@@ -1,0 +1,107 @@
+[
+    {
+        "pk":       11,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "122 S Westmoreland ave.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90004",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       12,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "122 S Westmoreland ave.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90004",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       13,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "122 S Westmoreland ave.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90004",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       14,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "122 S Westmoreland ave.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90004",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+
+    {
+        "pk":       11,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+15626066760",
+            "mobile_phone_number":  "+15626066760",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       12,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+15626066760",
+            "mobile_phone_number":  "+15626066760",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       13,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+15626066760",
+            "mobile_phone_number":  "+15626066760",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       14,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+15626066760",
+            "mobile_phone_number":  "+15626066760",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

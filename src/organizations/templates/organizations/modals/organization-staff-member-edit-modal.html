@@ -1,0 +1,85 @@
+{% load i18n %}
+
+<div class="modal fade" id="organizationStaffMemberEditPopupModal" tabindex="-1" role="dialog" aria-labelledby="organizationStaffMemberEditPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="organizationStaffMemberEditPopupModalLabel">{% trans "Edit Staff Member" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="organization-staff-member-edit-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="organization_id" value="">
+                    <input type="hidden" name="member_id" value="">
+
+                    <div class="form-group">
+                        <label for="id_position">{% trans "Position" %}</label>
+                        <input id="id_position" class="form-control" name="position" type="text" maxlength="200" placeholder="Position"></input>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_bio">{% trans "Bio" %}</label>
+                        <textarea id="id_bio" class="form-control" name="bio" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="staff_member_edit_submit();">{% trans "Submit" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Edit Organization Staff Member                                    ***/
+    /*************************************************************************/
+    function staff_member_edit_submit() {
+        var organization_id = $("#organization-staff-member-edit-modal-form").find("input[name='organization_id']").val();
+        var member_id = $("#organization-staff-member-edit-modal-form").find("input[name='member_id']").val();
+        var position = $("#organization-staff-member-edit-modal-form").find("input[name='position']").val();
+        var bio = $("#organization-staff-member-edit-modal-form").find("textarea[name='bio']").val();
+
+        $.post("{% url 'api-organization-staff-member-edit' 0 %}".replace("0", organization_id), {
+            "member_id":            member_id,
+            "position":             position,
+            "bio":                  bio,
+            "csrfmiddlewaretoken":  $("#organization-staff-member-edit-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#organizationStaffMemberEditPopupModal").modal("hide");
+
+            $(element).parent().parent().find("#position").text(position);
+            $(element).parent().parent().find("#bio").text(bio);
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to edit the Staff Member."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

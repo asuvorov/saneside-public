@@ -1,0 +1,105 @@
+{% load i18n %}
+
+<div class="modal fade" id="noEmailProvidedPopupModal" tabindex="-1" role="dialog" aria-labelledby="noEmailProvidedPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="noEmailProvidedPopupModalLabel">{% trans "Email Address Update" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <p class="note">
+                    <span class="label label-warning">{% trans "Please, provide / update your Email Address" %}</span><br/>
+                    {% blocktrans %}
+                        We noticed, that your Email Address hasn't been provided yet.<br/>
+                        For the best Experience, it is highly recommended, that you set your Email Address, so that you can be aware of everything, what happens to your Challenges, Participations, etc.
+                    {% endblocktrans %}
+                </p>
+
+                 <p class="note">
+                    <span class="label label-success">{% trans "Legal Notice" %}</span><br/>
+                    {% blocktrans %}
+                        We do not use your Email Address for the promotional Purposes.<br/>
+                        Our Goal is to keep you informed and updated.
+                    {% endblocktrans %}
+                </p>
+
+                <div class="row">
+                    <div class="col-xs-24 col-xs-offset-0 col-sm-18 col-sm-offset-3 col-md-18 col-md-offset-3">
+                        <form id="no-email-provided-modal-form" class="form-horizontal" action="" method="POST">
+                            {% csrf_token %}
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <label for="id_email">{% trans "Email" %}:<span class="asteriskField">*</span></label>
+                                    <input id="id_email" name="email" type="text" placeholder="Email" required/>
+                                    <div class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block" style="color:red;"></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="email_update();">{% trans "Update" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Update Email                                                      ***/
+    /*************************************************************************/
+    function email_update() {
+        var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        var email = $("#no-email-provided-modal-form").find("input[name='email']").val();
+
+        if (!regex.test(email)) {
+            $(".help-block").text("Please, enter the correct Email Address");
+
+            return false;
+        }
+
+        $(".help-block").text("");
+
+        $.post("{% url 'api-email-update' %}", {
+            "email":                email,
+            "csrfmiddlewaretoken":  $("#no-email-provided-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#noEmailProvidedPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            location.reload(true);
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to set the Email Address."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

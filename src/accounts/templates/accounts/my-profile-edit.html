@@ -1,0 +1,563 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+{% load imagekit %}
+{% load formset_tags %}
+
+{% block title %}{% trans "Edit Profile" %} - {{ block.super }}{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-view' %}">{% trans "My Profile" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-edit' %}">{% trans "Edit" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="my-profile-edit">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
+            {% if not request.user.profile.is_completed %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                {% blocktrans %}
+                    Thank you for signing up to SaneSide.<br/>
+                    Before you start creating the Challenges (Events), we will need some more Information about you.<br/>
+                    Please, complete your personal Information in the Form.
+                {% endblocktrans %}
+                </div>
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18">
+                <form id="my-profile-edit-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div id="pfl-avatar" class="col-xs-24 col-sm-8 col-md-8 profile-picture">
+                            <div align="left">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-24 col-md-24">
+                                        <div class="thumbnail avatar">
+                                        {% if request.user.profile.avatar %}
+                                            {% generateimage "common:medium_fill" source=request.user.profile.avatar -- alt=request.user.profile.auth_name %}
+                                        {% else %}
+                                            <img src="{{ STATIC_URL }}img/no-avatar-{{ request.user.profile.stat_gender_name|default:'male' }}.png" height="400" width="400" alt="Add a personal Touch to your Profile." />
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <a class="btn btn-primary btn-centered file" id="file"><i class="fa fa-upload fa-fw"></i> {% trans "Upload Photo" %}</a>
+                            <input id="id_avatar" name="avatar" type="file">
+
+                            <p>{% trans "Add a personal touch to your Profile. Pictures will automatically resize." %}</p>
+                        </div>
+
+                        <div id="pfl-details" class="col-xs-24 col-sm-16 col-md-16">
+                            <div class="wizard">
+                                <div class="wizard-inner">
+                                    <div class="connecting-line"></div>
+
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#personal-details" data-toggle="tab" aria-controls="personal-details" role="tab" title="Personal Details">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-book fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li role="presentation" class="">
+                                            <a href="#contact-details" data-toggle="tab" aria-controls="contact-details" role="tab" title="Contact Details">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-map-marker fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li role="presentation" class="">
+                                            <a href="#social-links" data-toggle="tab" aria-controls="social-links" role="tab" title="Social Links">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-handshake-o fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li role="presentation" class="">
+                                            <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-check fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" role="tabpanel" id="personal-details">
+                                        <ul class="list-inline pull-right">
+                                            <li><span><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</span></li>
+                                            <li><a href="#" class="next-step" style="border-radius:15px;">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+
+                                        <h3>{% trans "Personal Details" %}</h3>
+
+                                        <div class="form-group {% if pform.first_name.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ pform.first_name.label }}{% if pform.first_name.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ pform.first_name }}
+                                                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if pform.first_name.errors %}{% for error in pform.first_name.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if pform.last_name.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ pform.last_name.label }}{% if pform.last_name.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ pform.last_name }}
+                                                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if pform.last_name.errors %}{% for error in pform.last_name.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if pform.nickname.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ pform.nickname.label }}{% if pform.nickname.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ pform.nickname }}
+                                                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if pform.nickname.errors %}{% for error in pform.nickname.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if pform.email.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ pform.email.label }}{% if pform.email.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ pform.email }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if pform.email.errors %}{% for error in pform.email.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if pform.bio.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ pform.bio.label }}{% if pform.bio.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            {{ pform.bio }}
+
+                                            <span class="help-block">{% if pform.bio.errors %}{% for error in pform.bio.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+
+                                        <div style="display:inline-block; width:100%">
+                                            <div class="form-group half {% if pform.gender.errors %}has-error{% endif %}">
+                                                <label class="control-label">{{ pform.gender.label }}{% if pform.gender.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                                <div class="input-group">
+                                                    {{ pform.gender }}
+                                                    <div class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if pform.gender.errors %}{% for error in pform.gender.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group half pull-right {% if pform.birth_day.errors %}has-error{% endif %}">
+                                                <label class="control-label">{{ pform.birth_day.label }}{% if pform.birth_day.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                                <div class="input-group">
+                                                    {{ pform.birth_day }}
+                                                    <div class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if pform.birth_day.errors %}{% for error in pform.birth_day.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><span><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</span></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-pane fade" role="tabpanel" id="contact-details">
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+
+                                        <h3>{% trans "Location" %}</h3>
+
+                                        <div class="form-group {% if aform.address_1.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.address_1.label }}{% if aform.address_1.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.address_1 }}
+                                                <div class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.address_1.errors %}{% for error in aform.address_1.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.address_2.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.address_2.label }}{% if aform.address_2.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.address_2 }}
+                                                <div class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.address_2.errors %}{% for error in aform.address_2.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.zip_code.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.zip_code.label }}{% if aform.zip_code.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.zip_code }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.zip_code.errors %}{% for error in aform.zip_code.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.city.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.city.label }}{% if aform.city.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.city }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.city.errors %}{% for error in aform.city.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.province.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.province.label }}{% if aform.province.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.province }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.province.errors %}{% for error in aform.province.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.country.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.country.label }}{% if aform.country.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.country }}
+                                                <div class="input-group-addon"><i class="fa fa-globe fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.country.errors %}{% for error in aform.country.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.notes.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.notes.label }}{% if aform.notes.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            {{ aform.notes }}
+
+                                            <span class="help-block">{% if aform.notes.errors %}{% for error in aform.notes.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+
+                                            <p class="help">{{ aform.notes.help_text|safe }}</p>
+                                        </div>
+
+                                        <hr>
+
+                                        <h3>{% trans "Phone Numbers" %}</h3>
+
+                                        <div class="form-group {% if nform.phone_number.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ nform.phone_number.label }}{% if nform.phone_number.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="row">
+                                                <div class="col-xs-18 col-sm-18 col-md-18">
+                                                    <div class="input-group">
+                                                        {{ nform.phone_number }}
+                                                        <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    {{ nform.phone_number_ext }}
+                                                </div>
+                                            </div>
+
+                                            <span class="help-block">{{ nform.phone_number.help_text }} {% if nform.phone_number.errors %}{% for error in nform.phone_number.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if nform.mobile_phone_number.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ nform.mobile_phone_number.label }}{% if nform.mobile_phone_number.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="row">
+                                                <div class="col-xs-18 col-sm-18 col-md-18">
+                                                    <div class="input-group">
+                                                        {{ nform.mobile_phone_number }}
+                                                        <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    {{ nform.mobile_phone_number_ext }}
+                                                </div>
+                                            </div>
+
+                                            <span class="help-block">{{ nform.mobile_phone_number.help_text }} {% if nform.mobile_phone_number.errors %}{% for error in nform.mobile_phone_number.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-pane fade" role="tabpanel" id="social-links">
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+
+                                        <h3>{% trans "Social Links" %}</h3>
+
+                                        <div id="formset-social" data-formset-prefix="{{ formset_social.prefix }}" style="display:inline-block; width:100%">
+                                            {{ formset_social.management_form }}
+
+                                            <div data-formset-body>
+                                                <!-- New forms will be inserted in here -->
+                                            {% for fs in formset_social %}
+                                                <div class="row" data-formset-form>
+                                                    {{ fs.id }}
+                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                        {{ fs.social_app }}
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-14 col-md-14">
+                                                        {{ fs.url }}
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-4 col-md-4">
+                                                        <div class="hidden">{{ fs.DELETE }}</div>
+                                                        <a type="button" class="btn btn-rounded pull-right" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+
+                                            <!-- The empty form template. By wrapping this in a <script> tag, the __prefix__ placeholder can easily be replaced in both attributes and any scripts -->
+                                            <script type="form-template" data-formset-empty-form>
+                                            {% escapescript %}
+                                                <div class="row" data-formset-form>
+                                                    {{ formset_social.empty_form.id }}
+                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                        {{ formset_social.empty_form.social_app }}
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-14 col-md-14">
+                                                        {{ formset_social.empty_form.url }}
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-4 col-md-4">
+                                                        <div class="hidden">{{ formset_social.empty_form.DELETE }}</div>
+                                                        <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                    </div>
+                                                </div>
+                                            {% endescapescript %}
+                                            </script>
+
+                                            <!-- This Button will add a new Form, when clicked -->
+                                            <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-add><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+
+                                            <script>
+                                                jQuery(function ($) {
+                                                    $("#formset-social").formset({
+                                                        animateForms:   true
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-pane fade" role="tabpanel" id="complete">
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><span>{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></span></li>
+                                        </ul>
+
+                                        <h3>{% trans "Complete" %}</h3>
+
+                                        <div class="checkbox checkbox-primary">
+                                            {{ pform.receive_newsletters }}
+                                            {{ pform.receive_newsletters.label_tag }}
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><span>{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></span></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="tips" class="hidden-xs hidden-sm col-md-6 col-lg-6 right-sidebar">
+                <div class="actions">
+                    <a class="btn btn-primary btn-centered" name="submit"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Save Changes" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='submit']").click(function () {
+        $("#spinner").fadeIn("slow");
+
+        /*** DATE FORMAT *****************************************************/
+        var $input = $("input[name='birth_day']");
+        var val = $input.val();
+
+        if (val) {
+            var valMoment = moment(val);
+            var isMoment = moment.isMoment(valMoment);
+
+            if (isMoment) {
+                $input.attr("type", "text");
+                $input.val(valMoment.format("MM/DD/YYYY"));
+            }
+        }
+        /*********************************************************************/
+
+        $("form#my-profile-edit-form").submit();
+
+        return true;
+    })
+
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% for field in uform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in pform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in aform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in nform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    });
+</script>
+
+<!-- Pop-up Overlays -->
+
+{% if is_newly_created %}
+<div id="edit-profile-popup-overlay" class="well" style="display:none;">
+    <div class="popup-overlay-heading">
+        <h4>{% trans "Welcome to SaneSide" %}</h4>
+    </div>
+
+    <div class="popup-overlay-info">
+        <div class="alert alert-success">
+        {% blocktrans %}
+            <p>
+                Thank you for signing up to SaneSide.
+            </p>
+
+            <p>
+                Before you start creating the Challenges (Events),<br/>
+                we will need some more Information about you.<br/>
+                Please, complete your personal Information in the Form.
+            </p>
+        {% endblocktrans %}
+        </div>
+    </div>
+
+    <!-- Add an optional Button to close the Pop-up -->
+    <div class="popup-overlay-footer">
+        <button class="btn btn-default edit-profile-popup-overlay_close">{% trans "Close" %}</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** jQuery Pop-up Overlay                                         ***/
+        /*********************************************************************/
+        var options = {
+            type:                       "overlay",      //      "tooltip"
+            autoopen:                   true,           // def. false
+            scrolllock:                 true,           // def. false
+            background:                 true,
+            backgroundactive:           false,
+            color:                      "#000",
+            opacity:                    0.5,
+            horizontal:                 "center",
+            vertical:                   "center",
+            offsettop:                  0,
+            offsetleft:                 0,
+            escape:                     true,
+            blur:                       true,
+            setzindex:                  true,
+            autozindex:                 false,
+            keepfocus:                  true,
+            focusdelay:                 50,
+            outline:                    false,
+            detach:                     false,
+            //openelement:                ".{popup_id}_open",
+            //closeelement:               ".{popup_id}_close",
+            transition:                 "all 0.3s"
+        };
+
+        $("#edit-profile-popup-overlay").popup(options);
+    });
+</script>
+{% endif %}
+
+{% endblock %}

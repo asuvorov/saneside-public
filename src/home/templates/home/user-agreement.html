@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "User Agreement" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'user-agreement' %}">{% trans "User Agreement" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="user-agreement">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                {% include 'home/fragments/user-agreement-fragment.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,347 @@
+/*****************************************************************************/
+/*** VIEW PROFILE                                                          ***/
+/*****************************************************************************/
+#my-profile-info,
+#foreign-profile-info {
+    // --- Mixin
+    #instance.page-details();
+
+    p {
+        margin-bottom:      5px;
+    }
+    div.btn-group {
+        width:              100%;
+
+        > ul {
+            width:          100%;
+        }
+    }
+    div.right-sidebar ul.dropdown-menu {
+        padding-left:       0px !important;
+        margin-top:         -10px;
+    }
+
+    .profile-info-section {
+        background-color:   @white;
+        padding:            10px;
+        margin-bottom:      10px;
+    }
+    .profile-contacts {
+        i {
+            margin-right:   10px;
+        }
+    }
+    .profile-bio {}
+}
+#my-profile-invitations {
+    // --- Mixin
+    #instance.page-details();
+
+    #invitations-received-section,
+    #invitations-sent-section {
+        background-color:   @white;
+        padding:            10px;
+        margin-bottom:      10px;
+    }
+
+    .inv-received-archive,
+    .inv-sent-archive {
+        margin-top:         -10px !important;
+    }
+}
+#my-profile-participations,
+#foreign-profile-participations {
+    // --- Mixin
+    #instance.page-details();
+
+    //#participations-upcoming-section,
+    #participations-complete-section,
+    #participations-canceled-section,
+    #participations-rejected-section {
+        background-color:   @white;
+        padding:            10px;
+        margin-bottom:      10px;
+    }
+
+    .export-to-pdf {
+        margin-top:         -10px !important;
+    }
+}
+#my-profile-challenges,
+#foreign-profile-challenges {
+    // --- Mixin
+    #instance.page-details();
+
+    //#challenges-action-required-section,
+    //#challenges-upcoming-section,
+    //#challenges-complete-section,
+    //#challenges-draft-section {
+    //    background-color:   @white;
+    //    padding:            10px;
+    //    margin-bottom:      10px;
+    //}
+    #challenge-confirm-section,
+    #challenge-acknowledge-section {
+        background-color:   @white;
+        padding:            10px;
+        margin-bottom:      10px;
+    }
+}
+
+/*****************************************************************************/
+/*** EDIT PROFILE                                                          ***/
+/*****************************************************************************/
+#my-profile-edit,
+#my-profile-privacy {
+    // --- Mixin
+    #instance.page-create-edit();
+
+    .profile-picture {
+        .avatar > img {
+            margin-bottom:  10px;
+        }
+        .thumbnail {
+            border:         none;
+        }
+    }
+    .actions {
+        margin-top:         10px;
+    }
+
+    // --- Overrides for NavBar Tab Wizard
+    .connecting-line {
+        width:              75%;
+    }
+    .wizard .nav-tabs > li {
+        width:              25%;
+
+        &:after {
+            left:           43%;
+        }
+    }
+}
+
+/*****************************************************************************/
+/*** DELETE PROFILE                                                        ***/
+/*****************************************************************************/
+#my-profile-delete {
+    // --- Mixin
+    #instance.page-list();
+
+    background-color:       @white;
+    padding:                10px;
+    margin-top:             10px;
+    margin-bottom:          20px;
+
+    .section {
+        margin-bottom:      20px;
+    }
+}
+
+/*****************************************************************************/
+/*** USER PROFILE CARD                                                     ***/
+/*****************************************************************************/
+.card {
+    padding:                30px;
+    background-color:       rgba(214, 224, 226, 0.2);
+    -webkit-box-sizing:     border-box;
+       -moz-box-sizing:     border-box;
+            box-sizing:     border-box;
+
+    &.hovercard {
+        position:           relative;
+        padding-top:        0;
+        overflow:           hidden;
+        text-align:         center;
+        background-color:   @white;
+
+        .card-background {
+            height:         160px;
+
+            img {
+                margin-left:    -40px;
+                margin-top:     0px;
+                min-width:      130%;
+
+                -webkit-filter: blur(25px);
+                   -moz-filter: blur(25px);
+                    -ms-filter: blur(25px);
+                     -o-filter: blur(25px);
+                        filter: blur(25px);
+            }
+        }
+        .user-avatar {
+            position:       absolute;
+            top:            15px;
+            left:           0;
+            right:          0;
+
+            img {
+                width:          130px;
+                height:         130px;
+                max-width:      130px;
+                max-height:     130px;
+                border:         5px solid rgba(255, 255, 255, 0.5);
+
+                -webkit-border-radius:  50%;
+                   -moz-border-radius:  50%;
+                        border-radius:  50%;
+            }
+        }
+        .card-info {
+            color:          @gray-light;
+            font-size:      @font-size-small;
+            line-height:    @line-height-computed;
+            text-overflow:  ellipsis;
+            position:       absolute;
+            left:           0;
+            right:          0;
+            bottom:         14px;
+            overflow:       hidden;
+
+            .card-title {
+                color:              @gray-dark;
+                font-size:          @font-size-large;
+                line-height:        1;
+                text-shadow:        2px 2px 2px @white;
+                background-color:   rgba(255, 255, 255, 0.1);
+                padding:            2px 5px;
+                filter:             invert(100%);
+            }
+        }
+    }
+}
+
+/*****************************************************************************/
+/*** TEAM MEMBER PROFILE CARD                                              ***/
+/*****************************************************************************/
+.member-card {
+    padding:                30px;
+    background-color:       @brand-facebook;
+    -webkit-box-sizing:     border-box;
+       -moz-box-sizing:     border-box;
+            box-sizing:     border-box;
+
+    &.hovercard {
+        position:           relative;
+        padding-top:        0;
+        overflow:           hidden;
+        text-align:         center;
+        background-color:   @white;
+
+        .card-background {
+            height:         160px;
+
+            img {
+                margin-left:    -40px;
+                margin-top:     0px;
+                min-width:      130%;
+
+                -webkit-filter: blur(25px);
+                   -moz-filter: blur(25px);
+                    -ms-filter: blur(25px);
+                     -o-filter: blur(25px);
+                        filter: blur(25px);
+            }
+        }
+        .user-avatar {
+            position:       absolute;
+            top:            15px;
+            left:           0;
+            right:          0;
+
+            img {
+                width:          130px;
+                height:         130px;
+                max-width:      130px;
+                max-height:     130px;
+                border:         5px solid rgba(255, 255, 255, 0.5);
+
+                -webkit-border-radius:  50%;
+                   -moz-border-radius:  50%;
+                        border-radius:  50%;
+            }
+        }
+        .card-info {
+            color:          @gray-light;
+            font-size:      @font-size-small;
+            line-height:    @line-height-computed;
+            text-overflow:  ellipsis;
+            position:       absolute;
+            left:           0;
+            right:          0;
+            bottom:         0px;
+            overflow:       hidden;
+
+            .card-title {
+                color:              @gray-dark;
+                font-size:          @font-size-large;
+                line-height:        1;
+                text-shadow:        2px 2px 2px @white;
+                background-color:   rgba(255, 255, 255, 0.1);
+                padding:            2px 5px;
+                filter:             invert(100%);
+            }
+            .card-position {
+                color:              @white;
+                font-size:          @font-size-small;
+                line-height:        1;
+                background-color:   @brand-facebook;
+                padding:            2px 5px;
+
+                p {
+                    margin:     0px;
+                }
+            }
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Make Design more responsive
+// ----------------------------------------------------------------------------
+@media (max-width: 479px) {
+    /* <= 479px */
+    #my-profile-edit {
+        .wizard .nav-tabs > li {
+            &:after {
+                left:       35%;
+            }
+        }
+    }
+    #pfl-navigation {
+        display:            none;
+    }
+}
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    /* <= 480px <= 767px */
+    #my-profile-edit {
+        .wizard .nav-tabs > li {
+            &:after {
+                left:       41%;
+            }
+        }
+    }
+    #pfl-navigation {
+        display:            none;
+    }
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    /* <= 768px <= 991px */
+    #my-profile-edit {
+        .wizard .nav-tabs > li {
+            &:after {
+                left:       41%;
+            }
+        }
+    }
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    /* <= 992px <= 1199px */
+}
+@media (min-width: @screen-lg-min) and (max-width: 1599px) {
+    /* <= 1200px <= 1599px */
+}
+@media (min-width: 1600px) {
+    /* >= 1600px */
+}

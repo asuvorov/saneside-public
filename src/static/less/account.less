@@ -1,0 +1,74 @@
+// ----------------------------------------------------------------------------
+// --- Account sign-in
+//     Password reset
+// ----------------------------------------------------------------------------
+#account-signin,
+#password-reset {
+    // --- Mixin
+    #instance.page-create-edit();
+
+    background-color:       @white;
+    padding:                10px;
+    margin-top:             10px;
+    margin-bottom:          20px;
+
+    .delimiter {
+        border-top:         1px dashed @gray-light;
+        margin:             15px;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Account sign-up
+// ----------------------------------------------------------------------------
+#account-signup {
+    // --- Mixin
+    #instance.page-create-edit();
+
+    a.popover-content {
+        padding:            0;
+    }
+
+    // --- Overrides for NavBar Tab Wizard
+    .connecting-line {
+        width:              75%;
+    }
+    .wizard .nav-tabs > li {
+        width:              33.33%;
+
+        &:after {
+            left:           44%;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Account List
+// ----------------------------------------------------------------------------
+#account-list {
+    // --- Mixin
+    #instance.page-list();
+}
+
+// ----------------------------------------------------------------------------
+// --- Log-in pop-up Modal
+//     Forgot Password pop-up Modal
+//     No Email Provided pop-up Modal
+// ----------------------------------------------------------------------------
+#forgotPasswordPopupModal,
+#noEmailProvidedPopupModal {
+    p {
+        display:            inline-block;
+        margin:             0 0 10px;
+    }
+
+    .modal-body {
+        > p {
+            margin:         0 15px 15px 15px;
+        }
+    }
+    .delimiter {
+        border-top:         1px dashed @gray-light;
+        margin:             15px;
+    }
+}

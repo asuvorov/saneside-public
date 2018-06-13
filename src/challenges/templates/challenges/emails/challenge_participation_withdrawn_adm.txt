@@ -1,0 +1,15 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ admin.first_name }}!
+
+Member {{ user.first_name }} withdrew Application for participating in your Challenge "{{ challenge.name }}" with following Text:
+
+{{ cancellation_text }}
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Link to the Member's Profile Page: {{ profile_link }}
+
+Thank you, SaneSide Team.

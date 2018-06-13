@@ -1,0 +1,32 @@
+{% extends "organizations/organization-details-base.html" %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="organization-groups">
+    {% if is_staff_member %}
+        {% include "organizations/tabs/groups-adm-tab.html" %}
+    {% else %}
+        {% include "organizations/tabs/groups-tab.html" %}
+    {% endif %}
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if is_staff_member %}
+    {% include "invites/modals/invite-to-organization-group-popup-modal.html" %}
+
+    {% include "organizations/modals/organization-group-create-modal.html" %}
+    {% include "organizations/modals/organization-group-remove-modal.html" %}
+    {% include "organizations/modals/organization-group-member-remove-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var element;
+</script>
+{% endblock %}

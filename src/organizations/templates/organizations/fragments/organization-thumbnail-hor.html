@@ -1,0 +1,122 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<organization>
+{% endcomment %}
+
+<div class="item col-xs-24 col-sm-24 col-md-12">
+    <div class="thumbnail organization-thumb-hor" style="{% if organization.is_hidden %}background-color:#FBEFEF;{% endif %}">
+        <div class="organization-name">
+            <h4>
+                <a href="{% url 'organization-details' slug=organization.slug %}">{{ organization.name }}</a>
+
+            {% if organization.get_rating_avg > 0 %}
+                <div style="color:orange;">
+                    <input id="id_organization_rating" name="organization_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ organization.get_rating_avg }}" />
+                </div>
+            {% endif %}
+            </h4>
+        </div>
+
+        <div class="organization-author">
+            <p>
+                {% if organization.author.profile.avatar %}
+                    {% generateimage "header:thumbnail" source=organization.author.profile.avatar -- alt=organization.author.profile.auth_name %}
+                {% endif %}
+                <strong>{% trans "Created by" %}</strong>
+                <a href="{% url 'profile-view' organization.author_id %}">{{ organization.author.first_name }}</a> {{ organization.created|timesince }} {% trans "ago" %}
+            </p>
+        </div>
+
+        <div class="organization-tags">
+        {% if organization.tags.all and organization.hashtag %}
+            <p>
+                <i class="fa fa-tags fa-fw"></i>
+            {% for tag in organization.tags.all %}
+                <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+
+                <span class="vert-delimiter">|</span>
+
+                <i class="fa fa-hashtag fa-fw"></i>{{ organization.hashtag }}
+            </p>
+        {% elif organization.tags.all %}
+            <p>
+                <i class="fa fa-tags fa-fw"></i>
+            {% for tag in organization.tags.all %}
+                <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            </p>
+        {% elif organization.hashtag %}
+            <p>
+                <i class="fa fa-hashtag fa-fw"></i>{{ organization.hashtag }}
+            </p>
+        {% endif %}
+        </div>
+
+        <div class="organization-counts">
+            <i class="fa fa-comment fa-fw"></i> {{ organization.get_comments_count }}
+            <span class="vert-delimiter">|</span>
+            <i class="fa fa-eye fa-fw"></i> {{ organization.get_views_count }}
+        </div>
+
+        <div class="organization-avatar">
+            <a href="{% url 'organization-details' slug=organization.slug %}">
+            {% if organization.avatar %}
+                {% generateimage "common:large" source=organization.avatar -- alt=organization.name %}
+            {% endif %}
+            </a>
+        </div>
+
+        <div class="organization-description">
+            <p>{{ organization.description|striptags|truncatechars:300 }}</p>
+        </div>
+
+    {% with challenges=organization.get_upcoming_challenges %}
+        {% if organization.get_upcoming_challenges %}
+            <hr>
+
+            <div class="row">
+                <div class="col-xs-24 col-sm-24 col-md-24">
+                    <h5>{% trans "Current Challenges" %}</h5>
+
+                    <ul class="event-list">
+                    {% for challenge in challenges|slice:":5"|dictsort:"start_date" %}
+                        <li>
+                            <time style="background-color:{{ challenge.stat_category_color }};">
+                                <span class="day"  >{{ challenge.start_date|date:"j" }}</span>
+                                <span class="month">{{ challenge.start_date|date:"M" }}</span>
+                            </time>
+
+                            <div class="info">
+                                <a class="title" href="{% url 'challenge-details' slug=challenge.slug %}">
+                                    {{ challenge.name|truncatechars:30 }}
+                                </a>
+                                <p class="desc">
+                                    <i class="fa fa-clock-o fa-fw"></i> {{ challenge.start_time|date:"G:i"|default:"0:00" }}
+                                </p>
+                            {% if challenge.addressless %}
+                                <span class="label label-warning">{% trans "Location is not provided" %}</span>
+                            {% else %}
+                                <p class="desc">
+                                    <i class="fa fa-map-marker fa-fw"></i> {{ challenge.address.short_address }}
+                                </p>
+                            {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+        <div class="learn-more">
+            <a class="btn btn-warning btn-centered pull-right" href="{% url 'organization-details' organization.slug %}" style="width:auto;">{% trans "LEARN MORE" %} <i class="fa fa-chevron-right fa-fw"></i></a>
+        </div>
+    </div>
+</div>

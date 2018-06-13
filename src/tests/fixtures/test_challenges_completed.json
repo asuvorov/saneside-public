@@ -1,0 +1,98 @@
+[
+    {
+        "pk":       213,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               1,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #1-3",
+            "description":          "Description for the Challenge #1-3. Completed.",
+            "slug":                 "challenge-1-3",
+
+            "tags":                 [20, 21],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "2",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              21,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2016-01-01",
+            "start_time":           "00:00:00",
+            "start_tz":             "America/Los_Angeles",
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         31,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       223,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               2,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #2-3",
+            "description":          "Description for the Challenge #2-3. Completed.",
+            "slug":                 "challenge-2-3",
+
+            "tags":                 [20, 22],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "2",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              22,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2016-01-01",
+            "start_time":           "00:00:00",
+            "start_tz":             "America/Los_Angeles",
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         32,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

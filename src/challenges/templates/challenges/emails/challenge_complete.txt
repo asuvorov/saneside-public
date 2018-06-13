@@ -1,0 +1,17 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ admin.first_name }}!
+
+Your Challenge "{{ challenge.name }}" was complete!
+
+Experience Report Requests were sent to all signed up to Challenge Members.
+
+Please, don't forget to accept, or reject Members' Experience Reports.
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Also, you can find Link to this Challenge on your Profile Page.
+
+Thank you, SaneSide Team.

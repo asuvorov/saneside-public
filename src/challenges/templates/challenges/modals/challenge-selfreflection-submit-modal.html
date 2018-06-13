@@ -1,0 +1,97 @@
+{% load i18n %}
+
+<div class="modal fade" id="challengeSelfreflectionSubmitPopupModal" tabindex="-1" role="dialog" aria-labelledby="challengeSelfreflectionSubmitPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="challengeSelfreflectionSubmitPopupModalLabel">{% trans "Submit Experience Report" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="challenge-selfreflection-submit-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="challenge_id" value="">
+
+                    <p><strong>{% trans "Thank you for participating! Please take a minute to write about your Experience." %}</strong></p>
+
+                    <div class="form-group">
+                        <label for="id_selfreflection_activity_text">{% trans "What did you do during this Challenge?" %}</label>
+                        <textarea id="id_selfreflection_activity_text" class="form-control" name="selfreflection_activity_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="id_selfreflection_learning_text">{% trans "What did you learn? What Skills could you practice?" %}</label>
+                        <textarea id="id_selfreflection_learning_text" class="form-control" name="selfreflection_learning_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="challenge_selfreflection_submit();">{% trans "Submit" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Submit Challenge Experience Report                                ***/
+    /*************************************************************************/
+    function challenge_selfreflection_submit() {
+        var challenge_id = $("#challenge-selfreflection-submit-modal-form").find("input[name='challenge_id']").val();
+        var selfreflection_activity_text = $("#challenge-selfreflection-submit-modal-form").find("textarea[name='selfreflection_activity_text']").val();
+        var selfreflection_learning_text = $("#challenge-selfreflection-submit-modal-form").find("textarea[name='selfreflection_learning_text']").val();
+
+        $.post("{% url 'api-challenge-selfreflection-submit' 0 %}".replace("0", challenge_id), {
+            "selfreflection_activity_text": selfreflection_activity_text,
+            "selfreflection_learning_text": selfreflection_learning_text,
+            "csrfmiddlewaretoken":          $("#challenge-selfreflection-submit-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#challengeSelfreflectionSubmitPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            // ----------------------------------------------------------------
+            // --- Related to the `Accounts: My Profile Page: Completed Challenges Tab`
+            $(".action-" + challenge_id).find(".sr-submit").hide("slow");
+            $(".action-" + challenge_id).find(".not-participated").hide("slow");
+
+            $(".status-" + challenge_id).html("<span class='label label-info'>Waiting for Acknowledgment</span>");
+
+            // ----------------------------------------------------------------
+            // --- Related to the `Challenges: Details Page: Info Tab`
+            $(element).parent().parent().find("#div-sr-submit").hide("slow");
+            $(element).parent().parent().find("#div-not-participated").hide("slow");
+
+            $(".status").html("<span class='label label-info'>Waiting for Acknowledgment</span>");
+
+            //location.reload(true);
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to submit the Experience Report."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

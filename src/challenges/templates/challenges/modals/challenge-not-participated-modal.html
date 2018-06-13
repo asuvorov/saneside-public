@@ -1,0 +1,100 @@
+{% load i18n %}
+
+<div class="modal fade" id="challengeDidNotParticipateSubmitPopupModal" tabindex="-1" role="dialog" aria-labelledby="challengeDidNotParticipateSubmitPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="challengeDidNotParticipateSubmitPopupModalLabel">{% trans "Not participated" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="challenge-not-participated-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="challenge_id" value="">
+
+                    <p class="note">
+                        <span class="label label-warning">{% trans "Explain yourself" %}</span><br/>
+                        <strong>{% trans "Not participating in the Challenge could be very inconvenient for the Organizer. Please, write a Note, explaining why you couldn't make it this Time." %}</strong>
+                    </p>
+
+                    <p class="note">
+                        <span class="label label-warning">{% trans "Warning" %}</span><br/>
+                        {% trans "If you apply to the Challenge in the future, the Organizer will be able to see all Challenges you withdrew from, and the Reason you entered. Seeing fewer Withdrawals will make you look more trustworthy." %}
+                    </p>
+
+                    <div class="form-group">
+                        <label for="id_cancellation_text">{% trans "Cancellation Text" %}</label>
+                        <textarea id="id_cancellation_text" class="form-control" name="cancellation_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="participation_not_participated();">{% trans "Submit" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Not participated after all                                        ***/
+    /*************************************************************************/
+    function participation_not_participated() {
+        var challenge_id = $("#challenge-not-participated-modal-form").find("input[name='challenge_id']").val();
+        var cancellation_text = $("#challenge-not-participated-modal-form").find("textarea[name='cancellation_text']").val();
+
+        $.post("{% url 'api-participation-withdraw' 0 %}".replace("0", challenge_id), {
+            "cancellation_text":    cancellation_text,
+            "csrfmiddlewaretoken":  $("#challenge-not-participated-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#challengeDidNotParticipateSubmitPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            // ----------------------------------------------------------------
+            // --- Related to the `Accounts: My Profile Page: Completed Challenges Tab`
+            $(".action-" + challenge_id).find(".sr-submit").hide("slow");
+            $(".action-" + challenge_id).find(".not-participated").hide("slow");
+            $(".action-" + challenge_id).find(".add-rating").hide("slow");
+            $(".action-" + challenge_id).find(".add-complaint").hide("slow");
+
+            $(".status-" + challenge_id).html("<span class='label label-danger'>Not participated</span>");
+
+            // ----------------------------------------------------------------
+            // --- Related to the `Challenges: Details Page: Info Tab`
+            $(element).parent().parent().find("#div-sr-submit").hide("slow");
+            $(element).parent().parent().find("#div-not-participated").hide("slow");
+            $(element).parent().parent().find("#div-add-rating").hide("slow");
+            $(element).parent().parent().find("#div-add-complaint").hide("slow");
+
+            //location.reload(true);
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to withdraw the Participation."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

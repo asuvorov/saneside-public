@@ -1,0 +1,94 @@
+<!--
+TAB
+Foreign Profile - Completed Challenges
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% if completed_participations.count > 0 %}
+    <!--
+        Mobile View
+    -->
+    <div class="hidden-sm hidden-md hidden-lg">
+    {% for participation in completed_participations %}
+        <table class="table table-condensed">
+            <thead>
+                <tr class="active">
+                    <th colspan="2">
+                        {% trans "Challenge" %} <a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a><br/>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                {% if participation.selfreflection_activity_text %}
+                    <td><strong>{% trans "What I did" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.selfreflection_activity_text }}</span>
+                    </td>
+                {% endif%}
+                </tr>
+                <tr>
+                {% if participation.selfreflection_learning_text %}
+                    <td><strong>{% trans "What I learned" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.selfreflection_learning_text }}</span>
+                    </td>
+                {% endif %}
+                </tr>
+                <tr>
+                    <td><strong>{% trans "Admin replied" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.acknowledgement_text|default:"N/A" }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+    </div>
+
+    <!--
+        Tablet/Desktop View
+    -->
+    <table class="table table-condensed hidden-xs">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{% trans "Challenge Name" %}</th>
+                <th>{% trans "What I did" %}</th>
+                <th>{% trans "What I learned" %}</th>
+                <th>{% trans "Admin replied" %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for participation in completed_participations %}
+            <tr>
+                <td>
+                    <a href="{% url 'challenge-details' participation.challenge.slug %}">
+                    {% if participation.challenge.avatar %}
+                        {% generateimage "common:thumbnail" source=participation.challenge.avatar -- alt=participation.challenge.name %}
+                    {% endif %}
+                    </a>
+                </td>
+                <td><a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a></td>
+                <td>
+                    <span class="desc">{{ participation.selfreflection_activity_text }}</span>
+                </td>
+                <td>
+                    <span class="desc">{{ participation.selfreflection_learning_text }}</span>
+                </td>
+                <td>
+                    <span class="desc">{{ participation.acknowledgement_text }}</span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>
+        <span class="label label-info">{% trans "There are no completed Participations at the moment." %}</span>
+    </p>
+{% endif %}

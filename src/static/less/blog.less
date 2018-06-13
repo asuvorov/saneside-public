@@ -1,0 +1,189 @@
+// ----------------------------------------------------------------------------
+// --- Post List
+// ----------------------------------------------------------------------------
+#post-list {
+    // --- Mixin
+    #instance.page-list();
+}
+
+// ----------------------------------------------------------------------------
+// --- Post create
+//     Post edit
+// ----------------------------------------------------------------------------
+#post-create,
+#post-edit {
+    // --- Mixin
+    #instance.page-create-edit();
+}
+
+// ----------------------------------------------------------------------------
+// --- Post Details
+// ----------------------------------------------------------------------------
+#post-details {
+    // --- Mixin
+    #instance.page-details();
+
+    .nav-tabs {
+        margin-bottom:      10px;
+    }
+    .post-details {
+        i {
+            margin-right:   10px;
+        }
+    }
+    .post-author {}
+}
+
+// ----------------------------------------------------------------------------
+// --- Post Thumbnail
+// ----------------------------------------------------------------------------
+.thumbnail {
+    border:                 none;
+    border-radius:          0px;
+    padding:                0;
+}
+.post-thumb-hor {
+    display:                inline-block;
+    width:                  100%;
+    box-shadow:             1px 1px 3px rgba(0, 0, 0, 0.1);
+    margin:                 0 0 10px 0 !important;
+
+    .post-header {
+        h4 {
+            font-weight:        bold;
+            text-transform:     uppercase;
+            border:             none !important;
+            padding:            10px !important;
+            margin:             0    !important
+        }
+    }
+    .post-author {
+        font-size:          @font-size-small;
+        border-top:         3px solid @brand-primary;
+        padding:            5px 10px 0 10px;
+        margin:             0;
+
+        p {
+            margin-bottom:  5px;
+        }
+    }
+    .post-counts {
+        font-size:          @font-size-small;
+        text-align:         right;
+        padding:            0 10px;
+        margin:             5px 0;
+
+        i {
+            margin-right:   5px;
+        }
+        p {
+            margin:         0;
+        }
+    }
+    .post-tags {
+        font-size:          @font-size-small;
+        padding:            0 10px;
+        margin:             5px 0;
+
+        i {
+            margin-right:   5px;
+        }
+        p {
+            margin:         0;
+        }
+    }
+    .post-container {
+        border-top:         3px solid @brand-primary;
+        padding:            10px 0 0 0;
+
+        .post-avatar {}
+        .post-content {
+            padding:        10px;
+        }
+    }
+    .learn-more {
+        a {
+            width:          auto !important;
+            float:          right;
+            margin:         0 10px 10px 10px !important;
+        }
+    }
+}
+.post-thumb-search {
+    background-color:       @white;
+    box-shadow:             1px 1px 3px rgba(0, 0, 0, 0.1);
+    padding:                10px;
+    margin-bottom:          10px;
+
+    .learn-more {
+        a {
+            width:          auto !important;
+            float:          right;
+            margin:         0 10px 10px 10px !important;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Make Design more responsive
+// ----------------------------------------------------------------------------
+@media (max-width: 479px) {
+    /* <= 479px */
+    #post-details {
+        margin-top:         0;
+        margin-bottom:      50px;
+    }
+    #pst-tag-cloud,
+    #pst-calendar {
+        display:            none;
+    }
+
+    .post-thumb-hor,
+    .post-thumb-search {
+        .post-header {
+            h4 {
+                font-size:  @font-size-base;
+            }
+        }
+        .learn-more {
+            display:            flex;
+            align-items:        center;
+            justify-content:    center;
+
+            a {
+                width:          90% !important;
+                float:          none;
+            }
+        }
+    }
+    .actions {
+        margin-top:         10px;
+    }
+}
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    /* <= 480px <= 767px */
+    #post-details {
+        margin-top:         0;
+        margin-bottom:      50px;
+    }
+    #pst-tag-cloud,
+    #pst-calendar {
+        display:            none;
+    }
+
+    .actions {
+        margin-top:         10px;
+    }
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    /* <= 768px <= 991px */
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    /* <= 992px <= 1199px */
+}
+@media (min-width: @screen-lg-min) and (max-width: 1599px) {
+    /* <= 1200px <= 1599px */
+}
+@media (min-width: 1600px) {
+    /* >= 1600px */
+}

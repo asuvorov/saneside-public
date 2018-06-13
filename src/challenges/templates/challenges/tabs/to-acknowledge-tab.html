@@ -1,0 +1,202 @@
+<!--
+TAB
+Challenge Details - to acknowledge
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% if challenge.challenge_participations.waiting_for_acknowledgement.count > 0 %}
+    <!--
+        Mobile View
+    -->
+    <div class="hidden-sm hidden-md hidden-lg">
+    {% for participation in challenge.challenge_participations.waiting_for_acknowledgement %}
+        {% need_to_know_profile_details_tag request participation.user as need_to_know_profile_details %}
+        {% need_to_know_contact_details_tag request participation.user as need_to_know_contact_details %}
+
+        {% sum_of_hours_spent_tag participation.user as sum_of_hours_spent %}
+
+        {% with participation.user.profile as profile %}
+        <table class="table participation-{{ participation.id }}">
+            <thead>
+                <tr class="active">
+                    <th colspan="2">
+                        <a href="{% url 'profile-view' participation.user_id %}">
+                        {% if profile.avatar and need_to_know_profile_details %}
+                            {% generateimage "header:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                        {% endif %}
+
+                        {% if need_to_know_profile_details %}
+                            {{ profile.user.get_full_name }}
+                        {% else %}
+                            {% if profile.nickname %}
+                                {{ profile.nickname }}
+                            {% elif profile.short_name %}
+                                {{ profile.short_name }}
+                            {% else %}
+                                <i class="fa fa-user-secret fa-fw"></i>
+                            {% endif %}
+                        {% endif %}
+                        </a>
+
+                    {% if sum_of_hours_spent and need_to_know_profile_details %}
+                        <span class="badge">{{ sum_of_hours_spent }}</span>
+                    {% endif %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><strong>{% trans "What I did" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.selfreflection_activity_text|default:"N/A" }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{% trans "What I learned" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.selfreflection_learning_text|default:"N/A" }}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{% trans "Action" %}</strong></td>
+                    <td>
+                        <a class="sr-accept txt-success" challenge="{{ challenge.id}}" participation="{{ participation.id }}" href="#">{% trans "Accept" %}</a> |
+                        <a class="sr-reject txt-danger"  challenge="{{ challenge.id}}" participation="{{ participation.id }}" href="#">{% trans "Reject" %}</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endwith %}
+    {% endfor %}
+    </div>
+
+    <!--
+        Tablet/Desktop View
+    -->
+    <table class="table table-condensed hidden-xs">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{% trans "Member" %}</th>
+                <th>{% trans "Rating" %}</th>
+                <th>{% trans "What I did" %}</th>
+                <th>{% trans "What I learned" %}</th>
+                <th>{% trans "Action" %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for participation in challenge.challenge_participations.waiting_for_acknowledgement %}
+            {% need_to_know_profile_details_tag request participation.user as need_to_know_profile_details %}
+            {% need_to_know_contact_details_tag request participation.user as need_to_know_contact_details %}
+
+            {% sum_of_hours_spent_tag participation.user as sum_of_hours_spent %}
+
+            {% with participation.user.profile as profile %}
+            <tr class="participation-{{ participation.id }}">
+                <td>
+                    <a href="{% url 'profile-view' participation.user_id %}">
+                    {% if profile.avatar and need_to_know_profile_details %}
+                        {% generateimage "common:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                    {% else %}
+                        <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                    {% endif %}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'profile-view' participation.user_id %}">
+                    {% if need_to_know_profile_details %}
+                        {{ profile.user.get_full_name }}
+                    {% else %}
+                        {% if profile.nickname %}
+                            {{ profile.nickname }}
+                        {% elif profile.short_name %}
+                            {{ profile.short_name }}
+                        {% else %}
+                            <i class="fa fa-user-secret fa-fw"></i>
+                        {% endif %}
+                    {% endif %}
+                    </a>
+
+                {% if sum_of_hours_spent and need_to_know_profile_details %}
+                    <span class="badge">{{ sum_of_hours_spent }}</span>
+                {% endif %}
+                </td>
+                <td>
+                {% if profile.get_rating_avg > 0 %}
+                    <div class="pull-left" style="color:orange;">
+                        <input id="id_profile_rating" name="profile_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ profile.get_rating_avg }}" />
+                    </div>
+                {% else %}
+                    N/A
+                {% endif %}
+                </td>
+                <td>
+                    <span class="desc">{{ participation.selfreflection_activity_text }}</span>
+                </td>
+                <td>
+                    <span class="desc">{{ participation.selfreflection_learning_text }}</span>
+                </td>
+                <td>
+                    <a class="sr-accept txt-success" challenge="{{ challenge.id}}" participation="{{ participation.id }}" href="#">{% trans "Accept" %}</a> |
+                    <a class="sr-reject txt-danger"  challenge="{{ challenge.id}}" participation="{{ participation.id }}" href="#">{% trans "Reject" %}</a>
+                </td>
+            </tr>
+            {% endwith %}
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>
+        <span class="label label-info">{% trans "There are no Members, waiting for Acknowledgment, at the moment." %}</span>
+    </p>
+{% endif %}
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Show Notifications                                                ***/
+    /*************************************************************************/
+    $(document).ready(function () {
+        {% if challenge.challenge_participations.waiting_for_acknowledgement.count > 0 %}
+            new Noty({
+                type:   "warning",
+                text:   "You have {{ challenge.challenge_participations.waiting_for_acknowledgement.count }} Participant(s), waiting for Acknowledgment of their Experience Reports"
+            }).show();
+        {% endif %}
+    })
+
+    /*************************************************************************/
+    /*** Accept Experience Report                                          ***/
+    /*************************************************************************/
+    $(".sr-accept").click(function () {
+        element = $(this);
+
+        var challenge_id = $(this).attr("challenge");
+        var participation_id = $(this).attr("participation");
+
+        $("#challenge-participation-accept-selfreflection-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-participation-accept-selfreflection-modal-form").find("input[name='participation_id']").val(participation_id);
+        $("#challengeParticipationAcceptSelfreflectionPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Reject Experience Report                                          ***/
+    /*************************************************************************/
+    $(".sr-reject").click(function () {
+        element = $(this);
+
+        var challenge_id = $(this).attr("challenge");
+        var participation_id = $(this).attr("participation");
+
+        $("#challenge-participation-reject-selfreflection-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-participation-reject-selfreflection-modal-form").find("input[name='participation_id']").val(participation_id);
+        $("#challengeParticipationRejectSelfreflectionPopupModal").modal("show");
+    })
+</script>

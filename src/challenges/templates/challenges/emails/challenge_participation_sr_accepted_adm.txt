@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ admin.first_name }}!
+
+{{ user.first_name }}'s Experience Report to your Challenge "{{ challenge.name }}" was accepted!
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Link to the Member's Profile Page: {{ profile_link }}
+
+Thank you, SaneSide Team.

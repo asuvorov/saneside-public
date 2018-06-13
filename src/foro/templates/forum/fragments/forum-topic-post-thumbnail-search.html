@@ -1,0 +1,24 @@
+{% load i18n %}
+
+{% comment %}
+    Input Parameters:
+        :<forum_topic_post>
+{% endcomment %}
+
+<div class="col-xs-24 col-sm-24 col-md-24 col-lg-24" style="margin-bottom:10px;">
+    <div class="forum-topic-post-thumb-search">
+        <strong>
+            <p>
+                Forum Topic Post <a href="#">{{ forum_topic_post.title }}</a> in <a href="{% url 'topic-post-list' forum_topic_post.topic.forum_id forum_topic_post.topic_id %}">{{ forum_topic_post.topic.title }}</a>
+            </p>
+        </strong>
+
+        <p>
+            {% trans "posted by" %} <a href="{% url 'profile-view' forum_topic_post.author_id %}">{{ forum_topic_post.author.get_full_name }}</a>
+        </p>
+
+        <blockquote>
+            {{ forum_topic_post.body|striptags|truncatechars:300|default:"N/A" }}
+        </blockquote>
+    </div>
+</div>

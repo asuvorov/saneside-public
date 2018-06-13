@@ -1,0 +1,62 @@
+#privacy-policy,
+#user-agreement {
+    // --- Mixin
+    #instance.page-details();
+}
+
+#privacy-policy-fragment,
+#user-agreement-fragment {
+    font-size:              @font-size-base;
+    text-align:             justify;
+
+    h3, h4 {
+        text-transform:     uppercase;
+    }
+    h3 {
+        font-weight:        bold;
+    }
+    a {
+        color:              @brand-primary;
+    }
+    p {
+        text-transform:     none;
+
+        strong {
+            text-transform:     uppercase;
+        }
+    }
+    blockquote {
+        font-size:          @font-size-base;
+        margin:             10px 0;
+    }
+}
+
+#privacyPolicyPopupModal,
+#userAgreementPopupModal {
+    &.modal {
+        overflow:           auto;
+        overflow-y:         auto;
+    }
+
+    .modal-dialog {
+        width:              60%;
+    }
+    .modal-body {
+        position:           relative;
+        padding:            @modal-inner-padding;
+
+        max-height:         450px;
+        overflow-y:         auto;
+    }
+    .modal-footer {
+        button.btn {
+            .pb-big-button(
+                @ptop:      6px,
+                @mtop:      5px,
+                @mright:    0,
+                @mbottom:   5px,
+                @mleft:     5px
+            );
+        }
+    }
+}

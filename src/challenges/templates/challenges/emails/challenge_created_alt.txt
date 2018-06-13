@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user }}!
+
+The Challenge "{{ challenge.name }}", was successfully created, and you were added as contact Person to it.
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Also, you can find Link to this Challenge on your Profile Page.
+
+Thank you, SaneSide Team.

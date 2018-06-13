@@ -1,0 +1,81 @@
+{% extends "accounts/my-profile-base.html" %}
+
+{% load i18n %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="my-profile-participations">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participate in Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Upcoming" %}</span>
+                </h4>
+
+                <div id="participations-upcoming-section">
+                    {% include "accounts/tabs/my-profile/participations-upcoming-tab.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participated in Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Complete" %}</span>
+                    <a class="btn btn-rounded pull-right export-to-pdf" href="{% url 'my-profile-challenges-export' %}"><i class="fa fa-file-pdf-o fa-fw"></i> {% trans "Export to PDF" %}</a>
+                </h4>
+
+                <div id="participations-complete-section">
+                    {% include "accounts/tabs/my-profile/participations-complete-tab.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participations, canceled by Me" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Canceled" %}</span>
+                </h4>
+
+                <div id="participations-canceled-section">
+                    {% include "accounts/tabs/my-profile/participations-canceled-tab.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participations, canceled by Challenge Admin" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Rejected" %}</span>
+                </h4>
+
+                <div id="participations-rejected-section">
+                    {% include "accounts/tabs/my-profile/participations-rejected-tab.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% include "challenges/modals/challenge-selfreflection-submit-modal.html" %}
+    {% include "challenges/modals/challenge-not-participated-modal.html" %}
+    {% include "challenges/modals/challenge-rate-modal.html" %}
+
+    {% include "common/modals/complaint-add-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var element;
+</script>
+{% endblock %}

@@ -1,0 +1,107 @@
+[
+    {
+        "pk":       31,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "2417 E 24th str.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90058",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       32,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "2417 E 24th str.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90058",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       33,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "2417 E 24th str.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90058",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       34,
+        "model":    "core.address",
+        "fields":   {
+            "address_1":        "2417 E 24th str.",
+            "address_2":        "",
+            "city":             "Los Angeles",
+            "zip_code":         "90058",
+            "province":         "California",
+            "country":          "US",
+
+            "created":          "2016-01-01 00:00:00-0700",
+            "modified":         "2016-01-01 00:00:00-0700"
+        }
+    },
+
+    {
+        "pk":       31,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+18555501129",
+            "mobile_phone_number":  "+18555501129",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       32,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+18555501129",
+            "mobile_phone_number":  "+18555501129",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       33,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+18555501129",
+            "mobile_phone_number":  "+18555501129",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       34,
+        "model":    "core.phone",
+        "fields":   {
+            "phone_number":         "+18555501129",
+            "mobile_phone_number":  "+18555501129",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

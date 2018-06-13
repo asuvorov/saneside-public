@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user.first_name }}!
+
+Thank you for participating in Challenge "{{ challenge.name }}".
+
+Please, submit your Experience Report within {{ time }} Days on the Challenge Details Page here: {{ challenge_link }}
+
+Also, you can find Link to this Challenge on your Profile Page.
+
+Thank you, SaneSide Team.

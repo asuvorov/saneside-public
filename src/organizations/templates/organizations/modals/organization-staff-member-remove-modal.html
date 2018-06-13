@@ -1,0 +1,85 @@
+{% load i18n %}
+
+<div class="modal fade" id="organizationStaffMemberRemovePopupModal" tabindex="-1" role="dialog" aria-labelledby="organizationStaffMemberRemovePopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="organizationStaffMemberRemovePopupModalLabel">{% trans "Remove Staff Member" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="organization-staff-member-remove-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="organization_id" value="">
+                    <input type="hidden" name="member_id" value="">
+
+                    <div class="form-group">
+                        <label for="id_reason">{% trans "Reason" %}</label>
+                        <textarea id="id_reason" class="form-control" name="reason" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="staff_member_remove_submit();">{% trans "Remove" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Remove Organization Staff Member                                  ***/
+    /*************************************************************************/
+    function staff_member_remove_submit() {
+        var organization_id = $("#organization-staff-member-remove-modal-form").find("input[name='organization_id']").val();
+        var member_id = $("#organization-staff-member-remove-modal-form").find("input[name='member_id']").val();
+        var reason = $("#organization-staff-member-remove-modal-form").find("textarea[name='reason']").val();
+
+        $.post("{% url 'api-organization-staff-member-remove' 0 %}".replace("0", organization_id), {
+            "member_id":            member_id,
+            "reason":               reason,
+            "csrfmiddlewaretoken":  $("#organization-staff-member-remove-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#organizationStaffMemberRemovePopupModal").modal("hide");
+
+            $(element).parent().parent().hide("slow", function () {
+                fixFooter();
+            });
+
+            var tabID = $(element).parents(".tab-pane").attr("id");
+            var tabLI = $.find("a[href='#" + tabID + "']");
+            var badgeAmount = parseInt($(tabLI).find(".badge").text());
+
+            $(tabLI).find(".badge").text(badgeAmount - 1);
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to remove the Staff Member."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

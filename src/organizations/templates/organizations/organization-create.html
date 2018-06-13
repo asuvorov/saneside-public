@@ -1,0 +1,571 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+{% load imagekit %}
+{% load formset_tags %}
+
+{% block title %}{% trans "Create Organization" %} - {{ block.super }}{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'organization-list' %}">{% trans "Organizations" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'organization-create' %}">{% trans "Create" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="organization-create">
+        <div class="row">
+            <div id="tips" class="col-xs-24 hidden-sm hidden-md hidden-lg right-sidebar">
+                <div class="alert alert-info alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% blocktrans %}
+                    You can create your Organization here. If you have any questions, don't hesitate to <a href="mailto:support@saneside.com">contact Support</a>.
+                {% endblocktrans %}
+                </div>
+
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    {% trans "After creating the Organization, you will be redirected to the Details Page, where you can attach related Images, Documents and Links." %}
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <form id="create-organization-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div id="org-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                            <div class="thumbnail avatar" style="display:none;">
+                                <img id="avatar" src="#" alt="Upload Logo." />
+                            </div>
+
+                            <a class="btn btn-primary btn-centered file" id="file"><i class="fa fa-upload fa-fw"></i> {% trans "Upload Logo" %}</a>
+                            <input id="id_avatar" name="avatar" type="file">
+
+                            <div class="form-group {% if form.avatar.errors %}has-error{% endif %}">
+                                <span class="help-block">{% if form.avatar.errors %}{% for error in form.avatar.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+
+                        <div id="org-description" class="col-xs-24 col-sm-24 col-md-16">
+                            <div class="wizard">
+                                <div class="wizard-inner">
+                                    <div class="connecting-line"></div>
+
+                                    <ul class="nav nav-tabs" role="tablist">
+                                        <li role="presentation" class="active">
+                                            <a href="#organization-description" data-toggle="tab" aria-controls="organization-description" role="tab" title="Description">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-book fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li role="presentation" class="disabled">
+                                            <a href="#organization-contact-info" data-toggle="tab" aria-controls="organization-contact-info" role="tab" title="Contact Information">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-map-marker fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li role="presentation" class="disabled">
+                                            <a href="#organization-social-links" data-toggle="tab" aria-controls="organization-social-links" role="tab" title="Social Links">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-handshake-o fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                        <li role="presentation" class="disabled">
+                                            <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                                                <span class="round-tab">
+                                                    <i class="fa fa-check fa-fw"></i>
+                                                </span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-content">
+                                    <div class="tab-pane fade in active" role="tabpanel" id="organization-description">
+                                        <ul class="list-inline pull-right">
+                                            <li><span><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</span></li>
+                                            <li><a href="#" class="next-step" style="border-radius:15px;">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+
+                                        <h3>{% trans "Description" %}</h3>
+
+                                        <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.name }}
+                                                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.name.errors %}{% for error in form.name.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                                            {{ form.description }}
+
+                                            <span class="help-block">{% if form.description.errors %}{% for error in form.description.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.tags.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ form.tags.label }}{% if form.tags.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ form.tags }}
+                                                <div class="input-group-addon"><i class="fa fa-tags fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.tags.errors %}{% for error in form.tags.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.hashtag.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ form.hashtag.label }}{% if form.hashtag.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ form.hashtag }}
+                                                <div class="input-group-addon"><i class="fa fa-hashtag fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.hashtag.errors %}{% for error in form.hashtag.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+
+                                        <div class="form-group {% if form.website.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.website }}
+                                                <div class="input-group-addon"><i class="fa fa-link fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.website.errors %}{% for error in form.website.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.video.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.video }}
+                                                <div class="input-group-addon"><i class="fa fa-film fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.video.errors %}{% for error in form.video.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.email }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.email.errors %}{% for error in form.email.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="checkbox checkbox-primary">
+                                            {{ form.is_hidden }}
+                                            {{ form.is_hidden.label_tag }}
+                                        {% if form.is_hidden.help_text %}
+                                            <p class="help">{{ form.is_hidden.help_text|safe }}</p>
+                                        {% endif %}
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><span><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</span></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-pane fade" role="tabpanel" id="organization-contact-info">
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+
+                                        <h3>{% trans "Location" %}</h3>
+
+                                        <div class="checkbox checkbox-primary">
+                                            {{ form.addressless }}
+                                            {{ form.addressless.label_tag }}
+                                        </div>
+
+                                        <address>
+                                            <div class="form-group {% if aform.address_1.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ aform.address_1 }}
+                                                    <div class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if aform.address_1.errors %}{% for error in aform.address_1.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if aform.address_2.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ aform.address_2 }}
+                                                    <div class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if aform.address_2.errors %}{% for error in aform.address_2.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if aform.zip_code.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ aform.zip_code }}
+                                                    <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if aform.zip_code.errors %}{% for error in aform.zip_code.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if aform.city.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ aform.city }}
+                                                    <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if aform.city.errors %}{% for error in aform.city.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if aform.province.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ aform.province }}
+                                                    <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if aform.province.errors %}{% for error in aform.province.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if aform.country.errors %}has-error{% endif %}">
+                                                <label class="control-label">{{ aform.country.label }}{% if aform.country.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                                <div class="input-group">
+                                                    {{ aform.country }}
+                                                    <div class="input-group-addon"><i class="fa fa-globe fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if aform.country.errors %}{% for error in aform.country.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                        </address>
+
+                                        <!-- REMINDER: Keep the Address Notes Field outside the <address> Tag, so, for Example, in Case of the addressless Organization (Address is collapsed) the Admin will be able to provide some Notes, e.g., why the Organization Location is not specified, some Directions, etc. -->
+                                        <div class="form-group {% if aform.notes.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.notes.label }}{% if aform.notes.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            {{ aform.notes }}
+
+                                            <span class="help-block">{% if aform.notes.errors %}{% for error in aform.notes.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+
+                                            <p class="help">{{ aform.notes.help_text|safe }}</p>
+                                        </div>
+
+                                        <hr>
+
+                                        <h3>{% trans "Phone Numbers" %}</h3>
+
+                                        <div class="form-group {% if nform.phone_number.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ nform.phone_number.label }}{% if nform.phone_number.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="row">
+                                                <div class="col-xs-18 col-sm-18 col-md-18">
+                                                    <div class="input-group">
+                                                        {{ nform.phone_number }}
+                                                        <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    {{ nform.phone_number_ext }}
+                                                </div>
+                                            </div>
+
+                                            <span class="help-block">{{ nform.phone_number.help_text }} {% if nform.phone_number.errors %}{% for error in nform.phone_number.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if nform.mobile_phone_number.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ nform.mobile_phone_number.label }}{% if nform.mobile_phone_number.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="row">
+                                                <div class="col-xs-18 col-sm-18 col-md-18">
+                                                    <div class="input-group">
+                                                        {{ nform.mobile_phone_number }}
+                                                        <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    {{ nform.mobile_phone_number_ext }}
+                                                </div>
+                                            </div>
+
+                                            <span class="help-block">{{ nform.mobile_phone_number.help_text }} {% if nform.mobile_phone_number.errors %}{% for error in nform.mobile_phone_number.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+
+                                        <hr>
+
+                                        <h3>{% trans "Contact Person" %}</h3>
+
+                                        <div class="form-group">
+                                        {% for choice in form.contact %}
+                                            <div class="radio radio-primary">
+                                                {{ choice.tag }}
+                                                <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                        <div id="alt_person_creds">
+                                            <div class="form-group {% if form.alt_person_fullname.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ form.alt_person_fullname }}
+                                                    <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if form.alt_person_fullname.errors %}{% for error in form.alt_person_fullname.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if form.alt_person_email.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ form.alt_person_email }}
+                                                    <div class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{% if form.alt_person_email.errors %}{% for error in form.alt_person_email.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                            <div class="form-group {% if form.alt_person_phone.errors %}has-error{% endif %}">
+                                                <div class="input-group">
+                                                    {{ form.alt_person_phone }}
+                                                    <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+                                                </div>
+
+                                                <span class="help-block">{{ form.alt_person_phone.help_text }} {% if form.alt_person_phone.errors %}{% for error in form.alt_person_phone.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-pane fade" role="tabpanel" id="organization-social-links">
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+
+                                        <h3>{% trans "Social Links" %}</h3>
+
+                                        <div id="formset-social" data-formset-prefix="{{ formset_social.prefix }}" style="display:inline-block; width:100%">
+                                            {{ formset_social.management_form }}
+
+                                            <div data-formset-body>
+                                                <!-- New forms will be inserted in here -->
+                                            {% for fs in formset_social %}
+                                                <div class="row" data-formset-form>
+                                                    {{ fs.id }}
+                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                        {{ fs.social_app }}
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-14 col-md-14">
+                                                        {{ fs.url }}
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-4 col-md-4">
+                                                        <div class="hidden">{{ fs.DELETE }}</div>
+                                                        <a type="button" class="btn btn-rounded pull-right" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
+                                            </div>
+
+                                            <!-- The empty form template. By wrapping this in a <script> tag, the __prefix__ placeholder can easily be replaced in both attributes and any scripts -->
+                                            <script type="form-template" data-formset-empty-form>
+                                            {% escapescript %}
+                                                <div class="row" data-formset-form>
+                                                    {{ formset_social.empty_form.id }}
+                                                    <div class="col-xs-6 col-sm-6 col-md-6">
+                                                        {{ formset_social.empty_form.social_app }}
+                                                    </div>
+                                                    <div class="col-xs-12 col-sm-14 col-md-14">
+                                                        {{ formset_social.empty_form.url }}
+                                                    </div>
+                                                    <div class="col-xs-6 col-sm-4 col-md-4">
+                                                        <div class="hidden">{{ formset_social.empty_form.DELETE }}</div>
+                                                        <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                    </div>
+                                                </div>
+                                            {% endescapescript %}
+                                            </script>
+
+                                            <!-- This Button will add a new Form, when clicked -->
+                                            <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-add><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+
+                                            <script>
+                                                jQuery(function ($) {
+                                                    $("#formset-social").formset({
+                                                        animateForms:   true
+                                                    });
+                                                });
+                                            </script>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="tab-pane fade" role="tabpanel" id="complete">
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><span>{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></span></li>
+                                        </ul>
+
+                                        <h3>{% trans "Complete" %}</h3>
+
+                                        <p>{% trans "You have successfully completed all Steps." %}</p>
+
+                                        <div class="row">
+                                            <div class="col-xs-24 col-sm-2 col-md-24 col-lg-24 feature">
+                                                <a href="#" name="org-create" class="org-create">
+                                                    <span><i class="flaticon-rounded25"></i></span>
+                                                    <p>{% trans "Create this Organization" %}</p>
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        <ul class="list-inline pull-right">
+                                            <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                            <li><span>{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="tips" class="hidden-xs col-sm-8 col-md-6 right-sidebar">
+                <h4>{% trans "Tips" %}</h4>
+
+                <div class="alert alert-info">
+                {% blocktrans %}
+                    You can create your Organization here. If you have any questions, don't hesitate to <a href="mailto:support@saneside.com">contact Support</a>.
+                {% endblocktrans %}
+                </div>
+
+                <div class="alert alert-success">
+                    {% trans "After creating the Organization, you will be redirected to the Details Page, where you can attach related Images, Documents and Links." %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='org-create']").click(function () {
+        // --------------------------------------------------------------------
+        // --- Check, if Avatar Input is NOT empty
+        if ($("#id_avatar").get(0).files.length === 0) {
+            alert("Please, select the Avatar Image.");
+
+            return false;
+        }
+
+        $("#spinner").fadeIn("slow");
+
+        $("form#create-organization-form").submit();
+
+        return true;
+    })
+
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in aform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in nform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for form in formset_social.forms %}
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        new Noty({
+                            text: "Social Link : {{ field.label }}: {{ error }}"
+                        }).show();
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        /*********************************************************************/
+        /*** Organization has Address?                                     ***/
+        /*********************************************************************/
+        $("address").show();
+
+        if ($("#id_addressless").prop("checked")) {
+            $("address").hide();
+        }
+
+        $("#id_addressless").click(function () {
+            $("address").toggle("slow");
+        });
+
+        /*********************************************************************/
+        /*** Contact Person UX                                             ***/
+        /*********************************************************************/
+        $("#alt_person_creds").hide();
+
+        selected = $("input[type='radio']:checked");
+
+        if (selected.val() == "he") {
+            $("#alt_person_creds").show("slow");
+        }
+
+        $("#id_contact_0").click(function () {
+            $("#alt_person_creds").hide("slow");
+        });
+
+        $("#id_contact_1").click(function () {
+            $("#alt_person_creds").show("slow");
+        })
+    });
+</script>
+{% endblock %}

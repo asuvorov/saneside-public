@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ participation.user.first_name }}!
+
+Your Application to Challenge "{{ challenge.name }}"{% if participation.role %} for the Role of "{{ participation.role.name }}"{% endif %} was accepted!
+
+You are now signed up for the Challenge on {{ challenge.start_date }} at {{ challenge.start_time|date:"G:i"|default:"0:00" }}. Please, don’t forget to show up!
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user.first_name }}!
+
+The Challenge "{{ challenge.name }}", you participated, has added and/or edited the reporting Materials.
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

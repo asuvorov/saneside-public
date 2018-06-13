@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user }}!
+
+The Organization "{{ organization.name }}", were you added as a Contact Person, was modified!
+
+Link to the Organization Details Page: {{ organization_link }}
+
+Thank you, SaneSide Team.

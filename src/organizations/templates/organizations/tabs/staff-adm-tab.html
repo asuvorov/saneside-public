@@ -1,0 +1,83 @@
+<!--
+TAB
+Organization Details - Info
+-->
+{% load i18n %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        <h4 class="hidden-xs">{% trans "Organization's Staff Members" %}</h4>
+
+        <div class="alert alert-info alert-dismissible hidden-xs" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% trans "Staff Members can create Challenges on behalf of this Organization." %}
+        </div>
+
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% trans "You can use the Search Form below to find and invite SaneSide Members to become the Staff Members of the Organization." %}
+        </div>
+
+        <div class="organization-invite-staff">
+            <div class="row">
+                <div class="col-xs-24 col-sm-24 col-md-24">
+                    <form id="invite-org-staff-form" action="" method="POST">
+                        {% csrf_token %}
+
+                        <input id="hidden-invitee-id" type="hidden" />
+
+                        <div class="form-inline">
+                            <label for="invite-staff-members-list">{% trans "Find and invite" %}: </label>
+                            <input id="invite-staff-members-list" class="form-control autocomplete" placeholder="Start typing a Name..." type="text" onclick="$(this).select();">
+                            <button class="btn btn-rounded invite-org-staff"><i class="fa fa-fw fa-plus"></i>{% trans "Invite" %}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="organization-staff-section">
+            {% include "organizations/fragments/organization-staff-members-adm.html" with organization=organization %}
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Autocomplete                                                      ***/
+    /*************************************************************************/
+    $(function () {
+        $("#invite-staff-members-list").autocomplete({
+            source:     "{% url 'autocomplete-member-list' %}",
+            minLength:  3,
+            delay:      500,
+            select:     function (event, ui) {
+                console.log(">>> ID    :", ui.item.id);
+                console.log(">>> UUID  :", ui.item.uuid);
+                console.log(">>> LABEL :", ui.item.label);
+                console.log(">>> VALUE :", ui.item.value);
+
+                $("#hidden-invitee-id").val(ui.item.uuid);
+            }
+        }).data("ui-autocomplete")._renderItem = function(ul, item) {
+            return $("<li></li>")
+                .data("item.autocomplete", item)
+                .append("<a><img src='" + item.avatar + "' width='30' height='30' /> " + item.label + "<br></a>")
+                .appendTo(ul);
+        };
+    });
+
+    /*************************************************************************/
+    /*** Invite to Organization Staff                                      ***/
+    /*************************************************************************/
+    $(".invite-org-staff").click(function () {
+        var organization_id = {{ organization.id }};
+        var invitee_id = $("#hidden-invitee-id").val();
+
+        $("#invite-to-organization-staff-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#invite-to-organization-staff-modal-form").find("input[name='invitee_id']").val(invitee_id);
+        $("#inviteToOrganizationStaffPopupModal").modal("show");
+
+        return false;
+    })
+</script>

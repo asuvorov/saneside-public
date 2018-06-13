@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ admin.first_name }}!
+
+Your Challenge "{{ challenge.name }}" was cloned!
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load twitter_tag %}
+
+{% block title %}{% trans "Contact us" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'contact-us' %}">{% trans "Contact us" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="contact-us">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="row">
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                        <div align="center">
+                            <h2>{% trans "We would love to hear from you" %}</h2>
+                            <p>{% trans "Our Los Angeles based Team are on hand to respond to your Emails everyday" %} 9<sup>am</sup> - 5<sup>pm</sup></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="row">
+                    <div class="col-xs-24 col-sm-8 col-md-8 twitter-feed">
+                        <h4>{% trans "Twitter Feed" %}</h4>
+
+                        {% get_tweets for "sanesidedotcom" as tweets exclude "replies, retweets" limit 10 %}
+                        {# get_tweets for "sanesidedotcom" as tweets limit 10 #}
+
+                        <ul class="bxslider">
+                        {% for tweet in tweets  %}
+                            <li>
+                                <div class="twitt {% if forloop.first %}active {% endif %}item">
+                                    <p class="user-name"><i class="fa fa-twitter"></i> {{ tweet.user.name }}</p>
+                                    <p class="content">{{ tweet.html|safe }}</p>
+                                    <p class="posted-at">{{ tweet.datetime|date:"D d M Y" }}</p>
+                                </div>
+                                <div class="divider"></div>
+                            </li>
+                        {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-8 col-md-8 contact-info">
+                        <h4>{% trans "Contact Info" %}</h4>
+
+                        <div class="item">
+                            <i class="fa fa-map-marker"></i>
+                            <p>{% trans "Address" %}</p>
+                            <small>Los Angeles, CA 90028, USA</small>
+                        </div>
+
+                        <div class="item">
+                            <i class="fa fa-envelope"></i>
+                            <p>{% trans "Email" %}</p>
+                            <small><a href="mailto:support@saneside.com">support@saneside.com</a></small>
+                        </div>
+
+                        <div class="item">
+                            <i class="fa fa-phone"></i>
+                            <p>{% trans "Phone" %}</p>
+                            <small><a href="tel:(562) 606-6760">+1 (562) 606-6760</a></small>
+                        </div>
+
+                        <div class="item">
+                            <i class="fa fa-globe"></i>
+                            <p>{% trans "Online Support" %}</p>
+                            <small>Skype: artem.suvorov</small>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-8 col-md-8 contact-form">
+                        <h4>{% trans "Send us a Message" %}</h4>
+
+                        <form id="contact-us-form" action="" method="POST">
+                            {% csrf_token %}
+
+                            <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.name }}
+                                    <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.name.errors %}{% for error in form.name.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.email }}
+                                    <div class="input-group-addon"><i class="fa fa-at fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.email.errors %}{% for error in form.email.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.subject.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.subject }}
+                                    <div class="input-group-addon"><i class="fa fa-comments fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.subject.errors %}{% for error in form.subject.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.message.errors %}has-error{% endif %}">
+                                {{ form.message }}
+
+                                <span class="help-block">{% if form.message.errors %}{% for error in form.message.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <button type="button" class="btn btn-primary btn-centered" onclick="send_message();"><i class="fa fa-paper-plane fa-fw"></i> {% trans "Submit" %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Send a Message                                                    ***/
+    /*************************************************************************/
+    function send_message() {
+        var name = $("#contact-us-form").find("input[name='name']").val();
+        var email = $("#contact-us-form").find("input[name='email']").val();
+        var subject = $("#contact-us-form").find("input[name='subject']").val();
+        var message = $("#contact-us-form").find("textarea[name='message']").val();
+
+        $.post("{% url 'api-contact-us' %}", {
+            "name":                 name,
+            "email":                email,
+            "subject":              subject,
+            "message":              message,
+            "csrfmiddlewaretoken":  $("#contact-us-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to send the Message."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    })
+</script>
+{% endblock %}

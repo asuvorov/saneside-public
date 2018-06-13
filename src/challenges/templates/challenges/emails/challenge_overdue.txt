@@ -1,0 +1,14 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ admin.first_name }}!
+
+Your Challenge "{{ challenge.name }}" is overdue!
+
+If this Challenge has taken place as planned, please, mark it as completed.
+Remember to remove all Participants from the Challenge, who did not show up to help, so the Challenge will not appear on their Profiles.
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

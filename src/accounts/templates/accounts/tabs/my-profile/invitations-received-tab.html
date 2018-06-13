@@ -1,0 +1,324 @@
+<!--
+TAB
+My Profile - Received Invitations
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% if request.user.invitee.get_all_received.count > 0 %}
+    <!--
+        Mobile View
+    -->
+    <div class="hidden-sm hidden-md hidden-lg">
+    {% for invite in request.user.invitee.get_all_received.all %}
+        <table class="table" is-new="{{ invite.is_new }}">
+            <thead>
+                <tr class="active">
+                    <th colspan="2">
+                        {% trans "Invitation to" %} {{ invite.content_type.name.capitalize }}
+
+                    {% if invite.content_type.name == "challenge" %}
+                        <a href="{% url 'challenge-details' invite.content_object.slug %}">
+                            {{ invite.content_object.name|default:"N/A" }}
+                        </a>
+                    {% elif invite.content_type.name == "organization" %}
+                        <a href="{% url 'organization-details' invite.content_object.slug %}">
+                            {{ invite.content_object.name|default:"N/A" }}
+                        </a>
+                    {% elif invite.content_type.name == "organization group" %}
+                        <a href="{% url 'organization-details' invite.content_object.organization.slug %}">
+                            {{ invite.content_object.organization.name|default:"N/A" }} | {{ invite.content_object.name|default:"N/A" }}
+                        </a>
+                    {% endif %}
+
+                        {% trans "from" %}
+
+                    {% with invite.inviter.profile as profile %}
+                        <a href="{% url 'profile-view' invite.inviter_id %}">
+                        {% if profile.nickname %}
+                            {{ profile.nickname }}
+                        {% elif profile.short_name %}
+                            {{ profile.short_name }}
+                        {% else %}
+                            <i class="fa fa-user-secret fa-fw"></i>
+                        {% endif %}
+                        </a>
+                    {% endwith %}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><strong>{% trans "Invitation Text" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ invite.invitation_text }}</span>
+                    </td>
+                </tr>
+            {% if invite.is_new %}
+                <tr>
+                    <td><strong>{% trans "Action" %}</strong></td>
+                    <td class="action-{{ invite.id }}">
+                        <a class="accept-inv txt-success" invite="{{ invite.id }}" href="#">{% trans "Accept" %}</a> |
+                        <a class="reject-inv txt-danger"  invite="{{ invite.id }}" href="#">{% trans "Reject" %}</a>
+                    </td>
+                </tr>
+            {% endif %}
+                <tr>
+                    <td><strong>{% trans "Status" %}<strong></td>
+                    <td class="status-{{ invite.id }}">
+                    {% if invite.is_new %}
+                        <span class="label label-info">{% trans "New" %}</span>
+                    {% elif invite.is_accepted %}
+                        <span class="label label-success">{% trans "Accepted" %}</span>
+                    {% elif invite.is_rejected %}
+                        <span class="label label-warning">{% trans "Rejected" %}</span>
+                    {% elif invite.is_revoked %}
+                        <span class="label label-danger">{% trans "Revoked" %}</span>
+                    {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+    </div>
+
+    <!--
+        Tablet/Desktop View
+    -->
+    <table class="table table-condensed hidden-xs">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{% trans "Invitation to" %}</th>
+                <th>{% trans "Name" %}</th>
+                <th>{% trans "From" %}</th>
+                <th>{% trans "Rating" %}</th>
+                <th>{% trans "Invitation Text" %}</th>
+                <th>{% trans "Action" %}</th>
+                <th>{% trans "Status" %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for invite in request.user.invitee.get_all_received.all %}
+            <tr is-new="{{ invite.is_new }}">
+                <td>
+                {% if invite.content_type.name == "challenge" %}
+                    <a href="{% url 'challenge-details' invite.content_object.slug %}">
+                    {% if invite.content_object.avatar %}
+                        {% generateimage "common:thumbnail_wide" source=invite.content_object.avatar -- alt=invite.content_object.name %}
+                    {% endif %}
+                    </a>
+                {% elif invite.content_type.name == "organization" %}
+                    <a href="{% url 'organization-details' invite.content_object.slug %}">
+                    {% if invite.content_object.avatar %}
+                        {% generateimage "common:thumbnail_wide" source=invite.content_object.avatar -- alt=invite.content_object.name %}
+                    {% endif %}
+                    </a>
+                {% elif invite.content_type.name == "organization group" %}
+                    <a href="{% url 'organization-details' invite.content_object.organization.slug %}">
+                    {% if invite.content_object.organization.avatar %}
+                        {% generateimage "common:thumbnail_wide" source=invite.content_object.organization.avatar -- alt=invite.content_object.organization.name %}
+                    {% endif %}
+                    </a>
+                {% endif %}
+                </td>
+                <td>{{ invite.content_type.name.capitalize }}</td>
+                <td>
+                {% if invite.content_type.name == "challenge" %}
+                    <a href="{% url 'challenge-details' invite.content_object.slug %}">
+                        {{ invite.content_object.name|default:"N/A" }}
+                    </a>
+                {% elif invite.content_type.name == "organization" %}
+                    <a href="{% url 'organization-details' invite.content_object.slug %}">
+                        {{ invite.content_object.name|default:"N/A" }}
+                    </a>
+                {% elif invite.content_type.name == "organization group" %}
+                    <a href="{% url 'organization-details' invite.content_object.organization.slug %}">
+                        {{ invite.content_object.organization.name|default:"N/A" }} | {{ invite.content_object.name|default:"N/A" }}
+                    </a>
+                {% endif %}
+                </td>
+                <td>
+                {% with invite.inviter.profile as profile %}
+                    <a href="{% url 'profile-view' invite.inviter_id %}">
+                    {% if profile.avatar %}
+                        {% generateimage "header:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                    {% else %}
+                        <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                    {% endif %}
+
+                    {% if profile.nickname %}
+                        {{ profile.nickname }}
+                    {% elif profile.short_name %}
+                        {{ profile.short_name }}
+                    {% else %}
+                        <i class="fa fa-user-secret fa-fw"></i>
+                    {% endif %}
+                    </a>
+                {% endwith %}
+                </td>
+                <td>
+                {% with invite.inviter.profile as profile %}
+                    {% if profile.get_rating_avg > 0 %}
+                        <div style="color:orange;">
+                            <input id="id_profile_rating" name="profile_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ profile.get_rating_avg }}" />
+                        </div>
+                    {% else %}
+                        {% trans "N/A" %}
+                    {% endif %}
+                {% endwith %}
+                </td>
+                <td>
+                    <span class="desc">{{ invite.invitation_text }}</span>
+                </td>
+                <td class="action-{{ invite.id }}">
+                {% if invite.is_new %}
+                    <a class="accept-inv txt-success" invite="{{ invite.id }}" href="#">{% trans "Accept" %}</a> |
+                    <a class="reject-inv txt-danger"  invite="{{ invite.id }}" href="#">{% trans "Reject" %}</a>
+                {% endif %}
+                </td>
+                <td class="status-{{ invite.id }}">
+                {% if invite.is_new %}
+                    <span class="label label-info">{% trans "New" %}</span>
+                {% elif invite.is_accepted %}
+                    <span class="label label-success">{% trans "Accepted" %}</span>
+                {% elif invite.is_rejected %}
+                    <span class="label label-warning">{% trans "Rejected" %}</span>
+                {% elif invite.is_revoked %}
+                    <span class="label label-danger">{% trans "Revoked" %}</span>
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>
+        <span class="label label-info">{% trans "There are no received Invitations at the moment" %}</span>
+    </p>
+{% endif %}
+
+<script>
+    /*************************************************************************/
+    /*** Accept Invitation                                                 ***/
+    /*************************************************************************/
+    $(".accept-inv").click(function (event) {
+        element = $(this);
+
+        var invite_id = $(this).attr("invite");
+
+        $.post("{% url 'api-invite-accept' 0 %}".replace("0", invite_id), {
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            // ----------------------------------------------------------------
+            // --- Update Element
+            $("td.action-" + invite_id).html("");
+            $("td.status-" + invite_id).html("<span class='label label-success'>Accepted</span>");
+
+            // ----------------------------------------------------------------
+            // --- Update `#received-invitations` Tab
+            var count = $.find("#received-invitations-count");
+            var badgeAmount = parseInt($(count).text());
+
+            $(count).text(badgeAmount - 1);
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to accept the Invitation."
+                }).show();
+            };
+        });
+
+        return false;
+    })
+
+    /*************************************************************************/
+    /*** Reject Invitation                                                 ***/
+    /*************************************************************************/
+    $(".reject-inv").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var invite_id = $(this).attr("invite");
+
+        $("#invite-reject-modal-form").find("input[name='invite_id']").val(invite_id);
+        $("#inviteRejectPopupModal").modal("show");
+
+        $("#inviteRejectPopupModal").on("shown.bs.modal", function () {
+            $("body").css({
+                overflow:   "hidden"
+            });
+        })
+
+        $("#inviteRejectPopupModal").on("hidden.bs.modal", function () {
+            $("body").css({
+                overflow:   ""
+            });
+        })
+    })
+
+    /*************************************************************************/
+    /*** Archive all processed Invitations                                 ***/
+    /*************************************************************************/
+    $(".inv-received-archive").click(function () {
+        element = $(this);
+
+        var invite_id = $(this).attr("invite");
+
+        $.post("{% url 'api-invite-archive-all' %}", {
+            "kind":             "received",
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            // ----------------------------------------------------------------
+            // --- Update Element
+            $("table[is-new='False']").remove();
+            $("tr[is-new='False']").remove();
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to archive the Invitations."
+                }).show();
+            };
+        });
+
+        return false;
+    })
+</script>

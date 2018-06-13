@@ -1,0 +1,15 @@
+<!--
+TAB
+Organization Details - Groups
+-->
+{% load i18n %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        <h4 class="hidden-xs">{% trans "Organization Groups" %}</h4>
+
+        <div id="organization-groups-section">
+            {% include "organizations/fragments/organization-groups.html" with organization=organization %}
+        </div>
+    </div>
+</div>

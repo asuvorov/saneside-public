@@ -1,0 +1,55 @@
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% comment %}
+    Input Parameters:
+        :<comment>
+        :[is_admin]
+{% endcomment %}
+
+<div class="comment">
+    {% need_to_know_profile_details_tag request comment.user as need_to_know_profile_details %}
+    {% need_to_know_contact_details_tag request comment.user as need_to_know_contact_details %}
+
+    {% sum_of_hours_spent_tag comment.user as sum_of_hours_spent %}
+
+    <blockquote class="">
+        <p>
+            {{ comment.text }}
+        {% if request.user == comment.user or is_admin or request.user.is_staff %}
+            <a class="pull-right delete-comment txt-danger" href="#" comment="{{ comment.id }}"><i class="fa fa-times"></i></a>
+        {% endif %}
+        </p>
+
+        <small>
+        {% with comment.user.profile as profile %}
+            <a href="{% url 'profile-view' comment.user_id %}">
+            {% if profile.avatar and need_to_know_profile_details %}
+                {% generateimage "header:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+            {% else %}
+                <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+            {% endif %}
+
+            {% if need_to_know_profile_details %}
+                {{ profile.user.get_full_name }}
+            {% else %}
+                {% if profile.nickname %}
+                    {{ profile.nickname }}
+                {% elif profile.short_name %}
+                    {{ profile.short_name }}
+                {% else %}
+                    <i class="fa fa-user-secret fa-fw"></i>
+                {% endif %}
+            {% endif %}
+
+            {% if sum_of_hours_spent and need_to_know_profile_details %}
+                <span class="badge">{{ sum_of_hours_spent }}</span>
+            {% endif %}
+            </a>
+
+            {{ comment.created|timesince }} {% trans "ago" %}
+        </small>
+        {% endwith %}
+    </blockquote>
+</div>

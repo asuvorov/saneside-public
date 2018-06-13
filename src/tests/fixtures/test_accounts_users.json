@@ -1,0 +1,58 @@
+[
+    {
+        "pk":       1,
+        "model":    "auth.user",
+        "fields":   {
+            "username":             "admin",
+            "first_name":           "Admin",
+            "last_name":            "Admin",
+            "email":                "ddaemon@yandex.ru",
+            "password":             "pbkdf2_sha256$24000$IrQ6chsyG57T$4c1GnryIaNzhXkYZBKguCuWp7v4rWlL8d70Fn52lQUM=",
+            "is_staff":             true,
+            "is_active":            true,
+            "is_superuser":         true
+        }
+    },
+    {
+        "pk":       2,
+        "model":    "auth.user",
+        "fields":   {
+            "username":             "john.doe@mail.ru",
+            "first_name":           "John",
+            "last_name":            "Doe",
+            "email":                "john.doe@yandex.ru",
+            "password":             "pbkdf2_sha256$24000$IrQ6chsyG57T$4c1GnryIaNzhXkYZBKguCuWp7v4rWlL8d70Fn52lQUM=",
+            "is_staff":             false,
+            "is_active":            true,
+            "is_superuser":         false
+        }
+    },
+    {
+        "pk":       3,
+        "model":    "auth.user",
+        "fields":   {
+            "username":             "artem.suvorov@gmail.com",
+            "first_name":           "Artem",
+            "last_name":            "Suvorov",
+            "email":                "artem.suvorov@gmail.com",
+            "password":             "pbkdf2_sha256$24000$IrQ6chsyG57T$4c1GnryIaNzhXkYZBKguCuWp7v4rWlL8d70Fn52lQUM=",
+            "is_staff":             false,
+            "is_active":            true,
+            "is_superuser":         false
+        }
+    },
+    {
+        "pk":       4,
+        "model":    "auth.user",
+        "fields":   {
+            "username":             "maryna.suvorova@hotmail.com",
+            "first_name":           "Maryna",
+            "last_name":            "Suvorova",
+            "email":                "maryna.suvorova@hotmail.com",
+            "password":             "pbkdf2_sha256$24000$IrQ6chsyG57T$4c1GnryIaNzhXkYZBKguCuWp7v4rWlL8d70Fn52lQUM=",
+            "is_staff":             false,
+            "is_active":            true,
+            "is_superuser":         false
+        }
+    }
+]

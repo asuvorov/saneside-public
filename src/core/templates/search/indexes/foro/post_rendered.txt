@@ -1,0 +1,1 @@
+{% include "forum/fragments/forum-topic-post-thumbnail-search.html" with forum_topic_post=object %}

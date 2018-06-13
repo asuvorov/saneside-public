@@ -1,0 +1,37 @@
+{% extends "challenges/challenge-details-base.html" %}
+
+{% load i18n %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="challenge-confirm">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4 class="hidden-xs">{% trans "Members, waiting for Confirmation" %}</h4>
+
+                <div id="challenge-confirm-section">
+                    {% include "challenges/tabs/to-confirm-tab.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% if challenge.author == request.user %}
+        {% include "challenges/modals/challenge-participation-reject-modal.html" %}
+    {% endif %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var participation_id;
+    var element;
+</script>
+{% endblock %}

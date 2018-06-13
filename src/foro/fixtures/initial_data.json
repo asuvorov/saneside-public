@@ -1,0 +1,47 @@
+[
+    {
+        "model":        "foro.section",
+        "pk":           1,
+        "fields": {
+            "author":   1,
+            "title":    "General Issues",
+            "order":    0
+        }
+    },
+    {
+        "model":        "foro.section",
+        "pk":           2,
+        "fields": {
+            "author":   1,
+            "title":    "Feedback",
+            "order":    1
+        }
+    },
+    {
+        "model":        "foro.section",
+        "pk":           3,
+        "fields": {
+            "author":   1,
+            "title":    "New Ideas",
+            "order":    2
+        }
+    },
+    {
+        "model":        "foro.section",
+        "pk":           4,
+        "fields": {
+            "author":   1,
+            "title":    "Challenges",
+            "order":    3
+        }
+    },
+    {
+        "model":        "foro.section",
+        "pk":           5,
+        "fields": {
+            "author":   1,
+            "title":    "Organizations",
+            "order":    4
+        }
+    }
+]

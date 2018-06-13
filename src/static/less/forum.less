@@ -1,0 +1,127 @@
+// ----------------------------------------------------------------------------
+// --- Forum List
+//     Forum Topic List
+//     Forum Topic Post List
+// ----------------------------------------------------------------------------
+#forum-list,
+#topic-list,
+#topic-post-list {
+    // --- Mixin
+    #instance.page-list();
+
+    ul.root,
+    ul.children {
+        background-color:   @white;
+        list-style:         none;
+        padding-top:        10px;
+        padding-right:      10px;
+        padding-bottom:     10px;
+    }
+
+    .post {
+        margin-bottom:      20px;
+
+        .post-title {
+            font-weight:        bold;
+            text-transform:     uppercase;
+        }
+        .post-author {
+            font-size:      @font-size-small;
+        }
+        .post-body {}
+    }
+    .table-forum,
+    .table-topic {
+        & > tbody > tr > th {
+            vertical-align:     middle;
+        }
+        & > tbody > tr > td {
+            vertical-align:     top;
+        }
+        & th.cell-stat {
+            width:          6em;
+        }
+        & th.cell-stat-2x {
+            width:          14em;
+        }
+        & .fa {
+            text-align:     center;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Forum create
+//     Forum edit
+//     Forum Topic create
+//     Forum Topic edit
+//     Forum Topic Post create
+//     Forum Topic Post edit
+// ----------------------------------------------------------------------------
+#forum-create,
+#forum-edit,
+#topic-create,
+#topic-edit,
+#topic-post-create,
+#topic-post-edit {
+    // --- Mixin
+    #instance.page-create-edit();
+}
+
+// ----------------------------------------------------------------------------
+// --- Forum Thumbnail
+// ----------------------------------------------------------------------------
+.forum-section-thumb,
+.forum-topic-thumb {
+    background-color:       @white;
+    padding:                10px;
+    margin-bottom:          10px;
+}
+.forum-thumb-search,
+.forum-topic-thumb-search,
+.forum-topic-post-thumb-search {
+    background-color:       @white;
+    box-shadow:             1px 1px 3px rgba(0, 0, 0, 0.1);
+    padding:                10px;
+    margin-bottom:          10px;
+}
+
+// ----------------------------------------------------------------------------
+// --- Make Design more responsive
+// ----------------------------------------------------------------------------
+@media (max-width: 479px) {
+    /* <= 479px */
+    #forum-details {
+        margin-top:         0;
+        margin-bottom:      50px;
+    }
+    #frm-navigation,
+    #frm-tag-cloud,
+    #frm-calendar {
+        display:            none;
+    }
+}
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    /* <= 480px <= 767px */
+    #forum-details {
+        margin-top:         0;
+        margin-bottom:      50px;
+    }
+    #frm-navigation,
+    #frm-tag-cloud,
+    #frm-calendar {
+        display:            none;
+    }
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    /* <= 768px <= 991px */
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    /* <= 992px <= 1199px */
+}
+@media (min-width: @screen-lg-min) and (max-width: 1599px) {
+    /* <= 1200px <= 1599px */
+}
+@media (min-width: 1600px) {
+    /* >= 1600px */
+}

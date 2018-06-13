@@ -1,0 +1,73 @@
+{% load i18n %}
+
+<div class="modal fade" id="challengeCreatePopupModal" tabindex="-1" role="dialog" aria-labelledby="challengeCreatePopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="challengeCreatePopupModalLabel">{% trans "Create Challenge" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="challenge-create-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <p class="note">
+                        {% trans "You can update the Description." %}
+                    </p>
+
+                    <div class="form-group">
+                        <label for="id_description_text">{% trans "Description" %}</label>
+                        <textarea id="id_description_text" class="form-control" name="description_text" maxlength="1000" placeholder="Enter text here...">{{ challenge.description }}</textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="challenge_create();">{% trans "Create" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Create Challenge                                                  ***/
+    /*************************************************************************/
+    function challenge_create() {
+        var description_text = $("#challenge-create-modal-form").find("textarea[name='description_text']").val();
+
+        $.post("{% url 'api-challenge-create' challenge.id %}", {
+            "description_text":     description_text,
+            "csrfmiddlewaretoken":  $("#challenge-create-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#challengeCreatePopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            location.reload(true);
+            //location.replace("{% url 'challenge-details' challenge.slug %}");
+        }).fail(function (data) {
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to create the Challenge."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

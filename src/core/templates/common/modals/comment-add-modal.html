@@ -1,0 +1,83 @@
+{% load i18n %}
+
+<div class="modal fade" id="commentAddPopupModal" tabindex="-1" role="dialog" aria-labelledby="commentAddPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="commentAddPopupModalLabel">{% trans "Add Comment" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="comment-add-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="challenge_id" value="">
+                    <input type="hidden" name="organization_id" value="">
+                    <input type="hidden" name="post_id" value="">
+
+                    <div class="form-group">
+                        <label for="id_comment_text">{% trans "Please, enter a Comment" %}</label>
+                        <textarea id="id_comment_text" class="form-control" name="comment_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="comment_add();">{% trans "Comment" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Add Comment                                                       ***/
+    /*************************************************************************/
+    function comment_add() {
+        var comment_text = $("#comment-add-modal-form").find("textarea[name='comment_text']").val();
+        var challenge_id = $("#comment-add-modal-form").find("input[name='challenge_id']").val();
+        var organization_id = $("#comment-add-modal-form").find("input[name='organization_id']").val();
+        var post_id = $("#comment-add-modal-form").find("input[name='post_id']").val();
+
+        console.log(">>> Comment", comment_text);
+
+        $.post("{% url 'api-comment-list' %}", {
+            "challenge_id":         challenge_id,
+            "organization_id":      organization_id,
+            "post_id":              post_id,
+            "comment_text":         comment_text,
+            "csrfmiddlewaretoken":  $("#comment-add-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#commentAddPopupModal").modal("hide");
+
+            $(element).parent().after(data.comment);
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to add the Comment."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

@@ -1,0 +1,56 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<challenge>
+{% endcomment %}
+
+<div class="col-xs-24 col-sm-24 col-md-24 col-lg-24" style="margin-bottom:10px;">
+    <div class="challenge-thumb-search">
+        <div class="row">
+            <div class="hidden-xs col-sm-6 col-md-6 col-lg-6">
+                <div class="thumbnail">
+                    <a href="{% url 'challenge-details' challenge.slug %}">
+                    {% if challenge.avatar %}
+                        {% generateimage "common:medium_fill_wide" source=challenge.avatar -- alt=challenge.name %}
+                    {% else %}
+                    {% endif %}
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
+                <strong>
+                    <p>
+                        Challenge <a href="{% url 'challenge-details' challenge.slug %}">{{ challenge.name|truncatechars:50 }}</a>
+
+                    {% if challenge.get_rating_avg > 0 %}
+                        <div style="color:orange;">
+                            <input id="id_challenge_rating" name="challenge_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ challenge.get_rating_avg }}" />
+                        </div>
+                    {% endif %}
+                    </p>
+                </strong>
+
+            {% if challenge.organization and not challenge.organization.is_deleted %}
+                <p>
+                    {% trans "posted by" %} <a href="{% url 'organization-details' challenge.organization.slug %}"> {{ challenge.organization.name }}</a> {{ challenge.created|timesince }} {% trans "ago" %}
+                </p>
+            {% else %}
+                <p>
+                    {% trans "posted by" %} <a href="{% url 'profile-view' challenge.author_id %}"> {{ challenge.author.first_name }}</a> {{ challenge.created|timesince }} {% trans "ago" %}
+                </p>
+            {% endif %}
+
+                <blockquote>
+                    <p>{{ challenge.description|striptags|truncatechars:300|default:"N/A" }}</p>
+                </blockquote>
+
+                <div class="learn-more">
+                    <a class="btn btn-warning btn-centered pull-right" href="{% url 'challenge-details' challenge.slug %}" style="width:auto;">{% trans "LEARN MORE" %} <i class="fa fa-chevron-right fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

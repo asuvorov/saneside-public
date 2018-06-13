@@ -1,0 +1,180 @@
+{% load tz %}
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<challenge>
+        :[participation]
+        :[show_org]
+        :[chl_admin]
+{% endcomment %}
+
+<div class="challenge-thumb-container" category="{{ challenge.category|default:'' }}">
+    <div class="challenge-thumb-vert" style="{% if challenge.organization.is_hidden %}background-color:#FBEFEF;{% endif %}">
+        <div class="challenge-name">
+            <a href="{% url 'challenge-details' challenge.slug %}">
+                <h4>
+                    <div class="category-item">
+                        <i class="{{ challenge.stat_category_icon }}" title="{{ challenge.stat_category_name }}" category="{{ challenge.category }}" style="background-color:{{ challenge.stat_category_color }};"></i>
+                    </div>
+
+                    {{ challenge.name|truncatechars:50 }}
+
+                {% if challenge.get_rating_avg > 0 %}
+                    <div class="" style="color:orange;">
+                        <input id="id_challenge_rating" name="challenge_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ challenge.get_rating_avg }}" />
+                    </div>
+                {% endif %}
+                </h4>
+            </a>
+        </div>
+
+        <div class="challenge-author">
+        {% if challenge.organization and not challenge.organization.is_deleted and show_org %}
+            <p>
+            {% if challenge.organization.avatar %}
+                {% generateimage "header:thumbnail" source=challenge.organization.avatar -- alt=challenge.organization.name %}
+            {% endif %}
+                <strong>{% trans "by" %}</strong>
+                <a href="{% url 'organization-details' challenge.organization.slug %}"> {{ challenge.organization.name }}</a> {{ challenge.created|timesince }} {% trans "ago" %}
+            </p>
+        {% else %}
+            <p>
+            {% if challenge.author.profile.avatar %}
+                {% generateimage "header:thumbnail" source=challenge.author.profile.avatar -- alt=challenge.author.profile.auth_name %}
+            {% endif %}
+                <strong>{% trans "by" %}</strong>
+                <a href="{% url 'profile-view' challenge.author_id %}"> {{ challenge.author.first_name }}</a> {{ challenge.created|timesince }} {% trans "ago" %}
+            </p>
+        {% endif %}
+        </div>
+
+        <div class="challenge-description">
+            <p>{{ challenge.description|striptags|truncatechars:200 }}</p>
+        </div>
+
+        <div class="thumbnail" style="position:relative;">
+            <a href="{% url 'challenge-details' challenge.slug %}">
+            {% if challenge.avatar %}
+                {% generateimage "common:medium_fill_wide" source=challenge.avatar -- alt=challenge.name %}
+            {% else %}
+            {% endif %}
+
+            {% if challenge.is_confirmation_required %}
+                <label class="label label-warning label-confirmation-required">{% trans "Confirmation required" %}</label>
+            {% endif %}
+            </a>
+        </div>
+
+        <div class="challenge-details">
+            <p>
+                <i class="fa fa-map-marker fa-fw"></i>
+            {% if challenge.addressless %}
+                <span class="label label-warning">{% trans "Location is not provided" %}</span>
+            {% else %}
+                {{ challenge.address.short_address }}
+            {% endif %}
+            </p>
+
+            <p>
+            {% if challenge.is_dateless %}
+                <i class="fa fa-calendar fa-fw"></i>
+                <span class="label label-warning">{% trans "Dateless" %}</span>
+            {% else %}
+                <i class="fa fa-calendar fa-fw"></i>{{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"M j, Y" }}
+                <span class="vert-delimiter">|</span>
+                <i class="fa fa-clock-o fa-fw"></i>{{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"f a"|default:"12 a.m." }})
+            {% endif %}
+            </p>
+        </div>
+
+        <div class="challenge-roles">
+        {% if challenge.challenge_roles.all %}
+            <p>
+                <i class="fa fa-group fa-fw"></i>
+            {% for role in challenge.challenge_roles.all %}
+                <span class="label label-default">{{ role.name }} ({{ role.quantity }})</span>
+            {% endfor %}
+            </p>
+        {% endif %}
+        </div>
+
+        <div class="challenge-tags">
+        {% if challenge.tags.all and challenge.hashtag %}
+            <p>
+                <i class="fa fa-tags fa-fw"></i>
+            {% for tag in challenge.tags.all %}
+                <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+
+                <span class="vert-delimiter">|</span>
+
+                <i class="fa fa-hashtag fa-fw"></i>{{ challenge.hashtag }}
+            </p>
+        {% elif challenge.tags.all %}
+            <p>
+                <i class="fa fa-tags fa-fw"></i>
+            {% for tag in challenge.tags.all %}
+                <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% endfor %}
+            </p>
+        {% elif challenge.hashtag %}
+            <p>
+                <i class="fa fa-hashtag fa-fw"></i>{{ challenge.hashtag }}
+            </p>
+        {% endif %}
+        </div>
+
+        <div class="challenge-counts">
+            <p>
+                <i class="fa fa-comment fa-fw"></i> {{ challenge.get_comments_count }}
+                <span class="vert-delimiter">|</span>
+                <i class="fa fa-eye fa-fw"></i> {{ challenge.get_views_count }}
+            </p>
+        </div>
+
+        <div class="clear-fix">
+        </div>
+
+        <div class="challenge-status">
+        {% if participation %}
+            {% if participation.status == PARTICIPATION_STATUS.CONFIRMED %}
+                <p><span class="label label-success">{% trans "Confirmed" %}</span></p>
+            {% elif participation.status == PARTICIPATION_STATUS.WAITING_FOR_CONFIRMATION %}
+                <p><span class="label label-warning">{% trans "Waiting for Confirmation" %}</span></p>
+            {% elif participation.status == PARTICIPATION_STATUS.WAITING_FOR_SELFREFLECTION %}
+                <p><span class="label label-warning">{% trans "Waiting for Selfreflection" %}</span></p>
+            {% elif participation.status == PARTICIPATION_STATUS.WAITING_FOR_ACKNOWLEDGEMENT %}
+                <p><span class="label label-warning">{% trans "Waiting for Acknowledgement" %}</span></p>
+            {% elif participation.status == PARTICIPATION_STATUS.ACKNOWLEDGED %}
+                <p><span class="label label-success">{% trans "Acknowledged" %}</span></p>
+            {% endif %}
+        {% endif %}
+
+        {% if chl_admin %}
+            {% if challenge.get_confirmed_count > 0 %}
+                <p><span class="label label-success">{{ challenge.get_confirmed_count }} {% trans "Confirmed Application(s)" %}</span></p>
+            {% endif %}
+
+            {% if challenge.has_waiting_for_confirmation %}
+                <p><span class="label label-warning">{{ challenge.get_waiting_for_confirmation_count }} {% trans "Pending Application(s)" %}</span></p>
+            {% endif %}
+
+            {% if challenge.has_waiting_for_acknowledgement %}
+                <p><span class="label label-warning">{{ challenge.get_waiting_for_acknowledgement_count }} {% trans "Pending Experience Reports" %}</span></p>
+            {% endif %}
+
+            {% if challenge.is_overdue and not challenge.is_complete %}
+                <p><span class="label label-danger">{% trans "Mark as completed" %}</span></p>
+            {% endif %}
+        {% endif %}
+        </div>
+
+        <div class="learn-more">
+            <a class="btn btn-warning btn-centered" href="{% url 'challenge-details' challenge.slug %}" style="width:auto;">{% trans "LEARN MORE" %} <i class="fa fa-chevron-right fa-fw"></i></a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+{% load i18n %}
+
+<div class="modal fade" id="postPublishPopupModal" tabindex="-1" role="dialog" aria-labelledby="postPublishPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="postPublishPopupModalLabel">{% trans "Publish Post" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="post-publish-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <p class="note">
+                        {% trans "Do you really want to publish this Post?" %}
+                    </p>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" onclick="post_publish();">{% trans "Publish" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Publish Post                                                      ***/
+    /*************************************************************************/
+    function post_publish() {
+        $.post("{% url 'api-post-publish' 0 %}".replace("0", {{ post.id }}), {
+            "csrfmiddlewaretoken":  $("#post-publish-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#postPublishPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            //location.reload();
+            location.replace("{% url 'post-list' %}");
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to publish the Post."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

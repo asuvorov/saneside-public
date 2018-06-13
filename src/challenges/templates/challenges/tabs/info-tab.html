@@ -1,0 +1,593 @@
+<!--
+TAB
+Challenge Details - Info
+-->
+{% load tz %}
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-16 col-md-18">
+        <div class="thumbnail">
+        {% if challenge.avatar %}
+            {% generateimage "common:giant_fill_wide" source=challenge.avatar -- alt=challenge.name %}
+        {% endif %}
+        </div>
+
+        <div class="chl-info-section">
+            <div class="challenge-name">
+                <h4 class="hidden-sm hidden-md hidden-lg">{{ challenge.name }} ({{ challenge.duration }}h)</h4>
+                <h2 class="hidden-xs">{{ challenge.name }} ({{ challenge.duration }}h)</h2>
+            </div>
+
+            <div class="hidden-sm hidden-md hidden-lg">
+                {% include "challenges/fragments/challenge-media-status-breakdown.html" %}
+            </div>
+
+            <div class="challenge-description">
+                <blockquote>
+                    <p>{{ challenge.description|escape|linebreaks }}</p>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="chl-info-section">
+            <div class="challenge-details">
+                <p>
+                    <i class="fa fa-map-marker fa-fw"></i>
+                {% if challenge.addressless %}
+                    <span class="label label-warning">{% trans "Location is not provided" %}</span>
+                {% else %}
+                    {{ challenge.address.full_address|default:"N/A" }}
+                    <a data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeViewOnMapPopupModal" tabindex="-1">&nbsp;({% trans "View on Map" %})</a>
+                {% endif %}
+
+                {% if challenge.address.notes %}
+                    <blockquote>
+                        <p>{{ challenge.address.notes }}</p>
+                    </blockquote>
+                {% endif %}
+                </p>
+
+            {% if challenge.get_start_date_time_tz and not challenge.is_dateless %}
+                <table class="table table-striped hidden-sm hidden-md hidden-lg">
+                    <tr>
+                        <td><strong>{% trans "Venue Local Time" %}</strong></td>
+                        <td>
+                            <i class="fa fa-calendar fa-fw"></i>{{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"M j, Y" }}<br/>
+                            <i class="fa fa-clock-o fa-fw"></i>{{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"f a"|default:"12 a.m." }})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>{% trans "Your Local Time" %}</strong></td>
+                        <td>
+                            <i class="fa fa-calendar fa-fw"></i> {{ challenge.get_start_date_time_tz|localtime|date:"M j, Y" }}<br/>
+                            <i class="fa fa-clock-o fa-fw"></i> {{ challenge.get_start_date_time_tz|localtime|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|localtime|date:"f a"|default:"12 a.m." }})
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>{% trans "UTC Time" %}</strong></td>
+                        <td>
+                            <i class="fa fa-calendar fa-fw"></i>{{ challenge.get_start_date_time_tz|utc|date:"M j, Y" }}<br/>
+                            <i class="fa fa-clock-o fa-fw"></i>{{ challenge.get_start_date_time_tz|utc|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|utc|date:"f a"|default:"12 a.m." }})
+                        </td>
+                    </tr>
+                </table>
+
+                <table class="table table-striped hidden-xs">
+                    <tr>
+                        <th>{% trans "Venue Local Time" %}</th>
+                        <th>{% trans "Your Local Time" %}</th>
+                        <th>{% trans "UTC Time" %}</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>
+                                <i class="fa fa-calendar fa-fw"></i>{{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"F j, Y" }}<br/>
+                                <i class="fa fa-clock-o fa-fw"></i>{{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|timezone:challenge.start_tz.zone|date:"f a"|default:"12 a.m." }})
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <i class="fa fa-calendar fa-fw"></i> {{ challenge.get_start_date_time_tz|localtime|date:"F j, Y" }}<br/>
+                                <i class="fa fa-clock-o fa-fw"></i> {{ challenge.get_start_date_time_tz|localtime|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|localtime|date:"f a"|default:"12 a.m." }})
+                            </p>
+                        </td>
+                        <td>
+                            <p>
+                                <i class="fa fa-calendar fa-fw"></i>{{ challenge.get_start_date_time_tz|utc|date:"F j, Y" }}<br/>
+                                <i class="fa fa-clock-o fa-fw"></i>{{ challenge.get_start_date_time_tz|utc|date:"G:i"|default:"0:00" }} ({{ challenge.get_start_date_time_tz|utc|date:"f a"|default:"12 a.m." }})
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            {% elif challenge.is_dateless %}
+                <p>
+                    <i class="fa fa-calendar fa-fw"></i>
+                    <span class="label label-warning">{% trans "Dateless" %}</span>
+                </p>
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="chl-info-section">
+            <div class="challenge-category">
+                <p><i class="fa fa-plus-square-o fa-fw"></i><strong>{% trans "Category" %}: </strong>{{ challenge.stat_category_name }}</p>
+            </div>
+
+            <div class="challenge-tags">
+            {% if challenge.tags.all and challenge.hashtag %}
+                <p>
+                    <i class="fa fa-tags fa-fw"></i>
+                {% for tag in challenge.tags.all %}
+                    <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+
+                    <span class="vert-delimiter">|</span>
+
+                    <i class="fa fa-hashtag fa-fw"></i>{{ challenge.hashtag }}
+                </p>
+            {% elif challenge.tags.all %}
+                <p>
+                    <i class="fa fa-tags fa-fw"></i>
+                {% for tag in challenge.tags.all %}
+                    <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
+            {% elif challenge.hashtag %}
+                <p>
+                    <i class="fa fa-hashtag fa-fw"></i>{{ challenge.hashtag }}
+                </p>
+            {% endif %}
+            </div>
+
+            <div class="challenge-organization">
+            {% if challenge.organization and not challenge.organization.is_deleted %}
+                <p>
+                    <i class="fa fa-institution fa-fw"></i><strong>{% trans "Organized by" %}</strong>
+                    <a href="{% url 'organization-details' challenge.organization.slug %}">{{ challenge.organization.name }}</a>
+                </p>
+            {% endif %}
+            </div>
+
+            <div class="challenge-author">
+                <p>
+                {% if challenge.author.profile.avatar %}
+                    {% generateimage "header:thumbnail" source=challenge.author.profile.avatar -- alt=challenge.author.profile.auth_name %}
+                {% else %}
+                    <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                {% endif %}
+                    {% trans "Posted by" %}
+                    <a href="{% url 'profile-view' challenge.author_id %}">{{ challenge.author.first_name }}</a>
+                    {{ challenge.created|timesince }} {% trans "ago" %}
+                </p>
+            </div>
+        </div>
+
+        <!-- Challenge Achievements -->
+
+    {% if challenge.achievements and challenge.is_complete %}
+        <div class="challenge-achievements">
+            <h4>{% trans "Achievements" %}</h4>
+
+        {% autoescape off %}
+            {{ challenge.achievements }}
+        {% endautoescape %}
+        </div>
+    {% endif %}
+
+        <!-- Challenge Roles -->
+
+    {% if roles_breakdown %}
+        <div class="challenge-roles-breakdown">
+            <h4>{% trans "Roles Breakdown" %}
+                <a data-toggle="collapse" href="#collapse-roles-breakdown"  aria-expanded="false" aria-controls="collapse-roles-breakdown"><i class="toggle-icon fa fa-fw fa-chevron-down"></i></a>
+            </h4>
+
+            <div id="collapse-roles-breakdown" class="collapse">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr>
+                            <th>
+                                <span class="hidden-xs">{% trans "Name" %}</span>
+                            </th>
+                            <th>
+                                <span class="hidden-xs">{% trans "Required" %}</span>
+                                <i class="fa fa-fw fa-binoculars txt-info hidden-sm hidden-md hidden-lg"></i>
+                            </th>
+                            <th>
+                                <span class="hidden-xs">{% trans "Applied" %}</span>
+                                <i class="fa fa-fw fa-paper-plane txt-warning hidden-sm hidden-md hidden-lg"></i>
+                            </th>
+                            <th>
+                                <span class="hidden-xs">{% trans "Rejected" %}</span>
+                                <i class="fa fa-fw fa-times txt-danger hidden-sm hidden-md hidden-lg"></i>
+                            </th>
+                            <th>
+                                <span class="hidden-xs">{% trans "Confirmed" %}</span>
+                                <i class="fa fa-fw fa-check txt-success hidden-sm hidden-md hidden-lg"></i>
+                            </th>
+                            <th>
+                                <span class="hidden-xs">{% trans "Left" %}</span>
+                                <i class="fa fa-fw fa-user hidden-sm hidden-md hidden-lg"></i>
+                            </th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for role in roles_breakdown %}
+                        <tr>
+                            <td>{{ role.name }}</td>
+                            <td><div class="alert alert-info">{{ role.required }}</div></td>
+                            <td><div class="alert alert-warning">{{ role.applied }}</div></td>
+                            <td><div class="alert alert-danger">{{ role.rejected }}</div></td>
+                            <td><div class="alert alert-success">{{ role.confirmed }}</div></td>
+                            <td></td>
+                        </tr>
+                    {% empty %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Challenge Attachments -->
+
+    {% if challenge.is_complete %}
+        {% include "challenges/fragments/challenge-attachments-complete.html" with challenge=challenge %}
+    {% else %}
+        {% include "challenges/fragments/challenge-attachments-upcoming.html" with challenge=challenge %}
+    {% endif %}
+
+    <!-- Challenge Comments -->
+
+    {% if not challenge.is_draft %}
+        <div class="instance-comments">
+            <h4>{% trans "Comments" %} ({{ challenge.get_comment_list.count }})
+                <a data-toggle="collapse" href="#collapse-comments"  aria-expanded="false" aria-controls="collapse-comments"><i class="toggle-icon fa fa-fw fa-chevron-down"></i></a>
+            {% if request.user.is_authenticated %}
+                <a class="add-comment btn btn-rounded pull-right" href="#"><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+            {% endif %}
+            </h4>
+
+            <div id="collapse-comments" class="collapse">
+            {% for comment in challenge.get_comment_list %}
+                {% include "common/fragments/comment-hor.html" with comment=comment is_admin=is_admin %}
+            {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+    </div>
+
+    <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+        <div class="hidden-xs">
+            {% include "challenges/fragments/challenge-media-status-breakdown.html" %}
+        </div>
+
+        <!-- Link to th Page -->
+
+        <h4>{% trans "Link to this Page" %}</h4>
+        <input type="text" readonly="readonly" onclick="$(this).select();" value="{{ request.build_absolute_uri }}" />
+
+        <!-- Social Links -->
+    {% if social_links %}
+        <h4>{% trans "Social Links" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="social-buttons">
+                {% for social_link in social_links %}
+                    <button onclick="javascript:document.location.href='{{ social_link.url }}';" class="{{ social_link.stat_social_app_button }}">
+                        <i class="{{ social_link.stat_social_app_icon }}"></i>
+                    </button>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- Share Links -->
+        <h4>{% trans "Share" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="social-buttons">
+                    <button class="btn btn-facebook" onclick="javascript:share_on_fb();"><i class="fa fa-facebook fa-fw"></i></button>
+                    <button class="btn btn-twitter" onclick="javascript:share_on_tw();"><i class="fa fa-twitter fa-fw"></i></button>
+                    <button class="btn btn-linkedin" onclick="javascript:share_on_li();"><i class="fa fa-linkedin fa-fw"></i></button>
+                    <button class="btn btn-google-plus" onclick="javascript:share_on_gp();"><i class="fa fa-google-plus fa-fw"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Person -->
+        <h4>{% trans "Contact Person" %}</h4>
+    {% if request.user.is_authenticated %}
+        <div class="panel panel-info">
+            <div class="panel-body">
+            {% include "accounts/fragments/contact-person-side.html" with instance=challenge %}
+            </div>
+        </div>
+    {% else %}
+        <div class="panel panel-danger">
+            <div class="panel-body">
+                <p class="note">
+                    <span class="label label-warning">{% trans "Information hidden" %}</span><br/>
+                    {% trans "Log in to see the Phone # and Email Address of the Contact Person." %}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+{% if challenge.get_rating_avg > 0 %}
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        {% include "common/fragments/rating-card-hor.html" with instance=challenge %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% if challenge.author == request.user %}
+        {% include "challenges/modals/challenge-clone-modal.html" %}
+        {% include "challenges/modals/challenge-close-modal.html" %}
+    {% else %}
+    {% endif %}
+{% endif %}
+
+<!-- Script -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Add Comment                                                       ***/
+    /*************************************************************************/
+    $(".add-comment").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = "{{ challenge.id }}";
+
+        $("#comment-add-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#commentAddPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Delete Comment                                                    ***/
+    /*************************************************************************/
+    $(".delete-comment").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var comment_id = $(this).attr("comment");
+
+        $.ajax({
+            url:    "{% url 'api-comment-details' 0 %}".replace("0", comment_id),
+            type:   "DELETE"
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $(element).parent().parent().hide("slow");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to delete the Comment."
+                }).show();
+            };
+        });
+
+        return true;
+    })
+
+    /*************************************************************************/
+    /*** Submit Experience Report                                          ***/
+    /*************************************************************************/
+    $(".sr-submit").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = "{{ challenge.id }}";
+
+        $("#challenge-selfreflection-submit-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challengeSelfreflectionSubmitPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Did not participate                                               ***/
+    /*************************************************************************/
+    $(".not-participated").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = "{{ challenge.id }}";
+
+        $("#challenge-not-participated-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challengeDidNotParticipateSubmitPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Rate the Challenge                                                ***/
+    /*************************************************************************/
+    $(".add-rating").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = "{{ challenge.id }}";
+    {% if challenge.organization_id %}
+        var organization_id = "{{ challenge.organization_id }}";
+    {% else %}
+        var organization_id = "";
+    {% endif %}
+        var organizer_id = "{{ challenge.author_id }}";
+
+        $("#challenge-rate-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-rate-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#challenge-rate-modal-form").find("input[name='organizer_id']").val(organizer_id);
+
+        $("#challengeRatePopupModal").modal("show");
+        $("#challengeRatePopupModal").on("shown.bs.modal", function (event) {
+            if (organization_id) {
+                $("#challenge-rate-modal-form").find("#organization-form-group").show();
+            } else {
+                $("#challenge-rate-modal-form").find("#organization-form-group").hide();
+            }
+        })
+    })
+
+    /*************************************************************************/
+    /*** Add Complaint                                                     ***/
+    /*************************************************************************/
+    $(".add-complaint").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = "{{ challenge.id }}";
+
+        $("#complaint-add-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#complaintAddPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Share on ...                                                      ***/
+    /*************************************************************************/
+    var height = 300;
+    var width = 500;
+    var centeredY = (screen.height - height)/2;
+    var centeredX = (screen.width - width)/2;
+
+    function share_on_fb() {
+        window.open("http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + document.location.href + "&p[images][0]=&p[title]=&p[summary]=", "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+    function share_on_tw() {
+        window.open("http://twitter.com/home?status=" + "{{ challenge.name }}".substr(0,100) + " " + document.location.href, "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+    function share_on_li() {
+        window.open("http://www.linkedin.com/shareArticle?mini=true&url=" + document.location.href + "&title=" + "{{ challenge.name }}" + "&summary=&source=", "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+    function share_on_gp() {
+        window.open("https://plus.google.com/share?url=" + document.location.href, "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+</script>
+
+<!-- Pop-up Overlays -->
+
+{% if is_newly_created %}
+<div id="share-challenge-popup-overlay" class="well" style="display:none;">
+    <div class="popup-overlay-heading">
+        <h4>{% trans "Share the Challenge on social App" %}</h4>
+    </div>
+
+    <div class="popup-overlay-info">
+        <div class="alert alert-success">
+        {% blocktrans %}
+            You are just one Click away from sharing<br/>
+            your Challenge with all Friends.
+        {% endblocktrans %}
+        </div>
+    </div>
+
+    <div class="social-buttons hidden-xs" align="center">
+        <button class="btn btn-facebook" onclick="javascript:share_on_fb();"><i class="fa fa-facebook fa-fw fa-3x"></i></button>
+        <button class="btn btn-twitter" onclick="javascript:share_on_tw();"><i class="fa fa-twitter fa-fw fa-3x"></i></button>
+        <button class="btn btn-linkedin" onclick="javascript:share_on_li();"><i class="fa fa-linkedin fa-fw fa-3x"></i></button>
+        <button class="btn btn-google-plus" onclick="javascript:share_on_gp();"><i class="fa fa-google-plus fa-fw fa-3x"></i></button>
+    </div>
+
+    <div class="social-buttons hidden-sm hidden-md hidden-lg" align="center">
+        <button class="btn btn-facebook" onclick="javascript:share_on_fb();"><i class="fa fa-facebook fa-fw fa-2x"></i></button>
+        <button class="btn btn-twitter" onclick="javascript:share_on_tw();"><i class="fa fa-twitter fa-fw fa-2x"></i></button>
+        <button class="btn btn-linkedin" onclick="javascript:share_on_li();"><i class="fa fa-linkedin fa-fw fa-2x"></i></button>
+        <button class="btn btn-google-plus" onclick="javascript:share_on_gp();"><i class="fa fa-google-plus fa-fw fa-2x"></i></button>
+    </div>
+
+    <div class="popup-overlay-info">
+        <div class="alert alert-info">
+        {% blocktrans %}
+            You can also do it later from the<br/>
+            Challenge Details Page.
+        {% endblocktrans %}
+        </div>
+    </div>
+
+    <!-- Add an optional button to close the popup -->
+    <div class="popup-overlay-footer">
+        <button class="btn btn-default share-challenge-popup-overlay_close">{% trans "Close" %}</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** jQuery pop-up Overlay                                         ***/
+        /*********************************************************************/
+        var options = {
+            type:                       "overlay",      //      "tooltip"
+            autoopen:                   true,           // def. false
+            scrolllock:                 true,           // def. false
+            background:                 true,
+            backgroundactive:           false,
+            color:                      "#000",
+            opacity:                    0.5,
+            horizontal:                 "center",
+            vertical:                   "center",
+            offsettop:                  0,
+            offsetleft:                 0,
+            escape:                     true,
+            blur:                       true,
+            setzindex:                  true,
+            autozindex:                 false,
+            keepfocus:                  true,
+            focusdelay:                 50,
+            outline:                    false,
+            detach:                     false,
+            //openelement:                ".{popup_id}_open",
+            //closeelement:               ".{popup_id}_close",
+            transition:                 "all 0.3s"
+        };
+
+        $("#share-challenge-popup-overlay").popup(options);
+    });
+</script>
+{% endif %}

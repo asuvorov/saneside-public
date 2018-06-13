@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "About us" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'about-us' %}">{% trans "About us" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="about-us">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="section">
+                    <h4>{% trans "In brief" %}</h4>
+
+                    <p>{% trans "Initially, work on the Project began back in the Year 2012, and the Project was known as" %} <strong>partici.pe</strong>. {% trans "However, due to the lack of Funding, the Work on the Project was suspended in mid-2013." %}</p>
+                    <p>{% trans "Work on the Project was resumed in the second Half of 2014 by a Team of the independent Developers and Enthusiasts, and now the Project is experiencing its second Birth." %}</p>
+                </div>
+
+                <div class="section">
+                    <h4>{% trans "Who we are" %}</h4>
+
+                    <p>{% trans "We are the Team of independent Developers and Enthusiasts." %}</p>
+                    <p>{% trans "Our Motto: Want to be a Human - help others." %}</p>
+                    <p>{% trans "Our Goal: to provide the Promotion and Support of the civil, positively directed Volunteer Initiatives around the World." %}</p>
+                    <p>{% trans "Our Mission" %}:</p>
+                    <ul>
+                        <li>{% trans "With the Help of the Volunteers to achieve concrete Results in solving various social Problems." %}</li>
+                        <li>{% trans "To help young People to disclose Leadership and Volunteer Potential." %}</li>
+                        <li>{% trans "To bring to Life best socially significant volunteering Initiatives." %}</li>
+                        <li>{% trans "To create the Conditions for a long-term Partnership of the public Organizations (Participants of the Project) in carrying out other social community service Programs involving Volunteers." %}</li>
+                        <li>{% trans "Actively use the Internet to promote the Goals and Objectives of the volunteering Movement." %}</li>
+                        <li>{% trans "To join Forces of the public Organizations in the Area of solving common social Problems involving Volunteers." %}</li>
+                    </ul>
+                    <p>{% trans "Check out the" %} <a href="{% url 'our-team' %}">{% trans "Team</a> behind SaneSide." %}</p>
+                </div>
+
+                <div class="section">
+                    <h4>{% trans "Help us to improve the Website" %}</h4>
+
+                    <p>{% trans "We work hard on our Project, and therefore your Opinion is very important for us." %}</p>
+                    <p>{% trans "All your Suggestions for improving the Website you can send to the Technical Support Team from the" %} <a href="{% url 'contact-us' %}">{% trans "Contact us</a> Page." %}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% load i18n %}
+
+<div class="modal fade" id="inviteRejectPopupModal" tabindex="-1" role="dialog" aria-labelledby="inviteRejectPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="inviteRejectPopupModalLabel">{% trans "Reject Invitation" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="invite-reject-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="invite_id" value="">
+
+                    <div class="form-group">
+                        <label for="id_rejection_text">{% trans "Please, enter a Reason" %}</label>
+                        <textarea id="id_rejection_text" class="form-control" name="rejection_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="invite_reject();">{% trans "Reject" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Reject Invitation                                                 ***/
+    /*************************************************************************/
+    function invite_reject() {
+        var invite_id = $("#invite-reject-modal-form").find("input[name='invite_id']").val();
+        var rejection_text = $("#invite-reject-modal-form").find("textarea[name='rejection_text']").val();
+
+        $.post("{% url 'api-invite-reject' 0 %}".replace("0", invite_id), {
+            "rejection_text":       rejection_text,
+            "csrfmiddlewaretoken":  $("#invite-reject-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#inviteRejectPopupModal").modal("hide");
+
+            // ----------------------------------------------------------------
+            // --- Update Element
+            $("td.action-" + invite_id).html("");
+            $("td.status-" + invite_id).html("<span class='label label-warning'>Rejected</span>");
+
+            // ----------------------------------------------------------------
+            // --- Update `#received-invitations` Tab
+            var count = $.find("#received-invitations-count");
+            var badgeAmount = parseInt($(count).text());
+
+            $(count).text(badgeAmount - 1);
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to reject the Invitation."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

@@ -1,0 +1,137 @@
+[
+    {
+        "model":    "challenges.category",
+        "pk":       1,
+        "fields": {
+            "name":         "Animals",
+            "slug":         "animals",
+            "description":  "",
+            "category":     "0",
+            "color":        "0",
+            "icon":         "0",
+            "image":        "0",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       2,
+        "fields": {
+            "name":         "Arts & Culture",
+            "slug":         "arts-culture",
+            "description":  "",
+            "category":     "1",
+            "color":        "1",
+            "icon":         "1",
+            "image":        "1",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       3,
+        "fields": {
+            "name":         "Children & Youth",
+            "slug":         "children-youth",
+            "description":  "",
+            "category":     "2",
+            "color":        "2",
+            "icon":         "2",
+            "image":        "2",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       4,
+        "fields": {
+            "name":         "Community",
+            "slug":         "community",
+            "description":  "",
+            "category":     "4",
+            "color":        "4",
+            "icon":         "4",
+            "image":        "4",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       5,
+        "fields": {
+            "name":         "Education & Literacy",
+            "slug":         "education-literacy",
+            "description":  "",
+            "category":     "8",
+            "color":        "8",
+            "icon":         "8",
+            "image":        "8",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       6,
+        "fields": {
+            "name":         "Environment",
+            "slug":         "environment",
+            "description":  "",
+            "category":     "16",
+            "color":        "16",
+            "icon":         "16",
+            "image":        "16",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       7,
+        "fields": {
+            "name":         "Health & Wellness",
+            "slug":         "health-wellness",
+            "description":  "",
+            "category":     "32",
+            "color":        "32",
+            "icon":         "32",
+            "image":        "32",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       8,
+        "fields": {
+            "name":         "Sports & Recreation",
+            "slug":         "sports-recreation",
+            "description":  "",
+            "category":     "64",
+            "color":        "64",
+            "icon":         "64",
+            "image":        "64",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":    "challenges.category",
+        "pk":       9,
+        "fields": {
+            "name":         "Veterans & Seniors",
+            "slug":         "veterans-seniors",
+            "description":  "",
+            "category":     "128",
+            "color":        "128",
+            "icon":         "128",
+            "image":        "128",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    }
+]

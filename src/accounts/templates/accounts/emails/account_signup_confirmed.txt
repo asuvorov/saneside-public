@@ -1,0 +1,12 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user.first_name }}!
+
+Your Account was successfully confirmed.
+
+To log-in, please, follow this link:
+{{ login_link }}
+
+Thank you, SaneSide Team.

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Our Partners" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'our-partners' %}">{% trans "Our Partners" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="our-partners">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+            {% for partner in partners %}
+                <a href="{{ partner.website }}" target="_blank">
+                    <div class="thumbnail">
+                        <img src="{{ partner.avatar.url }}" width="600" alt="{{ partner.name }}" />
+                    </div>
+                </a>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,98 @@
+{% extends "base-forum.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+
+{% block title %}{% trans "Create a Post" %} - {{ block.super }}{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'forum-list' %}">{% trans "Forums" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'topic-list' topic.forum.id %}">{% trans "Topics" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'topic-post-list' topic.forum.id topic.id %}">{% trans "Posts" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'topic-post-create' topic.forum.id topic.id %}">{% trans "Create" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="topic-post-create">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <form id="create-topic-post-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.media }}
+
+                    <div class="row">
+                        <div id="pst-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                        </div>
+
+                        <div id="pst-details" class="col-xs-24 col-sm-24 col-md-16">
+                            <div class="form-group {% if form.title.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.title }}
+                                    <div class="input-group-addon"><i class="fa fa-i-cursor fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.title.errors %}{% for error in form.title.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.body.errors %}has-error{% endif %}">
+                                {{ form.body }}
+
+                                <span class="help-block">{% if form.body.errors %}{% for error in form.body.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="tips" class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+                <div class="actions">
+                    <a href="#" name="submit" class="btn btn-primary btn-centered"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Create" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='submit']").click(function () {
+        $("#spinner").fadeIn("slow");
+
+        $("form#create-topic-post-form").submit();
+
+        return true;
+    })
+</script>
+{% endblock %}

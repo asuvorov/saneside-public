@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% block title %}{% trans "Members List" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{{ request.path }}">{% trans "Members" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="account-list" class="container">
+    <div class="row">
+        <div class="col-xs-24 col-sm-24 col-md-24">
+            <h4>{{ page_title }}</h4>
+
+            <div class="row">
+            {% for account in accounts %}
+                {% include "accounts/fragments/account-thumbnail.html" with account=account %}
+            {% empty %}
+                <div class="col-xs-24 col-sm-24 col-md-24">
+                    <p>
+                        <span class="label label-info">{% trans "There are no Members at the moment" %}</span>
+                    </p>
+                </div>
+            {% endfor %}
+            </div>
+
+            <div id="page-selection"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load accounttags %}
+
+{% block title %}{% trans "Profile" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+    {% need_to_know_upcoming_challenges_tag   request account as need_to_know_upcoming_challenges %}
+    {% need_to_know_completed_challenges_tag  request account as need_to_know_completed_challenges %}
+    {% need_to_know_affiliated_challenges_tag request account as need_to_know_affiliated_challenges %}
+
+    {% need_to_know_canceled_participations_tag request account as need_to_know_canceled_participations %}
+    {% need_to_know_rejected_participations_tag request account as need_to_know_rejected_participations %}
+
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="">{% trans "Profile" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-sub-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                <a class="btn" href="{% url 'profile-view' account.id %}">
+                    <i class="fa fa-fw fa-info-circle"></i>
+                    <span class="hidden-xs">{% trans "Information" %}</span>
+                </a>
+            </div>
+
+        {% if request.user.is_authenticated %}
+            {% if need_to_know_upcoming_challenges or need_to_know_completed_challenges or need_to_know_canceled_participations or need_to_know_rejected_participations %}
+            <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                <a class="btn" href="{% url 'profile-participations' account.id %}">
+                    <i class="fa fa-fw fa-child"></i>
+                    <span class="hidden-xs">{% trans "Participations" %}</span>
+                </a>
+            </div>
+            {% endif %}
+
+            {% if need_to_know_affiliated_challenges %}
+            <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                <a class="btn" href="{% url 'profile-challenges' account.id %}">
+                    <i class="fa fa-fw fa-wrench"></i>
+                    <span class="hidden-xs">{% trans "Affiliated with" %}</span>
+                </a>
+            </div>
+            {% endif %}
+        {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_content %}
+{% endblock %}

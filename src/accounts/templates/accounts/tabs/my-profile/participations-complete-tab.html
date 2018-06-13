@@ -1,0 +1,258 @@
+<!--
+TAB
+My Profile - Completed Challenges
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% if request.user.profile.get_completed_participations.count > 0 %}
+    <!--
+        Mobile View
+    -->
+    <div class="hidden-sm hidden-md hidden-lg">
+    {% for participation in request.user.profile.get_completed_participations %}
+        <table class="table table-condensed">
+            <thead>
+                <tr class="active">
+                    <th colspan="2">
+                        {% trans "Challenge" %} <a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                {% if participation.selfreflection_activity_text %}
+                    <td><strong>{% trans "What I did" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.selfreflection_activity_text }}</span>
+                    </td>
+                {% endif%}
+                </tr>
+                <tr>
+                {% if participation.selfreflection_learning_text %}
+                    <td><strong>{% trans "What I learned" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.selfreflection_learning_text }}</span>
+                    </td>
+                {% endif %}
+                </tr>
+                <tr>
+                    <td><strong>{% trans "Admin replied" %}</strong></td>
+                    <td>
+                    {% if participation.is_selfreflection_rejected %}
+                        <span class="desc">{{ participation.selfreflection_rejection_text|default:"N/A" }}</span>
+                    {% else %}
+                        <span class="desc">{{ participation.acknowledgement_text|default:"N/A" }}</span>
+                    {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{% trans "Status" %}<strong></td>
+                    <td class="status-{{ participation.challenge_id }}">
+                    {% if participation.is_selfreflection_rejected %}
+                        <span class="label label-danger">{% trans "Experience Report rejected" %}</span>
+                    {% elif participation.is_waiting_for_selfreflection %}
+                        <span class="label label-info">{% trans "Waiting for Experience Report" %}</span>
+                    {% elif participation.is_waiting_for_acknowledgement %}
+                        <span class="label label-info">{% trans "Waiting for Acknowledgment" %}</span>
+                    {% elif participation.is_acknowledged %}
+                        <span class="label label-success">{% trans "Acknowledged" %}</span>
+                    {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>{% trans "Action" %}</strong></td>
+                    <td class="action-{{ participation.challenge_id }}">
+                    {% is_rated_challenge_tag participation.challenge request.user as is_rated %}
+                    {% is_complained_challenge_tag participation.challenge request.user as is_complained %}
+
+                    {% if participation.is_waiting_for_selfreflection or participation.is_selfreflection_rejected %}
+                        <a class="sr-submit txt-success" challenge-id="{{ participation.challenge_id }}" href="#"><i class="fa fa-check fa-fw" data-toggle="tooltip" data-placement="top" title="Submit my Experience"></i></a>
+                    {% endif %}
+
+                    {% if participation.is_waiting_for_selfreflection %}
+                        <a class="not-participated txt-danger" challenge-id="{{ participation.challenge_id }}" href="#"><i class="fa fa-times fa-fw" data-toggle="tooltip" data-placement="top" title="I didn't participate"></i></a>
+                    {% endif %}
+
+                    {% if not is_rated %}
+                        {% if participation.is_waiting_for_acknowledgement or participation.is_acknowledged %}
+                            <a class="add-rating txt-warning" challenge-id="{{ participation.challenge_id }}" organization-id="{% if participation.challenge.organization %}{{ participation.challenge.organization_id }}{% endif %}" organizer-id="{{ participation.challenge.author_id }}" href="#"><i class="fa fa-star fa-fw" data-toggle="tooltip" data-placement="top" title="Rate the Challenge"></i></a>
+                        {% endif %}
+                    {% endif %}
+
+                    {% if not is_complained %}
+                        {% if participation.is_waiting_for_selfreflection or participation.is_waiting_for_acknowledgement or participation.is_acknowledged %}
+                            <a class="add-complaint txt-danger" challenge-id="{{ participation.challenge_id }}" href="#"><i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="top" title="Complain to the Challenge"></i></a>
+                        {% endif %}
+                    {% endif %}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+    </div>
+
+    <!--
+        Tablet/Desktop View
+    -->
+    <table class="table table-condensed hidden-xs">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{% trans "Challenge Name" %}</th>
+                <th>{% trans "What I did" %}</th>
+                <th>{% trans "What I learned" %}</th>
+                <th>{% trans "Admin replied" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Actions" %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for participation in request.user.profile.get_completed_participations %}
+            <tr>
+                <td>
+                    <a href="{% url 'challenge-details' participation.challenge.slug %}">
+                    {% if participation.challenge.avatar %}
+                        {% generateimage "common:thumbnail_wide" source=participation.challenge.avatar -- alt=participation.challenge.name %}
+                    {% endif %}
+                    </a>
+                </td>
+                <td><a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a></td>
+                <td>
+                    <span class="desc">{{ participation.selfreflection_activity_text|default:"N/A" }}</span>
+                </td>
+                <td>
+                    <span class="desc">{{ participation.selfreflection_learning_text|default:"N/A" }}</span>
+                </td>
+                <td>
+                {% if participation.is_selfreflection_rejected %}
+                    <span class="desc">{{ participation.selfreflection_rejection_text|default:"N/A" }}</span>
+                {% else %}
+                    <span class="desc">{{ participation.acknowledgement_text|default:"N/A" }}</span>
+                {% endif %}
+                </td>
+                <td class="status-{{ participation.challenge_id }}">
+                {% if participation.is_selfreflection_rejected %}
+                    <span class="label label-danger">{% trans "Experience Report rejected" %}</span>
+                {% elif participation.is_waiting_for_selfreflection %}
+                    <span class="label label-info">{% trans "Waiting for Experience Report" %}</span>
+                {% elif participation.is_waiting_for_acknowledgement %}
+                    <span class="label label-info">{% trans "Waiting for Acknowledgment" %}</span>
+                {% elif participation.is_acknowledged %}
+                    <span class="label label-success">{% trans "Acknowledged" %}</span>
+                {% endif %}
+                </td>
+                <td class="action-{{ participation.challenge_id }}">
+                {% is_rated_challenge_tag participation.challenge request.user as is_rated %}
+                {% is_complained_challenge_tag participation.challenge request.user as is_complained %}
+
+                {% if participation.is_waiting_for_selfreflection or participation.is_selfreflection_rejected %}
+                    <a class="sr-submit txt-success" challenge-id="{{ participation.challenge_id }}" href="#"><i class="fa fa-check fa-fw" data-toggle="tooltip" data-placement="top" title="Submit my Experience"></i></a>
+                {% endif %}
+
+                {% if participation.is_waiting_for_selfreflection %}
+                    <a class="not-participated txt-danger" challenge-id="{{ participation.challenge_id }}" href="#"><i class="fa fa-times fa-fw" data-toggle="tooltip" data-placement="top" title="I didn't participate"></i></a>
+                {% endif %}
+
+                {% if not is_rated %}
+                    {% if participation.is_waiting_for_acknowledgement or participation.is_acknowledged %}
+                        <a class="add-rating txt-warning" challenge-id="{{ participation.challenge_id }}" organization-id="{% if participation.challenge.organization %}{{ participation.challenge.organization_id }}{% endif %}" organizer-id="{{ participation.challenge.author_id }}" href="#"><i class="fa fa-star fa-fw" data-toggle="tooltip" data-placement="top" title="Rate the Challenge"></i></a>
+                    {% endif %}
+                {% endif %}
+
+                {% if not is_complained %}
+                    {% if participation.is_waiting_for_selfreflection or participation.is_waiting_for_acknowledgement or participation.is_acknowledged %}
+                        <a class="add-complaint txt-danger" challenge-id="{{ participation.challenge_id }}" href="#"><i class="fa fa-info-circle fa-fw" data-toggle="tooltip" data-placement="top" title="Complain to the Challenge"></i></a>
+                    {% endif %}
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>
+        <span class="label label-info">{% trans "There are no completed Participations at the moment." %}</span>
+    </p>
+{% endif %}
+
+<script>
+    /*************************************************************************/
+    /*** Submit Experience Report                                          ***/
+    /*************************************************************************/
+    $(".sr-submit").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = $(this).attr("challenge-id");
+
+        $("#challenge-selfreflection-submit-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challengeSelfreflectionSubmitPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Did not participate                                               ***/
+    /*************************************************************************/
+    $(".not-participated").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = $(this).attr("challenge-id");
+
+        $("#challenge-not-participated-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challengeDidNotParticipateSubmitPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Rate the Challenge                                                ***/
+    /*************************************************************************/
+    $(".add-rating").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = $(this).attr("challenge-id");
+        var organization_id = $(this).attr("organization-id");
+        var organizer_id = $(this).attr("organizer-id");
+
+        $("#challenge-rate-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-rate-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#challenge-rate-modal-form").find("input[name='organizer_id']").val(organizer_id);
+
+        $("#challengeRatePopupModal").modal("show");
+        $("#challengeRatePopupModal").on("shown.bs.modal", function (event) {
+            if (organization_id) {
+                $("#challenge-rate-modal-form").find("#organization-form-group").show();
+            } else {
+                $("#challenge-rate-modal-form").find("#organization-form-group").hide();
+            }
+        })
+    })
+
+    /*************************************************************************/
+    /*** Complain the Challenge                                            ***/
+    /*************************************************************************/
+    $(".add-complaint").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = $(this).attr("challenge-id");
+
+        $("#complaint-add-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#complaintAddPopupModal").modal("show");
+    })
+</script>

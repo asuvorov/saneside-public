@@ -1,0 +1,41 @@
+{% extends "base-error.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% trans "404 - Resource not found" %}{% endblock %}
+
+{% block content %}
+<div class="cover">
+    <h1>{% trans "Resource not found" %}</h1>
+    <small>{% trans "Error 404" %}</small>
+    <p class="lead">
+        {% trans "The requested Resource could not be found, but may be available again in the Future." %}
+    </p>
+
+    <form action="/search/" method="GET">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="fa fa-search fa-fw"></i></span>
+
+            <input type="hidden" name="models" value="blog.post" id="id_models_0">
+            <input type="hidden" name="models" value="challenges.challenge" id="id_models_1">
+            <input type="hidden" name="models" value="foro.post" id="id_models_2">
+            <input type="hidden" name="models" value="foro.topic" id="id_models_3">
+            <input type="hidden" name="models" value="foro.forum" id="id_models_4">
+            <input type="hidden" name="models" value="home.faq" id="id_models_5">
+            <input type="hidden" name="models" value="organizations.organization" id="id_models_6">
+            <input type="hidden" name="models" value="accounts.userprofile" id="id_models_7">
+
+            <input name="q" type="text" class="form-control" placeholder="Search">
+
+            <span class="input-group-addon close-search"><i class="fa fa-times fa-fw"></i></span>
+        </div>
+    </form>
+
+    <div id="navbar">
+        <a href="{% url 'index' %}">{% trans "Home" %}</a>
+        <a href="{% url 'about-us' %}">{% trans "About" %}</a>
+        <a href="{% url 'post-list' %}">{% trans "Blog" %}</a>
+        <a href="{% url 'contact-us' %}">{% trans "Contact" %}</a>
+    </div>
+</div>
+{% endblock %}

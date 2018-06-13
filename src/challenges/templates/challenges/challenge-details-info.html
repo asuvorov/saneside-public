@@ -1,0 +1,48 @@
+{% extends "challenges/challenge-details-base.html" %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="challenge-info">
+        <div id="info">
+            {% include "challenges/tabs/info-tab.html" %}
+        </div>
+
+    {% if not challenge.is_draft %}
+        <div id="participants">
+            {% include "challenges/tabs/participants-tab.html" %}
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% include "challenges/modals/challenge-view-on-map-modal.html" %}
+
+{% if request.user.is_authenticated %}
+    {% if challenge.author == request.user %}
+        {% include "challenges/modals/challenge-create-modal.html" %}
+        {% include "challenges/modals/challenge-complete-modal.html" %}
+        {% include "challenges/modals/challenge-participation-remove-modal.html" %}
+    {% else %}
+        {% include "challenges/modals/challenge-participation-post-modal.html" %}
+        {% include "challenges/modals/challenge-participation-withdraw-modal.html" %}
+        {% include "challenges/modals/challenge-selfreflection-submit-modal.html" %}
+        {% include "challenges/modals/challenge-not-participated-modal.html" %}
+        {% include "challenges/modals/challenge-rate-modal.html" %}
+    {% endif %}
+
+    {% include "common/modals/comment-add-modal.html" %}
+    {% include "common/modals/complaint-add-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var participation_id;
+    var element;
+</script>
+{% endblock %}

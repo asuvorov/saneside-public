@@ -1,0 +1,15 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user.first_name }}!
+
+The Organization "{{ organization.name }}" Newsletter has just created new Challenge "{{ challenge.name }}".
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Link to the Organization Details Page: {{ organization_link }}
+
+You have received this Email, because you're subscribed to the Organization's Newsletters and Activity Notifications.
+
+Thank you, SaneSide Team.

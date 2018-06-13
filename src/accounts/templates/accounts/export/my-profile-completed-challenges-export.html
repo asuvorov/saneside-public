@@ -1,0 +1,69 @@
+{% extends "easy_pdf/base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load imagekit %}
+
+{% block extra_style %}
+    <style>
+        @page {
+            size:       letter landscape;
+            margin:     1cm;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="my-profile-challenge-list-export">
+        <p>
+        {% blocktrans with full_name=request.user.full_name %}
+            The List of the Challenges on SaneSide, {{ full_name }} participated in:
+        {% endblocktrans %}
+        </p>
+
+        <table class="table table-condensed">
+            <tr>
+                <th></th>
+                <th>{% trans "Challenge Name" %}</th>
+                <th>{% trans "What I did" %}</th>
+                <th>{% trans "What I learned" %}</th>
+                <th>{% trans "Admin replied" %}</th>
+                <th>{% trans "Status" %}</th>
+            </tr>
+        {% for participation in completed_participations %}
+            <tr>
+                <td>
+                {% if participation.challenge.avatar %}
+                    {% generateimage "common:thumbnail" source=participation.challenge.avatar -- alt=participation.challenge.name %}
+                {% endif %}
+                </td>
+                <td>{{ participation.challenge.name }}</td>
+                <td>{{ participation.selfreflection_activity_text }}</td>
+                <td>{{ participation.selfreflection_learning_text }}</td>
+                <td>
+                {% if participation.is_selfreflection_rejected %}
+                    {{ participation.selfreflection_rejection_text }}
+                {% else %}
+                    {{ participation.acknowledgement_text }}
+                {% endif %}
+                </td>
+                <td>
+                {% if participation.is_selfreflection_rejected %}
+                    <span class="label label-danger">{% trans "Experience Report rejected" %}</span>
+                {% elif participation.is_waiting_for_selfreflection %}
+                    <span class="label label-info">{% trans "Waiting for Experience Report" %}</span>
+                {% elif participation.is_waiting_for_acknowledgement %}
+                    <span class="label label-info">{% trans "Waiting for Acknowledgment" %}</span>
+                {% elif participation.is_acknowledged %}
+                    <span class="label label-success">{% trans "Acknowledged" %}</span>
+                {% endif %}
+                </td>
+            </tr>
+        {% empty %}
+            <p>
+                <span class="label label-info">{% trans "There are no completed Challenges at the moment." %}</span>
+            </p>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

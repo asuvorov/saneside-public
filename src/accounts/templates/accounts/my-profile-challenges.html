@@ -1,0 +1,78 @@
+{% extends "accounts/my-profile-base.html" %}
+
+{% load i18n %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="my-profile-challenges">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Challenges required Action" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Action required" %}</span>
+                </h4>
+
+                <div id="challenges-action-required-section">
+                    {% include "accounts/tabs/my-profile/admin-challenges-action-required-tab.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Upcoming Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Upcoming" %}</span>
+                </h4>
+
+                <div id="challenges-upcoming-section">
+                    {% include "accounts/tabs/my-profile/admin-challenges-upcoming-tab.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Completed Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Complete" %}</span>
+                </h4>
+
+                <div id="challenges-complete-section">
+                    {% include "accounts/tabs/my-profile/admin-challenges-complete-tab.html" %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Draft Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Drafts" %}</span>
+                </h4>
+
+                <div id="challenges-draft-section">
+                    {% include "accounts/tabs/my-profile/admin-challenges-draft-tab.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% include "challenges/modals/challenge-participation-reject-modal.html" %}
+    {% include "challenges/modals/challenge-selfreflection-accept-modal.html" %}
+    {% include "challenges/modals/challenge-selfreflection-reject-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var element;
+</script>
+{% endblock %}

@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user.first_name }}!
+
+You have withdrawn your Participation in Challenge "{{ challenge.name }}"!
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

@@ -1,0 +1,203 @@
+{% load i18n %}
+
+<div class="modal fade" id="inviteToOrganizationPopupModal" tabindex="-1" role="dialog" aria-labelledby="inviteToOrganizationPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="inviteToOrganizationPopupModalLabel">{% trans "Invite to Organization" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="invite-to-organization-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="organization_id" value="">
+                    <input type="hidden" name="org_group_id" value="">
+                    <input type="hidden" name="invitee_id" value="">
+
+                    <div id="staff_only" style="display:none;">
+                        <p class="note">
+                            <span class="label label-warning">{% trans "Warning!!!" %}</span><br/>
+                            {% blocktrans %}
+                                We noticed, that your Organization doesn't have Groups.<br/>
+                                The Invitee will be added to the Organization as a Staff Member by default.
+                            {% endblocktrans %}
+                        </p>
+                    </div>
+
+                    <div id="staff_or_group" style="display:none;">
+                         <p class="note">
+                            <span class="label label-success">{% trans "Notice" %}</span><br/>
+                            {% blocktrans %}
+                                Please, choose, where you'd like to add the Invitee.
+                            {% endblocktrans %}
+                        </p>
+
+                        <div class="form-group">
+                            <div class="radio radio-primary">
+                                <input name="invite_to" value="staff" required="" checked="" id="id_invite_to_0" type="radio">
+                                <label for="id_invite_to_0">Staff</label>
+                            </div>
+                            <div class="radio radio-primary">
+                                <input name="invite_to" value="group" required="" id="id_invite_to_1" type="radio">
+                                <label for="id_invite_to_1">Group</label>
+                            </div>
+                        </div>
+
+                        <select id="id_group" name="group" class="form-control selectpicker" data-live-search="true" title="Choose one of the following..." data-size="5">
+                        </select>
+                    </div>
+
+                    <hr>
+
+                    <div class="form-group">
+                        <label for="id_invitation_text">{% trans "Please, enter a Reason" %}</label>
+                        <textarea id="id_invitation_text" class="form-control" name="invitation_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="invite_to_organization();">{% trans "Invite" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var invite_to_staff_only = true;
+
+    /*************************************************************************/
+    /*** Pull out Organization Groups                                      ***/
+    /*************************************************************************/
+    $("#inviteToOrganizationPopupModal").on("show.bs.modal", function () {
+        console.log("show inviteToOrganizationPopupModal");
+
+        var organization_id = $("#invite-to-organization-modal-form").find("input[name='organization_id']").val();
+
+        $.get("{% url 'api-organization-group-list' 0 %}".replace("0", organization_id), {
+            "csrfmiddlewaretoken":  $("#invite-to-organization-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            if (data.data.length > 0) {
+                invite_to_staff_only = false;
+
+                $("#staff_or_group").show();
+                $("#staff_only").hide();
+
+                // ------------------------------------------------------------
+                // --- Clean up the Drop-down.
+                $("#id_group").html("");
+
+                // ------------------------------------------------------------
+                // --- Add new Options to the Drop-down.
+                // $("#id_group").append(
+                //     "<option value=\"\" selected=\"\">---------</option>"
+                // );
+
+                $.each(data.data, function(index, value) {
+                    $("#id_group").append(
+                        "<option value=\"" + value.id + "\">" + value.name + "</option>"
+                    );
+                });
+
+                // ------------------------------------------------------------
+                // --- Refresh Drop-down.
+                $(".selectpicker").selectpicker("refresh");
+            } else {
+                invite_to_staff_only = true;
+
+                $("#staff_or_group").hide();
+                $("#staff_only").show();
+            }
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to send the Invitation."
+                }).show();
+            };
+        });
+    })
+
+    /*************************************************************************/
+    /*** Invite to Organization Group                                      ***/
+    /*************************************************************************/
+    $("#id_group").on("changed.bs.select", function (e, clickedIndex, newValue, oldValue) {
+        $("#invite-to-organization-modal-form").find("input[name='org_group_id']").val($("#id_group").val());
+
+        $("#id_invite_to_1").prop("checked", true);
+    });
+
+    /*************************************************************************/
+    /*** Invite to Organization                                            ***/
+    /*************************************************************************/
+    function invite_to_organization() {
+        var organization_id = $("#invite-to-organization-modal-form").find("input[name='organization_id']").val();
+        var org_group_id = "";  // $("#invite-to-organization-modal-form").find("input[name='org_group_id']").val();
+        var invitee_id = $("#invite-to-organization-modal-form").find("input[name='invitee_id']").val();
+        var invitation_text = $("#invite-to-organization-modal-form").find("textarea[name='invitation_text']").val();
+
+        // --------------------------------------------------------------------
+        // --- Validate Data.
+        if (!invite_to_staff_only) {
+            var selected = $("input[type='radio']:checked");
+
+            if (selected.val() == "group") {
+                var org_group_id = $("#invite-to-organization-modal-form").find("input[name='org_group_id']").val();
+            }
+        }
+
+        $.post("{% url 'api-invite' %}", {
+            "invitee_id":           invitee_id,
+            "organization_id":      organization_id,
+            "org_group_id":         org_group_id,
+            "invitation_text":      invitation_text,
+            "csrfmiddlewaretoken":  $("#invite-to-organization-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#inviteToOrganizationPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to send the Invitation."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

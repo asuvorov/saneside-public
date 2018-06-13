@@ -1,0 +1,1 @@
+{% include "organizations/fragments/organization-thumbnail-search.html" with organization=object %}

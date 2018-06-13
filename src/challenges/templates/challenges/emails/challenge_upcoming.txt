@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user.first_name }}!
+
+Don't forget that you are signed up for the Challenge "{{ challenge.name }}" on {{ challenge.start_date }} at {{ challenge.start_time|date:"G:i"|default:"0:00" }}. Please, don’t forget to show up!
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

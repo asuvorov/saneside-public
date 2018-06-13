@@ -1,0 +1,81 @@
+{% extends "accounts/foreign-profile-base.html" %}
+
+{% load i18n %}
+{% load accounttags %}
+
+{% block extra_content %}
+    {% need_to_know_upcoming_challenges_tag   request account as need_to_know_upcoming_challenges %}
+    {% need_to_know_completed_challenges_tag  request account as need_to_know_completed_challenges %}
+    {% need_to_know_affiliated_challenges_tag request account as need_to_know_affiliated_challenges %}
+
+    {% need_to_know_canceled_participations_tag request account as need_to_know_canceled_participations %}
+    {% need_to_know_rejected_participations_tag request account as need_to_know_rejected_participations %}
+
+<div class="container">
+    <div id="foreign-profile-participations">
+    {% if need_to_know_upcoming_challenges %}
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participates in Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Upcoming" %}</span>
+                </h4>
+
+                <div id="participations-upcoming-section">
+                    {% include "accounts/tabs/foreign-profile/participations-upcoming-tab.html" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if need_to_know_completed_challenges %}
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participated in Challenges" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Complete" %}</span>
+                </h4>
+
+                <div id="participations-complete-section">
+                    {% include "accounts/tabs/foreign-profile/participations-complete-tab.html" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if need_to_know_canceled_participations %}
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participations, canceled by Member" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Canceled" %}</span>
+                </h4>
+
+                <div id="participations-canceled-section">
+                    {% include "accounts/tabs/foreign-profile/participations-canceled-tab.html" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if need_to_know_rejected_participations %}
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Participations, canceled by Challenge Admin" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Rejected" %}</span>
+                </h4>
+
+                <div id="participations-rejected-section">
+                    {% include "accounts/tabs/foreign-profile/participations-rejected-tab.html" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+<!-- Modals -->
+
+<!-- Scripts -->
+{% endblock %}

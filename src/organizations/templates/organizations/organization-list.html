@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+{% load taggit_templatetags2_tags %}
+
+{% block title %}{% trans "Organizations List" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'organization-list' %}">{% trans "Organizations" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="organization-list">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <div class="controllers">
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-rounded pull-right {% if not request.user.profile.is_completed %}disabled{% endif %}" href="{% url 'organization-create' %}"><i class="fa fa-plus fa-fw"></i> {% trans "Organization" %}</a>
+                {% endif %}
+                    <a class="btn btn-empty pull-right" href="{% url 'organization-directory' %}" style="margin-right:10px;">{% trans "Directory" %}</a>
+                </div>
+
+                <div id="brick-row" class="row">
+                {% for organization in organizations %}
+                    {% include "organizations/fragments/organization-thumbnail-hor.html" with organization=organization %}
+                {% endfor %}
+                </div>
+
+                <div id="page-selection"></div>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+                <div id="org-tag-cloud">
+                    <h4>{% trans "Tag Cloud" %}</h4>
+                    {% get_taglist as taglist for "organizations.organization" %}
+                    {% get_tagcloud as tagcloud for "organizations.organization" %}
+
+                    <div class="tag-cloud">
+                    {% for tag in tagcloud %}
+                        <a href="?tag={{ tag.id }}">
+                            <font size="{{ tag.weight|floatformat:0 }}">
+                                {{ tag.name }} ({{ tag.num_times }})
+                            </font>
+                        </a>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div id="org-calendar">
+                    <h4>{% trans "Archive" %}</h4>
+                    <span class="calendar"><div id="calendar"></div></span>
+                </div>
+
+            {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+                <div id="org-sponsored-links">
+                    <h4>{% trans "Sponsored Links" %}</h4>
+
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Organizations Page -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9496875666537518"
+                         data-ad-slot="4464428980"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

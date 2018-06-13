@@ -1,0 +1,92 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<instance>
+{% endcomment %}
+
+<div id="rating-card" class="well well-sm">
+    <div class="row">
+        <div class="col-xs-24 col-sm-24 col-md-24 text-center">
+            <h1 class="rating-num">{{ instance.get_rating_avg_float }}</h1>
+
+            <div class="rating-stars">
+                <input id="id_profile_rating" name="profile_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ instance.get_rating_avg }}" />
+            </div>
+
+            <div>
+                <span class="fa fa-users"></span> {{ instance.get_rating_count }} {% trans "total" %}
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-24 col-sm-24 col-md-24">
+            <div class="row">
+                <div class="rating-star-icon"><i class="fa fa-star fa-fw"></i> 5</div>
+
+                <div class="rating-star-progress">
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ instance.get_rating_5_percent }}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:{{ instance.get_rating_5_percent }}%;">
+                            <span class="sr-only">{{ instance.get_rating_5_percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="rating-star-icon"><i class="fa fa-star fa-fw"></i> 4</div>
+
+                <div class="rating-star-progress">
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ instance.get_rating_4_percent }}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:{{ instance.get_rating_4_percent }}%;">
+                            <span class="sr-only">{{ instance.get_rating_4_percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="rating-star-icon"><i class="fa fa-star fa-fw"></i> 3</div>
+
+                <div class="rating-star-progress">
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ instance.get_rating_3_percent }}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:{{ instance.get_rating_3_percent }}%;">
+                            <span class="sr-only">{{ instance.get_rating_3_percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="rating-star-icon"><i class="fa fa-star fa-fw"></i> 2</div>
+
+                <div class="rating-star-progress">
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="{{ instance.get_rating_2_percent }}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:{{ instance.get_rating_2_percent }}%;">
+                            <span class="sr-only">{{ instance.get_rating_2_percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="rating-star-icon"><i class="fa fa-star fa-fw"></i> 1</div>
+
+                <div class="rating-star-progress">
+                    <div class="progress progress-striped">
+                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="{{ instance.get_rating_1_percent }}"
+                            aria-valuemin="0" aria-valuemax="100" style="width:{{ instance.get_rating_1_percent }}%;">
+                            <span class="sr-only">{{ instance.get_rating_1_percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+[
+    {
+        "model":        "home.section",
+        "pk":           1,
+        "fields": {
+            "author":       1,
+            "title":        "General Questions",
+            "order":        0,
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.section",
+        "pk":           2,
+        "fields": {
+            "author":       1,
+            "title":        "Challenges",
+            "order":        1,
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.section",
+        "pk":           3,
+        "fields": {
+            "author":       1,
+            "title":        "Organizations",
+            "order":        2,
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    }
+]

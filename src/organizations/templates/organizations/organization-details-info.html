@@ -1,0 +1,36 @@
+{% extends "organizations/organization-details-base.html" %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="organization-info">
+        <div id="info">
+            {% include "organizations/tabs/info-tab.html" %}
+        </div>
+
+        <div id="upcoming-challenges">
+            {% include "organizations/tabs/challenges-upcoming-tab.html" %}
+        </div>
+
+        <div id="past-challenges">
+            {% include "organizations/tabs/challenges-completed-tab.html" %}
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+{% include "organizations/modals/organization-view-on-map-modal.html" %}
+
+{% if request.user.is_authenticated %}
+    {% include "common/modals/comment-add-modal.html" %}
+    {% include "common/modals/complaint-add-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var element;
+</script>
+{% endblock %}

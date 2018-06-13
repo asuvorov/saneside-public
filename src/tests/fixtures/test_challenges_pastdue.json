@@ -1,0 +1,98 @@
+[
+    {
+        "pk":       224,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               2,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #2-4",
+            "description":          "Description for the Challenge #2-4. Past due.",
+            "slug":                 "challenge-2-4",
+
+            "tags":                 [20, 22],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "1",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              22,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2016-01-01",
+            "start_time":           null,
+            "start_tz":             null,
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         32,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       244,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               4,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #4-4",
+            "description":          "Description for the Challenge #4-4. Past due.",
+            "slug":                 "challenge-4-4",
+
+            "tags":                 [20, 24],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "1",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              24,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2016-01-01",
+            "start_time":           null,
+            "start_tz":             null,
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         34,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

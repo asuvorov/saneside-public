@@ -1,0 +1,74 @@
+[
+    {
+        "model":        "home.faq",
+        "pk":           1,
+        "fields": {
+            "author":       1,
+            "section":      3,
+            "question":     "What's the Difference between \"My Organizations\" and \"Related Organizations\", displayed on the personal Profile Page?",
+            "answer":       "\"<b>My Organizations</b>\" is the List of the Organizations, created (authored) by the logged in User.<br/>\"<b>Related Organizations</b>\" is the List of the Organizations, where the logged in User is a Staff and/or Group Member.",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.faq",
+        "pk":           2,
+        "fields": {
+            "author":       1,
+            "section":      3,
+            "question":     "What are the \"Groups\", as seen on the Organization Details Page?",
+            "answer":       "Author and Staff Members of the Organization can create Groups and invite there other Users from:<ul><li>Organization's \"Groups\" Tab;</li><li>User's Profile Page.</li></ul>The \"Groups\" may be very useful for the \"hidden\" Organizations, as long as only Staff and Group Members will be able: to see the Organization's Activity & Details; to see the Details and participate in Challenges, created on behalf of the hidden Organization; etc.<br/>In other Words, it provides full Control over the hidden Organization's Privacy.",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.faq",
+        "pk":           3,
+        "fields": {
+            "author":       1,
+            "section":      3,
+            "question":     "Send Newsletter Functionality: when, to whom, etc?",
+            "answer":       "Author and Staff Members of the Organization can create and send the Organization's Newsletter.<br/>It will be sent out to all of the Organization's Subscribers.",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.faq",
+        "pk":           4,
+        "fields": {
+            "author":       1,
+            "section":      1,
+            "question":     "What are the \"Complaints\" (for Accounts, Challenges, and Organizations)?<br/>Is it a type of flagging System?<br/>Are Comments, tracking and Complaints Resolution Process given?",
+            "answer":       "After a Challenge has been completed, the User (Participant) can complain about the Challenge itself, Organization on behalf of what it was created, and other Participants.<br/>This will create a System Report, Platform Administrators will be notified, and appropriate Actions will be taken a Place.<br/>",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.faq",
+        "pk":           5,
+        "fields": {
+            "author":       1,
+            "section":      2,
+            "question":     "If adding a Challenge, there are multiple Date Options: \"Dateless\" or \"Onetime\", and the Options \"Weekly\", \"Monthly\", \"Annually\", \"Custom\", which are currently show strike-through.<br/>Do you plan to allow for repetitive Times?<br/>What's the Plan with the other strike-through Options?",
+            "answer":       "Yes, the recurring Challenges Functionality is in Development Stage.<br/>This Feature allows to create the recurring Challenges on Weekly, Monthly, Annually, or custom Basis.<br/>Next recurring Challenge will be created and posted automatically.",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    },
+    {
+        "model":        "home.faq",
+        "pk":           6,
+        "fields": {
+            "author":       1,
+            "section":      3,
+            "question":     "Adding a \"hidden\" Organization.<br/>Will completed Challenges of the hidden Organization show up on the public Profile of User?",
+            "answer":       "They won't show up by default.<br/>They will be visible only to the logged in Users, which are the Staff and/or Group Members of the same hidden Organization.",
+            "created":      "2017-01-01",
+            "modified":     "2017-01-01"
+        }
+    }
+]

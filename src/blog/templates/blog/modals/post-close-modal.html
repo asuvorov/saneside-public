@@ -1,0 +1,68 @@
+{% load i18n %}
+
+<div class="modal fade" id="postClosePopupModal" tabindex="-1" role="dialog" aria-labelledby="postClosePopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="postClosePopupModalLabel">{% trans "Close Post" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="post-close-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <p class="note">
+                        {% trans "Do you really want to close this Post?" %}
+                    </p>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="post_close();">{% trans "Close" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Close Post                                                   ***/
+    /*************************************************************************/
+    function post_close() {
+        $.post("{% url 'api-post-close' 0 %}".replace("0", {{ post.id }}), {
+            "csrfmiddlewaretoken":  $("#post-close-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#postClosePopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            //location.reload();
+            location.replace("{% url 'post-list' %}");
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to close the Post."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

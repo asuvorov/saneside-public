@@ -1,0 +1,97 @@
+[
+    {
+        "model":    "organizations.organization",
+        "pk":       31,
+        "fields": {
+            "author":               1,
+            "avatar":               "images/organizations/avatars/13_Gy9zLl8.jpg",
+            "name":                 "Private Organization #1",
+            "description":          "Private Organization #1",
+            "slug":                 "private-organization-1",
+
+            "tags":                 [30, 31],
+            "hashtag":              "organization",
+
+            "address":              31,
+            "phone_number":         31,
+            "website":              null,
+            "video":                null,
+            "email":                null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "is_newly_created":     true,
+            "is_hidden":            true,
+            "is_deleted":           false,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "organizations.organization",
+        "pk":       33,
+        "fields": {
+            "author":               3,
+            "avatar":               "images/organizations/avatars/13_Gy9zLl8.jpg",
+            "name":                 "Private Organization #3",
+            "description":          "Private Organization #3",
+            "slug":                 "private-organization-3",
+
+            "tags":                 [30, 33],
+            "hashtag":              "organization",
+
+            "address":              33,
+            "phone_number":         33,
+            "website":              null,
+            "video":                null,
+            "email":                null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "is_newly_created":     true,
+            "is_hidden":            true,
+            "is_deleted":           false,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+
+    {
+        "model":    "organizations.organizationstaff",
+        "pk":       31,
+        "fields": {
+            "author":               1,
+            "organization":         31,
+            "member":               1,
+
+            "position":             "",
+            "bio":                  "",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "organizations.organizationstaff",
+        "pk":       33,
+        "fields": {
+            "author":               3,
+            "organization":         33,
+            "member":               3,
+
+            "position":             "",
+            "bio":                  "",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

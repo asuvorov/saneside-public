@@ -1,0 +1,17 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ challenge.author.first_name }}!
+
+Member {{ participation.user.first_name }} applied to Participate in your Challenge "{{ challenge.name }}"{% if participation.role %} for the Role of "{{ participation.role.name }}"{% endif %} with following Text:
+
+{{ application_text }}
+
+Please, don't forget to accept or reject Member's Application.
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Link to the Member's Profile Page: {{ profile_link }}
+
+Thank you, SaneSide Team.

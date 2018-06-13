@@ -1,0 +1,31 @@
+{% load i18n %}
+
+<div class="modal fade" id="uploadURLsPopupModal" tabindex="-1" role="dialog" aria-labelledby="uploadURLsPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="uploadURLsPopupModalLabel">{% trans "Add Links" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="upload-links-modal-form" action="" method="POST" class="form-group">
+                    {% csrf_token %}
+
+                    <label class="control-label" for="id_urls">
+                        {% trans "Related Links" %}
+                    </label>
+                    <input id="id_links" class="form-control" name="links" placeholder="Separate your links with a space" type="text" value="{{ form.urls.value|default:'' }}" data-toggle="tooltip" title="This is where you can add links to anything - e.g. videos, design blogs, picture galleries" >
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onClick="tally()" data-dismiss="modal">{% trans "Done" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+</script>

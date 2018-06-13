@@ -1,0 +1,63 @@
+/* PROJECT */
+
+    Site Name:      SaneSide
+    Site URL:       https://www.saneside.com/
+    Created:        2014
+    Updated:        2018
+    Standards:      HTML5, CSS3
+    Components:     Twitter Bootstrap, jQuery
+    Software:       AWS, Ubuntu, nGinx, uWSGI, Python, Django, HTML, CSS,
+                    jQuery, JavaScript, MySQL
+    Plugins:        awesome-bootstrap-checkbox, bootpag, bootstrap,
+                    bootstrap-maxlength, bootstrap-rating, bootstrap-select,
+                    bootstrap-tabcollapse, bootstrap-tagsinput, bx-slider.js,
+                    ckeditor, equalheight, fontawesome, font-awesome-animation,
+                    isMobile, isotope, jquery, jquery.inputmask,
+                    jquery.pulsate, jquery-colorbox, jquery-file-upload,
+                    jquery-popup-overlay, jquery-scrolltotop,
+                    jquery-shorten-js, jquery-sticky, jquery-ui, jt.timepicker,
+                    less.js, modernizr, moment, noty, readmore-js
+                    seiyria-bootstrap-slider, smooth-scroll.js, tablesorter,
+                    underscore, zabuto_calendar
+    Web Design:     Artem Suvorov
+
+/* AUTHOR */
+
+    Name:           Artem Suvorov
+    Nickname:       copycat, ddaemon
+    Title:          CEO, CTO, Lead Developer
+    Location:       Los Angeles, CA, USA
+    About me:       https://www.facebook.com/artem.suvorov/about
+    Blog:
+    Contact:
+    Donation:
+
+/* TEAM */
+
+    Name:           Artem Suvorov
+    Title:          CEO, CTO, Lead Developer
+    Site:
+    Email:          artem.suvorov@gmail.com
+    Location:       Los Angeles, CA, USA
+
+    Name:           Maryna Suvorova
+    Title:          CMO, co-founder
+    Site:
+    Email:          maryna.suvorova@hotmail.com
+    Location:       Los Angeles, CA, USA
+
+    Name:           Werner Minshall
+    Title           Partner
+    Site:           http://www.terrataste.com/
+    Email:          werner@terrataste.com
+    Location:       Los Angeles, CA, USA
+
+    Name:           Philip Urech
+    Title           Mastermind, Consultant
+    Site:
+    Email:          philip.urech@gmail.com
+    Location:       Switzerland
+
+/* THANKS */
+
+    To everyone who shares, likes, comments, and contributes!

@@ -1,0 +1,15 @@
+{% extends "base-error.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% trans "403 - Access Denied" %}{% endblock %}
+
+{% block content %}
+<div class="cover">
+    <h1>{% trans "Access Denied" %}</h1>
+    <small>{% trans "Error 403" %}</small>
+    <p class="lead">
+        {% trans "The requested Resource requires an Authentication." %}
+    </p>
+</div>
+{% endblock %}

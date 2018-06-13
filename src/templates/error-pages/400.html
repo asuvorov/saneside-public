@@ -1,0 +1,15 @@
+{% extends "base-error.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% trans "400 - Bad Request" %}{% endblock %}
+
+{% block content %}
+<div class="cover">
+    <h1>{% trans "Bad Request" %}</h1>
+    <small>{% trans "Error 400" %}</small>
+    <p class="lead">
+        {% trans "The Server cannot process the Request due to something, that is perceived to be a Client Error." %}
+    </p>
+</div>
+{% endblock %}

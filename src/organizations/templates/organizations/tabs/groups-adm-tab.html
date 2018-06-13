@@ -1,0 +1,50 @@
+<!--
+TAB
+Organization Details - Groups
+-->
+{% load i18n %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        <h4 class="hidden-xs">
+            {% trans "Organization Groups" %}
+
+            <a class="btn btn-rounded pull-right org-group-create" href="#"><i class="fa fa-plus fa-fw"></i> {% trans "Group" %}</a>
+        </h4>
+
+        <h4 class="hidden-sm hidden-md hidden-lg">&nbsp;
+            <a class="btn btn-rounded pull-right org-group-create" href="#"><i class="fa fa-plus fa-fw"></i> {% trans "Group" %}</a>
+        </h4>
+
+        <div class="alert alert-info alert-dismissible hidden-xs" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% trans "Here you can create the Organization Groups and invite SaneSide Members to them." %}
+        </div>
+
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        {% blocktrans %}
+            <strong>!!! IMPORTANT !!!</strong><br/>
+            If the Organization <strong>is hidden</strong> from the Public, only the Staff and Groups' Members will be able to see the Organization Activity, so this helps to keep the Privacy under Control.
+        {% endblocktrans %}
+        </div>
+
+        <div id="organization-groups-section">
+            {% include "organizations/fragments/organization-groups-adm.html" with organization=organization %}
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Organization Group create                                         ***/
+    /*************************************************************************/
+    $(".org-group-create").click(function () {
+        element = $(this);
+
+        var organization_id = {{ organization.id }};
+
+        $("#organization-group-create-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#createOrganizationGroupPopupModal").modal("show");
+    })
+</script>

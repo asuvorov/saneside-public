@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+
+{% block title %}{% trans "Organizations Directory" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'organization-list' %}">{% trans "Organizations" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'organization-directory' %}">{% trans "Directory" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="organization-directory">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+            {% regroup organizations|dictsort:"name" by name.0 as organizations_by_letter %}
+            {% for organizations in organizations_by_letter %}
+                <h2>{{ organizations.grouper }}</h2>
+                {% for organization in organizations.list %}
+                    <a href="{% url 'organization-details' slug=organization.slug %}">
+                        {{ organization.name }}
+                    </a>{% if not forloop.last %}, {% endif %}
+                {% empty %}
+                {% endfor %}
+
+                {% if not forloop.last %}
+                    <hr>
+                {% endif %}
+            {% empty %}
+            {% endfor %}
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+            {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+                <div id="org-sponsored-links">
+                    <h4>{% trans "Sponsored Links" %}</h4>
+
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Organizations Directory Page -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9496875666537518"
+                         data-ad-slot="4283905788"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

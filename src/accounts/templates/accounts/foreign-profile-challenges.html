@@ -1,0 +1,31 @@
+{% extends "accounts/foreign-profile-base.html" %}
+
+{% load i18n %}
+{% load accounttags %}
+
+{% block extra_content %}
+    {% need_to_know_affiliated_challenges_tag request account as need_to_know_affiliated_challenges %}
+
+<div class="container">
+    <div id="foreign-profile-challenges">
+    {% if need_to_know_affiliated_challenges %}
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    <span class="hidden-xs">{% trans "Affiliated with" %}</span>
+                    <span class="hidden-sm hidden-md hidden-lg">{% trans "Affiliated with" %}</span>
+                </h4>
+
+                <div id="challenges-action-required-section">
+                    {% include "accounts/tabs/foreign-profile/admin-challenges-tab.html" %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+<!-- Modals -->
+
+<!-- Scripts -->
+{% endblock %}

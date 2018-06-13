@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+{% load taggit_templatetags2_tags %}
+
+{% block title %}{% trans "Challenge Categories List" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{{ request.path }}">{% trans "Challenge Categories" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="challenge-category-list" class="container">
+    <div class="row">
+        <div class="col-xs-0 col-sm-0 col-md-6 col-lg-6">
+        </div>
+
+        <div class="col-xs-24 col-sm-18 col-md-12 col-lg-12">
+            <div class="controllers">
+            </div>
+
+        {% for challenge_category in categories %}
+            <div class="category-list-item thumbnail">
+                <a href="{% url 'challenge-list' %}?cat={{ challenge_category.slug }}" title="{{ challenge_category.name }}" category="{{ challenge_category.category }}">
+                    {% generateimage "common:giant_fill_wide" source=challenge_category.avatar -- alt=challenge_category.name %}
+
+                    <span>{{ challenge_category.name }}</span>
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+
+        <div class="col-xs-24 col-sm-6 col-md-6 col-lg-6 right-sidebar">
+        {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+            <div id="sponsored-links">
+                <h4>{% trans "Sponsored Links" %}</h4>
+
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- Challenges Page -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9496875666537518"
+                     data-ad-slot="4604029786"
+                     data-ad-format="auto"></ins>
+                <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
+            </div>
+        {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Script -->
+
+<script>
+</script>
+{% endblock %}

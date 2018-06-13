@@ -1,0 +1,81 @@
+{% load i18n %}
+{% load static %}
+
+<footer>
+    <div class="row footer-top">
+        <div class="container">
+            <div class="col-xs-24 col-sm-4 col-md-4 logo">
+            </div>
+
+            <div class="col-xs-24 col-sm-12 col-md-12 site-map">
+                <ul>
+                    <p>{% trans "Terms &amp; Conditions" %}</p>
+
+                    <li><a href="{% url 'privacy-policy' %}">{% trans "Privacy Policy" %}</a></li>
+                    <li><a href="{% url 'user-agreement' %}">{% trans "User Agreement" %}</a></li>
+                    <li><a href="{% url 'faq' %}">{% trans "FAQ" %}</a></li>
+                </ul>
+
+                <ul>
+                    <p>{% trans "Media" %}</p>
+
+                    <li><a href="{% url 'post-list' %}">{% trans "Our Blog" %}</a></li>
+                    <li><a href="{% url 'our-team' %}">{% trans "Our Team" %}</a></li>
+                    <li><a href="{% url 'our-partners' %}">{% trans "Our Partners" %}</a></li>
+                </ul>
+
+                <ul>
+                    <p>{% trans "Feedback" %}</p>
+
+                    <li><a href="{% url 'about-us' %}">{% trans "About us" %}</a></li>
+                    <li><a href="{% url 'contact-us' %}">{% trans "Contact us" %}</a></li>
+                    <li><a href="{% url 'forum-list' %}">{% trans "Forum" %}</a></li>
+                </ul>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-8 social-buttons" align="right">
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_FACEBOOK }}';" class="btn btn-facebook">
+                    <i class="fa fa-facebook fa-fw"></i>
+                </button>
+
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_TWITTER }}';" class="btn btn-twitter">
+                    <i class="fa fa-twitter fa-fw"></i>
+                </button>
+
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_LINKEDIN }}';" class="btn btn-linkedin">
+                    <i class="fa fa-linkedin fa-fw"></i>
+                </button>
+
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_GOOGLE }}';" class="btn btn-google-plus">
+                    <i class="fa fa-google-plus fa-fw"></i>
+                </button>
+
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_PINTEREST }}';" class="btn btn-pinterest">
+                    <i class="fa fa-pinterest fa-fw"></i>
+                </button>
+
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_INSTAGRAM }}';" class="btn btn-instagram">
+                    <i class="fa fa-instagram fa-fw"></i>
+                </button>
+
+                <button onclick="javascript:document.location.href='{{ PB_SOCIAL_LINKS.PB_TUMBLR }}';" class="btn btn-tumblr">
+                    <i class="fa fa-tumblr fa-fw"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row footer-bottom">
+        <div class="container">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <p>Copyright &copy; 2014-2018 - SaneSide <span class="pull-right">{{ product_version_num }}</span></p>
+                <a href="/humans.txt" class="pull-right">
+                    <img alt="humans.txt" src="{% static 'img/humanstxt-transparent-color.png' %}" alt="SaneSide Platform." />
+                </a>
+                <a href="/docs" class="pull-right">
+                    <img alt="humans.txt" src="{% static 'img/swagger-logo.png' %}" alt="SaneSide Platform." />
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

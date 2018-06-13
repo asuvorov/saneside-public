@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ invite.invitee.first_name }}!
+
+Member {{ invite.inviter.get_full_name }} revoked their Invitation to {{ invite.content_type.name.capitalize }} "{{ invite.content_object.name }}"!
+
+Link to the Member's Profile Page: {{ profile_link }}
+
+Link to the {{ invite.content_type.name.capitalize }} Details Page: {{ subject_link }}
+
+Thank you, SaneSide Team.

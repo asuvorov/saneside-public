@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% load seo %}
+{% load i18n %}
+
+{% block title %}{% trans "Organization" %} "{{ organization.name }}" - {{ block.super }}{% endblock %}
+
+{% block extra_meta %}
+    {% get_metadata %}
+
+    <link rel="image_src" href="{{ organization.avatar.url }}" />
+    <meta name="description" content="{{ organization.description|truncatechars:300 }}" />
+{% endblock %}
+
+{% block extra_style %}
+{% endblock %}
+
+{% block extra_script %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'organization-list' %}">{% trans "Organizations" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'organization-details' organization.slug %}">{% trans "Details" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-sub-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                <a class="btn" href="{% url 'organization-details' organization.slug %}">
+                    <i class="fa fa-fw fa-info-circle"></i>
+                    <span class="hidden-xs">{% trans "Information" %}</span>
+                </a>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                <a class="btn" href="{% url 'organization-staff' organization.slug %}">
+                    <i class="fa fa-fw fa-id-card"></i>
+                    <span class="badge" style="background-color:#5bc0de;">{{ organization.organization_staff_members.all.count }}</span>&nbsp;
+                    <span class="hidden-xs">{% trans "Staff" %}</span>
+                    {#<span><i class="fa fa-info-circle fa-fw txt-info pull-right hidden-sm hidden-md hidden-lg" data-toggle="tooltip" data-placement="top" title='{% trans "Staff Members can create Challenges on behalf of this Organization." %}'></i></span>#}
+                </a>
+            </div>
+
+            <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                <a class="btn" href="{% url 'organization-groups' organization.slug %}">
+                    <i class="fa fa-fw fa-users"></i>
+                    <span class="badge" style="background-color:#5bc0de;">{{ organization.organization_groups.all.count }}</span>&nbsp;
+                    <span class="hidden-xs">{% trans "Groups" %}</span>
+                {% if is_staff_member %}
+                    {#<span><i class="fa fa-info-circle fa-fw txt-info pull-right hidden-sm hidden-md hidden-lg" data-toggle="tooltip" data-placement="top" title='{% trans "Here you can create the Organization Groups and invite SaneSide Members to them." %}'></i></span>#}
+                {% endif %}
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_content %}
+{% endblock %}

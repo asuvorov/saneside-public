@@ -1,0 +1,124 @@
+[
+    {
+        "pk":       1,
+        "model":    "accounts.userprivacygeneral",
+        "fields":   {
+            "user":                 1,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       2,
+        "model":    "accounts.userprivacygeneral",
+        "fields":   {
+            "user":                 2,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       3,
+        "model":    "accounts.userprivacygeneral",
+        "fields":   {
+            "user":                 3,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       4,
+        "model":    "accounts.userprivacygeneral",
+        "fields":   {
+            "user":                 4,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+
+    {
+        "pk":       1,
+        "model":    "accounts.userprivacymembers",
+        "fields":   {
+            "user":                 1,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       2,
+        "model":    "accounts.userprivacymembers",
+        "fields":   {
+            "user":                 2,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       3,
+        "model":    "accounts.userprivacymembers",
+        "fields":   {
+            "user":                 3,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       4,
+        "model":    "accounts.userprivacymembers",
+        "fields":   {
+            "user":                 4,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+
+    {
+        "pk":       1,
+        "model":    "accounts.userprivacyadmins",
+        "fields":   {
+            "user":                 1,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       2,
+        "model":    "accounts.userprivacyadmins",
+        "fields":   {
+            "user":                 2,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       3,
+        "model":    "accounts.userprivacyadmins",
+        "fields":   {
+            "user":                 3,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       4,
+        "model":    "accounts.userprivacyadmins",
+        "fields":   {
+            "user":                 4,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

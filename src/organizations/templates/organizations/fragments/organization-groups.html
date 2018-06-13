@@ -1,0 +1,48 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<organization>
+{% endcomment %}
+
+{% for group in organization.organization_groups.all %}
+    <div class="organization-group">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>{{ group.name }}</h4>
+
+            {% if group.description %}
+                <blockquote>
+                    <p>{{ group.description }}</p>
+                </blockquote>
+            {% endif %}
+
+                <div class="row">
+                {% for member in group.members.all %}
+                    {% include "organizations/fragments/organization-group-member-thumbnail.html" with account=member %}
+                {% empty %}
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                        <p>
+                            <span class="label label-info">{% trans "This Group has no Members at the moment." %}</span>
+                        </p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if not forloop.last %}
+        <hr>
+    {% endif %}
+{% empty %}
+    <div class="row">
+        <div class="col-xs-24 col-sm-24 col-md-24">
+            <p>
+                <span class="label label-info">{% trans "This Organization has no Groups at the moment." %}</span>
+            </p>
+        </div>
+    </div>
+{% endfor %}
+</div>

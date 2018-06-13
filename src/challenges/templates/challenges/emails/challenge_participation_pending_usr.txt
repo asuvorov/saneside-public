@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ participation.user.first_name }}!
+
+Your Application to Challenge "{{ challenge.name }}"{% if participation.role %} for the Role of "{{ participation.role.name }}"{% endif %} is waiting for Confirmation!
+
+Link to the Challenge Details Page: {{ challenge_link }}
+
+Thank you, SaneSide Team.

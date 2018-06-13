@@ -1,0 +1,6 @@
+{{ object.author.get_full_name }}
+{{ object.name }}
+{{ object.description }}
+{{ object.website }}
+{{ object.video }}
+{{ object.email }}

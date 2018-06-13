@@ -1,0 +1,206 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<challenge>
+        :[participation]
+        :[show_signup_form]
+        :[show_withdraw_form]
+        :[show_selfreflection_form]
+        :[show_not_participated_form]
+        :[show_rate_form]
+        :[show_complain_form]
+{% endcomment %}
+
+{% if challenge.is_complete %}
+    <p><span class="label label-success">{% trans "This Challenge is complete" %}</span></p>
+{% elif challenge.is_closed %}
+    <p><span class="label label-danger">{% trans "This Challenge is closed" %}</span></p>
+{% elif challenge.is_overdue %}
+    <p><span class="label label-danger">{% trans "This Challenge already happened" %}</span></p>
+{% elif challenge.is_confirmation_required %}
+    {% if not participation or not participation.is_confirmed_full %}
+        <p class="note">
+            <span class="label label-warning">{% trans "Confirmation required" %}</span><br/>
+        {% if not is_admin %}
+            {% trans "You need to write an Application to participate in this Challenge. The Challenge Organizer will use your Application Text and your History on SaneSide to decide whether you are a good fit for this Challenge." %}
+        {% endif %}
+        </p>
+    {% endif%}
+{% endif %}
+
+{% if request.user.is_authenticated %}
+    {% if is_admin %}
+        {% if challenge.is_complete %}
+            <p><strong>
+            {% blocktrans %}
+                Notification was sent to all Participants.<br/>
+                Please, allow 3 - 7 Days to submit their Experience Reports, and come back to accept or reject them.
+            {% endblocktrans %}
+            </strong></p>
+
+            <p class="note">
+                <span class="label label-warning">{% trans "Reporting Materials" %}</span><br/>
+                <strong>{% trans "You can add reporting Materials, manage current Attachments, and describe Achievements." %}</strong>
+            </p>
+
+            <a class="btn btn-primary" href="{% url 'challenge-reporting-materials' challenge.slug %}"><i class="fa fa-folder-o fa-fw"></i> {% trans "Reporting Materials" %}</a>
+        {% elif challenge.is_closed %}
+            <p><strong>{% trans "There is nothing to do here." %}</strong></p>
+        {% else %}
+            {% if challenge.is_overdue %}
+                <p class="note">
+                    <strong>
+                        {% trans "Please, mark this Challenge as completed, if it:" %}
+                        <ul>
+                            <li>{% trans "has taken Place as planned;" %}</li>
+                            <li>{% trans "has NOT taken Place, but you would like to all of the Participants to keep the Hours 'worked'." %}</li>
+                        </ul>
+                    </strong>
+
+                    {% trans "Remember to remove from the Challenge all the Participants, who did not show up, so the Challenge will not appear on their Profiles." %}
+                </p>
+
+                <a class="btn btn-success" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeCompletePopupModal" tabindex="-1"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Complete" %}</a>
+
+                <p class="note">
+                    <strong>
+                    {% blocktrans %}
+                        You can also clone the Challenge, if it hasn't taken Place, but you would like to re-schedule it.<br/>
+                        All the Participants will be automatically assigned to the cloned Challenge.
+                    {% endblocktrans %}
+                    </strong>
+                </p>
+
+                <a class="btn btn-primary" name="close" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeClonePopupModal" tabindex="-1"><i class="fa fa-clone fa-fw"></i> {% trans "Clone Challenge" %}</a>
+            {% else %}
+                <a class="btn btn-primary" href="{% url 'challenge-edit' challenge.slug %}"><i class="fa fa-edit fa-fw"></i> {% trans "Edit Challenge" %}</a>
+
+                {% if challenge.is_draft %}
+                    <p class="note">
+                        <span class="label label-warning">{% trans "This is a Draft." %}</span><br/>
+                        <strong>{% trans "Post this Challenge when you are ready, so other Members can see it." %}</strong>
+                    </p>
+
+                    <a class="btn btn-primary" name="post" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeCreatePopupModal" tabindex="-1"><i class="fa fa-check fa-fw"></i> {% trans "Post Challenge" %}</a>
+                {% elif challenge.is_dateless %}
+                    <p class="note">
+                        <span class="label label-warning">{% trans "Dateless." %}</span><br/>
+                        {% trans "Unless the Challenge is intentionally dateless, please, don't forget to provide its starting Date & Time." %}<br/>
+                        <strong>
+                            {% trans "You can mark this Challenge as completed, if it:" %}
+                            <ul>
+                                <li>{% trans "has taken Place as planned;" %}</li>
+                                <li>{% trans "has NOT taken Place, but you would like to all of the Participants to keep the Hours 'worked'." %}</li>
+                            </ul>
+                        </strong>
+
+                        {% trans "Remember to remove from the Challenge all the Participants, who did not show up, so the Challenge will not appear on their Profiles." %}
+                    </p>
+
+                    <a class="btn btn-success" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeCompletePopupModal" tabindex="-1"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Complete" %}</a>
+                {% endif %}
+            {% endif %}
+
+            <a class="btn btn-danger" name="close" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeClosePopupModal" tabindex="-1"><i class="fa fa-times fa-fw"></i> {% trans "Close Challenge" %}</a>
+        {% endif %}
+    {% else %}
+        {% if participation %}
+            <p class="status note">
+            {% if participation.is_waiting_for_confirmation %}
+                <span class="label label-info">{{ participation.stat_participation_status_name }}</span><br/>
+                {% trans "You have submitted an Application to this Challenge. You must now wait for the Organizer to decide whether they want to accept your Offer to help." %}
+            {% elif participation.is_confirmation_denied %}
+                <span class="label label-danger">{{ participation.stat_participation_status_name }}</span>
+            {% elif participation.is_confirmed %}
+                <span class="label label-success">{{ participation.stat_participation_status_name }}</span><br/>
+                {% trans "You are signed up for this Challenge. The Organizer is expecting you to be there and do your best." %}
+            {% elif participation.is_cancelled_by_admin %}
+                <span class="label label-danger">{{ participation.stat_participation_status_name }}</span>
+            {% elif participation.is_cancelled_by_user %}
+                <span class="label label-warning">{{ participation.stat_participation_status_name }}</span>
+            {% elif participation.is_waiting_for_selfreflection %}
+                <span class="label label-info">{{ participation.stat_participation_status_name }}</span>
+            {% elif participation.is_waiting_for_acknowledgement %}
+                <span class="label label-info">{{ participation.stat_participation_status_name }}</span>
+            {% elif participation.is_acknowledged %}
+                <span class="label label-success">{{ participation.stat_participation_status_name }}</span>
+            {% endif %}
+            </p>
+        {% endif %}
+
+        {% if not challenge.is_complete %}
+            {% if show_signup_form %}
+                {% if challenge.challenge_roles.all %}
+                    <p class="note">
+                        <span class="label label-default">{% trans "Challenge with Roles" %}</span><br/>
+                        {% blocktrans %}
+                            Challenge Author is looking for the differently skilled Volunteers / Participants.<br/>
+                            You will be offered to choose, which Role you want to take, on signing up to the Challenge / Event.
+                        {% endblocktrans %}
+                    </p>
+                {% endif %}
+
+                <a class="btn btn-primary btn-centered {% if not request.user.profile.is_completed %}disabled{% endif %}" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeParticipationPostPopupModal" tabindex="-1"><i class="fa fa-arrow-up fa-fw"></i> {% trans "Participate" %}</a>
+            {% endif %}
+
+            {% if show_withdraw_form %}
+                <p class="note">
+                {% if not challenge.allow_reenter %}
+                    <span class="label label-warning">{% trans "Application Warning" %}</span><br/>
+                    {% trans "Please, be advised, that it's not allowed to apply again to the Challenge after withdrawing Application." %}
+                {% endif %}
+                </p>
+
+                <a class="btn btn-danger btn-centered" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#challengeParticipationWithdrawPopupModal" tabindex="-1"><i class="fa fa-times fa-fw"></i> {% trans "Withdraw Application" %}</a>
+            {% endif %}
+        {% else %}
+            {% if show_selfreflection_form %}
+                <div id="div-sr-submit">
+                {% if participation.is_selfreflection_rejected %}
+                    <p>{% trans "Your Experience Report was returned to you with the following Note:" %}</p>
+                    <blockquote>{{ participation.selfreflection_rejection_text }}</blockquote>
+                    <p>{% trans "Please revise your Experience Report and submit it again." %}</p>
+                {% endif %}
+
+                    <a class="btn btn-primary sr-submit" href="#" tabindex="-1"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Submit my Experience" %}</a>
+                </div>
+            {% endif %}
+
+            {% if show_not_participated_form %}
+                <div id="div-not-participated">
+                    <a class="btn btn-warning not-participated" href="#"><i class="fa fa-times fa-fw"></i> {% trans "I did not participate" %}</a>
+                </div>
+            {% endif %}
+
+            {% if show_rate_form %}
+                <div id="div-add-rating">
+                    <a class="btn btn-warning add-rating" href="#"><i class="fa fa-thumbs-o-up fa-fw"></i> {% trans "Rate the Challenge" %}</a>
+                </div>
+            {% endif %}
+
+            <!-- Add Complaint -->
+            {% if show_complain_form %}
+                <div id="div-add-complaint">
+                    <p class="note">
+                        <span class="label label-danger">{% trans "Disclaimer" %}</span><br/>
+                        <p>
+                        {% blocktrans %}
+                            You see this Message, because you participated in this Challenge.<br/>
+                            Let us know, if there's something to complain about it.
+                        {% endblocktrans %}
+                        </p>
+                    </p>
+
+                    <a class="btn btn-danger add-complaint" href="#"><i class="fa fa-info-circle fa-fw"></i> {% trans "Complain" %}</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% else %}
+    <div>
+        <span class="label label-warning">{% trans "Login required" %}</span><br/>
+        {% trans "You must have a User Account to participate in this Challenge." %}
+    </div>
+{% endif %}

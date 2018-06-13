@@ -1,0 +1,118 @@
+<!--
+TAB
+My Profile - Admin Action required Challenges
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+<div class="row">
+{% for challenge in request.user.profile.get_admin_challenges_action_required %}
+    <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
+        {% include "challenges/fragments/challenge-thumbnail-hor.html" with challenge=challenge show_org=True chl_admin=True %}
+
+    {% if challenge.challenge_participations.waiting_for_confirmation.count > 0 %}
+        <div id="challenge-confirm-section">
+            <h4>{% trans "Waiting for Confirmation" %}</h4>
+
+            {% include "challenges/tabs/to-confirm-tab.html" with challenge=challenge %}
+        </div>
+    {% endif %}
+
+    {% if challenge.challenge_participations.waiting_for_acknowledgement.count > 0 %}
+        <div id="challenge-acknowledge-section">
+            <h4>{% trans "Waiting for Acknowledgment" %}</h4>
+
+            {% include "challenges/tabs/to-acknowledge-tab.html" with challenge=challenge %}
+        </div>
+    {% endif %}
+    </div>
+{% empty %}
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        <p>
+            <span class="label label-info">{% trans "There are no Challenges required Action at the moment." %}</span>
+        </p>
+    </div>
+{% endfor %}
+</div>
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Accept Application                                                ***/
+    /*************************************************************************/
+    $(".accept-app").click(function () {
+        element = $(this);
+
+        var challenge_id = $(this).attr("challenge");
+        var participation_id = $(this).attr("participation");
+
+        $.post("{% url 'api-participation-accept-application' 0 %}".replace("0", challenge_id), {
+            "participation_id": participation_id
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            //location.reload();
+            $(element).parent().parent().hide("slow", function () {
+                fixFooter();
+            });
+
+            var tabID = $(element).parents(".tab-pane").attr("id");
+            var tabLI = $.find("a[href='#" + tabID + "']");
+            var badgeAmount = parseInt($(tabLI).find(".badge").text());
+
+            $(tabLI).find(".badge").text(badgeAmount - 1);
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            $(element).parent().parent().append("<br><span style='color:red;'>" + data + "</span>");
+        });
+
+        return false;
+    })
+
+    /*************************************************************************/
+    /*** Reject Application                                                ***/
+    /*************************************************************************/
+    $(".reject-app").click(function () {
+        element = $(this);
+
+        var challenge_id = $(this).attr("challenge");
+        var participation_id = $(this).attr("participation");
+
+        $("#challenge-participation-reject-application-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-participation-reject-application-modal-form").find("input[name='participation_id']").val(participation_id);
+        $("#challengeParticipationRejectApplicationPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Accept Experience Report                                          ***/
+    /*************************************************************************/
+    $(".accept-sr").click(function () {
+        element = $(this);
+
+        var challenge_id = $(this).attr("challenge");
+        var participation_id = $(this).attr("participation");
+
+        $("#challenge-participation-accept-selfreflection-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-participation-accept-selfreflection-modal-form").find("input[name='participation_id']").val(participation_id);
+        $("#challengeParticipationAcceptSelfreflectionPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Reject Experience Report                                          ***/
+    /*************************************************************************/
+    $(".reject-sr").click(function () {
+        element = $(this);
+
+        var challenge_id = $(this).attr("challenge");
+        var participation_id = $(this).attr("participation");
+
+        $("#challenge-participation-reject-selfreflection-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#challenge-participation-reject-selfreflection-modal-form").find("input[name='participation_id']").val(participation_id);
+        $("#challengeParticipationRejectSelfreflectionPopupModal").modal("show");
+    })
+</script>

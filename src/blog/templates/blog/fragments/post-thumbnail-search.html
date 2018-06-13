@@ -1,0 +1,44 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<post>
+{% endcomment %}
+
+<div class="col-xs-24 col-sm-24 col-md-24 col-lg-24" style="margin-bottom:10px;">
+    <div class="post-thumb-search">
+        <div class="row">
+            <div class="hidden-xs col-sm-6 col-md-6 col-lg-6">
+                <div class="thumbnail">
+                    <a href="{% url 'post-details' post.slug %}">
+                    {% if post.avatar %}
+                        {% generateimage "common:medium_fill_wide" source=post.avatar -- alt=post.title %}
+                    {% else %}
+                    {% endif %}
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
+                <strong>
+                    <p>
+                        Blog Post <a href="{% url 'post-details' post.slug %}">{{ post.title|truncatechars:50 }}</a>
+                    </p>
+                </strong>
+
+                <p>
+                    {% trans "posted by" %} <a href="{% url 'profile-view' post.author_id %}"> {{ post.author.first_name }}</a> {{ post.created|timesince }} {% trans "ago" %}
+                </p>
+
+                <blockquote>
+                    <p>{{ post.content|striptags|truncatechars:300|default:"N/A" }}</p>
+                </blockquote>
+
+                <div class="learn-more">
+                    <a class="btn btn-warning btn-centered" href="{% url 'post-details' post.slug %}" style="width:auto;">{% trans "LEARN MORE" %} <i class="fa fa-chevron-right fa-fw"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

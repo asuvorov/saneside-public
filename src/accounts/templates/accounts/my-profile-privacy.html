@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+
+{% block title %}{% trans "Privacy Settings" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-view' %}">{% trans "My Profile" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-privacy' %}">{% trans "Privacy" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="my-profile-privacy">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <form id="my-profile-privacy-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-8 col-md-8">
+                            <h3>{% trans "General" %}</h3>
+
+                            <div class="checkbox checkbox-primary">
+                                {{ privacy_general_form.hide_profile_from_search }}
+                                {{ privacy_general_form.hide_profile_from_search.label_tag }}
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                {{ privacy_general_form.hide_profile_from_list }}
+                                {{ privacy_general_form.hide_profile_from_list.label_tag }}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-24 col-sm-8 col-md-8">
+                            <h3>{% trans "Members" %}</h3>
+
+                            <div class="form-group {% if privacy_members_form.profile_details.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.profile_details.label }}{% if privacy_members_form.profile_details.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.profile_details }}
+
+                                <span class="help-block">{% if privacy_members_form.profile_details.errors %}{% for error in privacy_members_form.profile_details.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if privacy_members_form.contact_details.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.contact_details.label }}{% if privacy_members_form.contact_details.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.contact_details }}
+
+                                <span class="help-block">{% if privacy_members_form.contact_details.errors %}{% for error in privacy_members_form.contact_details.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group {% if privacy_members_form.challenges_upcoming.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.challenges_upcoming.label }}{% if privacy_members_form.challenges_upcoming.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.challenges_upcoming }}
+
+                                <span class="help-block">{% if privacy_members_form.challenges_upcoming.errors %}{% for error in privacy_members_form.challenges_upcoming.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if privacy_members_form.challenges_completed.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.challenges_completed.label }}{% if privacy_members_form.challenges_completed.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.challenges_completed }}
+
+                                <span class="help-block">{% if privacy_members_form.challenges_completed.errors %}{% for error in privacy_members_form.challenges_completed.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group {% if privacy_members_form.challenges_affiliated.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.challenges_affiliated.label }}{% if privacy_members_form.challenges_affiliated.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.challenges_affiliated }}
+
+                                <span class="help-block">{% if privacy_members_form.challenges_affiliated.errors %}{% for error in privacy_members_form.challenges_affiliated.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group {% if privacy_members_form.participations_canceled.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.participations_canceled.label }}{% if privacy_members_form.participations_canceled.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.participations_canceled }}
+
+                                <span class="help-block">{% if privacy_members_form.participations_canceled.errors %}{% for error in privacy_members_form.participations_canceled.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if privacy_members_form.participations_rejected.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_members_form.participations_rejected.label }}{% if privacy_members_form.participations_rejected.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_members_form.participations_rejected }}
+
+                                <span class="help-block">{% if privacy_members_form.participations_rejected.errors %}{% for error in privacy_members_form.participations_rejected.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-24 col-sm-8 col-md-8">
+                            <h3>{% trans "Organizers" %}</h3>
+
+                            <div class="form-group {% if privacy_admins_form.profile_details.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.profile_details.label }}{% if privacy_admins_form.profile_details.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.profile_details }}
+
+                                <span class="help-block">{% if privacy_admins_form.profile_details.errors %}{% for error in privacy_admins_form.profile_details.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if privacy_admins_form.contact_details.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.contact_details.label }}{% if privacy_admins_form.contact_details.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.contact_details }}
+
+                                <span class="help-block">{% if privacy_admins_form.contact_details.errors %}{% for error in privacy_admins_form.contact_details.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group {% if privacy_admins_form.challenges_upcoming.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.challenges_upcoming.label }}{% if privacy_admins_form.challenges_upcoming.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.challenges_upcoming }}
+
+                                <span class="help-block">{% if privacy_admins_form.challenges_upcoming.errors %}{% for error in privacy_admins_form.challenges_upcoming.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if privacy_admins_form.challenges_completed.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.challenges_completed.label }}{% if privacy_admins_form.challenges_completed.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.challenges_completed }}
+
+                                <span class="help-block">{% if privacy_admins_form.challenges_completed.errors %}{% for error in privacy_admins_form.challenges_completed.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group {% if privacy_admins_form.challenges_affiliated.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.challenges_affiliated.label }}{% if privacy_admins_form.challenges_affiliated.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.challenges_affiliated }}
+
+                                <span class="help-block">{% if privacy_admins_form.challenges_affiliated.errors %}{% for error in privacy_admins_form.challenges_affiliated.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <hr>
+
+                            <div class="form-group {% if privacy_admins_form.participations_canceled.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.participations_canceled.label }}{% if privacy_admins_form.participations_canceled.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.participations_canceled }}
+
+                                <span class="help-block">{% if privacy_admins_form.participations_canceled.errors %}{% for error in privacy_admins_form.participations_canceled.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if privacy_admins_form.participations_rejected.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ privacy_admins_form.participations_rejected.label }}{% if privacy_admins_form.participations_rejected.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                {{ privacy_admins_form.participations_rejected }}
+
+                                <span class="help-block">{% if privacy_admins_form.participations_rejected.errors %}{% for error in privacy_admins_form.participations_rejected.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-xs-offset-0 col-sm-8 col-sm-offset-16 col-md-8 col-md-offset-16 actions">
+                <a class="btn btn-primary" name="submit-leave"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Save Changes and leave" %}</a>
+                <a class="btn btn-info" name="submit-stay"><i class="fa fa-refresh fa-fw"></i> {% trans "Save Changes and continue editing" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='submit-leave']").click(function () {
+        var form = $("form#my-profile-privacy-form");
+
+        form.append("<input type='hidden' name='submit-leave' value='Save Changes and leave' />");
+        form.submit();
+
+        return true;
+    })
+    $("a[name='submit-stay']").click(function () {
+        var form = $("form#my-profile-privacy-form");
+
+        form.append("<input type='hidden' name='submit-stay' value='Save Changes and continue editing' />");
+        form.submit();
+
+        return true;
+    })
+</script>
+{% endblock %}

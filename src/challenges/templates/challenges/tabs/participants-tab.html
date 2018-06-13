@@ -1,0 +1,39 @@
+<!--
+TAB
+Challenge Details - Participants
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        <h4>{% trans "Members, signed up to Challenge" %}</h4>
+
+        <div id="participant-list" class="row">
+        {% for participation in challenge.challenge_participations.confirmed %}
+            {% include "challenges/fragments/challenge-participant-thumbnail.html" with account=participation.user %}
+        {% empty %}
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <p>
+                    <span class="label label-info">{% trans "There are no Participants, at the moment." %}</span>
+                </p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Remove Participation                                              ***/
+    /*************************************************************************/
+    $(".remove-app").click(function () {
+        element = $(this);
+
+        var participation_id = $(this).attr("participation");
+
+        $("#challenge-participation-remove-modal-form").find("input[name='participation_id']").val(participation_id);
+        $("#challengeParticipationRemovePopupModal").modal("show");
+    })
+</script>

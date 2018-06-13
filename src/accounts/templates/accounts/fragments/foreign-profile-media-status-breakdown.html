@@ -1,0 +1,65 @@
+{% load i18n %}
+
+{% comment %}
+    Input Parameters:
+        :<request>
+{% endcomment %}
+
+{% if request.user.is_authenticated %}
+    <!-- Invite to participate in a Challenge -->
+    {% if request.user.posted_challenges.get_dateless_upcoming.all %}
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle {% if not request.user.profile.is_completed %}disabled{% endif %}" data-toggle="dropdown"><i class="fa fa-wrench fa-fw"></i> {% trans "Invite to Challenge" %} <span class="caret"></span></a>
+
+            <ul class="dropdown-menu" role="menu">
+            {% for challenge in request.user.posted_challenges.get_dateless_upcoming.all %}
+                <li><a href="#" class="invite-to-chl" challenge="{{ challenge.id }}">{{ challenge.name|truncatechars:30 }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Invite to become an Organization Staff Member -->
+    {% if request.user.created_organizations.all %}
+        <div class="btn-group">
+            <a class="btn btn-primary dropdown-toggle {% if not request.user.profile.is_completed %}disabled{% endif %}" data-toggle="dropdown"><i class="fa fa-building-o fa-fw"></i> {% trans "Invite to Organization" %} <span class="caret"></span></a>
+
+            <ul class="dropdown-menu" role="menu">
+            {% for organization in request.user.created_organizations.all %}
+                <li><a href="#" class="invite-to-org" organization="{{ organization.id }}">{{ organization.name|truncatechars:30 }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+
+    <!-- Add Complaint -->
+    {% if show_complain_form %}
+        <p class="note">
+            <span class="label label-danger">{% trans "Disclaimer" %}</span><br/>
+            <p>
+                {% trans "You see this Message, because you participated with" %}
+            {% if need_to_know_profile_details %}
+                {{ account.profile.user.get_full_name }}
+            {% else %}
+                {% if account.profile.nickname %}
+                    {{ account.profile.nickname }}
+                {% else %}
+                    {{ account.profile.short_name }}
+                {% endif %}
+            {% endif %}
+
+            {% blocktrans %}
+                in the same Challenge(s) in the Past.<br/>
+                Let us know, if there's something to complain about this Person.
+            {% endblocktrans %}
+            </p>
+        </p>
+
+        <a class="btn btn-danger btn-centered add-complaint" href="#"><i class="fa fa-info-circle fa-fw"></i> {% trans "Complain" %}</a>
+    {% endif %}
+{% else %}
+    <p class="note">
+        <span class="label label-warning">{% trans "Login required" %}</span><br/>
+        <p>{% trans "You must have a User Account to see more Details." %}</p>
+    </p>
+{% endif %}

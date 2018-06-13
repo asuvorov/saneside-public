@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Confirmation Email" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'signup' %}">{% trans "Sign up" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="account-confirmation-email-sent">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
+                <div class="jumbotron">
+                    <p>
+                        {% trans "Confirmation Letter has been sent to Email" %}: <a href="#">{{ email }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

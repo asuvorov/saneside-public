@@ -1,0 +1,122 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "FAQ" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'faq' %}">{% trans "FAQ" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="faq">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+            {% if request.user.is_staff %}
+                <div class="controllers">
+                    <a class="btn btn-rounded pull-right" href="{% url 'faq-create' %}"><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+                </div>
+            {% endif %}
+
+            {% for section in sections %}
+                {% include "home/fragments/faq-section.html" with section=section %}
+            {% empty %}
+            {% endfor %}
+
+                <div id="page-selection"></div>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+            {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+                <div id="sponsored-links">
+                    <h4>{% trans "Sponsored Links" %}</h4>
+
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- FAQ List -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9496875666537518"
+                         data-ad-slot="2058775686"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_staff %}
+    {% include "home/modals/faq-remove-popup-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Delete FAQ                                                        ***/
+    /*************************************************************************/
+    $(".faq-remove").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var faq_id = $(this).attr("faq-id");
+
+        $.ajax({
+            url:    "{% url 'api-faq-details' 0 %}".replace("0", faq_id),
+            type:   "DELETE"
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $(element).parent().parent().parent().hide("slow");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to delete the FAQ."
+                }).show();
+            };
+        });
+
+        return true;
+    })
+</script>
+
+<script>
+    $(document).ready(function () {
+        $(".panel-collapse").collapse();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Our Team" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'our-team' %}">{% trans "Our Team" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="our-team">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="alert alert-info">
+                    {% trans "Check out the Team behind the SaneSide" %}
+                </div>
+
+            {% for team in teams %}
+                <div class="team-section">
+                    <h4>{{ team.name }}</h4>
+
+                    <div class="row">
+                    {% for member in team.members.all %}
+                        {% include "accounts/fragments/team-member-thumbnail.html" with account=member %}
+                    {% empty %}
+                        <div class="col-xs-24 col-sm-24 col-md-24">
+                            <p>
+                                <span class="label label-info">{% trans "There are no Team Members at the moment" %}</span>
+                            </p>
+                        </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% empty %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

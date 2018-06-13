@@ -1,0 +1,27 @@
+{% load i18n %}
+{% load static %}
+{% load compress %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}{% trans "We've got some Trouble" %}{% endblock %}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+
+        <!-- Less CSS -->
+    {% compress css %}
+        <link rel="stylesheet" type="text/less" href="{% static 'less/error-pages.less' %}">
+    {% endcompress %}
+    </head>
+
+    <body>
+    {% block content %}
+    {% endblock %}
+
+        <footer>
+            <p>{% trans "Technical Contact:" %} <a href="mailto:support@saneside.com">support@saneside.com</a></p>
+        </footer>
+    </body>
+</html>

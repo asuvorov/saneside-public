@@ -1,0 +1,15 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user }}!
+
+Member {{ member }} has reported Complaint to {{ subject }} "{{ name }}" with the following:
+
+{{ text }}
+
+Link to the Member's Profile Page: {{ profile }}
+
+Link to the {{ subject }} Details Page: {{ url }}
+
+Thank you, SaneSide Team.

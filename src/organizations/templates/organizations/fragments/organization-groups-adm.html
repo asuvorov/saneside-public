@@ -1,0 +1,140 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<organization>
+{% endcomment %}
+
+{% for group in organization.organization_groups.all %}
+    <div class="organization-group">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4>
+                    {{ group.name }}
+
+                    <a class="btn btn-rounded btn-danger pull-right org-group-remove" href="#" group="{{ group.id }}"><i class="fa fa-minus fa-fw"></i>{% trans "Del" %}</a>
+                </h4>
+
+            {% if group.description %}
+                <blockquote>
+                    <p>{{ group.description }}</p>
+                </blockquote>
+            {% endif %}
+
+                <div class="organization-invite-group">
+                    <div class="row">
+                        <div class="col-xs-24 col-sm-24 col-md-24">
+                            <form id="invite-org-group-form" action="" method="POST">
+                                {% csrf_token %}
+
+                                <input id="hidden-invitee-id" type="hidden" />
+                                <input id="hidden-group-id" type="hidden" value="{{ group.id }}" />
+
+                                <div class="form-inline">
+                                    <label for="members-{{ group.id }}">{% trans "Find and invite" %}: </label>
+                                    <input id="members-{{ group.id }}" class="form-control autocomplete" placeholder="Start typing a Name..." type="text" onclick="$(this).select();">
+                                    <button class="btn btn-rounded invite-org-group"><i class="fa fa-fw fa-plus"></i>{% trans "Invite" %}</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <script>
+                    /*************************************************************/
+                    /*** Autocomplete                                          ***/
+                    /*************************************************************/
+                    $(function () {
+                        $("#members-{{ group.id }}").autocomplete({
+                            source:     "{% url 'autocomplete-member-list' %}",
+                            minLength:  3,
+                            delay:      500,
+                            select:     function (event, ui) {
+                                console.log(">>> ID    :", ui.item.id);
+                                console.log(">>> UUID  :", ui.item.uuid);
+                                console.log(">>> LABEL :", ui.item.label);
+                                console.log(">>> VALUE :", ui.item.value);
+
+                                $(this).parent().parent().find("#hidden-invitee-id").val(ui.item.uuid);
+                            }
+                        }).data("ui-autocomplete")._renderItem = function(ul, item) {
+                            return $("<li></li>")
+                                .data("item.autocomplete", item)
+                                .append("<a><img src='" + item.avatar + "' width='30' height='30' /> " + item.label + "<br></a>")
+                                .appendTo(ul);
+                        };
+                    });
+                </script>
+
+                <hr>
+
+                <div class="row">
+                {% for member in group.members.all %}
+                    {% include "organizations/fragments/organization-group-member-thumbnail.html" with account=member group=group is_admin=True %}
+                {% empty %}
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                        <p>
+                            <span class="label label-info">{% trans "This Group has no Members at the moment." %}</span>
+                        </p>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% empty %}
+    <div class="row">
+        <div class="col-xs-24 col-sm-24 col-md-24">
+            <p>
+                <span class="label label-info">{% trans "This Organization has no Groups at the moment." %}</span>
+            </p>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Invite to Organization Group                                      ***/
+    /*************************************************************************/
+    $(".invite-org-group").click(function () {
+        var organization_id = {{ organization.id }};
+        var org_group_id = $(this).parent().parent().find("#hidden-group-id").val();
+        var invitee_id = $(this).parent().parent().find("#hidden-invitee-id").val();
+
+        $("#invite-to-organization-group-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#invite-to-organization-group-modal-form").find("input[name='org_group_id']").val(org_group_id);
+        $("#invite-to-organization-group-modal-form").find("input[name='invitee_id']").val(invitee_id);
+
+        $("#inviteToOrganizationGroupPopupModal").modal("show");
+
+        return false;
+    })
+
+    /*************************************************************************/
+    /*** Remove Organization Group                                         ***/
+    /*************************************************************************/
+    $(".org-group-remove").click(function () {
+        element = $(this);
+
+        var group_id = $(this).attr("group");
+
+        $("#organization-group-remove-modal-form").find("input[name='group_id']").val(group_id);
+        $("#organizationGroupRemovePopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Remove Organization Group Member                                  ***/
+    /*************************************************************************/
+    $(".remove-mbr").click(function () {
+        element = $(this);
+
+        var group_id = $(this).attr("group");;
+        var member_id = $(this).attr("member");
+
+        $("#organization-group-member-remove-modal-form").find("input[name='group_id']").val(group_id);
+        $("#organization-group-member-remove-modal-form").find("input[name='member_id']").val(member_id);
+        $("#organizationGroupMemberRemovePopupModal").modal("show");
+    })
+</script>

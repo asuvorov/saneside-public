@@ -1,0 +1,244 @@
+<script>
+    /*************************************************************************/
+    /*** Files Uploading                                                   ***/
+    /*************************************************************************/
+    var upload_count = $("#tmp_files input").length;
+    var real_upload_count;
+
+    var image_count = 0;
+    var doc_count = 0;
+
+    var saved_images = 0;
+    var saved_documents = 0;
+
+    function csrfSafeMethod(method) {
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    //--- Remove uploaded File
+    function removeFile(index, container, event) {
+        if (is_image($("#id_tmp_images_path_" + index).val())) {
+            image_count--;
+        } else {
+            doc_count--;
+        }
+
+        removeAttachedFile($(container).attr("tmp-file-id"), "temp", event);
+
+        $("#id_tmp_files_" + index).remove();
+        $("#id_tmp_images_path_" + index).remove();
+
+        $(container).parent().remove();
+
+        tally();
+    }
+
+    //--- Check, if uploaded File is an Image
+    function is_image(path) {
+        return _.contains(["jpg", "jpeg", "gif", "png"], path.split(".").pop());
+    }
+
+    $(function () {
+        var url = "{% url 'tmp-upload' %}";
+        var csrftoken = "{{ csrf_token }}";
+
+        $("input[name='tmp_images_path']").each( function (key, obj) {
+            if (is_image(obj.value)) {
+                $("<li class='file-container' />").html("<img src='" + obj.value + "'><a class='btn btn-sm btn-danger' href='#' onClick='removeFile(" + key + ", this)>Remove</a>").appendTo("#files");
+                $("#files-label").show();
+
+                saved_images++;
+            } else {
+                if ($("#docs").text() != "") {
+                    $("#docs").append(", ");
+                }
+
+                $("<li class='file-container' />").html("<a href='" + obj.value + "'>" + (obj.value.split("/").pop()) + "</a> <a href='#' class='btn btn-sm btn-danger' onClick='removeFile(" + key + ", this)'><i class='fa fa-times'></i></a>").appendTo("#docs");
+                $("#docs-label").show();
+
+                saved_documents++;
+            }
+        });
+
+        $("#fileupload-images").fileupload({
+            url: url,
+            crossDomain: false,
+            acceptFileTypes: /(\.|\/)(jpe?g|png|gif)$/i,
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            dataType: "json",
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    // Render Thumbnails
+                    if (is_image(file.name)) {
+                        $("<div class='gallery-container' />").html("<i class='fa fa-times-circle-o' onClick='removeFile(" + upload_count + ", this, event)' tmp-file-id='" + file.tmp_file_id + "'></i><img src='{{ MEDIA_URL }}" + file.name + "' width='100'>").appendTo("#files");
+                        $("#files-label").show()
+                    }
+
+                    // UPLOAD ID: used by Django to associate upload with record
+                    $("<input type='hidden' id='id_tmp_files_" + upload_count + "' name='tmp_files'>").val(file.tmp_file_id).appendTo("#tmp_files");
+
+                    // UPLOAD PATH: used by Javascript to render thumbnails
+                    $("<input type='hidden' id='id_tmp_images_path_" + upload_count + "' name='tmp_images_path'>").val("{{ MEDIA_URL }}" + file.name).appendTo("#tmp_images_path");
+
+                    upload_count++;
+                    image_count++;
+
+                    tally();
+                });
+
+                window.setTimeout(function () {
+                    $("#progress .progress-bar").css("width", "0%");
+                    $("#progress").css("display", "none");
+                }, 1000);
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+
+                $("#progress").css("display", "block");
+                $("#progress .progress-bar").css("width", progress + "%");
+            },
+            dropZone: $("#fileupload-images")
+        }).prop("disabled", !$.support.fileInput).parent().addClass($.support.fileInput ? undefined : "disabled");
+
+        $("#fileupload-images").bind("fileuploadprocessfail", function (e, data) {
+            alert("Sorry, this field only supports the following file types:\n - jpg, png, gif\n\nYour file was not added.");
+        });
+
+        $("#fileupload-documents").fileupload({
+            url: url,
+            crossDomain: false,
+            acceptFileTypes: /(\.|\/)(doc|pdf|txt)$/i,
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type)) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            },
+            dataType: "json",
+            done: function (e, data) {
+                $.each(data.result.files, function (index, file) {
+                    // Render Thumbnails
+                    if (!is_image(file.name)) {
+                        $("<div class='documents-container' />").html("<i class='fa fa-times-circle-o' onClick='removeFile(" + upload_count + ", this, event)' tmp-file-id='" + file.tmp_file_id + "'></i> " + (file.name.split("/").pop()) + "<br/>").appendTo("#docs");
+                        $("#docs-label").show()
+                    }
+
+                    // UPLOAD ID: used by Django to associate upload with record
+                    $("<input type='hidden' id='id_tmp_files_" + upload_count + "' name='tmp_files'>").val(file.tmp_file_id).appendTo("#tmp_files");
+
+                    // UPLOAD PATH: used by Javascript to render thumbnails
+                    $("<input type='hidden' id='id_tmp_images_path_" + upload_count + "' name='tmp_images_path'>").val("{{ MEDIA_URL }}" + file.name).appendTo("#tmp_images_path");
+
+                    upload_count++;
+                    //real_upload_count++;
+                    doc_count++;
+
+                    tally();
+                });
+
+                window.setTimeout(function() {
+                    $("#progress .progress-bar").css("width", "0%");
+                    $("#progress").css("display", "none");
+                }, 1000);
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+
+                $("#progress").css("display", "block");
+                $("#progress .progress-bar").css("width", progress + "%");
+            },
+            dropZone: $("#fileupload-documents")
+        })
+        .prop("disabled", !$.support.fileInput)
+        .parent().addClass($.support.fileInput ? undefined : "disabled");
+
+        $("#fileupload-documents").bind("fileuploadprocessfail", function (e, data) {
+            alert("Sorry, this field only support the following file types:\n - pdf, doc, plain text \n\nYour file was not added.");
+        });
+
+        tally();
+    });
+
+    function removeAttachedFile(id, type, event) {
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        if (!event.target) event.target = event.srcElement;
+
+        var srcElement = event.target;
+
+        $.post("{% url 'remove-upload' %}", {
+            "type":                 type,
+            "id":                   id,
+            "csrfmiddlewaretoken":  $("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (result) {
+            if (result.deleted) {
+                $(srcElement).parent().remove();
+            }
+        }).fail(function (data) {
+        });
+    }
+
+    function removeAttachedLink(id, type, event) {
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        if (!event.target) event.target = event.srcElement;
+
+        var srcElement = event.target;
+
+        $.post("{% url 'remove-link' %}", {
+            "type":                 type,
+            "id":                   id,
+            "csrfmiddlewaretoken":  $("input[name='csrfmiddlewaretoken']").val()
+        }).done( function(result) {
+            if (result.deleted) {
+                $(srcElement).parent().remove();
+            }
+        }).fail( function(data) {
+        });
+    }
+
+    function tally() {
+        if (typeof saved_images == "undefined") {
+            saved_images = 0;
+        }
+
+        if (typeof saved_documents == "undefined") {
+            saved_documents = 0;
+        }
+
+        var total_uploads = real_upload_count + saved_images + saved_documents;
+        var total_images = image_count + saved_images;
+        var total_documents = doc_count + saved_documents;
+        var total_links = 0;
+
+        if ($("#id_links").length && $("#id_links").val() != "") {
+            total_links += $("#id_links").val().split(" ").length;
+        }
+        $("#id_tmp_links").val($("#id_links").val());
+
+        if (total_images > 0) {
+            $("#total_images").text("(" + total_images + ")");
+        } else {
+            $("#total_images").text("");
+        }
+
+        if (total_documents > 0) {
+            $("#total_documents").text("(" + total_documents + ")");
+        } else {
+            $("#total_documents").text("");
+        }
+
+        if (total_links > 0) {
+            $("#total_links").text("(" + total_links + ")");
+        } else {
+            $("#total_links").text("");
+        }
+    }
+</script>

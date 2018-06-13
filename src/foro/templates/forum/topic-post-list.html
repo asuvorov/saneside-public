@@ -1,0 +1,79 @@
+{% extends "base-forum.html" %}
+
+{% load i18n %}
+{% load foro_mptt_tags %}
+
+{% block title %}{% trans "Topic" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'forum-list' %}">{% trans "Forums" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'topic-list' topic.forum.id %}">{% trans "Topics" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'topic-post-list' topic.forum.id topic.id %}">{% trans "Details" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <dir id="topic-post-list">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="controllers">
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-rounded pull-right" href="{% url 'topic-post-create' topic.forum.id topic.id %}"><i class="fa fa-plus fa-fw"></i> {% trans "Post" %}</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="alert alert-info">
+                    {{ topic.description }}
+                </div>
+
+            {% if nodes %}
+                <ul class="root">
+                {% recursetree nodes %}
+                    <li>
+                        <div class="post">
+                            <h4 class="post-title">{{ node.title }}</h4>
+                            <p class="post-author">
+                                <strong>{% trans "Posted by" %}</strong>
+                                <a href="{% url 'profile-view' node.author_id %}">{{ node.author }}</a> {{ node.created|timesince }} {% trans "ago" %}
+                            </p>
+                            <div class="post-body">
+                                {{ node.body|escape|safe }}
+                            </div>
+                            <hr/>
+                        {% if node.level < 5 %}
+                            <a href="{% url 'topic-post-reply' topic.forum.id topic.id node.id %}">Reply</a>
+                        {% endif %}
+                        </div>
+
+                    {% if not node.is_leaf_node %}
+                        <ul class="children">
+                            {{ children }}
+                        </ul>
+                    {% endif %}
+                    </li>
+                {% endrecursetree %}
+                </ul>
+            {% else %}
+                <p>
+                    <span class="label label-info">{% trans "There are no Posts at the moment" %}</span>
+                </p>
+            {% endif %}
+            </div>
+        </div>
+    </dir>
+</div>
+{% endblock %}

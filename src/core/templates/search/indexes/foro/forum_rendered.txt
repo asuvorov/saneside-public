@@ -1,0 +1,1 @@
+{% include "forum/fragments/forum-thumbnail-search.html" with forum=object %}

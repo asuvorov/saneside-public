@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+
+{% block title %}{% trans "Add FAQ" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'faq' %}">{% trans "FAQ" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'faq-create' %}">{% trans "Add" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="faq-create">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <form id="create-faq-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.media }}
+
+                    <div class="row">
+                        <div id="faq-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                        </div>
+
+                        <div id="faq-details" class="col-xs-24 col-sm-24 col-md-16">
+                            <div class="form-group {% if form.question.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.question }}
+                                    <div class="input-group-addon"><i class="fa fa-i-cursor fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.question.errors %}{% for error in form.question.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.answer.errors %}has-error{% endif %}">
+                                {{ form.answer }}
+
+                                <span class="help-block">{% if form.answer.errors %}{% for error in form.answer.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.section.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ form.section.label }}{% if form.section.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                <div class="input-group">
+                                    {{ form.section }}
+                                    <div class="input-group-addon"><i class="fa fa-plus-square-o fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.section.errors %}{% for error in form.section.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6">
+                <div class="actions">
+                    <a class="btn btn-primary btn-centered" name="submit"><i class="fa fa-paper-plane fa-fw"></i> {% trans "Add this FAQ" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='submit']").click(function () {
+        $("form#create-faq-form").submit();
+
+        return true;
+    })
+
+    $(document).ready(function () {
+    });
+</script>
+{% endblock %}

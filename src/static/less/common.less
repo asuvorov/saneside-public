@@ -1,0 +1,189 @@
+// ----------------------------------------------------------------------------
+// --- Add Comment Button
+// ----------------------------------------------------------------------------
+a.add-comment,
+a.add-attachment {
+    font-size:              @font-size-base;
+    margin-top:             -10px !important;
+}
+
+// ----------------------------------------------------------------------------
+// --- Right Sidebar
+// ----------------------------------------------------------------------------
+div.right-sidebar {
+    h4 {
+        font-weight:        bold;
+        text-transform:     uppercase;
+        margin:             0 0 5px 0;
+        padding:            10px 0 !important;
+        // border-bottom:      1px solid @gray-lightest;
+        border-bottom:      none !important;
+    }
+    ul {
+        padding-left:       20px;
+    }
+
+    .tag-cloud {
+        background-color:   @white;
+        padding:            10px;
+        margin:             10px 0;
+    }
+    .link-to-page {
+        background-color:   @white;
+        padding:            10px;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Pop-up Overlay
+// ----------------------------------------------------------------------------
+.popup-overlay-heading {
+    border-bottom:          1px solid @gray-light;
+    margin:                 0 0 20px 0;
+
+    h4 {
+        font-weight:        bold;
+        text-transform:     uppercase;
+        margin:             0;
+        padding:            0 0 10px 0 !important;
+    }
+}
+.popup-overlay-info {
+    margin:                 20px 0 0 0;
+}
+.popup-overlay-footer {
+    border-top:             1px solid @gray-light;
+    margin:                 20px 0 0 0;
+    padding:                10px 0 0 0;
+    //float:                  right;
+}
+
+// ----------------------------------------------------------------------------
+// --- Twitter Feed
+// ----------------------------------------------------------------------------
+.twitter-feed {
+    h4 {
+        margin:             40px 0 20px 0;
+        text-transform:     uppercase;
+    }
+
+    .twitt {
+        .pb-twitter-feed(
+            @font-size:     @font-size-small
+        );
+    }
+    .divider {
+        background-color:   @gray-lightest;
+        height:             1px;
+        margin:             9px 0;
+        overflow:           hidden;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Polaroids
+// ----------------------------------------------------------------------------
+ul.polaroids {
+    a {
+        color:              @gray-dark;
+        background:         @white;
+        font-size:          18px;
+        text-align:         center;
+        text-decoration:    none;
+
+        display:            inline;
+        float:              left;
+        width:              auto;
+        margin:             15px;
+        padding:            10px 10px 20px;
+
+        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+           -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, .25);
+
+        -webkit-transform:  rotate(-2deg);
+           -moz-transform:  rotate(-2deg);
+
+        -webkit-transition: -webkit-transform .15s linear;
+
+        &:after {
+            content:        attr(title);
+        }
+    }
+    img {
+        display:            block;
+        width:              150px;
+        height:             150px;
+        margin-bottom:      20px;
+    }
+    li {
+        display:            inline;
+        padding-left:       0;
+    }
+}
+
+/* Rotate all even images 2 degrees */
+ul.polaroids li:nth-child(even) a {
+    -webkit-transform:      rotate(2deg);
+       -moz-transform:      rotate(2deg);
+}
+
+/* Don't rotate every third image, but offset its position */
+ul.polaroids li:nth-child(3n) a {
+    position:               relative;
+    top:                    -5px;
+
+    -webkit-transform:      none;
+       -moz-transform:      none;
+}
+
+/* Rotate every fifth image by 5 degrees and offset it */
+ul.polaroids li:nth-child(5n) a {
+    position:               relative;
+    right:                  5px;
+
+    -webkit-transform:      rotate(5deg);
+       -moz-transform:      rotate(5deg);
+}
+
+/* Keep default rotate for every eighth, but offset it */
+ul.polaroids li:nth-child(8n) a {
+    position:               relative;
+    top:                    8px;
+    right:                  5px;
+}
+
+/* Keep default rotate for every eleventh, but offset it */
+ul.polaroids li:nth-child(11n) a {
+    position:               relative;
+    top:                    3px;
+    left:                   -5px;
+}
+
+ul.polaroids li a:hover {
+    position:               relative;
+    z-index:                5;
+
+    -webkit-transform:      scale(1.25);
+       -moz-transform:      scale(1.25);
+
+    -webkit-box-shadow:     0 3px 6px rgba(0, 0, 0, .5);
+       -moz-box-shadow:     0 3px 6px rgba(0, 0, 0, .5);
+}
+
+@media screen and (max-width: @screen-xs-max) {
+    ul.polaroids {
+        a {
+            margin:         8px;
+            padding:        5px 5px 10px;
+        }
+        img {
+            width:          75px;
+            height:         75px;
+            margin-bottom:  10px;
+        }
+    }
+
+    ul.polaroids li a {
+        margin-left:        0;
+    }
+}

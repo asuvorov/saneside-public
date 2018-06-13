@@ -1,0 +1,72 @@
+{% load i18n %}
+
+<div class="modal fade" id="challengeClonePopupModal" tabindex="-1" role="dialog" aria-labelledby="challengeClonePopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="challengeClonePopupModalLabel">{% trans "Clone Challenge" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="challenge-clone-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_cloning_text">{% trans "Please, enter a Reason for cloning" %}</label>
+                        <textarea id="id_cloning_text" class="form-control" name="cloning_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="challenge_clone();">{% trans "Clone" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Clone Challenge                                                   ***/
+    /*************************************************************************/
+    function challenge_clone() {
+        var cloning_text = $("#challenge-clone-modal-form").find("textarea[name='cloning_text']").val();
+
+        $.post("{% url 'api-challenge-clone' challenge.id %}", {
+            "cloning_text":         cloning_text,
+            "csrfmiddlewaretoken":  $("#challenge-clone-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#challengeClonePopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            //location.reload();
+            location.replace(data.challenge_url);
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to clone the Challenge."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

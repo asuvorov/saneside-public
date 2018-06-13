@@ -1,0 +1,98 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<organization>
+{% endcomment %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+    {% if organization.organization_staff_members.count > 0 %}
+        <!--
+            Mobile View
+        -->
+        <div class="hidden-sm hidden-md hidden-lg">
+        {% for instance in organization.organization_staff_members.all %}
+            <table class="table">
+                <thead>
+                    <tr class="active">
+                        <th>
+                        {% with instance.member.profile as profile %}
+                            <a href="{% url 'profile-view' instance.member.id %}">
+                            {% if profile.avatar %}
+                                {% generateimage "header:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                            {% else %}
+                                <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                            {% endif %}
+                            </a>
+                        {% endwith %}
+                            <a href="{% url 'profile-view' instance.member.id %}">{{ instance.member.get_full_name }}</a>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong id="position">{{ instance.position|default:"N/A" }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <blockquote>
+                                <p id="bio">{{ instance.bio|default:"N/A" }}</p>
+                            </blockquote>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+        </div>
+
+        <!--
+            Tablet/Desktop View
+        -->
+        <table id="sortable" class="table table-condensed hidden-xs">
+            <thead>
+                <tr>
+                    <th>{% trans "Avatar" %}</th>
+                    <th>{% trans "Info" %}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for instance in organization.organization_staff_members.all %}
+                <tr>
+                    <td>
+                    {% with instance.member.profile as profile %}
+                        <a href="{% url 'profile-view' instance.member.id %}">
+                        {% if profile.avatar %}
+                            {% generateimage "common:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="100" width="100" alt="" />
+                        {% endif %}
+                        </a>
+                    {% endwith %}
+                    </td>
+
+                    <td>
+                        <h4>
+                            <a href="{% url 'profile-view' instance.member.id %}">{{ instance.member.get_full_name }}</a>
+                        </h4>
+                        <strong id="position">{{ instance.position|default:"N/A" }}</strong>
+                        <blockquote>
+                            <p id="bio">{{ instance.bio|default:"N/A" }}</p>
+                        </blockquote>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            <span class="label label-info">{% trans "This Organization has no Staff Members at the moment." %}</span>
+        </p>
+    {% endif %}
+    </div>
+</div>

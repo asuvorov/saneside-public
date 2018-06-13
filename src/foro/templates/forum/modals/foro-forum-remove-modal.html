@@ -1,0 +1,77 @@
+{% load i18n %}
+
+<div class="modal fade" id="foroForumRemovePopupModal" tabindex="-1" role="dialog" aria-labelledby="foroForumRemovePopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="foroForumRemovePopupModalLabel">{% trans "Remove Forum" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="foro-forum-remove-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="forum_id" value="">
+
+                    <div class="form-group">
+                        <label for="id_cancellation_text">{% trans "Please, enter a Reason" %}</label>
+                        <textarea id="id_cancellation_text" class="form-control" name="cancellation_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="forum_remove();">{% trans "Remove" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Remove Forum                                                      ***/
+    /*************************************************************************/
+    function forum_remove() {
+        var cancellation_text = $("#foro-forum-remove-modal-form").find("textarea[name='cancellation_text']").val();
+        var forum_id = $("#foro-forum-remove-modal-form").find("input[name='forum_id']").val();
+
+        $.post("{% url 'api-forum-remove' 0 %}".replace("0", forum_id), {
+            "cancellation_text":    cancellation_text,
+            "csrfmiddlewaretoken":  $("#foro-forum-remove-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#foroForumRemovePopupModal").modal("hide");
+
+            //location.reload();
+            $(element).parent().parent().hide("slow", function () {
+                fixFooter();
+            });
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to remove the Forum."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

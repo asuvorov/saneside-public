@@ -1,0 +1,26 @@
+{% load i18n %}
+{% load static %}
+
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>{% trans "Participated in Challenges" %}</title>
+
+    {% block meta %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% endblock %}
+
+    {% block extras %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/export.css' %}">
+    {% endblock %}
+
+    {% block extra_style %}{% endblock %}
+    {% block extra_script %}{% endblock %}
+    {% block extra_head %}{% endblock %}
+    </head>
+
+    <body>
+    {% block content %}
+    {% endblock %}
+    </body>
+</html>

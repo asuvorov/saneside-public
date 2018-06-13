@@ -1,0 +1,98 @@
+{% load i18n %}
+
+<div class="modal fade" id="complaintAddPopupModal" tabindex="-1" role="dialog" aria-labelledby="complaintAddPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="complaintAddPopupModalLabel">{% trans "Add Complaint" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="complaint-add-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="account_id" value="">
+                    <input type="hidden" name="challenge_id" value="">
+                    <input type="hidden" name="organization_id" value="">
+
+                    <p class="note">
+                        <span class="label label-danger">{% trans "Disclaimer" %}</span><br/>
+                        <strong>{% trans "So, you are going to leave a Complaint." %}</strong><br/>
+
+                        Before proceeding, evaluate all the Cons and Pros, and continue only if it is worth it.<br/>
+                        Please, be honest.<br/>
+                        For providing knowingly false and slandering Information, your Account will be blocked, and the IP Address blacklisted, for Life.<br/>
+                    </p>
+
+                    <div class="form-group">
+                        <label for="id_complaint_text">{% trans "Please, enter a Complaint" %}</label>
+                        <textarea id="id_complaint_text" class="form-control" name="complaint_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="complaint_add();">{% trans "Complain" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Add Complaint                                                     ***/
+    /*************************************************************************/
+    function complaint_add() {
+        var complaint_text = $("#complaint-add-modal-form").find("textarea[name='complaint_text']").val();
+        var account_id = $("#complaint-add-modal-form").find("input[name='account_id']").val();
+        var challenge_id = $("#complaint-add-modal-form").find("input[name='challenge_id']").val();
+        var organization_id = $("#complaint-add-modal-form").find("input[name='organization_id']").val();
+
+        $.post("{% url 'api-complaint-list' %}", {
+            "account_id":           account_id,
+            "challenge_id":         challenge_id,
+            "organization_id":      organization_id,
+            "complaint_text":       complaint_text,
+            "csrfmiddlewaretoken":  $("#complaint-add-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#complaintAddPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            // ----------------------------------------------------------------
+            // --- Related to the `Accounts: My Profile Page: Completed Challenges Tab`
+            $(".action-" + challenge_id).find(".add-complaint").hide("slow");
+
+            // ----------------------------------------------------------------
+            // --- Related to the `Challenges: Details Page: Info Tab`
+            $(element).parent().parent().find("#div-add-complaint").hide("slow");
+
+            // location.reload(true);
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to add the Complaint."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

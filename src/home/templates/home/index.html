@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load twitter_tag %}
+
+{% block title %}{{ block.super }}{% endblock %}
+
+{% block content %}
+<div id="index-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#index-carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#index-carousel" data-slide-to="1"></li>
+        <li data-target="#index-carousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for Slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <img src="{{ STATIC_URL }}img/DSC02177.jpg" alt="SaneSide Platform - Volunteering and Community Service made easy." />
+            <div class="container">
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="{{ STATIC_URL }}img/DSC02160.jpg" alt="SaneSide Platform - Volunteering and Community Service made easy." />
+            <div class="container">
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="{{ STATIC_URL }}img/DSC02173.jpg" alt="SaneSide Platform - Volunteering and Community Service made easy." />
+            <div class="container">
+                <div class="carousel-caption"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="body-navs" class="hero">
+    <div id="index" class="container">
+        <div class="row">
+            <div class="col-xs-24 col-xs-offset-0 col-sm-22 col-sm-offset-1 col-md-20 col-md-offset-2 body-navs-header">
+                <h1>
+                {% blocktrans %}
+                    Have Fun<br/>
+                    Meet new People<br/>
+                    Make the World a better Place
+                {% endblocktrans %}
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="body-navs-next" align="center">
+                    <h4>{% trans "Online Platform for volunteering work" %}</h4>
+
+                    <div class="body-navs-next-btn">
+                        <a class="btn" data-scroll href="#welcome">{% trans "Find out more" %}</a>
+                    </div>
+
+                    <div class="body-navs-next-img">
+                        <h4>{% trans "Find out more" %}</h4>
+
+                        <a data-scroll href="#welcome">
+                            <img src="{{ STATIC_URL }}img/move-down-button.png" class="move-up" style="display:block;" alt="Find out more - SaneSide Platform." />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="welcome">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-xs-offset-0 col-sm-20 col-sm-offset-2 col-md-16 col-md-offset-4" align="center">
+                <h2>{% trans "Welcome" %}</h2>
+
+                <p>{% trans "SaneSide is an online Platform for volunteering Work" %}</p>
+                <p>
+                    {% trans "On SaneSide you can find and post Opportunities to volunteer your Time for a good Cause." %}<br/>
+                    {% trans "Do you want to meet new People, have fun, and make the World a better Place?" %}<br/>
+                    {% trans "Find your first Challenge on SaneSide." %}
+                </p>
+
+                <a class="btn" href="{% url 'signup' %}">{% trans "Right Now" %}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="how-it-works">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24" align="center">
+                <h2>{% trans "How it works" %}</h2>
+
+                <div class="row">
+                    <div class="col-xs-24 col-sm-12 col-md-6 feature">
+                        <span><i class="flaticon-fluff1"></i></span>
+                        <p>{% trans "Tell us, where you need the Help or what Activity you offer" %}</p>
+                        <small>{% trans "After signing up to our Platform, you can start creating your Challenges. You will be asked to describe your Challenge (Description, Time &amp; Place, Category, etc.), which will help other Members to find your Challenge with ease." %}</small>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-12 col-md-6 feature">
+                        <span><i class="flaticon-user73"></i></span>
+                        <p>{% trans "All interested Members will apply for the Challenge" %}</p>
+                        <small>{% trans "Registered Members will apply for your Challenge. You can review their Profiles, Examples of current and/or past Experience, and other Members' Reviews. Your contact Details are hidden from the unregistered Users." %}</small>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-12 col-md-6 feature">
+                        <span><i class="flaticon-square56"></i></span>
+                        <p>{% trans "Make a Decision" %}</p>
+                        <small>{% trans "Our Platform allows you to engage with applied Members before accepting their Participation in your Challenge. Ask Questions, provide them with additional Information, and ensure, that they are as excited about your Challenge as you are." %}</small>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-12 col-md-6 feature">
+                        <span><i class="flaticon-huge3"></i></span>
+                        <p>{% trans "Accomplish your Challenge" %}</p>
+                        <small>{% trans "Once you have found the right Participants for the Challenge, confirm their Participation in the Challenge, and get it done. After the Challenge has taken its Place, review Experience Reports, and leave Feedback for each Person, participated in." %}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="latest-twitter">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-22 col-xs-offset-1 col-sm-20 col-sm-offset-2 col-md-16 col-md-offset-4 header" align="center">
+                <img src="{{ STATIC_URL }}img/twitt.png" alt="Latest from Twitter - SaneSide Platform." />
+                <h2>{% trans "Latest from Twitter" %}</h2>
+
+                    {% get_tweets for "sanesidedotcom" as tweets exclude "replies, retweets" limit 10 %}
+                    {# get_tweets for "sanesidedotcom" as tweets limit 10 #}
+
+                <div id="twitter-carousel" class="carousel slide" data-ride="carousel">
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner">
+                    {% for tweet in tweets  %}
+                        <div class="{% if forloop.first %}active {% endif %}item">{{ tweet.html|safe }}</div>
+                    {% endfor %}
+                    </div>
+
+                    <!-- Indicators -->
+                    <ol class="carousel-indicators">
+                    {% for tweet in tweets %}
+                        <li data-target="twitter-carousel" data-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active"{% endif %}></li>
+                    {% endfor %}
+                    </ol>
+
+                    <!-- Carousel Nav -->
+                {% comment %}
+                    <a class="carousel-control left" href="#twitter-carousel" data-slide="prev">&lsaquo;</a>
+                    <a class="carousel-control right" href="#twitter-carousel" data-slide="next">&rsaquo;</a>
+                {% endcomment %}
+                </div>
+
+                {#<a class="btn btn-primary">Follow us</a>#}
+                <a href="https://twitter.com/sanesidedotcom" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false" data-dnt="true" data-align="center">{% trans "Follow" %} @sanesidedotcom</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        //---------------------------------------------------------------------
+        if (!isMobile.any) {
+            equalHeight($(".feature > p"));
+        }
+    })
+
+    //-------------------------------------------------------------------------
+    //--- Twitter Follow Button
+    //-------------------------------------------------------------------------
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?"http":"https";if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document, "script", "twitter-wjs");
+</script>
+{% endblock %}

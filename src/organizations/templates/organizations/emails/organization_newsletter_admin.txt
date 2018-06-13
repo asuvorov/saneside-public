@@ -1,0 +1,11 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ admin.first_name }}!
+
+The Organization's "{{ organization.name }}" Newsletter with the Title {{ newsletter.title }}, was successfully created and populated.
+
+Link to the Organization Details Page: {{ organization_link }}
+
+Thank you, SaneSide Team.

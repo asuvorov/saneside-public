@@ -1,0 +1,38 @@
+{% extends "challenges/challenge-details-base.html" %}
+
+{% load i18n %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="challenge-acknowledge">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h4 class="hidden-xs">{% trans "Members, waiting for Acknowledgment" %}</h4>
+
+                <div id="challenge-acknowledge-section">
+                    {% include "challenges/tabs/to-acknowledge-tab.html" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% if challenge.author == request.user %}
+        {% include "challenges/modals/challenge-selfreflection-accept-modal.html" %}
+        {% include "challenges/modals/challenge-selfreflection-reject-modal.html" %}
+    {% endif %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var participation_id;
+    var element;
+</script>
+{% endblock %}

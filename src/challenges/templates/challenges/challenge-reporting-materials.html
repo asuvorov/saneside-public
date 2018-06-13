@@ -1,0 +1,209 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+{% load imagekit %}
+
+{% block title %}{% trans "Challenge reporting Materials" %} - {{ block.super }}{% endblock %}
+
+{% block extra_style %}
+{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'challenge-list' %}">{% trans "Challenges" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'challenge-reporting-materials' challenge.slug %}">{% trans "Reporting Materials" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="challenge-reporting-materials">
+        <div class="row">
+            <div id="tips" class="col-xs-24 col-sm-24 col-md-24 col-lg-24 right-sidebar">
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% blocktrans %}
+                    Here you can add the Challenge reporting Materials, manage current Attachments, and describe Achievements.<br/>
+                    After you save Changes, all confirmed Participants will receive appropriate Notifications.
+                {% endblocktrans %}
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <form id="edit-challenge-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.media }}
+
+                    <div class="row">
+                        <div id="chl-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                        </div>
+
+                        <div id="chl-description" class="col-xs-24 col-sm-24 col-md-16">
+                            <h3>{% trans "Achievements" %}</h3>
+
+                            <div class="form-group {% if form.achievements.errors %}has-error{% endif %}">
+                                {{ form.achievements }}
+
+                                <span class="help-block">{% if form.achievements.errors %}{% for error in form.achievements.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <h3>{% trans "Attachments" %}</h3>
+
+                            <hr>
+
+                            <div style="display:none;">
+                                <div id="tmp_files">
+                                    {{ form.tmp_files }}
+                                </div>
+                                <div id="tmp_images_path">
+                                    {{ form.tmp_images_path }}
+                                </div>
+                                <div id="tmp_links">
+                                    {{ form.tmp_links }}
+                                </div>
+                            </div>
+
+                            <div class="btn-group btn-group-sm">
+                                <a class="popover-content" title="" data-original-title="" data-content="Click to add images (jpg, png, gif) here" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#uploadImagesPopupModal" tabindex="-1">
+                                    <i class="fa fa-camera fa-fw"></i>
+                                    <span id="total_images" class="total-attachments"></span>
+                                </a>
+                                <a class="popover-content" title="" data-original-title="" data-content="Click to add documents (pdf, doc, plain text) here" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#uploadDocumentsPopupModal" tabindex="-1">
+                                    <i class="fa fa-paperclip fa-fw"></i>
+                                    <span id="total_documents" class="total-attachments"></span>
+                                </a>
+                                <a class="popover-content" title="" data-original-title="" data-content="Click to add links" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#uploadURLsPopupModal" tabindex="-1">
+                                    <i class="fa fa-link fa-fw"></i>
+                                    <span id="total_links" class="total-attachments"></span>
+                                </a>
+                            </div>
+
+                            <hr>
+
+                            <div class="challenge-attachments">
+                                <h4>{% trans "Images" %}</h4>
+
+                                <div class="gallery">
+                                {% for img in challenge.get_image_list.all %}
+                                    <div class="gallery-container">
+                                        <i class="fa fa-times-circle-o" onclick="removeAttachedFile({{ img.id }}, 'image', event);"></i>
+                                        <a class="gallery-photos" href="{{ MEDIA_URL }}{{ img.image }}" title="">{% generateimage "common:thumbnail" source=img.image -- alt=img.name %}</a>
+                                    </div>
+                                {% empty %}
+                                {% endfor %}
+                                </div>
+
+                                <h4>{% trans "Documents" %}</h4>
+
+                                <div class="gallery">
+                                {% for doc in challenge.get_document_list.all %}
+                                    <div class="documents-container">
+                                        <i class="fa fa-times-circle-o" onclick="removeAttachedFile({{ doc.id }}, 'document', event);"></i>
+                                        <a href="{{ MEDIA_URL }}{{ doc.document }}" target="_blank">{{ doc.name }}</a>
+                                        {% if not forloop.last %}<br />{% endif %}
+                                    </div>
+                                {% empty %}
+                                {% endfor %}
+                                </div>
+
+                                <h4>{% trans "Links" %}</h4>
+
+                                <div class="gallery">
+                                {% for url in challenge.get_url_list.all %}
+                                    <div class="links-container">
+                                        <i class="fa fa-times-circle-o" onclick="removeAttachedLink({{ url.id }}, 'regular', event);"></i>
+                                        <a href="{{ url.url }}" target="_blank">{% if url.title %}{{ url.title }}{% else %}{{ url.url }}{% endif %}</a>
+                                        {% if not forloop.last %}<br />{% endif %}
+                                    </div>
+                                {% empty %}
+                                {% endfor %}
+                                </div>
+
+                                <h4>{% trans "Video Links" %}</h4>
+
+                                <div class="gallery">
+                                {% for video_url in challenge.get_video_url_list.all %}
+                                    <div class="video-links-container">
+                                        <i class="fa fa-times-circle-o" onclick="removeAttachedLink({{ video_url.id }}, 'video', event);"></i>
+                                        <a href="{{ video_url.url }}">{{ video_url.url }}</a>
+                                        {% if not forloop.last %}<br />{% endif %}
+                                    </div>
+                                {% empty %}
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+                <div class="actions">
+                    <a class="btn btn-primary btn-centered" name="submit"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Save Changes" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Injects -->
+
+{% include "injects/upload.html" %}
+
+<!-- Modals -->
+
+{% include "common/modals/attach-image-modal.html" %}
+{% include "common/modals/attach-doc-modal.html" %}
+{% include "common/modals/attach-url-modal.html" %}
+
+<!-- Script -->
+
+<script>
+    $("a[name='submit']").click(function () {
+        $("#spinner").fadeIn("slow");
+
+        $("form#edit-challenge-form").submit();
+
+        return true;
+    })
+
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    });
+</script>
+{% endblock %}

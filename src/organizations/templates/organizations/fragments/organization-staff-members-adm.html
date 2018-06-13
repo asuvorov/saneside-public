@@ -1,0 +1,218 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<organization>
+{% endcomment %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+    {% if organization.organization_staff_members.count > 0 %}
+        <!--
+            Mobile View
+        -->
+        <div class="hidden-sm hidden-md hidden-lg">
+        {% for instance in organization.organization_staff_members.all %}
+            <table class="table">
+                <thead>
+                    <tr class="active">
+                        <th>
+                            <i class="fa fa-bars fa-fw drag" member-id="{{ instance.id }}"></i>
+                        </th>
+                        <th colspan="2">
+                        {% with instance.member.profile as profile %}
+                            <a href="{% url 'profile-view' instance.member.id %}">
+                            {% if profile.avatar %}
+                                {% generateimage "header:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                            {% else %}
+                                <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                            {% endif %}
+                            </a>
+                        {% endwith %}
+
+                            <a href="{% url 'profile-view' instance.member.id %}">{{ instance.member.get_full_name }}</a>
+                        </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <strong id="position">{{ instance.position|default:"N/A" }}</strong>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td colspan="2">
+                            <blockquote>
+                                <p id="bio">{{ instance.bio|default:"N/A" }}</p>
+                            </blockquote>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><strong>{% trans "Action" %}</strong></td>
+                        <td>
+                            <a class="edit   txt-warning" member-id="{{ instance.id }}" href="#" title="Edit"  ><i class="fa fa-edit fa-fw" ></i></a>
+                        {% if instance.member != request.user %}
+                            <a class="remove txt-danger"  member-id="{{ instance.id }}" href="#" title="Remove"><i class="fa fa-times fa-fw"></i></a>
+                        {% endif %}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+        </div>
+
+        <!--
+            Tablet/Desktop View
+        -->
+        <table id="sortable" class="table table-condensed hidden-xs">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>{% trans "Avatar" %}</th>
+                    <th>{% trans "Info" %}</th>
+                    <th>{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for instance in organization.organization_staff_members.all %}
+                <tr>
+                    <td>
+                        <i class="fa fa-bars fa-fw drag" member-id="{{ instance.id }}"></i>
+                    </td>
+
+                    <td>
+                    {% with instance.member.profile as profile %}
+                        <a href="{% url 'profile-view' instance.member.id %}">
+                        {% if profile.avatar %}
+                            {% generateimage "common:thumbnail" source=profile.avatar -- alt=profile.auth_name %}
+                        {% else %}
+                            <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="100" width="100" alt="" />
+                        {% endif %}
+                        </a>
+                    {% endwith %}
+                    </td>
+
+                    <td>
+                        <h4>
+                            <a href="{% url 'profile-view' instance.member.id %}">{{ instance.member.get_full_name }}</a>
+                        </h4>
+                        <strong id="position">{{ instance.position|default:"N/A" }}</strong>
+                        <blockquote>
+                            <p id="bio">{{ instance.bio|default:"N/A" }}</p>
+                        </blockquote>
+                    </td>
+
+                    <td>
+                        <a class="edit   txt-warning" member-id="{{ instance.id }}" href="#" title="Edit"  ><i class="fa fa-edit fa-fw" ></i></a>
+                    {% if instance.member != request.user %}
+                        <a class="remove txt-danger"  member-id="{{ instance.id }}" href="#" title="Remove"><i class="fa fa-times fa-fw"></i></a>
+                    {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>
+            <span class="label label-info">{% trans "This Organization has no Staff Members at the moment." %}</span>
+        </p>
+    {% endif %}
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Edit Organization Staff Member                                    ***/
+    /*************************************************************************/
+    $(".edit").click(function () {
+        // --------------------------------------------------------------------
+        // --- `element` is global Variable, don't redefine it with `var`.
+        element = $(this);
+
+        var member_id = $(this).attr("member-id");
+
+        $("#organization-staff-member-edit-modal-form").find("input[name='organization_id']").val({{ organization.id }});
+        $("#organization-staff-member-edit-modal-form").find("input[name='member_id']").val(member_id);
+        $("#organization-staff-member-edit-modal-form").find("input[name='position']").val($(element).parent().parent().find("#position").text());
+        $("#organization-staff-member-edit-modal-form").find("textarea[name='bio']").val($(element).parent().parent().find("#bio").text());
+        $("#organizationStaffMemberEditPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Remove Organization Staff Member                                  ***/
+    /*************************************************************************/
+    $(".remove").click(function () {
+        // --------------------------------------------------------------------
+        // --- `element` is global Variable, don't redefine it with `var`.
+        element = $(this);
+
+        var member_id = $(this).attr("member-id");
+
+        $("#organization-staff-member-remove-modal-form").find("input[name='organization_id']").val({{ organization.id }});
+        $("#organization-staff-member-remove-modal-form").find("input[name='member_id']").val(member_id);
+        $("#organizationStaffMemberRemovePopupModal").modal("show");
+    })
+
+    $(document).ready(function() {
+        /*********************************************************************/
+        /*** Sortable Staff Member's List                                  ***/
+        /*********************************************************************/
+        $("#sortable").sortable({
+            handle:         $(this).find("tbody .drag"),
+            items:          "tbody tr",
+            axis:           "y",
+            scroll:         true,
+            cursor:         "ns-resize",
+            containment:    $(this).find("tbody"),
+            update: function(event, ui) {
+                console.log("INSIDE: `update`");
+
+                var order = [];
+
+                $("#sortable i.drag").each(function(index) {
+                    console.log(">>> INDEX ", index);
+
+                    order.push({
+                        "member_id":    $(this).attr("member-id"),
+                        "order":        index,
+                    })
+                });
+
+                console.log(">>> ORDER >>> ", order);
+
+                $.post("{% url 'api-organization-staff-member-order' organization.id %}", {
+                    "staff_member_order":       JSON.stringify(order),
+                }).done(function (data) {
+                    console.log("Success");
+                    console.log("Data :", data);
+
+                    new Noty({
+                        type:   "info",
+                        text:   data.message
+                    }).show();
+                }).fail(function (data) {
+                    console.log("Fail");
+                    console.log("Data :", data);
+
+                    try {
+                        new Noty({
+                            type:   "error",
+                            text:   data.responseJSON.message
+                        }).show();
+                    } catch (err) {
+                        new Noty({
+                            type:   "error",
+                            text:   "Failed to change the Order."
+                        }).show();
+                    };
+                });
+            }
+        })
+    })
+</script>

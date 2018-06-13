@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% load seo %}
+{% load i18n %}
+
+{% block title %}{% trans "Challenge" %} "{{ challenge.name }}" - {{ block.super }}{% endblock %}
+
+{% block extra_meta %}
+    {% get_metadata %}
+
+    <link rel="image_src" href="{{ challenge.avatar.url }}" />
+    <meta name="description" content="{{ challenge.description|striptags|truncatechars:300 }}" />
+{% endblock %}
+
+{% block extra_style %}
+{% endblock %}
+
+{% block extra_script %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'challenge-list' %}">{% trans "Challenges" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'challenge-details' challenge.slug %}">{% trans "Details" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if is_admin and not challenge.is_draft %}
+    <div class="nav-sub-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                    <a class="btn" href="{% url 'challenge-details' challenge.slug %}">
+                        <i class="fa fa-fw fa-info-circle"></i>
+                        <span class="hidden-xs">{% trans "Information" %}</span>
+                    </a>
+                </div>
+
+                <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                    <a class="btn" href="{% url 'challenge-confirm' challenge.slug %}">
+                        <i class="fa fa-fw fa-user-plus"></i>
+                        <span id="waiting-for-confirmation-count" class="badge" style="background-color:#f0ad4e;">{{ challenge.challenge_participations.waiting_for_confirmation.count }}</span>&nbsp;
+                        <span class="hidden-xs">{% trans "To confirm" %}</span>
+                    </a>
+                </div>
+
+                <div class="col-xs-8 col-sm-8 col-md-8 sub-btn">
+                    <a class="btn" href="{% url 'challenge-acknowledge' challenge.slug %}">
+                        <i class="fa fa-fw fa-thumbs-up"></i>
+                        <span id="waiting-for-acknowledgment-count" class="badge" style="background-color:#5bc0de;">{{ challenge.challenge_participations.waiting_for_acknowledgement.count }}</span>&nbsp;
+                        <span class="hidden-xs">{% trans "To acknowledge" %}</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_content %}
+{% endblock %}

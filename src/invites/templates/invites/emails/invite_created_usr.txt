@@ -1,0 +1,17 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user }}!
+
+Member {{ member }} has invited you to {{ subject }} "{{ name }}" with the following:
+
+{{ text }}
+
+Please, don't forget to accept, or reject Invitation.
+
+Link to the Member's Profile Page: {{ profile }}
+
+Link to the {{ subject }} Details Page: {{ url }}
+
+Thank you, SaneSide Team.

@@ -1,0 +1,540 @@
+<!--
+TAB
+Organization Details - Info
+-->
+
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+{% load twitter_tag %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-16 col-md-18">
+        <div class="thumbnail">
+        {% if organization.avatar %}
+            {% generateimage "common:giant_fill_wide" source=organization.avatar -- alt=organization.name %}
+        {% endif %}
+        </div>
+
+        <div class="org-info-section">
+            <div class="organization-name">
+                <h4 class="hidden-sm hidden-md hidden-lg">{{ organization.name }}</h4>
+                <h2 class="hidden-xs">{{ organization.name }}</h2>
+            </div>
+
+            <div class="hidden-sm hidden-md hidden-lg">
+                {% include "organizations/fragments/organization-media-status-breakdown.html" %}
+            </div>
+
+            <div class="organization-description">
+                <blockquote>
+                    <p>{{ organization.description|escape|linebreaks }}</p>
+                </blockquote>
+            </div>
+        </div>
+
+        <div class="org-info-section">
+            <div class="organization-details">
+                <p>
+                    <i class="fa fa-map-marker fa-fw"></i>
+                {% if organization.addressless %}
+                    <span class="label label-warning">{% trans "Location is not provided" %}</span>
+                {% else %}
+                    {{ organization.address.full_address|default:"N/A" }}
+                    <a data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#organizationViewOnMapPopupModal" tabindex="-1">&nbsp;({% trans "View on Map" %})</a>
+                {% endif %}
+                </p>
+            {% if organization.address.notes %}
+                <blockquote>
+                    <p>{{ organization.address.notes }}</p>
+                </blockquote>
+            {% endif %}
+
+                <p>
+                    <i class="fa fa-phone fa-fw"></i>{{ organization.phone_number.phone_number|default:"N/A" }}{% if organization.phone_number.phone_number_ext %} ({% trans "ext." %} {{ organization.phone_number.phone_number_ext }}){% endif %}
+                    <span class="vert-delimiter">|</span>
+                    <i class="fa fa-mobile-phone fa-fw"></i>{{ organization.phone_number.mobile_phone_number|default:"N/A" }}{% if organization.phone_number.mobile_phone_number_ext %} ({% trans "ext." %} {{ organization.phone_number.mobile_phone_number_ext }}){% endif %}
+                </p>
+                <p>
+                    <i class="fa fa-envelope-o fa-fw"></i>{% if organization.email %}<a href="mailto:{{ organization.email }}">{{ organization.email }}</a>{% endif %}
+                    <span class="vert-delimiter">|</span>
+                    <i class="fa fa-link fa-fw"></i>{% if organization.website %}<a href="{{ organization.website }}">{% trans "Website" %}</a>{% endif %}
+                    <span class="vert-delimiter">|</span>
+                    <i class="fa fa-film fa-fw"></i>{% if organization.video %}<a href="{{ organization.video }}">{% trans "Video" %}</a>{% endif %}
+                </p>
+            </div>
+
+            <hr>
+
+            <div class="organization-tags">
+            {% if organization.tags.all and organization.hashtag %}
+                <p>
+                    <i class="fa fa-tags fa-fw"></i>
+                {% for tag in organization.tags.all %}
+                    <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+
+                    <span class="vert-delimiter">|</span>
+
+                    <i class="fa fa-hashtag fa-fw"></i>{{ organization.hashtag }}
+                </p>
+            {% elif organization.tags.all %}
+                <p>
+                    <i class="fa fa-tags fa-fw"></i>
+                {% for tag in organization.tags.all %}
+                    <a href="?tag={{ tag.id }}">{{ tag.name }}</a>
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+                </p>
+            {% elif organization.hashtag %}
+                <p>
+                    <i class="fa fa-hashtag fa-fw"></i>{{ organization.hashtag }}
+                </p>
+            {% endif %}
+            </div>
+
+            <div class="organization-hours">
+                <p>
+                    <i class="fa fa-clock-o fa-fw"></i> <span class="badge" style="background-color:#5cb85c;">{{ organization.get_hours_received|default:"0" }}</span> {% trans "Hours received" %}
+                </p>
+            </div>
+        </div>
+
+        <div class="instance-attachments">
+            <h4>{% trans "Attachments" %}
+                <a data-toggle="collapse" href="#collapse-attachments"  aria-expanded="false" aria-controls="collapse-attachments"><i class="toggle-icon fa fa-fw fa-chevron-down"></i></a>
+            {% if organization.author == request.user %}
+                <a class="add-attachment btn btn-rounded pull-right" href="{% url 'organization-edit' organization.slug %}#organization-attachments"><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+            {% endif %}
+            </h4>
+
+            <div id="collapse-attachments" class="collapse">
+                <div class="row">
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                        <div class="gallery">
+                        {% for img in organization.get_image_list.all %}
+                            <div class="gallery-container">
+                                <a class="gallery-photos" href="{{ MEDIA_URL }}{{ img.image }}" title="">{% generateimage "common:thumbnail" source=img.image -- alt=img.name %}</a>
+                            </div>
+                        {% empty %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-24 col-sm-8 col-md-8">
+                        <div class="gallery">
+                        {% for doc in organization.get_document_list.all %}
+                            <div class="documents-container">
+                                <a href="{{ MEDIA_URL }}{{ doc.document }}" target="_blank"><i class="fa fa-file-o fa-fw"></i> {{ doc.name }}</a>
+                                {% if not forloop.last %}<br />{% endif %}
+                            </div>
+                        {% empty %}
+                        {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-8 col-md-8">
+                        <div class="gallery">
+                        {% for url in organization.get_url_list.all %}
+                            <div class="links-container">
+                                <a href="{{ url.url }}" target="_blank"><i class="fa fa-link fa-fw"></i> {% if url.title %}{{ url.title }}{% else %}{{ url.url }}{% endif %}</a>
+                                {% if not forloop.last %}<br />{% endif %}
+                            </div>
+                        {% empty %}
+                        {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-24 col-sm-8 col-md-8">
+                        <div class="gallery">
+                        {% for video_url in organization.get_video_url_list.all %}
+                            <div class="video-links-container">
+                                <a href="{{ video_url.url }}"><i class="fa fa-file-video-o fa-fw"></i> {{ video_url.url }}</a>
+                                {% if not forloop.last %}<br />{% endif %}
+                            </div>
+                        {% empty %}
+                        {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="instance-comments">
+            <h4>{% trans "Comments" %} ({{ organization.get_comment_list.count }})
+                <a data-toggle="collapse" href="#collapse-comments"  aria-expanded="false" aria-controls="collapse-comments"><i class="toggle-icon fa fa-fw fa-chevron-down"></i></a>
+            {% if request.user.is_authenticated %}
+                <a class="add-comment btn btn-rounded pull-right" href="#"><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+            {% endif %}
+            </h4>
+
+            <div id="collapse-comments" class="collapse">
+            {% for comment in organization.get_comment_list %}
+                {% include "common/fragments/comment-hor.html" with comment=comment is_admin=is_admin %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+        <div class="hidden-xs">
+            {% include "organizations/fragments/organization-media-status-breakdown.html" %}
+        </div>
+
+        <!-- Link to the Page -->
+        <h4>{% trans "Link to this Page" %}</h4>
+
+        <input class="link-to-page" type="text" readonly="readonly" onclick="$(this).select();" value="{{ request.build_absolute_uri }}" />
+
+        <!-- Social Links -->
+    {% if social_links %}
+        <h4>{% trans "Social Links" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="social-buttons">
+                {% for social_link in social_links %}
+                    <button onclick="javascript:document.location.href='{{ social_link.url }}';" class="{{ social_link.stat_social_app_button }}">
+                        <i class="{{ social_link.stat_social_app_icon }}"></i>
+                    </button>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- Share Links -->
+        <h4>{% trans "Share" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="social-buttons">
+                    <button class="btn btn-facebook" onclick="javascript:share_on_fb();"><i class="fa fa-facebook fa-fw"></i></button>
+                    <button class="btn btn-twitter" onclick="javascript:share_on_tw();"><i class="fa fa-twitter fa-fw"></i></button>
+                    <button class="btn btn-linkedin" onclick="javascript:share_on_li();"><i class="fa fa-linkedin fa-fw"></i></button>
+                    <button class="btn btn-google-plus" onclick="javascript:share_on_gp();"><i class="fa fa-google-plus fa-fw"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Twitter Feed -->
+    {% if twitter_acc %}
+        <h4>{% trans "Twitter Feed" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                {% get_tweets for twitter_acc as tweets exclude "replies, retweets" limit 10 %}
+                {# get_tweets for twitter_acc as tweets limit 10 #}
+
+                <div class="twitter-feed">
+                    <ul class="bxslider">
+                    {% for tweet in tweets  %}
+                        <li>
+                            <div class="twitt {% if forloop.first %}active {% endif %}item">
+                                <p class="user-name"><i class="fa fa-twitter"></i> {{ tweet.user.name }}</p>
+                                <p class="content">{{ tweet.html|safe }}</p>
+                                <p class="posted-at">{{ tweet.datetime|date:"D d M Y" }}</p>
+                            </div>
+                            <div class="divider"></div>
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- Contact Person -->
+        <h4>{% trans "Contact Person" %}</h4>
+    {% if request.user.is_authenticated %}
+        <div class="panel panel-info">
+            <div class="panel-body">
+            {% include "accounts/fragments/contact-person-side.html" with instance=organization %}
+            </div>
+        </div>
+    {% else %}
+        <div class="panel panel-danger">
+            <div class="panel-body">
+                <p class="note">
+                    <span class="label label-warning">{% trans "Information hidden" %}</span><br/>
+                    {% trans "Log in to see the Phone # and Email Address of the Contact Person." %}
+                </p>
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- Subscribers -->
+    {% if organization.subscribers.all %}
+        <h4>{% trans "Subscribers" %}</h4>
+
+        <div class="panel panel-success">
+            <div class="panel-body">
+            {% for subscriber in organization.subscribers.all %}
+                <a class="" href="{% url 'profile-view' user_id=subscriber.id %}">
+                {% if subscriber.profile.avatar %}
+                    {% generateimage "header:thumbnail" source=subscriber.profile.avatar -- alt=subscriber.profile.auth_name %}
+                {% else %}
+                    <img src="{{ STATIC_URL }}img/no-avatar-{{ subscriber.profile.stat_gender_name|default:'male' }}.png" height="30" width="30" alt="" />
+                {% endif %}
+                </a>
+            {% empty %}
+            {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+        <!-- Widgets -->
+    {% if organization in request.user.profile.staff_member_organizations.all %}
+        <h4>{% trans "Widgets" %}</h4>
+
+        <div class="organization-widget">
+            <p>{% trans "Copy and paste this Block of Code to your Website to show a List of all upcoming Challenges of your Organization." %}</p>
+            <pre class="prettyprint">&lt;iframe src="http://{{ request.get_host }}{% url 'organization-iframe-upcoming' organization.id %}" name="iframe" width="400" height="200" align="right" scrolling="auto"&gt;&lt;p&gt;Widget not supported in your browser&lt;/p&gt;&lt;iframe&gt;</pre>
+        </div>
+
+        <div class="organization-widget">
+            <p>{% trans "Copy and paste this Block of Code to your Website to show a List of all past Challenges of your Organization and their Participants." %}</p>
+            <pre class="prettyprint">&lt;iframe src="http://{{ request.get_host }}{% url 'organization-iframe-complete' organization.id %}" name="iframe" width="400" height="200" align="right" scrolling="auto"&gt;&lt;p&gt;"Widget not supported in your browser&lt;/p&gt;&lt;/iframe&gt;</pre>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+{% if organization.get_rating_avg > 0 %}
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        {% include "common/fragments/rating-card-hor.html" with instance=organization %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Scripts -->
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Subscribe                                                         ***/
+    /*************************************************************************/
+    $(".subscribe").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var organization_id = "{{ organization.id }}";
+
+        $.post("{% url 'api-organization-subscribe' 0 %}".replace("0", organization_id), {
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $(element).hide("slow");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to subscribe to the Organization."
+                }).show();
+            };
+        });
+
+        return true;
+    });
+
+    /*************************************************************************/
+    /*** Add Comment                                                       ***/
+    /*************************************************************************/
+    $(".add-comment").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var organization_id = "{{ organization.id }}";
+
+        $("#comment-add-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#commentAddPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Delete Comment                                                    ***/
+    /*************************************************************************/
+    $(".delete-comment").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var comment_id = $(this).attr("comment");
+
+        $.ajax({
+            url:    "{% url 'api-comment-details' 0 %}".replace("0", comment_id),
+            type:   "DELETE"
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $(element).parent().parent().hide("slow");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to delete the Comment."
+                }).show();
+            };
+        });
+
+        return true;
+    })
+
+    /*************************************************************************/
+    /*** Add Complaint                                                     ***/
+    /*************************************************************************/
+    $(".add-complaint").click(function (event) {
+        element = $(this);
+
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var organization_id = "{{ organization.id }}";
+
+        $("#complaint-add-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#complaintAddPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Share on ...                                                      ***/
+    /*************************************************************************/
+    var height = 300;
+    var width = 500;
+    var centeredY = (screen.height - height)/2;
+    var centeredX = (screen.width - width)/2;
+
+    function share_on_fb() {
+        window.open("http://www.facebook.com/sharer/sharer.php?s=100&p[url]=" + document.location.href + "&p[images][0]=&p[title]=&p[summary]=", "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+    function share_on_tw() {
+        window.open("http://twitter.com/home?status=" + "{{ organization.name }}".substr(0,100) + " " + document.location.href, "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+    function share_on_li() {
+        window.open("http://www.linkedin.com/shareArticle?mini=true&url=" + document.location.href + "&title=" + "{{ organization.name }}" + "&summary=&source=", "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+    function share_on_gp() {
+        window.open("https://plus.google.com/share?url=" + document.location.href, "_blank", "height=" + height + ", width=" + width + ", left=" + centeredX + ", top=" + centeredY).focus();
+    }
+</script>
+
+<!-- Pop-up Overlays -->
+
+{% if is_newly_created %}
+<div id="share-organization-popup-overlay" class="well" style="display:none;">
+    <div class="popup-overlay-heading">
+        <h4>{% trans "Share the Organization on social App" %}</h4>
+    </div>
+
+    <div class="popup-overlay-info">
+        <div class="alert alert-success">
+        {% blocktrans %}
+            You are just one Click away from sharing<br/>
+            your Organization with all Friends.
+        {% endblocktrans %}
+        </div>
+    </div>
+
+    <div class="social-buttons hidden-xs" align="center">
+        <button class="btn btn-facebook" onclick="javascript:share_on_fb();"><i class="fa fa-facebook fa-fw fa-3x"></i></button>
+        <button class="btn btn-twitter" onclick="javascript:share_on_tw();"><i class="fa fa-twitter fa-fw fa-3x"></i></button>
+        <button class="btn btn-linkedin" onclick="javascript:share_on_li();"><i class="fa fa-linkedin fa-fw fa-3x"></i></button>
+        <button class="btn btn-google-plus" onclick="javascript:share_on_gp();"><i class="fa fa-google-plus fa-fw fa-3x"></i></button>
+    </div>
+
+    <div class="social-buttons hidden-sm hidden-md hidden-lg" align="center">
+        <button class="btn btn-facebook" onclick="javascript:share_on_fb();"><i class="fa fa-facebook fa-fw fa-2x"></i></button>
+        <button class="btn btn-twitter" onclick="javascript:share_on_tw();"><i class="fa fa-twitter fa-fw fa-2x"></i></button>
+        <button class="btn btn-linkedin" onclick="javascript:share_on_li();"><i class="fa fa-linkedin fa-fw fa-2x"></i></button>
+        <button class="btn btn-google-plus" onclick="javascript:share_on_gp();"><i class="fa fa-google-plus fa-fw fa-2x"></i></button>
+    </div>
+
+    <div class="popup-overlay-info">
+        <div class="alert alert-info">
+        {% blocktrans %}
+            You can also do it later from the<br/>
+            Organization Details Page.
+        {% endblocktrans %}
+        </div>
+    </div>
+
+    <!-- Add an optional button to close the popup -->
+    <div class="popup-overlay-footer">
+        <button class="btn btn-default share-organization-popup-overlay_close">{% trans "Close" %}</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** jQuery pop-up Overlay                                         ***/
+        /*********************************************************************/
+        var options = {
+            type:                       "overlay",      //      "tooltip"
+            autoopen:                   true,           // def. false
+            scrolllock:                 true,           // def. false
+            background:                 true,
+            backgroundactive:           false,
+            color:                      "#000",
+            opacity:                    0.5,
+            horizontal:                 "center",
+            vertical:                   "center",
+            offsettop:                  0,
+            offsetleft:                 0,
+            escape:                     true,
+            blur:                       true,
+            setzindex:                  true,
+            autozindex:                 false,
+            keepfocus:                  true,
+            focusdelay:                 50,
+            outline:                    false,
+            detach:                     false,
+            //openelement:                ".{popup_id}_open",
+            //closeelement:               ".{popup_id}_close",
+            transition:                 "all 0.3s"
+        };
+
+        $("#share-organization-popup-overlay").popup(options);
+    });
+</script>
+{% endif %}

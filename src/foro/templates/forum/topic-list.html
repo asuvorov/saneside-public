@@ -1,0 +1,112 @@
+{% extends "base-forum.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Forum" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'forum-list' %}">{% trans "Forums" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'topic-list' forum.id %}">{% trans "Topics" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="topic-list">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="controllers">
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-rounded pull-right" href="{% url 'topic-create' forum.id %}"><i class="fa fa-plus fa-fw"></i> {% trans "Topic" %}</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="alert alert-info">
+                    <span class="desc">{{ forum.description }}</span>
+                </div>
+
+                <div class="forum-topic-thumb">
+                    <table class="table table-striped table-topic">
+                        <tr>
+                            <th>{% trans "Topics" %}</th>
+                            <th>
+                                <span class="desc">{% trans "Description" %}</span>
+                            </th>
+                            <th class="cell-stat text-center hidden-xs hidden-sm">{% trans "Posts" %}</th>
+                            <th class="hidden-xs hidden-sm">{% trans "Last Post" %}</th>
+                        {% if request.user.is_authenticated and request.user.is_staff %}
+                            <th>{% trans "Actions" %}</th>
+                        {% endif %}
+                        </tr>
+                    {% for topic in topics %}
+                        <tr>
+                            <td>
+                                <strong>
+                                    <a href="{% url 'topic-post-list' forum.id topic.id %}">{{ topic.title }}</a>
+                                </strong>
+                            </td>
+                            <td>{{ topic.description|striptags|truncatechars:300|default:"N/A" }}</td>
+                            <td class="text-center hidden-xs hidden-sm">{{ topic.num_posts }}</td>
+                            <td class="hidden-xs hidden-sm">
+                            {% if topic.last_post %}
+                                {% with last_post=topic.last_post %}
+                                    <strong>{{ last_post.title|truncatechars:16 }}</strong><br/>
+                                    by <a href="{% url 'profile-view' last_post.author_id %}">{{ last_post.author }}</a><br/>
+                                    {{ last_post.created|timesince }} {% trans "ago" %}
+                                {% endwith %}
+                            {% endif %}
+                            </td>
+                        {% if request.user.is_authenticated and request.user.is_staff %}
+                            <td>
+                                <a class="txt-warning" href="{% url 'topic-edit' forum.id topic.id %}"><i class="fa fa-edit fa-fw"></i></a>
+                                <a class="txt-danger remove" topic="{{ topic.id }}" href="#" title="Remove"><i class="fa fa-times fa-fw"></i></a>
+                            </td>
+                        {% endif %}
+                        </tr>
+                    {% empty %}
+                        <p>
+                            <span class="label label-info">{% trans "There are no Topics at the moment" %}</span>
+                        </p>
+                    {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+{% include "forum/modals/foro-topic-remove-modal.html" %}
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var topic_id;
+    var element;
+
+    /*************************************************************************/
+    /*** Remove Topic                                                      ***/
+    /*************************************************************************/
+    $(".remove").click(function () {
+        var element = $(this);
+
+        var topic_id = $(this).attr("topic");
+
+        $("#foro-topic-remove-modal-form").find("input[name='topic_id']").val(topic_id);
+        $("#foroTopicRemovePopupModal").modal("show");
+    })
+</script>
+{% endblock %}

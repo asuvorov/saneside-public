@@ -1,0 +1,97 @@
+[
+    {
+        "model":    "organizations.organization",
+        "pk":       32,
+        "fields": {
+            "author":               2,
+            "avatar":               "images/organizations/avatars/13_Gy9zLl8.jpg",
+            "name":                 "Public Organization #2",
+            "description":          "Public Organization #2",
+            "slug":                 "public-organization-2",
+
+            "tags":                 [30, 32],
+            "hashtag":              "organization",
+
+            "address":              32,
+            "phone_number":         32,
+            "website":              null,
+            "video":                null,
+            "email":                null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "is_newly_created":     true,
+            "is_hidden":            false,
+            "is_deleted":           false,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "organizations.organization",
+        "pk":       34,
+        "fields": {
+            "author":               4,
+            "avatar":               "images/organizations/avatars/13_Gy9zLl8.jpg",
+            "name":                 "Public Organization #4",
+            "description":          "Public Organization #4",
+            "slug":                 "public-organization-4",
+
+            "tags":                 [30, 34],
+            "hashtag":              "organization",
+
+            "address":              34,
+            "phone_number":         34,
+            "website":              null,
+            "video":                null,
+            "email":                null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "is_newly_created":     true,
+            "is_hidden":            false,
+            "is_deleted":           false,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+
+    {
+        "model":    "organizations.organizationstaff",
+        "pk":       32,
+        "fields": {
+            "author":               2,
+            "organization":         32,
+            "member":               2,
+
+            "position":             "",
+            "bio":                  "",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "organizations.organizationstaff",
+        "pk":       34,
+        "fields": {
+            "author":               4,
+            "organization":         34,
+            "member":               4,
+
+            "position":             "",
+            "bio":                  "",
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

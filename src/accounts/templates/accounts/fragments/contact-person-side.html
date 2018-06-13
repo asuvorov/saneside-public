@@ -1,0 +1,60 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<instance>
+{% endcomment %}
+
+<div class="contact-person">
+{% if not instance.is_alt_person %}
+    <div align="center">
+        <a href="{% url 'profile-view' instance.author_id %}">
+        {% if instance.author.profile.avatar %}
+            {% generateimage "common:thumbnail" source=instance.author.profile.avatar -- alt=instance.author.profile.auth_name %}
+        {% else %}
+            <img src="{{ STATIC_URL }}img/no-avatar-{{ instance.author.profile.stat_gender_name|default:'male' }}.png" height="100" width="100" alt="Contact Person - SaneSide Platform." />
+        {% endif %}
+
+            <h5>
+                {{ instance.author.get_full_name }}
+
+            {% if instance.author.profile.get_rating_avg > 0 %}
+                <div class="" style="color:orange;">
+                    <input id="id_profile_rating" name="profile_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ instance.author.profile.get_rating_avg }}" />
+                </div>
+            {% endif %}
+            </h5>
+        </a>
+    </div>
+
+    <div>
+        <a href="mailto:{{ instance.author.email}}">{{ instance.author.email }}</a><br/>
+        {% if instance.author.profile.phone_number.phone_number or instance.author.profile.phone_number.mobile_phone_number %}
+            {% if instance.author.profile.phone_number.phone_number %}
+                <i class="fa fa-phone fa-fw"></i>
+                {{ instance.author.profile.phone_number.phone_number }}
+                {% if instance.author.profile.phone_number.phone_number_ext %} ({% trans "ext." %} {{ instance.author.profile.phone_number.phone_number_ext }}){% endif %}
+                <br/>
+            {% endif %}
+
+            {% if instance.author.profile.phone_number.mobile_phone_number %}
+                <i class="fa fa-mobile-phone fa-fw"></i>
+                {{ instance.author.profile.phone_number.mobile_phone_number }}
+                {% if instance.author.profile.phone_number.mobile_phone_number_ext %} ({% trans "ext." %} {{ instance.author.profile.phone_number.mobile_phone_number_ext }}){% endif %}
+                <br/>
+            {% endif %}
+        {% endif %}
+    </div>
+{% else %}
+    <div>
+        <strong>{{ instance.alt_person_fullname }}</strong><br/>
+        <a href="mailto:{{ instance.alt_person_email }}">{{ instance.alt_person_email }}</a><br/>
+    {% if instance.alt_person_phone %}
+        <i class="fa fa-phone fa-fw"></i>
+        {{ instance.alt_person_phone }}
+        <br/>
+    {% endif %}
+    </div>
+{% endif %}
+</div>

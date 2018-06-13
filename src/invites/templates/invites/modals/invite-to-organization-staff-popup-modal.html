@@ -1,0 +1,79 @@
+{% load i18n %}
+
+<div class="modal fade" id="inviteToOrganizationStaffPopupModal" tabindex="-1" role="dialog" aria-labelledby="inviteToOrganizationStaffPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="inviteToOrganizationStaffPopupModalLabel">{% trans "Invite to Organization Staff" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="invite-to-organization-staff-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <input type="hidden" name="organization_id" value="">
+                    <input type="hidden" name="invitee_id" value="">
+
+                    <div class="form-group">
+                        <label for="id_invitation_text">{% trans "Please, enter a Reason" %}</label>
+                        <textarea id="id_invitation_text" class="form-control" name="invitation_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="invite_to_organization_staff();">{% trans "Invite" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Invite to Organization Staff                                      ***/
+    /*************************************************************************/
+    function invite_to_organization_staff() {
+        var organization_id = $("#invite-to-organization-staff-modal-form").find("input[name='organization_id']").val();
+        var invitee_id = $("#invite-to-organization-staff-modal-form").find("input[name='invitee_id']").val();
+        var invitation_text = $("#invite-to-organization-staff-modal-form").find("textarea[name='invitation_text']").val();
+
+        $.post("{% url 'api-invite' %}", {
+            "invitee_id":           invitee_id,
+            "organization_id":      organization_id,
+            "invitation_text":      invitation_text,
+            "csrfmiddlewaretoken":  $("#invite-to-organization-staff-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#inviteToOrganizationStaffPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            $("input#invite-staff-members-list").val("");
+
+        }).fail(function (data) {
+            console.log("Fail");
+            console.log("Data :", data);
+
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to send the Invitation."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Log in" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'login' %}">{% trans "Sign in" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="account-signin">
+        <div class="row">
+            <div class="col-xs-24 col-xs-offset-0 col-sm-24 col-sm-offset-0 col-md-18 col-md-offset-3">
+                <div class="row">
+                    <div class="col-xs-24 col-sm-24 col-md-24 social-buttons" align="center">
+                        <button class="btn btn-facebook" onclick="javascript:document.location.href='{% url 'social:begin' backend='facebook' %}';"><i class="fa fa-facebook fa-fw fa-2x"></i></button>
+                        {#<button class="btn btn-twitter" onclick="javascript:document.location.href='{% url 'social:begin' backend='twitter' %}';"><i class="fa fa-twitter fa-fw fa-2x"></i></button>#}
+                        <button class="btn btn-linkedin" onclick="javascript:document.location.href='{% url 'social:begin' backend='linkedin' %}';"><i class="fa fa-linkedin fa-fw fa-2x"></i></button>
+                        <button class="btn btn-google-plus" onclick="javascript:document.location.href='{% url 'social:begin' backend='google-oauth2' %}';"><i class="fa fa-google-plus fa-fw fa-2x"></i></button>
+                    </div>
+                </div>
+
+                <div class="delimiter"></div>
+
+                <div class="row">
+                    <div class="col-xs-24 col-xs-offset-0 col-sm-16 col-sm-offset-4 col-md-16 col-md-offset-4">
+                        <form id="signin-form" class="form-horizontal" action="" method="POST">
+                            {% csrf_token %}
+
+                            <div class="form-group {% if form.username.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    <label class="control-label">{{ form.username.label }}{% if form.username.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                    {{ form.username }}
+                                    <div class="input-group-addon"><i class="fa fa-at fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.username.errors %}{% for error in form.username.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    <label class="control-label">{{ form.password.label }}{% if form.password.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                    {{ form.password }}
+                                    <div class="input-group-addon"><i class="fa fa-lock fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.password.errors %}{% for error in form.password.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                        {% if form.non_field_errors %}
+                            <div class="form-group has-error">
+                            {% for error in form.non_field_errors %}
+                                <span class="help-block">{{ error }}</span>
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+
+                            <div class="checkbox checkbox-primary">
+                                {{ form.remember_me }}
+                                {{ form.remember_me.label_tag }}
+                            </div>
+
+                            <input name="submit" type="submit" value="Log in now">
+                            <input type="hidden" name="next" id="next_page" value="{{ next }}" />
+                        </form>
+                    </div>
+                </div>
+
+                <div class="delimiter"></div>
+
+                <div class="row">
+                    <div class="col-xs-24 col-xs-offset-0 col-sm-16 col-sm-offset-4 col-md-16 col-md-offset-4" align="right">
+                    {% blocktrans %}
+                        <p>Forgot <a class="" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#forgotPasswordPopupModal" tabindex="-1">Username / Password</a>?</p>
+                    {% endblocktrans %}
+                        <p>{% trans "Don't have an Account?" %} <a href="{% url 'signup' %}">{% trans "Sign-up now" %}</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    });
+</script>
+{% endblock %}

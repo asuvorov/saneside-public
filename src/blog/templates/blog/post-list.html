@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+{% load taggit_templatetags2_tags %}
+
+{% block title %}{% trans "Our Blog" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'post-list' %}">{% trans "Blog" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="post-list">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <div class="controllers">
+                {% if request.user.is_staff %}
+                    <a class="btn btn-rounded pull-right" href="{% url 'post-create' %}"><i class="fa fa-plus fa-fw"></i> {% trans "Post" %}</a>
+                {% endif %}
+                </div>
+
+                {% for post in posts %}
+                    {% include "blog/fragments/post-thumbnail-hor.html" with post=post %}
+                {% empty %}
+                {% endfor %}
+
+                <div id="page-selection"></div>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+                <div id="pst-tag-cloud">
+                    <h4>{% trans "Tag Cloud" %}</h4>
+                    {% get_taglist as taglist for "blog.post" %}
+                    {% get_tagcloud as tagcloud for "blog.post" %}
+
+                    <div class="tag-cloud">
+                    {% for tag in tagcloud %}
+                        <a href="?tag={{ tag.id }}">
+                            <font size="{{ tag.weight|floatformat:0 }}">
+                                {{ tag.name }} ({{ tag.num_times }})
+                            </font>
+                        </a>
+                    {% endfor %}
+                    </div>
+                </div>
+
+                <div id="pst-calendar">
+                    <h4>{% trans "Archive" %}</h4>
+
+                    <span class="calendar"><div id="calendar"></div></span>
+                </div>
+
+            {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+                <div id="sponsored-links">
+                    <h4>{% trans "Sponsored Links" %}</h4>
+
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Blog Post List -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9496875666537518"
+                         data-ad-slot="7028811585"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Zabuto Calendar                                                   ***/
+    /*************************************************************************/
+    var now = new Date();
+    var year = now.getFullYear();
+    var month = now.getMonth() + 1;
+    var settings = {
+        language:       false,
+        year:           year,
+        month:          month,
+        show_previous:  true,
+        show_next:      true,
+        cell_border:    false,
+        today:          true,
+        show_days:      true,
+        weekstartson:   1,
+        nav_icon: {
+            prev: "<i class=\"fa fa-chevron-circle-left\"></i>",
+            next: "<i class=\"fa fa-chevron-circle-right\"></i>"
+        },
+        data:           false,
+        ajax: {
+            url:        "{% url 'api-blog-archive' %}",
+            modal:      false
+        },
+        legend: false,
+        action: function () {
+            return myDateFunction(this.id, false);
+        },
+        action_nav: function () {
+            return myNavFunction(this.id);
+        },
+    };
+
+    function myDateFunction (id, fromModal) {
+        console.log(">>> WE ARE HERE <<<");
+
+        $("#date-popover").hide();
+
+        if (fromModal) {
+            $("#" + id + "_modal").modal("hide");
+        }
+
+        var date = $("#" + id).data("date");
+        var hasEvent = $("#" + id).data("hasEvent");
+
+        if (hasEvent && !fromModal) {
+            return false;
+        }
+
+        $("#date-popover-content").html("You clicked on date " + date);
+        $("#date-popover").show();
+
+        return true;
+    }
+
+    function myNavFunction (id) {
+        $("#date-popover").hide();
+
+        var nav = $("#" + id).data("navigation");
+        var to  = $("#" + id).data("to");
+
+        console.log("nav " + nav + " to: " + to.month + "/" + to.year);
+    }
+
+    $(document).ready(function () {
+        $("#calendar").zabuto_calendar(settings);
+    });
+</script>
+{% endblock %}

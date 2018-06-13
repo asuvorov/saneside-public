@@ -1,0 +1,787 @@
+// ----------------------------------------------------------------------------
+// --- Sign-in Form
+//     Reset Password Modal Form
+//     No Email provided Modal Form
+// ----------------------------------------------------------------------------
+#signin-form,
+#password-reset-modal-form,
+#no-email-provided-modal-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    input[type="submit"] {
+        float:              right;
+
+        .pb-big-button(
+            @text-align:    center,
+            @width:         80%,
+            @ptop:          8px
+        );
+    }
+    input[type="checkbox"] {
+        .pb-input-checkbox();
+    }
+    label.control-label {
+        text-align:         left;
+    }
+    span.help-block {
+        color:              @brand-danger;
+        padding-left:       20%;
+    }
+    div.checkbox {
+        margin-left:        19%;
+        margin-bottom:      10px;
+    }
+
+    .form-group {
+        margin:             0 0 15px 0;
+
+        .pb-form-group-horiz();
+    }
+    .input-group {
+        > input {
+            border-right:                   none;
+            border-top-right-radius:        0px;
+            border-bottom-right-radius:     0px;
+        }
+    }
+    .input-group-addon {
+        .pb-input-group-addon(
+            @bdcolor:       @gray-lightest
+        );
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Sign-up Form
+// ----------------------------------------------------------------------------
+#signup-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    input#id_captcha_1 {
+        float:              right;
+
+        .pb-input-text(
+            @width:         50%,
+            @bdcolor:       @gray-lightest
+        );
+    }
+    input[type="submit"] {
+        .pb-input-submit();
+    }
+    input[type="checkbox"] {
+        .pb-input-checkbox(
+            @margin:        none
+        );
+    }
+    input[type="radio"] {
+        .pb-input-radio(
+            @margin:        none
+        );
+    }
+    select {
+        .pb-select(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    span.help-block {
+        color:              @brand-danger;
+    }
+    a {
+        &.popover-content {
+            padding:        0;
+        }
+        &.btn {
+            .pb-big-button(
+                @width:     100%,
+                @ptop:      8px
+            );
+        }
+        &.file {
+            .pb-big-button(
+                @width:     100%,
+                @height:    auto,
+                @ptop:      10px,
+                @pbottom:   10px,
+                @mbottom:   20px
+            );
+        }
+    }
+    i.fa-upload {
+        color:              @white;
+        font-size:          @font-size-h4;
+    }
+    div.btn-group {
+        width:              100%;
+        height:             30px;
+
+        > ul {
+            width:          100%;
+        }
+    }
+    li {
+        list-style-type:    none;
+    }
+    button.btn-select {
+        border-color:                   @gray-lightest;
+        border-top-right-radius:        0px;
+        border-bottom-right-radius:     0px;
+        padding:                        4px;
+    }
+    > label {
+        .pb-label-checkbox();
+    }
+    > .row {
+        background-color:   @white;
+        padding:            10px 0 0 0;
+    }
+
+    .input-group {
+        > input {
+            border-right:                   none;
+            border-top-right-radius:        0px;
+            border-bottom-right-radius:     0px;
+        }
+    }
+    .input-group-addon {
+        .pb-input-group-addon(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    .half {
+        display:            inline-block;
+        width:              48%;
+        margin-bottom:      15px;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Search Form
+// ----------------------------------------------------------------------------
+#search-form {
+    background-color:   @white;
+    padding:            10px;
+
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    input[type="submit"] {
+        float:              right;
+
+        .pb-big-button(
+            @width:         80%,
+            @ptop:          8px
+        );
+    }
+    input[type="checkbox"] {
+        .pb-input-checkbox(
+            @margin:        none
+        );
+    }
+    label.control-label {
+        text-align:         left;
+    }
+    span.help-block {
+        color:              @brand-danger;
+        padding-left:       20%;
+    }
+    div.checkbox {
+        display:            inline-block;
+        width:              auto;
+        margin-top:         5px !important;
+        margin-right:       5px;
+        margin-bottom:      5px;
+    }
+
+    .form-group {
+        margin:             0 0 15px 0;
+
+        .pb-form-group-horiz();
+    }
+    .input-group {
+        > input {
+            border-right:                   none;
+            border-top-right-radius:        0px;
+            border-bottom-right-radius:     0px;
+        }
+    }
+    .input-group-addon {
+        .pb-input-group-addon(
+            @bdcolor:       @gray-lightest
+        );
+    }
+}
+
+// ----------------------------------------------------------------------------
+//     Contact us Form
+//     Reset Password Form
+// ----------------------------------------------------------------------------
+#contact-us-form,
+#password-reset-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    textarea {
+        margin-bottom:      10px;
+
+        .pb-textarea(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    input[type="submit"] {
+        .pb-big-button(
+            @text-align:    center,
+            @width:         100%,
+            @ptop:          8px
+        );
+    }
+    input[type="button"] {
+        .pb-input-submit(
+            @bgcolor:       @brand-linkedin
+        );
+    }
+    input[type="checkbox"] {
+        .pb-input-checkbox();
+    }
+    label {
+        .pb-label-checkbox();
+    }
+
+    .input-group {
+        > input {
+            border-right:                   none;
+            border-top-right-radius:        0px;
+            border-bottom-right-radius:     0px;
+        }
+    }
+    .input-group-addon {
+        .pb-input-group-addon(
+            @bdcolor:       @gray-lightest
+        );
+    }
+}
+
+// ----------------------------------------------------------------------------
+//     Edit my Profile Form
+// ----------------------------------------------------------------------------
+#my-profile-edit-form,
+#my-profile-privacy-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    textarea {
+        margin-bottom:      10px;
+
+        .pb-textarea(
+            @height:        100px,
+            @bdcolor:       @gray-lightest,
+            @resize:        none
+        );
+    }
+    input[type="submit"],
+    input[type="button"] {
+        .pb-input-submit();
+    }
+    select {
+        .pb-select(
+            @bdcolor:       @gray-lightest
+        );
+
+        &#id_category {
+            height:         100px;
+        }
+    }
+    input[type="checkbox"] {
+        .pb-input-checkbox(
+            @margin:        none
+        );
+    }
+    input[type="radio"] {
+        .pb-input-radio(
+            @margin:        none
+        );
+    }
+    a {
+        word-wrap:          break-word;
+
+        &.btn {
+            .pb-big-button(
+                @width:     100%,
+                @ptop:      8px
+            );
+        }
+        &.file {
+            .pb-big-button(
+                @width:     100%,
+                @height:    auto,
+                @ptop:      10px,
+                @pbottom:   10px,
+                @mbottom:   20px
+            );
+        }
+    }
+    i.fa-upload {
+        color:              @white;
+        font-size:          @font-size-h4;
+    }
+    div.btn-group {
+        width:              100%;
+        height:             30px;
+
+        > ul {
+            width:          100%;
+        }
+    }
+    li {
+        list-style-type:    none;
+    }
+    button.btn-select {
+        border-color:               @gray-lightest;
+        border-top-right-radius:    0px;
+        border-bottom-right-radius: 0px;
+        padding:                    4px;
+    }
+
+    > label {
+        .pb-label-checkbox();
+    }
+    > .row {
+        background-color:   @white;
+        padding:            10px 0 0 0;
+    }
+
+    .input-group {
+        > input {
+            border-right:               none;
+            border-top-right-radius:    0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+    .input-group-addon {
+        .pb-input-group-addon(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    .half {
+        display:            inline-block;
+        width:              48%;
+        margin-bottom:      15px;
+    }
+    .disabled {
+        margin-bottom:      0px;
+        background-color:   @gray-lightest;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Post Create Form
+//     Post Edit Form
+//     Challenge Post Form
+//     Challenge Edit Form
+//     Challenge Filter Form
+//     Organization Create Form
+//     Organization Edit Form
+//     Organization Newsletter Form
+//     Forum Create Form
+//     Forum Edit Form
+//     Topic Create Form
+//     Topic Edit Form
+//     Topic Post Create Form
+//     Topic Post Edit Form
+//     FAQ create Form
+//     FAQ edit Form
+// ----------------------------------------------------------------------------
+#create-post-form,
+#edit-post-form,
+#post-challenge-form,
+#edit-challenge-form,
+#filter-challenge-form,
+#create-organization-form,
+#edit-organization-form,
+#create-organization-newsletter-form,
+#create-forum-form,
+#edit-forum-form,
+#create-topic-form,
+#edit-topic-form,
+#create-topic-post-form,
+#edit-topic-post-form,
+#create-faq-form,
+#edit-faq-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    textarea {
+        margin-bottom:      10px;
+
+        .pb-textarea(
+            @height:        100px,
+            @bdcolor:       @gray-lightest
+        );
+    }
+    input[type="submit"],
+    input[type="button"] {
+        margin-bottom:      10px;
+
+        .pb-input-submit();
+    }
+    input[type="checkbox"] {
+        .pb-input-checkbox(
+            @margin:        none
+        );
+    }
+    input[type="radio"] {
+        .pb-input-radio(
+            @margin:        none
+        );
+    }
+    select {
+        .pb-select(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    div.btn-group {
+        width:              100%;
+        height:             30px;
+
+        > ul {
+            width:          100%;
+        }
+    }
+    li {
+        list-style-type:    none;
+    }
+    button.btn-select {
+        border-color:               @gray-lightest;
+        border-top-right-radius:    0px;
+        border-bottom-right-radius: 0px;
+        padding:                    4px;
+    }
+
+    > label {
+        .pb-label-checkbox();
+    }
+    > .row {
+        background-color:   @white;
+        padding:            10px 0 0 0;
+    }
+
+    .input-group {
+        > input {
+            border-right:               none;
+            border-top-right-radius:    0px;
+            border-bottom-right-radius: 0px;
+        }
+    }
+    .input-group-addon {
+        .pb-input-group-addon(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    .half {
+        display:            inline-block;
+        width:              48%;
+        margin-bottom:      15px;
+    }
+
+    //--- Overrides for Bootstrap Tags Input
+    .bootstrap-tagsinput {
+        width:                          100%;
+        border-color:                   @gray-lightest;
+        border-right:                   none;
+        border-top-right-radius:        0px;
+        border-bottom-right-radius:     0px;
+        padding:                        4px;
+
+        > input {
+            background-color:   transparent;
+            border:             medium none;
+            box-shadow:         none;
+            margin:             0;
+            max-width:          inherit;
+            outline:            medium none;
+            padding:            0 6px;
+            width:              auto;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Challenge clone Modal Form
+//     Challenge close Modal Form
+//     Challenge create Modal Form
+//     Challenge complete Modal Form
+//     Challenge Selfreflection Submit Modal Form
+//     Challenge Participation Post Modal Form
+//     Challenge Participation Withdraw Modal Form
+//     Challenge Participation Remove Modal Form
+//     Challenge Participation Reject Application Modal Form
+//     Challenge not Participated Modal Form
+//     Challenge Participation Accept Selfreflection Modal Form
+//     Challenge Participation Reject Selfreflection Modal Form
+//     Challenge rate Modal Form
+//     Invite to Challenge Modal Form
+//     Invite to Organization Staff Modal Form
+//     Invite to Organization Group Modal Form
+//     Invite reject Modal Form
+//     Comment add Modal Form
+//     Complaint add Modal Form
+//     Organization Group create
+//     Organization Group remove
+//     Organization Group Member remove Modal Form
+//     Organization Staff Member edit Modal Form
+//     Organization Staff Member remove Modal Form
+//     Blog Post publish Modal Form
+//     Blog Post close Modal Form
+// ----------------------------------------------------------------------------
+#challenge-clone-modal-form,
+#challenge-close-modal-form,
+#challenge-create-modal-form,
+#challenge-complete-modal-form,
+#challenge-selfreflection-submit-modal-form,
+#challenge-participation-post-modal-form,
+#challenge-participation-withdraw-modal-form,
+#challenge-participation-remove-modal-form,
+#challenge-participation-reject-application-modal-form,
+#challenge-not-participated-modal-form,
+#challenge-participation-accept-selfreflection-modal-form,
+#challenge-participation-reject-selfreflection-modal-form,
+#challenge-rate-modal-form,
+#invite-to-challenge-modal-form,
+#invite-to-organization-modal-form,
+#invite-to-organization-staff-modal-form,
+#invite-to-organization-group-modal-form,
+#invite-reject-modal-form,
+#comment-add-modal-form,
+#complaint-add-modal-form,
+#organization-group-create-modal-form,
+#organization-group-remove-modal-form,
+#organization-group-member-remove-modal-form,
+#organization-staff-member-edit-modal-form,
+#organization-staff-member-remove-modal-form,
+#post-publish-modal-form,
+#post-close-modal-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    textarea {
+        .pb-textarea(
+            @height:        50px,
+            @bdcolor:       @gray-lightest
+        );
+    }
+    select {
+        .pb-select(
+            @bdcolor:       @gray-lightest
+        );
+    }
+    span.help-block {
+        color:              @brand-danger;
+        padding-left:       20%;
+    }
+
+    .form-group {
+        margin-bottom:      10px;
+    }
+}
+
+// ----------------------------------------------------------------------------
+//     Invite Organization's Staff Form
+//     Invite Organization's Group Form
+// ----------------------------------------------------------------------------
+#invite-org-staff-form,
+#invite-org-group-form {
+    input {
+        .pb-input-text(
+            @bdcolor:       @gray-lightest,
+            @width:         50%
+        );
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Make Design more responsive
+// ----------------------------------------------------------------------------
+
+/*** Styles added to fix the Issue with Zoom in on iPhone ***/
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"] {
+        font-size:          16px !important;
+    }
+}
+
+/* iPhone < 5: */
+@media screen and (device-aspect-ratio: 2/3) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"] {
+        font-size:          16px !important;
+    }
+}
+
+/* iPhone 5, 5C, 5S, iPod Touch 5G */
+@media screen and (device-aspect-ratio: 40/71) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"] {
+        font-size:          16px !important;
+    }
+}
+
+/* iPhone 6, iPhone 6S, iPhone 7 Portrait/Landscape */
+@media screen and (device-aspect-ratio: 375/667) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"] {
+        font-size:          16px !important;
+    }
+}
+
+/* iPhone 6 Plus, iPhone 6S Plus, iPhone 7 Plus Portrait/Landscape */
+@media screen and (device-aspect-ratio: 9/16) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="password"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="date"],
+    input[type="month"],
+    input[type="time"],
+    input[type="week"],
+    input[type="number"],
+    input[type="email"],
+    input[type="url"],
+    input[type="search"] {
+        font-size:          16px !important;
+    }
+}
+
+@media (max-width: 479px) {
+    /* <= 479px */
+    #signin-form,
+    #password-reset-modal-form,
+    #no-email-provided-modal-form {
+        input[type="submit"] {
+            width:          100%;
+        }
+        span.help-block {
+            padding-left:       0;
+        }
+        div.checkbox {
+            margin-left:        0;
+        }
+
+        .form-group {
+            margin:         0;
+
+            label {
+                display:    none;
+            }
+            input,
+            textarea {
+                display:    inline-block;
+                width:      100%;
+                float:      none;
+            }
+        }
+    }
+    #signup-form,
+    #my-profile-edit-form,
+    #create-post-form,
+    #edit-post-form,
+    #post-challenge-form,
+    #edit-challenge-form,
+    #create-organization-form,
+    #edit-organization-form,
+    #create-organization-newsletter-form,
+    #create-forum-form,
+    #edit-forum-form,
+    #create-topic-form,
+    #edit-topic-form,
+    #create-topic-post-form,
+    #edit-topic-post-form,
+    #create-faq-form,
+    #edit-faq-form {
+        .half {
+            display:            inline-block;
+            width:              100%;
+            margin-bottom:      0px;
+        }
+    }
+}
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    /* <= 480px <= 767px */
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    /* <= 768px <= 991px */
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    /* <= 992px <= 1199px */
+}
+@media (min-width: @screen-lg-min) and (max-width: 1599px) {
+    /* <= 1200px <= 1599px */
+}
+@media (min-width: 1600px) {
+    /* >= 1600px */
+}

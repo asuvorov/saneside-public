@@ -1,0 +1,71 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<challenge>
+{% endcomment %}
+
+<div class="instance-attachments">
+    <h4>{% trans "Attachments" %}
+        <a data-toggle="collapse" href="#collapse-attachments"  aria-expanded="false" aria-controls="collapse-attachments"><i class="toggle-icon fa fa-fw fa-chevron-down"></i></a>
+    {% if request.user.is_authenticated %}
+        {% if is_admin %}
+            <a class="add-attachment btn btn-rounded pull-right" href="{% url 'challenge-edit' challenge.slug %}#challenge-attachments"><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+        {% endif %}
+    {% endif %}
+    </h4>
+
+    <div id="collapse-attachments" class="collapse">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="gallery">
+                {% for img in challenge.get_image_list.all %}
+                    <div class="gallery-container">
+                        <a class="gallery-photos" href="{{ MEDIA_URL }}{{ img.image }}" title="">{% generateimage "common:thumbnail" source=img.image -- alt=img.name %}</a>
+                    </div>
+                {% empty %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-8 col-md-8">
+                <div class="gallery">
+                {% for doc in challenge.get_document_list.all %}
+                    <div class="documents-container">
+                        <a href="{{ MEDIA_URL }}{{ doc.document }}" target="_blank"><i class="fa fa-file-o fa-fw"></i> {{ doc.name }}</a>
+                        {% if not forloop.last %}<br />{% endif %}
+                    </div>
+                {% empty %}
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-8">
+                <div class="gallery">
+                {% for url in challenge.get_url_list.all %}
+                    <div class="links-container">
+                        <a href="{{ url.url }}" target="_blank"><i class="fa fa-link fa-fw"></i> {% if url.title %}{{ url.title }}{% else %}{{ url.url }}{% endif %}</a>
+                        {% if not forloop.last %}<br />{% endif %}
+                    </div>
+                {% empty %}
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-8">
+                <div class="gallery">
+                {% for video_url in challenge.get_video_url_list.all %}
+                    <div class="video-links-container">
+                        <a href="{{ video_url.url }}"><i class="fa fa-file-video-o fa-fw"></i> {{ video_url.url }}</a>
+                        {% if not forloop.last %}<br />{% endif %}
+                    </div>
+                {% empty %}
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

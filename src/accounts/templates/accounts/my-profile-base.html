@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "My Profile" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-view' %}">{% trans "My Profile" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="nav-sub-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 sub-btn">
+                <a class="btn" href="{% url 'my-profile-view' %}">
+                    <i class="fa fa-fw fa-info-circle"></i>
+                    <span class="hidden-xs">{% trans "Information" %}</span>
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 sub-btn">
+                <a class="btn" href="{% url 'my-profile-invitations' %}">
+                    <i class="fa fa-fw fa-inbox"></i>
+                {% if request.user.invitee.get_new.all.count > 0 %}
+                    <span id="received-invitations-count" class="badge" style="background-color:#f0ad4e;">{{ request.user.invitee.get_new.all.count }}</span>&nbsp;
+                {% endif %}
+                    <span class="hidden-xs">{% trans "Invitations" %}</span>
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 sub-btn">
+                <a class="btn" href="{% url 'my-profile-participations' %}">
+                    <i class="fa fa-fw fa-child"></i>
+                {% if request.user.profile.get_upcoming_participations.all.count > 0 %}
+                    <span class="badge" style="background-color:#f0ad4e;">{{ request.user.profile.get_upcoming_participations.all.count }}</span>&nbsp;
+                {% endif %}
+                    <span class="hidden-xs">{% trans "Participations" %}</span>
+                </a>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6 sub-btn">
+                <a class="btn" href="{% url 'my-profile-challenges' %}">
+                    <i class="fa fa-fw fa-wrench"></i>
+                {% if request.user.profile.get_admin_challenges_action_required.all.count > 0 %}
+                    <span class="badge" style="background-color:#d9534f;">{{ request.user.profile.get_admin_challenges_action_required.all.count }}</span>&nbsp;
+                {% endif %}
+                {% if request.user.profile.get_admin_challenges_upcoming.all.count > 0 %}
+                    <span class="badge" style="background-color:#f0ad4e;">{{ request.user.profile.get_admin_challenges_upcoming.all.count }}</span>&nbsp;
+                {% endif %}
+                {% if request.user.profile.get_admin_challenges_draft.all.count > 0 %}
+                    <span class="badge" style="background-color:#5bc0de;">{{ request.user.profile.get_admin_challenges_draft.all.count }}</span>&nbsp;
+                {% endif %}
+                    <span class="hidden-xs">{% trans "Challenges I responsible for" %}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_content %}
+{% endblock %}

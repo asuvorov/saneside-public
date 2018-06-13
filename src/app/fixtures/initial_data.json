@@ -1,0 +1,79 @@
+[
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           1,
+        "fields": {
+            "_path":            "/search/",
+            "title":            "Search on the SaneSide Platform",
+            "description":      "Search Page",
+            "keywords":         "Search, SaneSide, Volunteering, Community Service",
+            "heading":          "Search - SaneSide Platform"
+        }
+    },
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           2,
+        "fields": {
+            "_path":            "/privacy-policy/",
+            "title":            "Privacy Policy of the SaneSide Platform",
+            "description":      "Privacy Policy Page",
+            "keywords":         "Privacy Policy, SaneSide, Volunteering, Community Service",
+            "heading":          "Privacy Policy - SaneSide Platform"
+        }
+    },
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           3,
+        "fields": {
+            "_path":            "/user-agreement/",
+            "title":            "User Agreement of the SaneSide Platform",
+            "description":      "User Agreement Page",
+            "keywords":         "User Agreement, SaneSide, Volunteering, Community Service",
+            "heading":          "User Agreement - SaneSide Platform"
+        }
+    },
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           4,
+        "fields": {
+            "_path":            "/our-team/",
+            "title":            "Team of the SaneSide Platform",
+            "description":      "Team Page",
+            "keywords":         "Team, SaneSide, Volunteering, Community Service",
+            "heading":          "Team - SaneSide Platform"
+        }
+    },
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           5,
+        "fields": {
+            "_path":            "/our-partners/",
+            "title":            "Partners of the SaneSide Platform",
+            "description":      "Partners Page",
+            "keywords":         "Partners, SaneSide, Volunteering, Community Service",
+            "heading":          "Partners - SaneSide Platform"
+        }
+    },
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           6,
+        "fields": {
+            "_path":            "/about-us/",
+            "title":            "About SaneSide Platform",
+            "description":      "About Page",
+            "keywords":         "About, SaneSide, Volunteering, Community Service",
+            "heading":          "About - SaneSide Platform"
+        }
+    },
+    {
+        "model":        "djangoseo.metadatapath",
+        "pk":           7,
+        "fields": {
+            "_path":            "/contact-us/",
+            "title":            "Contact SaneSide Platform",
+            "description":      "Contact Page",
+            "keywords":         "Contact, SaneSide, Volunteering, Community Service",
+            "heading":          "Contact - SaneSide Platform"
+        }
+    }
+]

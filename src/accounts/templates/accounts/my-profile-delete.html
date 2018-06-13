@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load imagekit %}
+
+{% block title %}{% trans "Delete Profile" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'account-list' %}">{% trans "Members" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-view' %}">{% trans "My Profile" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'my-profile-delete' %}">{% trans "Delete" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="my-profile-delete">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="alert alert-danger">
+                    <h4>{% trans "So, you're about removing your Profile from SaneSide" %}</h4>
+
+                {% blocktrans %}
+                    Thank you for participating in SaneSide. We hope, you had a great Time here.<br/>
+                    Before you remove your Profile, we'd like to remind you about the Challenges you were signed up for, the Challenges you've created, and the Organization you're affiliated with.<br/>
+                    Please, take a look to the Information, listed below.
+                {% endblocktrans %}
+                </div>
+
+                <form id="my-profile-delete-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div id="pfl-details" class="col-xs-24 col-xs-offset-0 col-sm-16 col-sm-offset-4 col-md-12 col-md-offset-6">
+                            <div class="row">
+                                <div class="col-xs-24 col-sm-24 col-md-24">
+                                    <div class="section">
+                                    {% if request.user.profile.get_upcoming_participations %}
+                                        <h4>{% trans "Challenges, you were signed up for" %}</h4>
+                                        {% for participation in request.user.profile.get_upcoming_participations %}
+                                            <a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+
+                                    <div class="section">
+                                    {% if request.user.profile.get_completed_participations %}
+                                        <h4>{% trans "Challenges completed, but waiting for Acknowledgment or your Experience Report" %}</h4>
+                                        {% for participation in request.user.profile.get_completed_participations %}
+                                            <a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+
+                                    <div class="section">
+                                    {% if request.user.profile.get_admin_challenges_action_required %}
+                                        <h4>{% trans "Challenges, required your Action" %}</h4>
+                                        {% for challenge in request.user.profile.get_admin_challenges_action_required %}
+                                            <a href="{% url 'challenge-details' challenge.slug %}">{{ challenge.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+
+                                    <div class="section">
+                                    {% if request.user.profile.get_admin_challenges_upcoming %}
+                                        <h4>{% trans "Challenges, you've created (upcoming)" %}</h4>
+                                        {% for challenge in request.user.profile.get_admin_challenges_upcoming %}
+                                            <a href="{% url 'challenge-details' challenge.slug %}">{{ challenge.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+
+                                    <div class="section">
+                                    {% if request.user.profile.get_admin_challenges_draft %}
+                                        <h4>{% trans "Challenges, you've created (Drafts)" %}</h4>
+                                        {% for challenge in request.user.profile.get_admin_challenges_draft %}
+                                            <a href="{% url 'challenge-details' challenge.slug %}">{{ challenge.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+
+                                    <div class="section">
+                                    {% if user.created_organizations.all %}
+                                        <h4>{% trans "Organizations, you've created" %}</h4>
+                                        {% for organization in user.created_organizations.all %}
+                                            <a href="{% url 'organization-details' organization.slug %}">{{ organization.name }}</a>
+                                            {% if not forloop.last %}, {% endif %}
+                                        {% empty %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 feature">
+                                    <a href="#" name="submit">
+                                        <span><i class="flaticon-trash27"></i></span>
+                                        <p>{% trans "Delete Profile anyway" %}</p>
+                                    </a>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-6 feature">
+                                    <a href="{% url 'my-profile-view' %}">
+                                        <span><i class="flaticon-cross39"></i></span>
+                                        <p>{% trans "Take me out of here" %}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="tips" class="col-xs-24 col-sm-8 col-md-6">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='submit']").click(function () {
+        $("form#my-profile-delete-form").submit();
+
+        return true;
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+{% load imagekit %}
+
+{% block title %}{% trans "Create and populate Newsletter" %} - {{ block.super }}{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'organization-list' %}">{% trans "Organizations" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'organization-details' organization.slug %}">{% trans "Details" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'organization-populate-newsletter' organization.slug %}">{% trans "Newsletter" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="organization-newsletter-create">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <form id="create-organization-newsletter-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.media }}
+
+                    <div class="row">
+                        <div id="org-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                        </div>
+
+                        <div id="org-details" class="col-xs-24 col-sm-24 col-md-16">
+                            <div class="form-group {% if form.title.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.title }}
+                                    <div class="input-group-addon"><i class="fa fa-i-cursor fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.title.errors %}{% for error in form.title.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group {% if form.content.errors %}has-error{% endif %}">
+                                {{ form.content }}
+
+                                <span class="help-block">{% if form.content.errors %}{% for error in form.content.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6">
+                <div class="actions">
+                    <a class="btn btn-primary btn-centered" name="submit"><i class="fa fa-paper-plane fa-fw"></i> {% trans "Populate this Newsletter" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    $("a[name='submit']").click(function () {
+        $("#spinner").fadeIn("slow");
+
+        $("form#create-organization-newsletter-form").submit();
+
+        return true;
+    })
+
+    $(document).ready(function () {
+    });
+</script>
+{% endblock %}

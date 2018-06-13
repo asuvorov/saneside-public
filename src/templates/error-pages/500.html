@@ -1,0 +1,16 @@
+{% extends "base-error.html" %}
+
+{% load i18n %}
+
+{% block title %}{{ block.super }} | {% trans "500 - Web-service currently unavailable" %}{% endblock %}
+
+{% block content %}
+<div class="cover">
+    <h1>{% trans "Web-service currently unavailable" %}</h1>
+    <small>{% trans "Error 500" %}</small>
+    <p class="lead">
+        {% trans "An unexpected Condition was encountered." %}<br/>
+        {% trans "Our service team has been dispatched to bring it back online." %}
+    </p>
+</div>
+{% endblock %}

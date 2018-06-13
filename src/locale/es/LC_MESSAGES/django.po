@@ -1,0 +1,5679 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-04-02 14:10-0700\n"
+"PO-Revision-Date: 2018-03-08 12:22-0753\n"
+"Last-Translator: Artem Suvorov <admin@saneside.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Translated-Using: django-rosetta 0.8.1\n"
+
+#: accounts/choices.py:15
+msgid "Female"
+msgstr "Hembra"
+
+#: accounts/choices.py:16
+msgid "Male"
+msgstr "Macho"
+
+#: accounts/choices.py:17
+msgid "Other"
+msgstr "Otros"
+
+#: accounts/choices.py:29
+msgid "Paranoid"
+msgstr "Paranoico"
+
+#: accounts/choices.py:30
+msgid "Normal"
+msgstr "Normal"
+
+#: accounts/choices.py:45 accounts/choices.py:58
+msgid "No-one"
+msgstr "Nadie"
+
+#: accounts/choices.py:46
+msgid "Registered Users"
+msgstr "Los Usuarios Registrados"
+
+#: accounts/choices.py:47
+msgid "Participants of the Challenges, I participate in too"
+msgstr ""
+
+#: accounts/choices.py:48
+msgid "Staff/Group Members of the Organization(s), I affiliated with"
+msgstr ""
+
+#: accounts/choices.py:49
+msgid "Everyone"
+msgstr "Cada uno"
+
+#: accounts/choices.py:59
+msgid "Admins of the Challenges, I participate(-d) in"
+msgstr ""
+
+#: accounts/choices.py:60
+msgid "Admins of the upcoming Challenges on the Platform"
+msgstr ""
+
+#: accounts/forms.py:26 accounts/forms.py:30 accounts/forms.py:114
+#: accounts/forms.py:259
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:21
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:35
+#: challenges/forms.py:190 challenges/models.py:358 home/forms.py:30
+#: home/templates/home/contact-us.html:70 organizations/forms.py:111
+#: organizations/models.py:135 organizations/models.py:161
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: accounts/forms.py:34 accounts/forms.py:40 accounts/forms.py:73
+#: accounts/forms.py:79 accounts/forms.py:322 accounts/forms.py:328
+msgid "Password"
+msgstr "Contraseña"
+
+#: accounts/forms.py:44
+msgid "Keep me logged-in on this Computer"
+msgstr ""
+
+#: accounts/forms.py:89 accounts/forms.py:337
+msgid "Retry"
+msgstr "Reintentar"
+
+#: accounts/forms.py:102 accounts/forms.py:243
+msgid "First Name"
+msgstr "Primer Nombre"
+
+#: accounts/forms.py:108 accounts/forms.py:251
+msgid "Last Name"
+msgstr "Apellido"
+
+#: accounts/forms.py:127
+msgid "User already exists."
+msgstr "El usuario ya existe."
+
+#: accounts/forms.py:135 accounts/forms.py:345
+msgid "Passwords don't match."
+msgstr "Las contraseñas no coinciden."
+
+#: accounts/forms.py:182 accounts/forms.py:281 accounts/models.py:105
+msgid "Nickname"
+msgstr "Apodo"
+
+#: accounts/forms.py:188 accounts/forms.py:287
+msgid "Tell us a bit about yourself."
+msgstr "Cuéntanos un poco sobre ti."
+
+#: accounts/models.py:97 accounts/models.py:98 accounts/models.py:613
+#: accounts/models.py:614 accounts/models.py:692 accounts/models.py:693
+#: accounts/models.py:822 accounts/models.py:823 accounts/models.py:995
+#: accounts/models.py:996 challenges/models.py:1413
+msgid "User"
+msgstr "Usuario"
+
+#: accounts/models.py:106
+msgid "User Nickname"
+msgstr "Nick De Usuario"
+
+#: accounts/models.py:111
+msgid "User Bio"
+msgstr "Usuario Bio"
+
+#: accounts/models.py:116
+msgid "Gender"
+msgstr "Género"
+
+#: accounts/models.py:117
+msgid "User Gender"
+msgstr "Género de Usuario"
+
+#: accounts/models.py:121
+msgid "Birthday"
+msgstr "Cumpleaños"
+
+#: accounts/models.py:122
+msgid "User Birthday"
+msgstr "Cumpleaños de Usuario"
+
+#: accounts/models.py:130 challenges/models.py:292
+#: home/templates/home/contact-us.html:64 organizations/models.py:110
+msgid "Address"
+msgstr "Dirección"
+
+#: accounts/models.py:131
+msgid "User Address"
+msgstr "Dirección de Usuario"
+
+#: accounts/models.py:136 accounts/templates/accounts/my-profile-edit.html:280
+#: organizations/models.py:117
+#: organizations/templates/organizations/organization-create.html:275
+#: organizations/templates/organizations/organization-edit.html:263
+msgid "Phone Numbers"
+msgstr "Los Números De Teléfono"
+
+#: accounts/models.py:137
+msgid "User Phone Numbers"
+msgstr "Números de Teléfono Del Usuario"
+
+#: accounts/models.py:143 accounts/models.py:144
+msgid "I would like to receive Email Updates"
+msgstr "Me gustaría recibir Actualizaciones por Correo electrónico"
+
+#: accounts/models.py:159
+msgid "user profile"
+msgstr "perfil de usuario"
+
+#: accounts/models.py:160
+msgid "user profiles"
+msgstr "los perfiles de usuario"
+
+#: accounts/models.py:339 accounts/models.py:383 accounts/models.py:427
+#: accounts/models.py:471
+#, python-format
+msgid "Dear, %(name)s."
+msgstr "Queridos, %(name)s."
+
+#: accounts/models.py:343
+#, python-format
+msgid ""
+"<p>To finish your registration Process, please, follow this \"<a href="
+"\"%(confirmation_link)s\">Link</a>\".</p>"
+msgstr ""
+
+#: accounts/models.py:387
+#, python-format
+msgid ""
+"<p>Your Account was successfully confirmed.</p><p>To log-in, please, follow "
+"this \"<a href=\"%(login_link)s\">Link</a>\".</p>"
+msgstr ""
+
+#: accounts/models.py:431
+#, python-format
+msgid ""
+"<p>You are about to restore your Password on SaneSide.</p><p>To proceed, "
+"please, follow this \"<a href=\"%(confirmation_link)s\">Link</a>\".</p>"
+msgstr ""
+
+#: accounts/models.py:475
+#, python-format
+msgid ""
+"<p>You have successfully reset the Password from your Account.</p><p>To log-"
+"in, please, follow this \"<a href=\"%(login_link)s\">Link</a>\".</p>"
+msgstr ""
+
+#: accounts/models.py:620 accounts/models.py:621
+msgid "Hide my Profile from the Search Results"
+msgstr ""
+
+#: accounts/models.py:624 accounts/models.py:625
+msgid "Hide my Profile from the Members' List"
+msgstr ""
+
+#: accounts/models.py:630 accounts/models.py:631
+msgid "user privacy (general)"
+msgstr "la privacidad del usuario (general)"
+
+#: accounts/models.py:702 accounts/models.py:704 accounts/models.py:832
+#: accounts/models.py:834
+msgid ""
+"Who can see my Profile Details (e.g. Avatar, Name, Bio, Gender, Birthday)"
+msgstr ""
+
+#: accounts/models.py:710 accounts/models.py:712 accounts/models.py:840
+#: accounts/models.py:842
+msgid "Who can see my Contact Details (e.g. Address, Phone #, Email)"
+msgstr ""
+
+#: accounts/models.py:719 accounts/models.py:721 accounts/models.py:849
+#: accounts/models.py:851
+msgid ""
+"Who can see the List of Challenges, I'm going to participate in (upcoming "
+"Challenges)"
+msgstr ""
+
+#: accounts/models.py:727 accounts/models.py:729 accounts/models.py:857
+#: accounts/models.py:859
+msgid ""
+"Who can see the List of Challenges, I participated in (completed Challenges)"
+msgstr ""
+
+#: accounts/models.py:736 accounts/models.py:738 accounts/models.py:866
+#: accounts/models.py:868
+msgid "Who can see the List of Challenges, I affiliated with "
+msgstr ""
+
+#: accounts/models.py:745 accounts/models.py:747 accounts/models.py:875
+#: accounts/models.py:877
+msgid ""
+"Who can see the List of Participations, canceled by me (withdrawn "
+"Participations)"
+msgstr ""
+
+#: accounts/models.py:753 accounts/models.py:755 accounts/models.py:883
+#: accounts/models.py:885
+msgid ""
+"Who can see the List of Participations, canceled by the Challenge Organizer/"
+"Admin (rejected Participations)"
+msgstr ""
+
+#: accounts/models.py:760 accounts/models.py:761
+msgid "user privacy (members)"
+msgstr "la privacidad de los usuarios (miembros)"
+
+#: accounts/models.py:890 accounts/models.py:891
+msgid "user privacy (admins)"
+msgstr "la privacidad de los usuarios (administradores)"
+
+#: accounts/models.py:1000
+msgid "IP"
+msgstr "IP"
+
+#: accounts/models.py:1001
+msgid "User IP Address"
+msgstr ""
+
+#: accounts/models.py:1005
+msgid "Provider"
+msgstr "Proveedor"
+
+#: accounts/models.py:1006
+msgid "User Internet Provider"
+msgstr ""
+
+#: accounts/models.py:1018
+msgid "user login"
+msgstr "inicio de sesión de usuario"
+
+#: accounts/models.py:1019
+msgid "user logins"
+msgstr "inicios de sesión de usuario"
+
+#: accounts/models.py:1076 accounts/models.py:1150 accounts/models.py:1151
+msgid "Team"
+msgstr "Equipo"
+
+#: accounts/models.py:1077
+msgid "Team Name"
+msgstr "Nombre Del Equipo"
+
+#: accounts/models.py:1084
+msgid "team"
+msgstr "equipo"
+
+#: accounts/models.py:1085
+msgid "teams"
+msgstr "equipos"
+
+#: accounts/models.py:1143 accounts/models.py:1144
+msgid "Team Member"
+msgstr "Miembro Del Equipo"
+
+#: accounts/models.py:1156 organizations/models.py:691
+#: organizations/models.py:692
+#: organizations/templates/organizations/modals/organization-staff-member-edit-modal.html:19
+msgid "Position"
+msgstr "Posición"
+
+#: accounts/models.py:1157
+msgid "Team Member Position"
+msgstr ""
+
+#: accounts/models.py:1164
+msgid "team member"
+msgstr "miembro del equipo"
+
+#: accounts/models.py:1165
+msgid "team members"
+msgstr "los miembros del equipo"
+
+#: accounts/templates/accounts/account-list.html:7
+msgid "Members List"
+msgstr "Lista De Miembros"
+
+#: accounts/templates/accounts/account-list.html:15
+#: accounts/templates/accounts/account-login.html:13
+#: accounts/templates/accounts/account-password-reset.html:13
+#: accounts/templates/accounts/account-signup-confirmation-email-sent.html:13
+#: accounts/templates/accounts/account-signup-confirmation-error.html:13
+#: accounts/templates/accounts/account-signup-confirmation-success.html:13
+#: accounts/templates/accounts/account-signup.html:30
+#: accounts/templates/accounts/foreign-profile-base.html:21
+#: accounts/templates/accounts/my-profile-base.html:13
+#: accounts/templates/accounts/my-profile-delete.html:14
+#: accounts/templates/accounts/my-profile-edit.html:32
+#: accounts/templates/accounts/my-profile-privacy.html:14
+#: accounts/templates/accounts/my-profile-privacy.html:47
+#: templates/fragments/navbar.html:103
+msgid "Members"
+msgstr "Los miembros"
+
+#: accounts/templates/accounts/account-list.html:33
+msgid "There are no Members at the moment"
+msgstr "No hay Miembros en el momento"
+
+#: accounts/templates/accounts/account-login.html:5
+#: templates/fragments/navbar-forum.html:77 templates/fragments/navbar.html:77
+msgid "Log in"
+msgstr "Registro en"
+
+#: accounts/templates/accounts/account-login.html:15
+#: accounts/templates/accounts/account-password-reset.html:15
+msgid "Sign in"
+msgstr "Signo en"
+
+#: accounts/templates/accounts/account-login.html:85
+msgid ""
+"\n"
+"                        <p>Forgot <a class=\"\" title=\"\" data-original-"
+"title=\"\" data-content=\"\" data-placement=\"bottom\" data-container=\"body"
+"\" data-trigger=\"hover\" data-toggle=\"modal\" href="
+"\"#forgotPasswordPopupModal\" tabindex=\"-1\">Username / Password</a>?</p>\n"
+"                    "
+msgstr ""
+
+#: accounts/templates/accounts/account-login.html:88
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:39
+msgid "Don't have an Account?"
+msgstr "No tienes una Cuenta?"
+
+#: accounts/templates/accounts/account-login.html:88
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:39
+msgid "Sign-up now"
+msgstr "Inscríbase ahora"
+
+#: accounts/templates/accounts/account-password-reset.html:5
+#: accounts/templates/accounts/account-password-reset.html:17
+msgid "Password reset"
+msgstr "De restablecimiento de contraseña"
+
+#: accounts/templates/accounts/account-password-reset.html:29
+msgid "Please, enter new Password"
+msgstr "Por favor, introduzca la nueva Contraseña"
+
+#: accounts/templates/accounts/account-signup-confirmation-email-sent.html:5
+msgid "Confirmation Email"
+msgstr "Correo Electrónico De Confirmación"
+
+#: accounts/templates/accounts/account-signup-confirmation-email-sent.html:15
+#: accounts/templates/accounts/account-signup-confirmation-error.html:15
+#: accounts/templates/accounts/account-signup-confirmation-success.html:15
+#: accounts/templates/accounts/account-signup.html:7
+#: accounts/templates/accounts/account-signup.html:32
+#: accounts/templates/accounts/account-signup.html:175
+#: templates/fragments/navbar-forum.html:72 templates/fragments/navbar.html:72
+msgid "Sign up"
+msgstr "Regístrate"
+
+#: accounts/templates/accounts/account-signup-confirmation-email-sent.html:28
+msgid "Confirmation Letter has been sent to Email"
+msgstr ""
+
+#: accounts/templates/accounts/account-signup-confirmation-error.html:5
+msgid "Account Confirmation Error"
+msgstr ""
+
+#: accounts/templates/accounts/account-signup-confirmation-error.html:28
+msgid ""
+"\n"
+"                        Thank you for staying on SaneSide.\n"
+"                        Unfortunately, we were not able to confirm your "
+"Account or any other Error has been acquired.\n"
+"                    "
+msgstr ""
+
+#: accounts/templates/accounts/account-signup-confirmation-success.html:5
+msgid "Account Confirmation Success"
+msgstr ""
+
+#: accounts/templates/accounts/account-signup-confirmation-success.html:28
+msgid ""
+"\n"
+"                        Thank you for staying on SaneSide.\n"
+"                        Your Account was confirmed and now is ready to use.\n"
+"                    "
+msgstr ""
+
+#: accounts/templates/accounts/account-signup.html:45
+#: accounts/templates/accounts/account-signup.html:188
+msgid ""
+"\n"
+"                    This Information is only visible to People, who need to "
+"see it, and is private by default. To understand, who can see what if this "
+"Information, please read our <a class=\"popover-content ppnua\" title=\"\" "
+"data-original-title=\"\" data-content=\"\" data-placement=\"bottom\" data-"
+"container=\"body\" data-trigger=\"hover\" data-toggle=\"modal\" href="
+"\"#privacyPolicyPopupModal\" tabindex=\"-1\">Privacy Policy</a>\n"
+"                "
+msgstr ""
+
+#: accounts/templates/accounts/account-signup.html:52
+#: accounts/templates/accounts/account-signup.html:194
+msgid ""
+"After signing up and successful Confirmation of your Email, you will be "
+"redirected to the Profile Page, where you can add your Location, Contact "
+"Details and social Links."
+msgstr ""
+
+#: accounts/templates/accounts/account-signup.html:66
+#: accounts/templates/accounts/my-profile-edit.html:82
+#: blog/templates/blog/post-create.html:55
+#: blog/templates/blog/post-edit.html:58
+msgid "Upload Photo"
+msgstr "Subir Foto"
+
+#: accounts/templates/accounts/account-signup.html:73
+msgid ""
+"Add a personal Touch to your Profile. Pictures will automatically resize."
+msgstr ""
+
+#: accounts/templates/accounts/account-signup.html:77
+#: accounts/templates/accounts/my-profile-edit.html:135
+msgid "Personal Details"
+msgstr "Datos Personales"
+
+#: accounts/templates/accounts/account-signup.html:152
+#: accounts/templates/accounts/foreign-profile-participations.html:36
+#: accounts/templates/accounts/my-profile-challenges.html:38
+#: accounts/templates/accounts/my-profile-edit.html:394
+#: accounts/templates/accounts/my-profile-participations.html:25
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:24
+#: challenges/choices.py:19
+#: challenges/templates/challenges/challenge-create.html:562
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:65
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:102
+#: challenges/templates/challenges/modals/challenge-complete-modal.html:27
+#: organizations/templates/organizations/organization-create.html:428
+msgid "Complete"
+msgstr "Completa"
+
+#: accounts/templates/accounts/account-signup.html:166
+msgid ""
+"\n"
+"                                By signing up, you agree to our <a class="
+"\"popover-content ppnua\" title=\"\" data-original-title=\"\" data-content="
+"\"\" data-placement=\"bottom\" data-container=\"body\" data-trigger=\"hover"
+"\" data-toggle=\"modal\" href=\"#privacyPolicyPopupModal\" tabindex="
+"\"-1\">Privacy Policy</a> and <a class=\"popover-content ppnua\" title=\"\" "
+"data-original-title=\"\" data-content=\"\" data-placement=\"bottom\" data-"
+"container=\"body\" data-trigger=\"hover\" data-toggle=\"modal\" href="
+"\"#userAgreementPopupModal\" tabindex=\"-1\">User Agreement</a>.\n"
+"                            "
+msgstr ""
+
+#: accounts/templates/accounts/account-signup.html:185
+#: challenges/templates/challenges/challenge-create.html:596
+#: organizations/templates/organizations/organization-create.html:455
+msgid "Tips"
+msgstr "Consejos"
+
+#: accounts/templates/accounts/account-signup.html:207
+msgid "Sign-up with social App"
+msgstr "Regístrate con Aplicación social"
+
+#: accounts/templates/accounts/account-signup.html:219
+msgid ""
+"\n"
+"            You can also go through a regular signing up Process.<br/>\n"
+"            To do this, close this Pop-up.\n"
+"        "
+msgstr ""
+
+#: accounts/templates/accounts/account-signup.html:228
+#: accounts/templates/accounts/my-profile-edit.html:523
+#: blog/templates/blog/modals/post-close-modal.html:22
+#: challenges/templates/challenges/modals/challenge-close-modal.html:23
+#: challenges/templates/challenges/modals/challenge-view-on-map-modal.html:16
+#: challenges/templates/challenges/tabs/info-tab.html:554
+#: home/templates/home/modals/privacy-policy-popup-modal.html:20
+#: home/templates/home/modals/user-agreement-popup-modal.html:20
+#: organizations/templates/organizations/modals/organization-view-on-map-modal.html:16
+#: organizations/templates/organizations/tabs/info-tab.html:501
+msgid "Close"
+msgstr ""
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:19
+#, python-format
+msgid ""
+"\n"
+"            The List of the Challenges on SaneSide, %(full_name)s "
+"participated in:\n"
+"        "
+msgstr ""
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:27
+#: accounts/templates/accounts/tabs/foreign-profile/participations-canceled-tab.html:43
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:59
+#: accounts/templates/accounts/tabs/foreign-profile/participations-rejected-tab.html:43
+#: accounts/templates/accounts/tabs/my-profile/participations-canceled-tab.html:43
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:104
+#: accounts/templates/accounts/tabs/my-profile/participations-rejected-tab.html:43
+#: challenges/forms.py:153 challenges/forms.py:485 challenges/models.py:246
+msgid "Challenge Name"
+msgstr "Desafío Nombre"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:28
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:27
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:60
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:27
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:105
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:54
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:87
+msgid "What I did"
+msgstr "Lo que yo hice"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:29
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:35
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:61
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:35
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:106
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:60
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:88
+msgid "What I learned"
+msgstr "Lo que he aprendido"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:30
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:42
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:62
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:42
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:107
+msgid "Admin replied"
+msgstr "Admin respondió"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:31
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:69
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:100
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:68
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:99
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:52
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:108
+#: blog/models.py:105 challenges/models.py:274 challenges/models.py:1435
+#: invites/models.py:95
+msgid "Status"
+msgstr "Estado"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:52
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:55
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:139
+msgid "Experience Report rejected"
+msgstr "Informe de la experiencia rechazado"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:54
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:57
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:141
+msgid "Waiting for Experience Report"
+msgstr "A la espera de Informe de Experiencia"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:56
+#: accounts/templates/accounts/tabs/my-profile/admin-challenges-action-required-tab.html:24
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:59
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:143
+#: challenges/choices.py:167
+msgid "Waiting for Acknowledgment"
+msgstr "A la espera de Confirmación"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:58
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:61
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:145
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:173
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:153
+msgid "Acknowledged"
+msgstr "Reconocido"
+
+#: accounts/templates/accounts/export/my-profile-completed-challenges-export.html:64
+#: accounts/templates/accounts/tabs/my-profile/admin-challenges-complete-tab.html:15
+msgid "There are no completed Challenges at the moment."
+msgstr "No hay ninguna completado Desafíos al momento."
+
+#: accounts/templates/accounts/foreign-profile-base.html:6
+#: accounts/templates/accounts/foreign-profile-base.html:23
+msgid "Profile"
+msgstr "Perfil"
+
+#: accounts/templates/accounts/foreign-profile-base.html:36
+#: accounts/templates/accounts/my-profile-base.html:28
+#: challenges/templates/challenges/challenge-details-base.html:43
+#: core/templates/common/info.html:5 core/templates/common/info.html:12
+#: organizations/templates/organizations/organization-details-base.html:42
+msgid "Information"
+msgstr "Información"
+
+#: accounts/templates/accounts/foreign-profile-base.html:45
+#: accounts/templates/accounts/my-profile-base.html:48
+msgid "Participations"
+msgstr "Participaciones"
+
+#: accounts/templates/accounts/foreign-profile-base.html:54
+#: accounts/templates/accounts/foreign-profile-challenges.html:15
+#: accounts/templates/accounts/foreign-profile-challenges.html:16
+msgid "Affiliated with"
+msgstr "Afiliados con"
+
+#: accounts/templates/accounts/foreign-profile-participations.html:20
+msgid "Participates in Challenges"
+msgstr ""
+
+#: accounts/templates/accounts/foreign-profile-participations.html:21
+#: accounts/templates/accounts/my-profile-challenges.html:25
+#: accounts/templates/accounts/my-profile-participations.html:12
+#: challenges/choices.py:18
+msgid "Upcoming"
+msgstr "Próximo"
+
+#: accounts/templates/accounts/foreign-profile-participations.html:35
+#: accounts/templates/accounts/my-profile-participations.html:24
+#: templates/easy_pdf/base.html:7
+msgid "Participated in Challenges"
+msgstr "Participó en los Retos"
+
+#: accounts/templates/accounts/foreign-profile-participations.html:50
+msgid "Participations, canceled by Member"
+msgstr "Participaciones, cancelado por parte de los Estados"
+
+#: accounts/templates/accounts/foreign-profile-participations.html:51
+#: accounts/templates/accounts/my-profile-participations.html:39
+#: accounts/templates/accounts/tabs/foreign-profile/participations-canceled-tab.html:45
+#: accounts/templates/accounts/tabs/foreign-profile/participations-rejected-tab.html:45
+#: accounts/templates/accounts/tabs/my-profile/participations-canceled-tab.html:45
+#: accounts/templates/accounts/tabs/my-profile/participations-rejected-tab.html:45
+msgid "Canceled"
+msgstr "Cancelado"
+
+#: accounts/templates/accounts/foreign-profile-participations.html:65
+#: accounts/templates/accounts/my-profile-participations.html:51
+msgid "Participations, canceled by Challenge Admin"
+msgstr ""
+
+#: accounts/templates/accounts/foreign-profile-participations.html:66
+#: accounts/templates/accounts/my-profile-participations.html:52
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:76
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:189
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:75
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:187
+#: challenges/templates/challenges/tabs/info-tab.html:206
+#: invites/choices.py:18
+msgid "Rejected"
+msgstr "Rechazado"
+
+#: accounts/templates/accounts/fragments/contact-person-side.html:37
+#: accounts/templates/accounts/fragments/contact-person-side.html:44
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:102
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:104
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:88
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:90
+#: organizations/templates/organizations/tabs/info-tab.html:54
+#: organizations/templates/organizations/tabs/info-tab.html:56
+msgid "ext."
+msgstr "ext."
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:12
+#: invites/templates/invites/modals/invite-to-challenge-popup-modal.html:8
+msgid "Invite to Challenge"
+msgstr "Invitar a Reto"
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:25
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:8
+msgid "Invite to Organization"
+msgstr "Invitar a la Organización"
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:38
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:187
+#: core/templates/common/modals/complaint-add-modal.html:20
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:20
+msgid "Disclaimer"
+msgstr "Descargo de responsabilidad"
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:40
+msgid "You see this Message, because you participated with"
+msgstr ""
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:51
+msgid ""
+"\n"
+"                in the same Challenge(s) in the Past.<br/>\n"
+"                Let us know, if there's something to complain about this "
+"Person.\n"
+"            "
+msgstr ""
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:58
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:196
+#: core/templates/common/modals/complaint-add-modal.html:36
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:29
+msgid "Complain"
+msgstr "Completa"
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:62
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:203
+msgid "Login required"
+msgstr "Es necesario iniciar sesión"
+
+#: accounts/templates/accounts/fragments/foreign-profile-media-status-breakdown.html:63
+msgid "You must have a User Account to see more Details."
+msgstr ""
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:9
+msgid "Profile Settings"
+msgstr "Configuración De Perfil"
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:12
+#: accounts/templates/accounts/my-profile-edit.html:9
+msgid "Edit Profile"
+msgstr "Editar Perfil"
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:13
+#: accounts/templates/accounts/my-profile-privacy.html:6
+msgid "Privacy Settings"
+msgstr "La Configuración De Privacidad"
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:14
+msgid "Change Password"
+msgstr "Cambiar La Contraseña"
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:15
+#: accounts/templates/accounts/my-profile-delete.html:6
+msgid "Delete Profile"
+msgstr "Eliminar Perfil"
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:19
+#: challenges/templates/challenges/challenge-create.html:8
+#: challenges/templates/challenges/modals/challenge-create-modal.html:8
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:11
+msgid "Create Challenge"
+msgstr "Crear Reto"
+
+#: accounts/templates/accounts/fragments/my-profile-media-status-breakdown.html:20
+#: organizations/templates/organizations/organization-create.html:9
+msgid "Create Organization"
+msgstr "Crear una Organización"
+
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:8
+msgid "Forgot Username / Password?"
+msgstr "Olvidé Mi Nombre De Usuario / Contraseña?"
+
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:12
+msgid "Enter your Email below and we'll send out your Contact Details."
+msgstr ""
+
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:38
+msgid "Need Help?"
+msgstr "Necesita Ayuda?"
+
+#: accounts/templates/accounts/modals/forgot-password-popup-modal.html:38
+#: home/templates/home/contact-us.html:6
+#: home/templates/home/contact-us.html:16 templates/fragments/footer.html:31
+#: templates/fragments/navbar-forum.html:167
+#: templates/fragments/navbar.html:192
+msgid "Contact us"
+msgstr "Contáctenos"
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:8
+msgid "Email Address Update"
+msgstr "Actualización de Dirección de Correo Electrónico"
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:13
+msgid "Please, provide / update your Email Address"
+msgstr "Por favor, proporcione / actualizar su Dirección de Correo electrónico"
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:14
+msgid ""
+"\n"
+"                        We noticed, that your Email Address hasn't been "
+"provided yet.<br/>\n"
+"                        For the best Experience, it is highly recommended, "
+"that you set your Email Address, so that you can be aware of everything, "
+"what happens to your Challenges, Participations, etc.\n"
+"                    "
+msgstr ""
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:21
+msgid "Legal Notice"
+msgstr "Aviso Legal"
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:22
+msgid ""
+"\n"
+"                        We do not use your Email Address for the promotional "
+"Purposes.<br/>\n"
+"                        Our Goal is to keep you informed and updated.\n"
+"                    "
+msgstr ""
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:48
+msgid "Update"
+msgstr "Actualizar"
+
+#: accounts/templates/accounts/modals/no-email-provided-popup-modal.html:49
+#: blog/templates/blog/modals/post-close-modal.html:23
+#: blog/templates/blog/modals/post-publish-modal.html:23
+#: challenges/templates/challenges/modals/challenge-clone-modal.html:24
+#: challenges/templates/challenges/modals/challenge-close-modal.html:24
+#: challenges/templates/challenges/modals/challenge-complete-modal.html:28
+#: challenges/templates/challenges/modals/challenge-create-modal.html:28
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:36
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:46
+#: challenges/templates/challenges/modals/challenge-participation-reject-modal.html:27
+#: challenges/templates/challenges/modals/challenge-participation-remove-modal.html:26
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:34
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:43
+#: challenges/templates/challenges/modals/challenge-selfreflection-accept-modal.html:32
+#: challenges/templates/challenges/modals/challenge-selfreflection-reject-modal.html:27
+#: challenges/templates/challenges/modals/challenge-selfreflection-submit-modal.html:33
+#: core/templates/common/modals/attach-doc-modal.html:34
+#: core/templates/common/modals/attach-image-modal.html:34
+#: core/templates/common/modals/attach-url-modal.html:24
+#: core/templates/common/modals/comment-add-modal.html:28
+#: core/templates/common/modals/complaint-add-modal.html:37
+#: foro/templates/forum/modals/foro-forum-remove-modal.html:26
+#: foro/templates/forum/modals/foro-topic-remove-modal.html:26
+#: invites/templates/invites/modals/invite-reject-popup-modal.html:26
+#: invites/templates/invites/modals/invite-to-challenge-popup-modal.html:27
+#: invites/templates/invites/modals/invite-to-organization-group-popup-modal.html:28
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:63
+#: invites/templates/invites/modals/invite-to-organization-staff-popup-modal.html:27
+#: organizations/templates/organizations/modals/organization-group-create-modal.html:31
+#: organizations/templates/organizations/modals/organization-group-member-remove-modal.html:27
+#: organizations/templates/organizations/modals/organization-group-remove-modal.html:26
+#: organizations/templates/organizations/modals/organization-staff-member-edit-modal.html:32
+#: organizations/templates/organizations/modals/organization-staff-member-remove-modal.html:27
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: accounts/templates/accounts/my-profile-base.html:5
+#: accounts/templates/accounts/my-profile-base.html:15
+#: accounts/templates/accounts/my-profile-delete.html:16
+#: accounts/templates/accounts/my-profile-edit.html:34
+#: accounts/templates/accounts/my-profile-privacy.html:16
+msgid "My Profile"
+msgstr "Mi Perfil"
+
+#: accounts/templates/accounts/my-profile-base.html:38
+msgid "Invitations"
+msgstr "Invitaciones"
+
+#: accounts/templates/accounts/my-profile-base.html:64
+msgid "Challenges I responsible for"
+msgstr "Retos a los que me responsables de"
+
+#: accounts/templates/accounts/my-profile-challenges.html:11
+msgid "Challenges required Action"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-challenges.html:12
+msgid "Action required"
+msgstr "Acción requerida"
+
+#: accounts/templates/accounts/my-profile-challenges.html:24
+#: organizations/templates/organizations/fragments/organization-iframe-upcoming.html:9
+msgid "Upcoming Challenges"
+msgstr "Próximos Desafíos"
+
+#: accounts/templates/accounts/my-profile-challenges.html:37
+#: organizations/templates/organizations/fragments/organization-iframe-complete.html:9
+msgid "Completed Challenges"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-challenges.html:50
+msgid "Draft Challenges"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-challenges.html:51
+msgid "Drafts"
+msgstr "Borradores"
+
+#: accounts/templates/accounts/my-profile-delete.html:18
+msgid "Delete"
+msgstr "Eliminar"
+
+#: accounts/templates/accounts/my-profile-delete.html:30
+msgid "So, you're about removing your Profile from SaneSide"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-delete.html:32
+msgid ""
+"\n"
+"                    Thank you for participating in SaneSide. We hope, you "
+"had a great Time here.<br/>\n"
+"                    Before you remove your Profile, we'd like to remind you "
+"about the Challenges you were signed up for, the Challenges you've created, "
+"and the Organization you're affiliated with.<br/>\n"
+"                    Please, take a look to the Information, listed below.\n"
+"                "
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-delete.html:48
+msgid "Challenges, you were signed up for"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-delete.html:59
+msgid ""
+"Challenges completed, but waiting for Acknowledgment or your Experience "
+"Report"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-delete.html:70
+msgid "Challenges, required your Action"
+msgstr "Desafíos, se requiere su Acción"
+
+#: accounts/templates/accounts/my-profile-delete.html:81
+msgid "Challenges, you've created (upcoming)"
+msgstr "Desafíos, has creado (próximo)"
+
+#: accounts/templates/accounts/my-profile-delete.html:92
+msgid "Challenges, you've created (Drafts)"
+msgstr "Desafíos, has creado (Borradores)"
+
+#: accounts/templates/accounts/my-profile-delete.html:103
+msgid "Organizations, you've created"
+msgstr "Organizaciones, has creado"
+
+#: accounts/templates/accounts/my-profile-delete.html:118
+msgid "Delete Profile anyway"
+msgstr "Eliminar Perfil de todos modos"
+
+#: accounts/templates/accounts/my-profile-delete.html:125
+msgid "Take me out of here"
+msgstr "Sácame de aquí"
+
+#: accounts/templates/accounts/my-profile-edit.html:36
+#: blog/templates/blog/post-edit.html:36
+#: challenges/templates/challenges/challenge-edit.html:37
+#: foro/templates/forum/forum-edit.html:32
+#: foro/templates/forum/topic-edit.html:34
+#: home/templates/home/faq-edit.html:18
+#: organizations/templates/organizations/organization-edit.html:37
+msgid "Edit"
+msgstr "Editar"
+
+#: accounts/templates/accounts/my-profile-edit.html:51
+msgid ""
+"\n"
+"                    Thank you for signing up to SaneSide.<br/>\n"
+"                    Before you start creating the Challenges (Events), we "
+"will need some more Information about you.<br/>\n"
+"                    Please, complete your personal Information in the Form.\n"
+"                "
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-edit.html:85
+msgid ""
+"Add a personal touch to your Profile. Pictures will automatically resize."
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-edit.html:131
+#: accounts/templates/accounts/my-profile-edit.html:202
+#: accounts/templates/accounts/my-profile-edit.html:209
+#: accounts/templates/accounts/my-profile-edit.html:316
+#: accounts/templates/accounts/my-profile-edit.html:323
+#: accounts/templates/accounts/my-profile-edit.html:383
+#: accounts/templates/accounts/my-profile-edit.html:390
+#: accounts/templates/accounts/my-profile-edit.html:402
+#: challenges/templates/challenges/challenge-create.html:125
+#: challenges/templates/challenges/challenge-create.html:258
+#: challenges/templates/challenges/challenge-create.html:265
+#: challenges/templates/challenges/challenge-create.html:442
+#: challenges/templates/challenges/challenge-create.html:449
+#: challenges/templates/challenges/challenge-create.html:509
+#: challenges/templates/challenges/challenge-create.html:516
+#: challenges/templates/challenges/challenge-create.html:551
+#: challenges/templates/challenges/challenge-create.html:558
+#: challenges/templates/challenges/challenge-create.html:583
+#: challenges/templates/challenges/challenge-edit.html:122
+#: challenges/templates/challenges/challenge-edit.html:255
+#: challenges/templates/challenges/challenge-edit.html:262
+#: challenges/templates/challenges/challenge-edit.html:439
+#: challenges/templates/challenges/challenge-edit.html:446
+#: challenges/templates/challenges/challenge-edit.html:506
+#: challenges/templates/challenges/challenge-edit.html:513
+#: challenges/templates/challenges/challenge-edit.html:548
+#: challenges/templates/challenges/challenge-edit.html:555
+#: challenges/templates/challenges/challenge-edit.html:646
+#: organizations/templates/organizations/organization-create.html:119
+#: organizations/templates/organizations/organization-create.html:193
+#: organizations/templates/organizations/organization-create.html:200
+#: organizations/templates/organizations/organization-create.html:350
+#: organizations/templates/organizations/organization-create.html:357
+#: organizations/templates/organizations/organization-create.html:417
+#: organizations/templates/organizations/organization-create.html:424
+#: organizations/templates/organizations/organization-create.html:442
+#: organizations/templates/organizations/organization-edit.html:108
+#: organizations/templates/organizations/organization-edit.html:181
+#: organizations/templates/organizations/organization-edit.html:188
+#: organizations/templates/organizations/organization-edit.html:338
+#: organizations/templates/organizations/organization-edit.html:345
+#: organizations/templates/organizations/organization-edit.html:405
+#: organizations/templates/organizations/organization-edit.html:412
+#: organizations/templates/organizations/organization-edit.html:499
+msgid "Prev"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-edit.html:132
+#: accounts/templates/accounts/my-profile-edit.html:203
+#: accounts/templates/accounts/my-profile-edit.html:210
+#: accounts/templates/accounts/my-profile-edit.html:317
+#: accounts/templates/accounts/my-profile-edit.html:324
+#: accounts/templates/accounts/my-profile-edit.html:384
+#: accounts/templates/accounts/my-profile-edit.html:391
+#: accounts/templates/accounts/my-profile-edit.html:403
+#: challenges/templates/challenges/challenge-create.html:126
+#: challenges/templates/challenges/challenge-create.html:259
+#: challenges/templates/challenges/challenge-create.html:266
+#: challenges/templates/challenges/challenge-create.html:443
+#: challenges/templates/challenges/challenge-create.html:450
+#: challenges/templates/challenges/challenge-create.html:510
+#: challenges/templates/challenges/challenge-create.html:517
+#: challenges/templates/challenges/challenge-create.html:552
+#: challenges/templates/challenges/challenge-create.html:559
+#: challenges/templates/challenges/challenge-create.html:584
+#: challenges/templates/challenges/challenge-edit.html:123
+#: challenges/templates/challenges/challenge-edit.html:256
+#: challenges/templates/challenges/challenge-edit.html:263
+#: challenges/templates/challenges/challenge-edit.html:440
+#: challenges/templates/challenges/challenge-edit.html:447
+#: challenges/templates/challenges/challenge-edit.html:507
+#: challenges/templates/challenges/challenge-edit.html:514
+#: challenges/templates/challenges/challenge-edit.html:549
+#: challenges/templates/challenges/challenge-edit.html:556
+#: challenges/templates/challenges/challenge-edit.html:647
+#: core/templates/search/search.html:88
+#: core/templates/search/search_text.html:88
+#: organizations/templates/organizations/organization-create.html:120
+#: organizations/templates/organizations/organization-create.html:194
+#: organizations/templates/organizations/organization-create.html:201
+#: organizations/templates/organizations/organization-create.html:351
+#: organizations/templates/organizations/organization-create.html:358
+#: organizations/templates/organizations/organization-create.html:418
+#: organizations/templates/organizations/organization-create.html:425
+#: organizations/templates/organizations/organization-create.html:443
+#: organizations/templates/organizations/organization-edit.html:109
+#: organizations/templates/organizations/organization-edit.html:182
+#: organizations/templates/organizations/organization-edit.html:189
+#: organizations/templates/organizations/organization-edit.html:339
+#: organizations/templates/organizations/organization-edit.html:346
+#: organizations/templates/organizations/organization-edit.html:406
+#: organizations/templates/organizations/organization-edit.html:413
+#: organizations/templates/organizations/organization-edit.html:500
+msgid "Next"
+msgstr "Siguiente"
+
+#: accounts/templates/accounts/my-profile-edit.html:213
+#: challenges/templates/challenges/challenge-create.html:271
+#: challenges/templates/challenges/challenge-edit.html:268
+#: challenges/templates/challenges/modals/challenge-view-on-map-modal.html:8
+#: organizations/templates/organizations/modals/organization-view-on-map-modal.html:8
+#: organizations/templates/organizations/organization-create.html:204
+#: organizations/templates/organizations/organization-edit.html:192
+msgid "Location"
+msgstr "Ubicación"
+
+#: accounts/templates/accounts/my-profile-edit.html:327
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:148
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:120
+#: challenges/templates/challenges/challenge-create.html:453
+#: challenges/templates/challenges/challenge-edit.html:450
+#: challenges/templates/challenges/tabs/info-tab.html:278
+#: organizations/templates/organizations/organization-create.html:361
+#: organizations/templates/organizations/organization-edit.html:349
+#: organizations/templates/organizations/tabs/info-tab.html:194
+msgid "Social Links"
+msgstr "Enlaces De Vídeo"
+
+#: accounts/templates/accounts/my-profile-edit.html:345
+#: accounts/templates/accounts/my-profile-edit.html:364
+#: challenges/templates/challenges/challenge-create.html:220
+#: challenges/templates/challenges/challenge-create.html:239
+#: challenges/templates/challenges/challenge-create.html:471
+#: challenges/templates/challenges/challenge-create.html:490
+#: challenges/templates/challenges/challenge-edit.html:217
+#: challenges/templates/challenges/challenge-edit.html:236
+#: challenges/templates/challenges/challenge-edit.html:468
+#: challenges/templates/challenges/challenge-edit.html:487
+#: organizations/templates/organizations/fragments/organization-groups-adm.html:16
+#: organizations/templates/organizations/organization-create.html:379
+#: organizations/templates/organizations/organization-create.html:398
+#: organizations/templates/organizations/organization-edit.html:367
+#: organizations/templates/organizations/organization-edit.html:386
+msgid "Del"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-edit.html:371
+#: blog/templates/blog/post-details.html:123
+#: challenges/templates/challenges/challenge-create.html:246
+#: challenges/templates/challenges/challenge-create.html:497
+#: challenges/templates/challenges/challenge-edit.html:243
+#: challenges/templates/challenges/challenge-edit.html:494
+#: challenges/templates/challenges/fragments/challenge-attachments-upcoming.html:14
+#: challenges/templates/challenges/tabs/info-tab.html:253
+#: home/templates/home/faq-create.html:18 home/templates/home/faq-list.html:28
+#: organizations/templates/organizations/organization-create.html:405
+#: organizations/templates/organizations/organization-edit.html:393
+#: organizations/templates/organizations/tabs/info-tab.html:108
+#: organizations/templates/organizations/tabs/info-tab.html:170
+msgid "Add"
+msgstr "Agregar"
+
+#: accounts/templates/accounts/my-profile-edit.html:417
+#: blog/templates/blog/post-edit.html:114
+#: challenges/templates/challenges/challenge-edit.html:660
+#: challenges/templates/challenges/challenge-reporting-materials.html:167
+#: foro/templates/forum/forum-edit.html:88
+#: foro/templates/forum/topic-edit.html:73
+#: home/templates/home/faq-edit.html:70
+#: organizations/templates/organizations/organization-edit.html:513
+msgid "Save Changes"
+msgstr "Guardar Los Cambios"
+
+#: accounts/templates/accounts/my-profile-edit.html:502
+msgid "Welcome to SaneSide"
+msgstr "Bienvenido a SaneSide"
+
+#: accounts/templates/accounts/my-profile-edit.html:507
+msgid ""
+"\n"
+"            <p>\n"
+"                Thank you for signing up to SaneSide.\n"
+"            </p>\n"
+"\n"
+"            <p>\n"
+"                Before you start creating the Challenges (Events),<br/>\n"
+"                we will need some more Information about you.<br/>\n"
+"                Please, complete your personal Information in the Form.\n"
+"            </p>\n"
+"        "
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-info.html:84
+#: home/templates/home/index.html:84
+msgid "Welcome"
+msgstr "Bienvenido"
+
+#: accounts/templates/accounts/my-profile-info.html:89
+#, python-format
+msgid ""
+"\n"
+"            <p>\n"
+"                Make sure to get your Profile to 80%% complete.\n"
+"            </p>\n"
+"\n"
+"            <p>\n"
+"                This is a Requirement:<br/>\n"
+"                (1) to show up in Search Results;<br/>\n"
+"                (2) to create Challenges (Events) and Organizations;<br/>\n"
+"                (3) to participate in Challenges (Events);<br/>\n"
+"                (4) to invite and to be invited to Challenges (Events)<br/>\n"
+"                and Organizations.\n"
+"            </p>\n"
+"        "
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-info.html:107
+#, python-format
+msgid ""
+"\n"
+"            <p>\n"
+"                You have %(days_left)s Days of the <strong>GRACE PERIOD</"
+"strong> left.\n"
+"            </p>\n"
+"        "
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-info.html:118
+msgid "Let's go"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-invitations.html:11
+msgid "Received Invitations"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-invitations.html:12
+msgid "Received"
+msgstr "Recibido"
+
+#: accounts/templates/accounts/my-profile-invitations.html:13
+#: accounts/templates/accounts/my-profile-invitations.html:27
+#: blog/templates/blog/post-list.html:58
+#: organizations/templates/organizations/organization-list.html:60
+msgid "Archive"
+msgstr "Archivo"
+
+#: accounts/templates/accounts/my-profile-invitations.html:25
+msgid "Sent Invitations"
+msgstr "Enviado Invitaciones"
+
+#: accounts/templates/accounts/my-profile-invitations.html:26
+msgid "Sent"
+msgstr "Enviado"
+
+#: accounts/templates/accounts/my-profile-participations.html:11
+msgid "Participate in Challenges"
+msgstr "Participar en los Retos"
+
+#: accounts/templates/accounts/my-profile-participations.html:26
+msgid "Export to PDF"
+msgstr "Exportación a PDF"
+
+#: accounts/templates/accounts/my-profile-participations.html:38
+msgid "Participations, canceled by Me"
+msgstr ""
+
+#: accounts/templates/accounts/my-profile-privacy.html:18
+msgid "Privacy"
+msgstr "El Modo De Privacidad"
+
+#: accounts/templates/accounts/my-profile-privacy.html:34
+msgid "General"
+msgstr "General"
+
+#: accounts/templates/accounts/my-profile-privacy.html:103
+msgid "Organizers"
+msgstr "Organizado por"
+
+#: accounts/templates/accounts/my-profile-privacy.html:164
+msgid "Save Changes and leave"
+msgstr "Guardar Los Cambios"
+
+#: accounts/templates/accounts/my-profile-privacy.html:165
+msgid "Save Changes and continue editing"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/foreign-profile/admin-challenges-tab.html:15
+#: accounts/templates/accounts/tabs/my-profile/admin-challenges-upcoming-tab.html:15
+msgid "There are no upcoming Challenges at the moment"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:45
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:35
+msgid "Hours spent"
+msgstr "Pasaron horas"
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:52
+msgid "Member's Organizations"
+msgstr "Organizaciones de la Miembro"
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:57
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:47
+msgid "There are no Organizations yet."
+msgstr "No existen Organizaciones todavía."
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:62
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:56
+msgid "Related Organizations"
+msgstr "Relacionadas con la Organizaciones "
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:67
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:61
+msgid "There are no related Organizations yet."
+msgstr ""
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:90
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:70
+msgid "Contact Details"
+msgstr "Datos De Contacto"
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:112
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:134
+msgid "Information is hidden from Public"
+msgstr "La información oculta"
+
+#: accounts/templates/accounts/tabs/foreign-profile/info-tab.html:126
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:104
+#: organizations/models.py:695
+#: organizations/templates/organizations/modals/organization-staff-member-edit-modal.html:24
+msgid "Bio"
+msgstr "Bio"
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-canceled-tab.html:26
+#: accounts/templates/accounts/tabs/foreign-profile/participations-canceled-tab.html:46
+#: accounts/templates/accounts/tabs/foreign-profile/participations-rejected-tab.html:26
+#: accounts/templates/accounts/tabs/foreign-profile/participations-rejected-tab.html:46
+#: accounts/templates/accounts/tabs/my-profile/participations-canceled-tab.html:26
+#: accounts/templates/accounts/tabs/my-profile/participations-canceled-tab.html:46
+#: accounts/templates/accounts/tabs/my-profile/participations-rejected-tab.html:26
+#: accounts/templates/accounts/tabs/my-profile/participations-rejected-tab.html:46
+#: organizations/templates/organizations/modals/organization-staff-member-remove-modal.html:19
+msgid "Reason"
+msgstr "La razón"
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-canceled-tab.html:44
+#: accounts/templates/accounts/tabs/foreign-profile/participations-rejected-tab.html:44
+#: accounts/templates/accounts/tabs/my-profile/participations-canceled-tab.html:44
+#: accounts/templates/accounts/tabs/my-profile/participations-rejected-tab.html:44
+#: challenges/choices.py:159
+msgid "Signed up"
+msgstr "Firmado"
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-canceled-tab.html:72
+#: accounts/templates/accounts/tabs/my-profile/participations-canceled-tab.html:72
+msgid "There are no canceled Participations at the moment."
+msgstr "No hay cancelado Participaciones en el momento."
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:19
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:19
+#: challenges/models.py:1312 challenges/models.py:1313
+#: challenges/models.py:1419 challenges/models.py:1420
+#: challenges/templates/challenges/challenge-dateless-list.html:52
+#: challenges/templates/challenges/challenge-details-base.html:6
+#: challenges/templates/challenges/challenge-list.html:51
+msgid "Challenge"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-complete-tab.html:92
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:178
+msgid "There are no completed Participations at the moment."
+msgstr ""
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-rejected-tab.html:72
+#: accounts/templates/accounts/tabs/my-profile/participations-rejected-tab.html:72
+msgid "There are no rejected Participations at the moment"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/foreign-profile/participations-upcoming-tab.html:15
+#: accounts/templates/accounts/tabs/my-profile/participations-upcoming-tab.html:15
+msgid "There are no upcoming Participations at the moment"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/admin-challenges-action-required-tab.html:16
+#: challenges/choices.py:155
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:167
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:147
+msgid "Waiting for Confirmation"
+msgstr "A la espera de Confirmación"
+
+#: accounts/templates/accounts/tabs/my-profile/admin-challenges-action-required-tab.html:33
+msgid "There are no Challenges required Action at the moment."
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/admin-challenges-draft-tab.html:15
+msgid "There are no draft Challenges at the moment."
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:43
+msgid "My Organizations"
+msgstr "Mi Organizaciones"
+
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:50
+msgid "Create</a> new Organization."
+msgstr "Crear</a> nueva Organización."
+
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:73
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:16
+msgid "Privacy Information"
+msgstr "La Información de la Privacidad"
+
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:74
+msgid ""
+"This Information can only be seen by the Organizers of the Challenges "
+"(Events) you participate in."
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:136
+msgid "Spotlight"
+msgstr "Foco"
+
+#: accounts/templates/accounts/tabs/my-profile/info-tab.html:141
+#: blog/templates/blog/post-list.html:65
+#: challenges/templates/challenges/challenge-category-list.html:45
+#: challenges/templates/challenges/challenge-dateless-list.html:158
+#: challenges/templates/challenges/challenge-list.html:173
+#: core/templates/search/search.html:101
+#: core/templates/search/search_text.html:101
+#: home/templates/home/faq-list.html:43
+#: organizations/templates/organizations/organization-directory.html:47
+#: organizations/templates/organizations/organization-list.html:66
+msgid "Sponsored Links"
+msgstr "Enlaces Patrocinados"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:19
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:94
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:19
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:93
+msgid "Invitation to"
+msgstr "Invitación a"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:35
+msgid "from"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:54
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:98
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:54
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:97
+#: invites/models.py:112 invites/models.py:113
+msgid "Invitation Text"
+msgstr "Texto De La Invitación"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:61
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:99
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:61
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:98
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:66
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:66
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:89
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:64
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:87
+#: organizations/templates/organizations/fragments/organization-staff-members-adm.html:56
+msgid "Action"
+msgstr "Acción"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:63
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:179
+#: challenges/templates/challenges/modals/challenge-selfreflection-accept-modal.html:31
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:68
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:146
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:66
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:142
+msgid "Accept"
+msgstr "Aceptar"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:64
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:180
+#: challenges/templates/challenges/modals/challenge-participation-reject-modal.html:26
+#: challenges/templates/challenges/modals/challenge-selfreflection-reject-modal.html:26
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:69
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:147
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:67
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:143
+#: invites/templates/invites/modals/invite-reject-popup-modal.html:25
+msgid "Reject"
+msgstr "Rechazar"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:72
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:185
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:71
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:183
+#: invites/choices.py:16 templates/fragments/navbar.html:109
+#: templates/fragments/navbar.html:118
+msgid "New"
+msgstr "Nuevo"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:74
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:187
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:73
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:185
+#: invites/choices.py:17
+msgid "Accepted"
+msgstr "Aceptado"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:78
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:191
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:77
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:189
+#: invites/choices.py:19
+msgid "Revoked"
+msgstr "Revocado"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:95
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:94
+#: challenges/forms.py:382 challenges/forms.py:482 challenges/models.py:99
+#: challenges/models.py:245 challenges/models.py:1299
+#: challenges/templates/challenges/tabs/info-tab.html:195 core/models.py:138
+#: core/models.py:202 home/forms.py:23 home/models.py:53 home/models.py:54
+#: organizations/models.py:79 organizations/models.py:812
+msgid "Name"
+msgstr "Nombre"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:96
+msgid "From"
+msgstr "De"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:97
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:96
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:86
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:84
+msgid "Rating"
+msgstr "Clasificación"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:170
+msgid "N/A"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-received-tab.html:200
+msgid "There are no received Invitations at the moment"
+msgstr "No hay ninguna recibido Invitaciones en el momento"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:35
+msgid "to"
+msgstr ""
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:63
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:178
+msgid "Revoke"
+msgstr "Revocar"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:95
+msgid "To"
+msgstr "A"
+
+#: accounts/templates/accounts/tabs/my-profile/invitations-sent-tab.html:198
+msgid "There are no sent Invitations at the moment"
+msgstr "No hay ninguna enviado Invitaciones en el momento"
+
+#: accounts/templates/accounts/tabs/my-profile/participations-complete-tab.html:109
+#: foro/templates/forum/fragments/forum-section.html:23
+#: foro/templates/forum/topic-list.html:50
+#: organizations/templates/organizations/fragments/organization-staff-members-adm.html:78
+msgid "Actions"
+msgstr "Acciones"
+
+#: accounts/views.py:156
+msgid "All Members"
+msgstr "Todos Los Miembros"
+
+#: accounts/views.py:238
+msgid "Members near you"
+msgstr "Los miembros de la cerca de usted"
+
+#: accounts/views.py:304
+msgid "Members you might know"
+msgstr "Los miembros se puede saber"
+
+#: accounts/views.py:351
+msgid "New Members"
+msgstr "Los Nuevos Miembros"
+
+#: accounts/views.py:398
+msgid "Members online"
+msgstr "Miembros en línea"
+
+#: accounts/views.py:716
+msgid "Sorry, you have entered wrong Email or Password"
+msgstr "Lo sentimos, has introducido mal el Correo electrónico o la Contraseña"
+
+#: accounts/views.py:1571
+msgid "An Error has occurred."
+msgstr "Se ha producido un Error."
+
+#: api/v1/api_accounts/views.py:94 api/v1/api_accounts/views.py:192
+msgid "No Email provided."
+msgstr ""
+
+#: api/v1/api_accounts/views.py:134
+msgid "Failed to update the Email."
+msgstr ""
+
+#: api/v1/api_accounts/views.py:138
+msgid "Successfully updated the Email."
+msgstr ""
+
+#: api/v1/api_accounts/views.py:211 api/v1/api_accounts/views.py:268
+msgid "Failed to send the Password Renewal Link."
+msgstr ""
+
+#: api/v1/api_accounts/views.py:216
+msgid "User not found."
+msgstr "El usuario no encontrado."
+
+#: api/v1/api_accounts/views.py:272
+msgid "Successfully sent the Password Renewal Link."
+msgstr ""
+
+#: api/v1/api_blog/views.py:92 api/v1/api_challenges/views.py:107
+msgid "No Year provided."
+msgstr ""
+
+#: api/v1/api_blog/views.py:97 api/v1/api_challenges/views.py:112
+msgid "No Month provided."
+msgstr ""
+
+#: api/v1/api_blog/views.py:164 api/v1/api_blog/views.py:250
+msgid "Post ID is not provided."
+msgstr ""
+
+#: api/v1/api_blog/views.py:177 api/v1/api_blog/views.py:263
+#: api/v1/api_foro/views.py:284
+msgid "Post not found."
+msgstr ""
+
+#: api/v1/api_blog/views.py:208
+msgid "Successfully published the Post."
+msgstr ""
+
+#: api/v1/api_blog/views.py:294
+msgid "Successfully closed the Post."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:184 api/v1/api_challenges/views.py:292
+#: api/v1/api_challenges/views.py:404 api/v1/api_challenges/views.py:572
+#: api/v1/api_challenges/views.py:694
+msgid "Challenge ID is not provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:189 api/v1/api_challenges/views.py:297
+#: api/v1/api_challenges/views.py:409 api/v1/api_challenges/views.py:577
+msgid "No Description Text provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:197 api/v1/api_challenges/views.py:305
+#: api/v1/api_challenges/views.py:417 api/v1/api_challenges/views.py:585
+#: api/v1/api_challenges/views.py:702 api/v1/api_challenges/views.py:980
+#: api/v1/api_challenges/views.py:1103 api/v1/api_challenges/views.py:1247
+#: api/v1/api_challenges/views.py:1527 api/v1/api_challenges/views.py:1675
+#: api/v1/api_core/views.py:146 api/v1/api_core/views.py:178
+#: api/v1/api_core/views.py:303 api/v1/api_core/views.py:413
+#: api/v1/api_core/views.py:453 api/v1/api_core/views.py:461
+#: api/v1/api_core/views.py:516 api/v1/api_core/views.py:523
+#: api/v1/api_core/views.py:713 api/v1/api_core/views.py:720
+#: api/v1/api_core/views.py:853 api/v1/api_home/views.py:95
+#: api/v1/api_organizations/views.py:139 api/v1/api_organizations/views.py:227
+#: api/v1/api_organizations/views.py:315 api/v1/api_organizations/views.py:397
+#: api/v1/api_organizations/views.py:471 api/v1/api_organizations/views.py:574
+#: api/v1/api_organizations/views.py:686 api/v1/api_organizations/views.py:770
+msgid "You don't have Permissions to perform the Action."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:210 api/v1/api_challenges/views.py:318
+#: api/v1/api_challenges/views.py:430 api/v1/api_challenges/views.py:598
+#: api/v1/api_challenges/views.py:715 api/v1/api_challenges/views.py:864
+#: api/v1/api_challenges/views.py:993 api/v1/api_challenges/views.py:1116
+#: api/v1/api_challenges/views.py:1260 api/v1/api_challenges/views.py:1390
+#: api/v1/api_challenges/views.py:1540 api/v1/api_challenges/views.py:1688
+#: api/v1/api_core/views.py:159 api/v1/api_core/views.py:430
+#: api/v1/api_core/views.py:690 api/v1/api_invites/views.py:173
+msgid "Challenge not found."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:244
+msgid "Successfully published the Challenge."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:355
+msgid "Successfully completed the Challenge."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:522
+msgid "Successfully cloned the Challenge."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:635
+msgid "Successfully closed the Challenge."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:798
+msgid "Successfully posted the Participation."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:846 api/v1/api_challenges/views.py:962
+#: api/v1/api_challenges/views.py:1090 api/v1/api_challenges/views.py:1229
+#: api/v1/api_challenges/views.py:1367 api/v1/api_challenges/views.py:1509
+#: api/v1/api_challenges/views.py:1657
+msgid "No Challenge ID provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:851 api/v1/api_challenges/views.py:972
+#: api/v1/api_challenges/views.py:1239
+msgid "No Cancellation Text provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:878 api/v1/api_challenges/views.py:1007
+#: api/v1/api_challenges/views.py:1130 api/v1/api_challenges/views.py:1274
+#: api/v1/api_challenges/views.py:1404 api/v1/api_challenges/views.py:1554
+#: api/v1/api_challenges/views.py:1702
+msgid "Participation not found."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:910
+msgid "Successfully withdrew the Participation."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:967 api/v1/api_challenges/views.py:1095
+#: api/v1/api_challenges/views.py:1234 api/v1/api_challenges/views.py:1514
+#: api/v1/api_challenges/views.py:1662
+msgid "No Participation ID provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1041
+msgid "Successfully removed the Participant."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1176
+msgid "Successfully accepted the Participation Request."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1308
+msgid "Successfully rejected the Participation Request."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1372
+msgid "No Activity Text provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1377
+msgid "No Learning Text provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1453
+msgid "Successfully submitted the Experience Report."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1519
+msgid "No Acknowledgment Text provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1605
+msgid "Successfully accepted the Experience Report."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1667 api/v1/api_invites/views.py:542
+msgid "No Rejection Text provided."
+msgstr ""
+
+#: api/v1/api_challenges/views.py:1737
+msgid "Successfully rejected the Experience Report."
+msgstr ""
+
+#: api/v1/api_core/views.py:127
+msgid "Neither Challenge, nor Organization, nor Post ID provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:132
+msgid "No Comment Text provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:191 api/v1/api_core/views.py:478
+#: api/v1/api_core/views.py:746 api/v1/api_invites/views.py:208
+#: api/v1/api_organizations/views.py:484 api/v1/api_organizations/views.py:783
+msgid "Organization not found."
+msgstr ""
+
+#: api/v1/api_core/views.py:212
+msgid "Blog Post not found."
+msgstr ""
+
+#: api/v1/api_core/views.py:239
+msgid "Successfully added the Comment."
+msgstr ""
+
+#: api/v1/api_core/views.py:285
+msgid "No Comment ID provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:298
+msgid "Comment not found."
+msgstr ""
+
+#: api/v1/api_core/views.py:310
+msgid "Successfully removed the Comment."
+msgstr ""
+
+#: api/v1/api_core/views.py:376
+msgid "Neither Account, nor Challenge, nor Organization, ID provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:381
+msgid "No Complaint Text provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:395
+msgid "Member not found."
+msgstr ""
+
+#: api/v1/api_core/views.py:405
+msgid "You already complained on the Member."
+msgstr ""
+
+#: api/v1/api_core/views.py:440
+msgid "You already complained on the Challenge."
+msgstr ""
+
+#: api/v1/api_core/views.py:488
+msgid "You already complained on the Organization."
+msgstr ""
+
+#: api/v1/api_core/views.py:563
+msgid "Successfully added the Complaint."
+msgstr ""
+
+#: api/v1/api_core/views.py:655
+msgid "Neither Challenge, nor Organizer ID provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:660
+msgid "Neither Challenge, nor Organizer Rating provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:665
+msgid "Neither Challenge, nor Organizer Review Text provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:671
+msgid "Organization Rating is not provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:676
+msgid "Organization Review Text is not provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:700
+msgid "You already rated the Challenge."
+msgstr ""
+
+#: api/v1/api_core/views.py:773
+msgid "Organizer not found."
+msgstr ""
+
+#: api/v1/api_core/views.py:790
+msgid "Successfully added the Rating."
+msgstr ""
+
+#: api/v1/api_core/views.py:835
+msgid "No Rating ID provided."
+msgstr ""
+
+#: api/v1/api_core/views.py:848
+msgid "Rating not found."
+msgstr ""
+
+#: api/v1/api_core/views.py:860
+msgid "Successfully removed the Rating."
+msgstr ""
+
+#: api/v1/api_foro/views.py:87
+msgid "No Forum ID provided."
+msgstr ""
+
+#: api/v1/api_foro/views.py:100
+msgid "Forum not found."
+msgstr ""
+
+#: api/v1/api_foro/views.py:130
+msgid "Successfully removed the Forum."
+msgstr ""
+
+#: api/v1/api_foro/views.py:179
+msgid "No Topic ID provided."
+msgstr ""
+
+#: api/v1/api_foro/views.py:192
+msgid "Topic not found."
+msgstr ""
+
+#: api/v1/api_foro/views.py:222
+msgid "Successfully removed the Topic."
+msgstr ""
+
+#: api/v1/api_foro/views.py:271
+msgid "No Post ID provided."
+msgstr ""
+
+#: api/v1/api_foro/views.py:314
+msgid "Successfully removed the Post."
+msgstr ""
+
+#: api/v1/api_home/views.py:90
+msgid "No FAQ ID provided."
+msgstr ""
+
+#: api/v1/api_home/views.py:108
+msgid "FAQ not found."
+msgstr ""
+
+#: api/v1/api_home/views.py:115
+msgid "Successfully removed the FAQ."
+msgstr ""
+
+#: api/v1/api_home/views.py:181
+msgid "No Name, Email, Subject or Message provided."
+msgstr ""
+
+#: api/v1/api_home/views.py:223
+msgid "Successfully sent the Message."
+msgstr ""
+
+#: api/v1/api_invites/views.py:120
+msgid "No Invitee ID provided."
+msgstr ""
+
+#: api/v1/api_invites/views.py:125
+msgid ""
+"Neither Challenge, nor Organization, nor Organization Group ID provided."
+msgstr ""
+
+#: api/v1/api_invites/views.py:130
+msgid "No Invitation Text provided."
+msgstr ""
+
+#: api/v1/api_invites/views.py:143
+msgid "Invitee not found."
+msgstr ""
+
+#: api/v1/api_invites/views.py:230 api/v1/api_organizations/views.py:588
+#: api/v1/api_organizations/views.py:700
+msgid "Organization Group not found."
+msgstr ""
+
+#: api/v1/api_invites/views.py:277
+msgid "Successfully sent the Invitation."
+msgstr ""
+
+#: api/v1/api_invites/views.py:326
+#, fuzzy
+#| msgid "Location is not provided"
+msgid "No Kind provided."
+msgstr "La ubicación no es siempre"
+
+#: api/v1/api_invites/views.py:355
+msgid "Successfully archived the Invitations."
+msgstr ""
+
+#: api/v1/api_invites/views.py:400 api/v1/api_invites/views.py:537
+#: api/v1/api_invites/views.py:643
+msgid "No Invite ID provided."
+msgstr ""
+
+#: api/v1/api_invites/views.py:414 api/v1/api_invites/views.py:556
+#: api/v1/api_invites/views.py:657
+msgid "Invite not found."
+msgstr ""
+
+#: api/v1/api_invites/views.py:419 api/v1/api_invites/views.py:561
+#: api/v1/api_invites/views.py:662
+msgid "Invite Status has been changed already."
+msgstr ""
+
+#: api/v1/api_invites/views.py:487
+msgid "Successfully accepted the Invitation."
+msgstr ""
+
+#: api/v1/api_invites/views.py:595
+msgid "Successfully rejected the Invitation."
+msgstr ""
+
+#: api/v1/api_invites/views.py:695
+msgid "Successfully revoked the Invitation."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:111 api/v1/api_organizations/views.py:384
+#: api/v1/api_organizations/views.py:458 api/v1/api_organizations/views.py:762
+msgid "No Organization ID provided."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:116 api/v1/api_organizations/views.py:219
+#: api/v1/api_organizations/views.py:307 api/v1/api_organizations/views.py:463
+#: api/v1/api_organizations/views.py:566 api/v1/api_organizations/views.py:678
+msgid "No Payload provided."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:157
+msgid "Successfully changed the Staff Members Order."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:214 api/v1/api_organizations/views.py:302
+msgid "No Organization/Member ID provided."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:241 api/v1/api_organizations/views.py:329
+msgid "Organization Staff Member not found."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:249
+msgid "Successfully updated the Staff Member Information."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:335
+msgid "Successfully removed the Staff Member."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:417
+msgid "Successfully pulled out the Groups."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:507
+msgid "Successfully created the Group."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:561
+msgid "No Organization/Group ID provided."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:616
+msgid "Successfully removed the Group."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:673
+msgid "No Organization/Group/Member ID provided."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:711
+msgid "Organization Group Member not found."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:719
+msgid "Successfully removed the Group Member."
+msgstr ""
+
+#: api/v1/api_organizations/views.py:793
+msgid ""
+"You have successfully subscribed to the Organization's Newsletters and "
+"Notifications."
+msgstr ""
+
+#: api/v1/serializers.py:35
+msgid "User Account is disabled."
+msgstr "Cuenta de usuario está deshabilitada."
+
+#: api/v1/serializers.py:42
+msgid "Unable to login with provided Credentials."
+msgstr "No se puede iniciar sesión con provistos de Credenciales."
+
+#: api/v1/serializers.py:45
+msgid "Must include \"username\" and \"password\""
+msgstr "Debe incluir \"nombre de usuario\" y \"contraseña\""
+
+#: blog/choices.py:15 blog/templates/blog/fragments/post-thumbnail-hor.html:15
+#: blog/templates/blog/post-details.html:47 challenges/choices.py:17
+msgid "Draft"
+msgstr "Proyecto de"
+
+#: blog/choices.py:16
+msgid "Visible"
+msgstr "Visible"
+
+#: blog/choices.py:17 challenges/choices.py:21
+msgid "Closed"
+msgstr "Cerrado"
+
+#: blog/forms.py:35 blog/models.py:74 foro/forms.py:160 foro/models.py:463
+msgid "Post Title"
+msgstr "Título Del Post"
+
+#: blog/forms.py:44 blog/models.py:97 blog/models.py:98
+#: challenges/forms.py:170 challenges/models.py:263 challenges/models.py:264
+#: organizations/forms.py:83 organizations/models.py:97
+#: organizations/models.py:98
+msgid "Hashtag"
+msgstr "Hashtag"
+
+#: blog/models.py:65 blog/models.py:66 foro/models.py:444
+msgid "Post Author"
+msgstr ""
+
+#: blog/models.py:73 core/models.py:271 core/models.py:1353 foro/models.py:54
+#: foro/models.py:139 foro/models.py:306 foro/models.py:462 home/models.py:154
+msgid "Title"
+msgstr "Título"
+
+#: blog/models.py:78
+#, fuzzy
+#| msgid "Description"
+msgid "Short Description"
+msgstr "Descripción"
+
+#: blog/models.py:79
+#, fuzzy
+#| msgid "Group Description"
+msgid "Post short Description"
+msgstr "Descripción De Grupo"
+
+#: blog/models.py:83 core/models.py:1358 foro/models.py:467
+msgid "Content"
+msgstr "Contenido"
+
+#: blog/models.py:84 foro/models.py:468
+msgid "Post Content"
+msgstr ""
+
+#: blog/models.py:92 challenges/models.py:258 organizations/models.py:92
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: blog/models.py:93 challenges/models.py:259 organizations/models.py:93
+msgid "A comma-separated List of Tags."
+msgstr "Una Lista separada por comas de las Etiquetas."
+
+#: blog/models.py:106
+msgid "Post Status"
+msgstr "Post Condición"
+
+#: blog/models.py:111
+msgid "blog post"
+msgstr "post"
+
+#: blog/models.py:112
+msgid "blog posts"
+msgstr "puestos"
+
+#: blog/templates/blog/fragments/post-media-status-breakdown.html:9
+#: blog/templates/blog/post-edit.html:8
+msgid "Edit Post"
+msgstr "Editar El Post"
+
+#: blog/templates/blog/fragments/post-media-status-breakdown.html:12
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:82
+msgid "This is a Draft."
+msgstr "Este es un Proyecto."
+
+#: blog/templates/blog/fragments/post-media-status-breakdown.html:13
+msgid "Publish this Post when you are ready, so other Members can see it."
+msgstr ""
+
+#: blog/templates/blog/fragments/post-media-status-breakdown.html:16
+#: blog/templates/blog/modals/post-publish-modal.html:8
+msgid "Publish Post"
+msgstr "Publicar Post"
+
+#: blog/templates/blog/fragments/post-thumbnail-hor.html:27
+#: blog/templates/blog/post-details.html:59
+#: challenges/templates/challenges/tabs/info-tab.html:163
+#: foro/templates/forum/topic-post-list.html:50
+msgid "Posted by"
+msgstr "Publicado por"
+
+#: blog/templates/blog/fragments/post-thumbnail-hor.html:28
+#: blog/templates/blog/fragments/post-thumbnail-search.html:31
+#: blog/templates/blog/post-details.html:60
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:57
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:65
+#: challenges/templates/challenges/fragments/challenge-thumbnail-search.html:38
+#: challenges/templates/challenges/fragments/challenge-thumbnail-search.html:42
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:40
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:48
+#: challenges/templates/challenges/tabs/info-tab.html:165
+#: core/templates/common/fragments/comment-hor.html:51
+#: foro/templates/forum/fragments/forum-section.html:46
+#: foro/templates/forum/topic-list.html:67
+#: foro/templates/forum/topic-post-list.html:51
+#: organizations/templates/organizations/fragments/organization-thumbnail-hor.html:29
+#: organizations/templates/organizations/fragments/organization-thumbnail-search.html:37
+msgid "ago"
+msgstr "hace"
+
+#: blog/templates/blog/fragments/post-thumbnail-hor.html:88
+#: blog/templates/blog/fragments/post-thumbnail-search.html:39
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:197
+#: challenges/templates/challenges/fragments/challenge-thumbnail-search.html:51
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:177
+#: organizations/templates/organizations/fragments/organization-thumbnail-hor.html:119
+#: organizations/templates/organizations/fragments/organization-thumbnail-search.html:45
+msgid "LEARN MORE"
+msgstr ""
+
+#: blog/templates/blog/fragments/post-thumbnail-search.html:31
+#: challenges/templates/challenges/fragments/challenge-thumbnail-search.html:38
+#: challenges/templates/challenges/fragments/challenge-thumbnail-search.html:42
+#: foro/templates/forum/fragments/forum-topic-post-thumbnail-search.html:17
+msgid "posted by"
+msgstr "publicado por"
+
+#: blog/templates/blog/modals/post-close-modal.html:8
+#: blog/templates/blog/post-edit.html:115
+msgid "Close Post"
+msgstr "Cerrar Post"
+
+#: blog/templates/blog/modals/post-close-modal.html:16
+msgid "Do you really want to close this Post?"
+msgstr "¿Usted realmente desea cerrar este Post?"
+
+#: blog/templates/blog/modals/post-publish-modal.html:16
+msgid "Do you really want to publish this Post?"
+msgstr "¿Realmente quieres publicar este Post?"
+
+#: blog/templates/blog/modals/post-publish-modal.html:22
+msgid "Publish"
+msgstr "Publicar"
+
+#: blog/templates/blog/post-create.html:8
+msgid "Create Post"
+msgstr "Crear Post"
+
+#: blog/templates/blog/post-create.html:31
+#: blog/templates/blog/post-details.html:24
+#: blog/templates/blog/post-edit.html:34 blog/templates/blog/post-list.html:15
+#: templates/error-pages/404.html:37
+msgid "Blog"
+msgstr "Blog"
+
+#: blog/templates/blog/post-create.html:33
+#: challenges/templates/challenges/challenge-create.html:33
+#: challenges/templates/challenges/modals/challenge-create-modal.html:27
+#: foro/templates/forum/forum-create.html:32
+#: foro/templates/forum/forum-create.html:88
+#: foro/templates/forum/topic-create.html:34
+#: foro/templates/forum/topic-create.html:73
+#: foro/templates/forum/topic-post-create.html:36
+#: foro/templates/forum/topic-post-create.html:78
+#: organizations/templates/organizations/modals/organization-group-create-modal.html:30
+#: organizations/templates/organizations/organization-create.html:34
+#: templates/fragments/navbar.html:122
+msgid "Create"
+msgstr "Crear"
+
+#: blog/templates/blog/post-create.html:111
+msgid "Publish this Post"
+msgstr "Publicar este Post"
+
+#: blog/templates/blog/post-create.html:112
+#: challenges/templates/challenges/challenge-create.html:577
+msgid "Save as a Draft"
+msgstr "Guardar como Borrador"
+
+#: blog/templates/blog/post-details.html:7
+#: blog/templates/blog/post-list.html:28
+#: foro/templates/forum/topic-post-list.html:31
+msgid "Post"
+msgstr "Post"
+
+#: blog/templates/blog/post-details.html:26
+#: challenges/templates/challenges/challenge-details-base.html:29
+#: foro/templates/forum/topic-post-list.html:18
+#: organizations/templates/organizations/organization-details-base.html:29
+#: organizations/templates/organizations/organization-populate-newsletter.html:33
+msgid "Details"
+msgstr "Detalles"
+
+#: blog/templates/blog/post-details.html:120
+#: challenges/templates/challenges/tabs/info-tab.html:250
+#: organizations/templates/organizations/tabs/info-tab.html:167
+msgid "Comments"
+msgstr "Comentarios"
+
+#: blog/templates/blog/post-details.html:142
+#: challenges/templates/challenges/tabs/info-tab.html:273
+#: organizations/templates/organizations/tabs/info-tab.html:188
+msgid "Link to this Page"
+msgstr "Enlace a esta Página"
+
+#: blog/templates/blog/post-details.html:149
+#: challenges/templates/challenges/tabs/info-tab.html:294
+#: organizations/templates/organizations/tabs/info-tab.html:210
+msgid "Share"
+msgstr "Compartir"
+
+#: blog/templates/blog/post-list.html:7 templates/fragments/footer.html:22
+#: templates/fragments/navbar-forum.html:176
+#: templates/fragments/navbar.html:201
+msgid "Our Blog"
+msgstr "Nuestro Blog"
+
+#: blog/templates/blog/post-list.html:42
+#: challenges/templates/challenges/challenge-dateless-list.html:135
+#: challenges/templates/challenges/challenge-list.html:150
+#: organizations/templates/organizations/organization-list.html:44
+msgid "Tag Cloud"
+msgstr "Nube De Etiquetas"
+
+#: challenges/choices.py:20
+msgid "Expired"
+msgstr "Caducado"
+
+#: challenges/choices.py:30
+msgid "Anyone can participate."
+msgstr "Cualquier persona puede participar."
+
+#: challenges/choices.py:32
+msgid "Participate only after a confirmed Application"
+msgstr "Participar sólo una vez confirmado Aplicación"
+
+#: challenges/choices.py:51
+msgid "Animals"
+msgstr "Los animales"
+
+#: challenges/choices.py:52
+msgid "Arts & Culture"
+msgstr "Arte Y Cultura"
+
+#: challenges/choices.py:53
+msgid "Children & Youth"
+msgstr "Los Niños Y Jóvenes"
+
+#: challenges/choices.py:54
+msgid "Community"
+msgstr "La comunidad"
+
+#: challenges/choices.py:55
+msgid "Education & Literacy"
+msgstr "Educación Y Alfabetización"
+
+#: challenges/choices.py:56
+msgid "Environment"
+msgstr "Medio ambiente"
+
+#: challenges/choices.py:57
+msgid "Health & Wellness"
+msgstr "Salud & Bienestar"
+
+#: challenges/choices.py:58
+msgid "Sports & Recreation"
+msgstr "Deportes Y Recreación"
+
+#: challenges/choices.py:59
+msgid "Veterans & Seniors"
+msgstr "Los Veteranos Y Seniors"
+
+#: challenges/choices.py:157
+msgid "You were not accepted to this Challenge"
+msgstr "No fue aceptado este Reto"
+
+#: challenges/choices.py:161
+msgid "The Organizer removed you from this Challenge"
+msgstr ""
+
+#: challenges/choices.py:163
+msgid "You withdrew your Participation to this Challenge"
+msgstr ""
+
+#: challenges/choices.py:165
+#, fuzzy
+#| msgid "Waiting for Experience Report"
+msgid "Please, write your Experience Report"
+msgstr "A la espera de Informe de Experiencia"
+
+#: challenges/choices.py:169
+msgid "Report acknowledged"
+msgstr ""
+
+#: challenges/choices.py:181
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:103
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:83
+#: challenges/templates/challenges/tabs/info-tab.html:108
+#: templates/fragments/navbar.html:119
+msgid "Dateless"
+msgstr "Dateless"
+
+#: challenges/choices.py:182
+msgid "Once"
+msgstr "Una vez"
+
+#: challenges/choices.py:201 challenges/choices.py:227
+#: challenges/choices.py:238
+msgid "----------"
+msgstr "----------"
+
+#: challenges/choices.py:202
+msgid "January"
+msgstr "Enero"
+
+#: challenges/choices.py:203
+msgid "February"
+msgstr "Febrero"
+
+#: challenges/choices.py:204
+msgid "March"
+msgstr "Marzo"
+
+#: challenges/choices.py:205
+msgid "April"
+msgstr "Abril"
+
+#: challenges/choices.py:206
+msgid "May"
+msgstr "Mayo"
+
+#: challenges/choices.py:207
+msgid "June"
+msgstr "Junio"
+
+#: challenges/choices.py:208
+msgid "July"
+msgstr "Julio"
+
+#: challenges/choices.py:209
+msgid "August"
+msgstr "Agosto"
+
+#: challenges/choices.py:210
+msgid "September"
+msgstr "Septiembre"
+
+#: challenges/choices.py:211
+msgid "October"
+msgstr "Octubre"
+
+#: challenges/choices.py:212
+msgid "November"
+msgstr "Noviembre"
+
+#: challenges/choices.py:213
+msgid "December"
+msgstr "Diciembre"
+
+#: challenges/choices.py:228
+msgid "Sunday"
+msgstr "Domingo"
+
+#: challenges/choices.py:229
+msgid "Monday"
+msgstr "Lunes"
+
+#: challenges/choices.py:230
+msgid "Tuesday"
+msgstr "Martes"
+
+#: challenges/choices.py:231
+msgid "Wednesday"
+msgstr "Miércoles"
+
+#: challenges/choices.py:232
+msgid "Thursday"
+msgstr "Jueves"
+
+#: challenges/choices.py:233
+msgid "Friday"
+msgstr "Viernes"
+
+#: challenges/choices.py:234
+msgid "Saturday"
+msgstr "Sábado"
+
+#: challenges/choices.py:239
+msgid "Last Day of Month"
+msgstr "Último Día de Mes"
+
+#: challenges/forms.py:73 organizations/forms.py:27
+#, python-format
+msgid "Me (%s)"
+msgstr "Me (%s)"
+
+#: challenges/forms.py:74 organizations/forms.py:28
+msgid "Affiliate different Person"
+msgstr ""
+
+#: challenges/forms.py:130 challenges/forms.py:320
+#: core/templates/common/modals/attach-url-modal.html:16
+msgid "Related Links"
+msgstr "Enlaces Relacionados"
+
+#: challenges/forms.py:133 challenges/forms.py:323 organizations/forms.py:53
+msgid "Separate your Links with a Space"
+msgstr ""
+
+#: challenges/forms.py:159 challenges/models.py:250
+msgid "Challenge Description"
+msgstr ""
+
+#: challenges/forms.py:184 challenges/models.py:354 organizations/forms.py:105
+#: organizations/models.py:157
+msgid "Full Name"
+msgstr "Nombre Completo"
+
+#: challenges/forms.py:196 challenges/models.py:362 core/forms.py:141
+#: core/models.py:588 core/models.py:598 organizations/forms.py:117
+#: organizations/models.py:165
+msgid "Phone Number"
+msgstr "Número De Teléfono"
+
+#: challenges/forms.py:210
+msgid "Write the Feedback here..."
+msgstr ""
+
+#: challenges/forms.py:221
+msgid "Duration should be greater, than 0"
+msgstr ""
+
+#: challenges/forms.py:233
+msgid "Reserved Word cannot be used as a Challenge Name."
+msgstr ""
+
+#: challenges/forms.py:244 challenges/forms.py:250 challenges/forms.py:258
+#: challenges/forms.py:269 challenges/forms.py:276 challenges/forms.py:287
+#: challenges/forms.py:401 challenges/forms.py:409 core/forms.py:273
+#: organizations/forms.py:140 organizations/forms.py:146
+#: organizations/forms.py:154
+msgid "This Field is required."
+msgstr "Este Campo es obligatorio."
+
+#: challenges/forms.py:387
+msgid "Qty"
+msgstr "Cant."
+
+#: challenges/forms.py:493
+msgid "Year"
+msgstr ""
+
+#: challenges/forms.py:501 challenges/models.py:312 challenges/models.py:313
+msgid "Month"
+msgstr "Mes"
+
+#: challenges/forms.py:509
+msgid "Day"
+msgstr "Día"
+
+#: challenges/models.py:100
+#, fuzzy
+#| msgid "Category"
+msgid "Category Name"
+msgstr "Categoría"
+
+#: challenges/models.py:103 challenges/models.py:249
+#: challenges/templates/challenges/challenge-create.html:129
+#: challenges/templates/challenges/challenge-edit.html:126
+#: challenges/templates/challenges/modals/challenge-complete-modal.html:20
+#: challenges/templates/challenges/modals/challenge-create-modal.html:20
+#: foro/models.py:143 foro/models.py:310
+#: foro/templates/forum/fragments/forum-section.html:17
+#: foro/templates/forum/topic-list.html:45 organizations/models.py:83
+#: organizations/models.py:816
+#: organizations/templates/organizations/organization-create.html:123
+#: organizations/templates/organizations/organization-edit.html:112
+msgid "Description"
+msgstr "Descripción"
+
+#: challenges/models.py:104
+#, fuzzy
+#| msgid "Description"
+msgid "Category Description"
+msgstr "Descripción"
+
+#: challenges/models.py:111 challenges/models.py:112 challenges/models.py:268
+#: challenges/templates/challenges/tabs/info-tab.html:116
+msgid "Category"
+msgstr "Categoría"
+
+#: challenges/models.py:116
+msgid "Color"
+msgstr ""
+
+#: challenges/models.py:117
+#, fuzzy
+#| msgid "Category"
+msgid "Category Color"
+msgstr "Categoría"
+
+#: challenges/models.py:121
+msgid "Icon"
+msgstr ""
+
+#: challenges/models.py:122
+#, fuzzy
+#| msgid "Category"
+msgid "Category Icon"
+msgstr "Categoría"
+
+#: challenges/models.py:126
+#, fuzzy
+#| msgid "Images"
+msgid "Image"
+msgstr "Imágenes"
+
+#: challenges/models.py:127
+#, fuzzy
+#| msgid "Category"
+msgid "Category Image"
+msgstr "Categoría"
+
+#: challenges/models.py:132
+#, fuzzy
+#| msgid "Category"
+msgid "category"
+msgstr "Categoría"
+
+#: challenges/models.py:133
+#, fuzzy
+#| msgid "Category"
+msgid "categories"
+msgstr "Categoría"
+
+#: challenges/models.py:237 core/models.py:1347 foro/models.py:48
+#: foro/models.py:127 foro/models.py:294 foro/models.py:443 home/models.py:148
+#: organizations/models.py:72 organizations/models.py:673
+#: organizations/models.py:807
+msgid "Author"
+msgstr "Autor"
+
+#: challenges/models.py:238
+msgid "Challenge Author"
+msgstr ""
+
+#: challenges/models.py:269
+msgid "Challenge Category"
+msgstr ""
+
+#: challenges/models.py:275
+msgid "Challenge Status"
+msgstr ""
+
+#: challenges/models.py:279
+#: challenges/templates/challenges/challenge-create.html:520
+#: challenges/templates/challenges/challenge-edit.html:517
+msgid "Application"
+msgstr "Aplicación"
+
+#: challenges/models.py:280
+msgid "Challenge Application"
+msgstr ""
+
+#: challenges/models.py:286 challenges/models.py:287
+#: organizations/models.py:104 organizations/models.py:105
+msgid "I will provide the Location later, if any."
+msgstr ""
+
+#: challenges/models.py:293
+msgid "Challenge Location"
+msgstr ""
+
+#: challenges/models.py:299
+msgid "Duration (hours)"
+msgstr "Duración (horas)"
+
+#: challenges/models.py:300
+msgid "Challenge Duration"
+msgstr ""
+
+#: challenges/models.py:307
+msgid "Recurrence"
+msgstr "La recurrencia"
+
+#: challenges/models.py:308
+msgid "Challenge Recurrence"
+msgstr ""
+
+#: challenges/models.py:317 challenges/models.py:318
+msgid "Day of Week"
+msgstr "Día de Semana"
+
+#: challenges/models.py:322 challenges/models.py:323
+msgid "Day of Month"
+msgstr "Día de Mes"
+
+#: challenges/models.py:330
+#: challenges/templates/challenges/challenge-list.html:91
+msgid "Start Date"
+msgstr "Fecha De Inicio"
+
+#: challenges/models.py:331
+msgid "Challenge Start Date"
+msgstr ""
+
+#: challenges/models.py:335
+msgid "Start Time"
+msgstr "Hora De Inicio"
+
+#: challenges/models.py:336
+msgid "Challenge Start Time"
+msgstr ""
+
+#: challenges/models.py:339
+msgid "Timezone"
+msgstr "La zona horaria"
+
+#: challenges/models.py:340
+msgid "Challenge Timezone"
+msgstr ""
+
+#: challenges/models.py:345
+msgid "Start Date/Time with TZ"
+msgstr "Fecha/Hora de inicio con TZ"
+
+#: challenges/models.py:346
+msgid "Challenge Start Date/Time with TZ"
+msgstr ""
+
+#: challenges/models.py:355
+msgid "Challenge Contact Person full Name"
+msgstr ""
+
+#: challenges/models.py:359
+msgid "Challenge Contact Person Email"
+msgstr ""
+
+#: challenges/models.py:363 core/models.py:589 core/models.py:599
+#: organizations/models.py:166
+msgid "Please, use the International Format, e.g. +1-202-555-0114."
+msgstr ""
+
+#: challenges/models.py:371 organizations/models.py:679
+#: organizations/models.py:680 organizations/models.py:822
+#: organizations/models.py:823
+#: organizations/templates/organizations/fragments/organization-thumbnail-search.html:26
+#: organizations/templates/organizations/organization-details-base.html:6
+#: organizations/templates/organizations/organization-list.html:28
+msgid "Organization"
+msgstr "Organización"
+
+#: challenges/models.py:372
+msgid "Challenge Organization"
+msgstr ""
+
+#: challenges/models.py:379 challenges/models.py:380
+#: challenges/templates/challenges/challenge-reporting-materials.html:67
+#: challenges/templates/challenges/tabs/info-tab.html:174
+msgid "Achievements"
+msgstr "Los archivos adjuntos"
+
+#: challenges/models.py:386 challenges/models.py:387
+msgid "Reason for closing"
+msgstr "La razón para el cierre de"
+
+#: challenges/models.py:397 challenges/models.py:399
+msgid ""
+"Allow Members to apply again to the Challenge after withdrawing their "
+"Application."
+msgstr ""
+
+#: challenges/models.py:404 challenges/models.py:406
+msgid ""
+"Automatically accept Participants' Experience Reports after the Challenge "
+"completed."
+msgstr ""
+
+#: challenges/models.py:409
+msgid "Acceptance Text"
+msgstr ""
+
+#: challenges/models.py:411
+msgid ""
+"This Text will automatically appear as an Acknowledgment Text for each "
+"Participant after Challenge has been marked as completed."
+msgstr ""
+
+#: challenges/models.py:416
+msgid "challenge"
+msgstr ""
+
+#: challenges/models.py:417
+msgid "challenges"
+msgstr ""
+
+#: challenges/models.py:684 challenges/models.py:730 challenges/models.py:779
+#: challenges/models.py:883 challenges/models.py:932 challenges/models.py:978
+#: challenges/models.py:1025 challenges/models.py:1070
+#: challenges/models.py:1621 challenges/models.py:1690
+#: challenges/models.py:1751 challenges/models.py:1812
+#: challenges/models.py:1878 challenges/models.py:1938
+#: challenges/models.py:1997 challenges/models.py:2061
+#: challenges/models.py:2125 challenges/models.py:2188
+#: challenges/models.py:2248 challenges/models.py:2303
+#: challenges/models.py:2370 challenges/models.py:2416
+#: challenges/models.py:2469 challenges/models.py:2518
+#: challenges/models.py:2568 challenges/models.py:2617
+#: challenges/models.py:2667 challenges/models.py:2713
+#: challenges/models.py:2764 challenges/models.py:2813
+#: challenges/models.py:2863 challenges/models.py:2912 challenges/tasks.py:54
+#: challenges/tasks.py:151 core/models.py:977 invites/models.py:202
+#: invites/models.py:258 invites/models.py:310 invites/models.py:359
+#: invites/models.py:408 invites/models.py:457 invites/models.py:508
+#: invites/models.py:557 organizations/models.py:277
+#: organizations/models.py:326 organizations/models.py:372
+#: organizations/models.py:421 organizations/models.py:471
+#, python-format
+msgid "Dear, %(user)s."
+msgstr "Queridos, %(user)s."
+
+#: challenges/models.py:688
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\" Draft, was "
+"successfully created.</p>"
+msgstr ""
+
+#: challenges/models.py:734
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was successfully "
+"created.</p>"
+msgstr ""
+
+#: challenges/models.py:783
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was successfully "
+"created, and you were added as a contact Person to it.</p>"
+msgstr ""
+
+#: challenges/models.py:829
+#, python-format
+msgid "The \"<a href=\"%(url)s\">%(name)s</a>\" recent Activity."
+msgstr ""
+
+#: challenges/models.py:834
+#, python-format
+msgid ""
+"<p>Dear, %(user)s,</p><p>The Organization \"<a href=\"%(org_url)s\">"
+"%(org_name)s</a>\" has just created new Challenge \"<a href=\"%(chl_url)s\">"
+"%(chl_name)s</a>\".</p><p>You have received this Email, because you're "
+"subscribed to the Organization's Newsletters and Activity Notifications.</p>"
+msgstr ""
+
+#: challenges/models.py:887
+#, python-format
+msgid ""
+"<p>Your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was modified.</p>"
+msgstr ""
+
+#: challenges/models.py:936
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\", where you added as a "
+"contact Person, was modified.</p>"
+msgstr ""
+
+#: challenges/models.py:982
+#, python-format
+msgid ""
+"<p>Your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was complete!</"
+"p><p>Experience Report Requests were sent to all signed up to the Challenge "
+"Members.</p><p>Please, don't forget to accept, or reject the Members' "
+"Experience Reports.</p>"
+msgstr ""
+
+#: challenges/models.py:1029
+#, python-format
+msgid "<p>Your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was cloned!</p>"
+msgstr ""
+
+#: challenges/models.py:1074
+#, python-format
+msgid "<p>Your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was closed!</p>"
+msgstr ""
+
+#: challenges/models.py:1300
+msgid "Role Name"
+msgstr "Nombre De La Rol"
+
+#: challenges/models.py:1302 challenges/models.py:1303
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: challenges/models.py:1327
+msgid "role"
+msgstr "rol"
+
+#: challenges/models.py:1328
+msgid "roles"
+msgstr "roles"
+
+#: challenges/models.py:1414
+msgid "Participant"
+msgstr "Participante"
+
+#: challenges/models.py:1426
+msgid "Role"
+msgstr "Rol"
+
+#: challenges/models.py:1427
+msgid "Role, if applicable"
+msgstr "Papel, si es aplicable"
+
+#: challenges/models.py:1436
+msgid "Participation Status"
+msgstr "La Estado del Participación "
+
+#: challenges/models.py:1442 challenges/models.py:1443
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:26
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:58
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:86
+msgid "Application Text"
+msgstr "El Texto de la Aplicación"
+
+#: challenges/models.py:1446 challenges/models.py:1447
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:28
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:26
+msgid "Cancellation Text"
+msgstr "El Texto de la Cancelación"
+
+#: challenges/models.py:1450 challenges/models.py:1451
+msgid "Experience Report - Activity Text"
+msgstr ""
+
+#: challenges/models.py:1454 challenges/models.py:1455
+msgid "Experience Report - learning Text"
+msgstr ""
+
+#: challenges/models.py:1458 challenges/models.py:1459
+msgid "Experience Report - Rejection Text"
+msgstr ""
+
+#: challenges/models.py:1462 challenges/models.py:1463
+msgid "Acknowledgement Text"
+msgstr ""
+
+#: challenges/models.py:1470 challenges/models.py:1471
+msgid "Date created"
+msgstr "Fecha de creación"
+
+#: challenges/models.py:1475 challenges/models.py:1476 invites/models.py:124
+#: invites/models.py:125
+msgid "Date accepted"
+msgstr "Fecha de aceptado"
+
+#: challenges/models.py:1480 challenges/models.py:1481
+msgid "Date canceled"
+msgstr "Fecha de cancelado"
+
+#: challenges/models.py:1485
+msgid "Date of the Experience Report"
+msgstr ""
+
+#: challenges/models.py:1486
+msgid "Date of receiving of the Experience Report"
+msgstr ""
+
+#: challenges/models.py:1490
+msgid "Date of the Experience Report Rejection"
+msgstr ""
+
+#: challenges/models.py:1491
+msgid "Date of Rejection of the Experience Report"
+msgstr ""
+
+#: challenges/models.py:1495
+msgid "Date acknowledged"
+msgstr "Fecha reconocido"
+
+#: challenges/models.py:1496
+msgid "Date of acknowledging of the Experience Report"
+msgstr ""
+
+#: challenges/models.py:1501
+msgid "participation"
+msgstr "la participación"
+
+#: challenges/models.py:1502
+msgid "participations"
+msgstr "participaciones"
+
+#: challenges/models.py:1625 challenges/models.py:1694
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\", you signed up for, "
+"was modified.</p><p>You are now signed up for the Challenge on "
+"%(start_date)s at %(start_time)s.</p><p>Please don't forget to show up!</p>"
+msgstr ""
+
+#: challenges/models.py:1755
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\", you signed up for, "
+"was modified.</p><p>The new Locations is %(address)s.</p><p>Please don't "
+"forget to show up!</p>"
+msgstr ""
+
+#: challenges/models.py:1816
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\", you participated, has "
+"added and/or edited the reporting Materials.</p>"
+msgstr ""
+
+#: challenges/models.py:1882
+#, python-format
+msgid ""
+"<p>Thank you for participating in the Challenge \"<a href=\"%(url)s\">"
+"%(name)s</a>\"</p><p>Please, submit your Experience Report within %(time)s "
+"Days.</p>"
+msgstr ""
+
+#: challenges/models.py:1942
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\" "
+"was rejected due to the Reason:</p><p>Challenge complete.</p>"
+msgstr ""
+
+#: challenges/models.py:2001
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\", you signed up for, "
+"was cloned for the following Reason:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2065
+#, python-format
+msgid ""
+"<p>The Challenge \"<a href=\"%(url)s\">%(name)s</a>\", you signed up for, "
+"was closed for the following Reason:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2131
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\", "
+"for the Role of \"%(role)s\" was accepted!</p><p>You are now signed up for "
+"the Challenge on %(start_date)s at %(start_time)s.</p><p>Please don't forget "
+"to show up!</p>"
+msgstr ""
+
+#: challenges/models.py:2142
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\", "
+"was accepted!</p><p>You are now signed up for the Challenge on "
+"%(start_date)s at %(start_time)s.</p><p>Please don't forget to show up!</p>"
+msgstr ""
+
+#: challenges/models.py:2194
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" was accepted to "
+"Participate in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" for the "
+"Role of \"%(role)s\"!</p>"
+msgstr ""
+
+#: challenges/models.py:2203
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" was accepted to "
+"Participate in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: challenges/models.py:2254
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\", "
+"for the Role of \"%(role)s\" is waiting for Confirmation!</p>"
+msgstr ""
+
+#: challenges/models.py:2261
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\", "
+"is waiting for Confirmation!</p>"
+msgstr ""
+
+#: challenges/models.py:2309
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" applied to Participate "
+"in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" for the Role of "
+"\"%(role)s\" with the following Text:</p><p>%(text)s</p><p>Please, don't "
+"forget to accept or reject the Member's Application.</p>"
+msgstr ""
+
+#: challenges/models.py:2321
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" applied to Participate "
+"in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" with the following "
+"Text:</p><p>%(text)s</p><p>Please, don't forget to accept or reject the "
+"Member's Application.</p>"
+msgstr ""
+
+#: challenges/models.py:2374
+#, python-format
+msgid ""
+"<p>You have withdrawn your Participation in Challenge \"<a href=\"%(url)s\">"
+"%(name)s</a>\"!</p>"
+msgstr ""
+
+#: challenges/models.py:2420
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" withdrew Application "
+"for participating in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" "
+"with the following Text:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2473
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\" "
+"was removed due to the Reason:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2522
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" was removed from "
+"participating in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\".</p>"
+msgstr ""
+
+#: challenges/models.py:2572
+#, python-format
+msgid ""
+"<p>Your Application to the Challenge \"<a href=\"%(url)s\">%(name)s</a>\" "
+"was rejected due to the Reason:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2621
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" was rejected from "
+"participating in your Challenge \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: challenges/models.py:2671
+#, python-format
+msgid ""
+"<p>Your Experience Report to the Challenge \"<a href=\"%(url)s\">%(name)s</a>"
+"\", was submitted.</p>"
+msgstr ""
+
+#: challenges/models.py:2717
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" submitted Experience "
+"Report on your Challenge \"<a href=\"%(url)s\">%(name)s</a>\".</p><p>Please, "
+"accept OR reject Member's Experience Report.</p>"
+msgstr ""
+
+#: challenges/models.py:2768
+#, python-format
+msgid ""
+"<p>Your Experience Report to the Challenge \"<a href=\"%(url)s\">%(name)s</a>"
+"\", was accepted with following:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2817
+#, python-format
+msgid ""
+"<p>\"<a href=\"%(profile)s\">%(member)s's</a>\" Experience Report to your "
+"Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was accepted!</p>"
+msgstr ""
+
+#: challenges/models.py:2867
+#, python-format
+msgid ""
+"<p>Your Experience Report to the Challenge \"<a href=\"%(url)s\">%(name)s</a>"
+"\", was rejected due to the Reason:</p><p>%(text)s</p>"
+msgstr ""
+
+#: challenges/models.py:2916
+#, python-format
+msgid ""
+"<p>\"<a href=\"%(profile)s\">%(member)s's</a>\" Experience Report to your "
+"Challenge \"<a href=\"%(url)s\">%(name)s</a>\" was rejected!</p>"
+msgstr ""
+
+#: challenges/tasks.py:58
+#, python-format
+msgid ""
+"<p>Your Challenge \"<a href=\"%(url)s\">%(name)s</a>\" is overdue!</p><p>If "
+"this Challenge has taken place as planned, please, mark it as completed.</"
+"p><p>Remember to remove all Participants from the Challenge, who did not "
+"show up to help, so the Challenge will not appear on their Profiles.</p>"
+msgstr ""
+
+#: challenges/tasks.py:155
+#, python-format
+msgid ""
+"<p>Don't forget that you are signed up for the Challenge \"<a href=\"%(url)s"
+"\">%(name)s</a>\" on %(start_date)s at %(start_time)s.</p><p>Please, don't "
+"forget to show up!</p>"
+msgstr ""
+
+#: challenges/templates/challenges/challenge-category-list.html:7
+#, fuzzy
+#| msgid "Challenge Name"
+msgid "Challenge Categories List"
+msgstr "Desafío Nombre"
+
+#: challenges/templates/challenges/challenge-category-list.html:15
+#, fuzzy
+#| msgid "Challenge Name"
+msgid "Challenge Categories"
+msgstr "Desafío Nombre"
+
+#: challenges/templates/challenges/challenge-create.html:31
+#: challenges/templates/challenges/challenge-dateless-list.html:15
+#: challenges/templates/challenges/challenge-details-base.html:27
+#: challenges/templates/challenges/challenge-edit.html:35
+#: challenges/templates/challenges/challenge-list.html:15
+#: challenges/templates/challenges/challenge-reporting-materials.html:34
+#: templates/fragments/navbar.html:115
+msgid "Challenges"
+msgstr "Desafíos"
+
+#: challenges/templates/challenges/challenge-create.html:45
+#: challenges/templates/challenges/challenge-create.html:599
+msgid ""
+"\n"
+"                You can create your Challenge here. If you have any "
+"Questions, don't hesitate to <a href=\"mailto:support@saneside.com\">contact "
+"Support</a>.\n"
+"            "
+msgstr ""
+
+#: challenges/templates/challenges/challenge-create.html:52
+#: challenges/templates/challenges/challenge-create.html:605
+msgid ""
+"After creating the Challenge, you will be redirected to the Details Page, "
+"where you can attach additional Materials (e.g. Images, Documents, Links, "
+"etc.)"
+msgstr ""
+
+#: challenges/templates/challenges/challenge-create.html:66
+#: challenges/templates/challenges/challenge-edit.html:64
+msgid "Upload Cover"
+msgstr "Carga De La Cubierta"
+
+#: challenges/templates/challenges/challenge-create.html:195
+#: challenges/templates/challenges/challenge-edit.html:192
+msgid "Roles"
+msgstr "Roles"
+
+#: challenges/templates/challenges/challenge-create.html:198
+msgid ""
+"\n"
+"                                        If you are looking for the "
+"differently skilled Volunteers / Participants, you can add specific Roles "
+"and Quantity here (e.g. 1 Driver, 10 Street-cleaners, etc.).<br/>\n"
+"                                        If Roles are specified, Members will "
+"be offered to choose, which Role they want to take, on signing up to the "
+"Challenge / Event.\n"
+"                                    "
+msgstr ""
+
+#: challenges/templates/challenges/challenge-create.html:343
+#: challenges/templates/challenges/challenge-edit.html:340
+#: challenges/templates/challenges/tabs/info-tab.html:308
+#: organizations/templates/organizations/organization-create.html:312
+#: organizations/templates/organizations/organization-edit.html:300
+#: organizations/templates/organizations/tabs/info-tab.html:251
+msgid "Contact Person"
+msgstr "Persona De Contacto"
+
+#: challenges/templates/challenges/challenge-create.html:389
+msgid ""
+"\n"
+"                                        Select one of the available Options: "
+"<i>dateless, once, <s>weekly</s>, <s>monthly</s>, <s>annually</s>, "
+"<s>custom</s></i>.\n"
+"                                    "
+msgstr ""
+
+#: challenges/templates/challenges/challenge-create.html:564
+#: organizations/templates/organizations/organization-create.html:430
+msgid "You have successfully completed all Steps."
+msgstr ""
+
+#: challenges/templates/challenges/challenge-create.html:570
+msgid "Create this Challenge"
+msgstr "Crear este Reto"
+
+#: challenges/templates/challenges/challenge-dateless-list.html:7
+#: challenges/templates/challenges/challenge-list.html:7
+msgid "Challenges List"
+msgstr ""
+
+#: challenges/templates/challenges/challenge-dateless-list.html:28
+#: challenges/templates/challenges/challenge-list.html:27
+msgid "Filter"
+msgstr ""
+
+#: challenges/templates/challenges/challenge-dateless-list.html:91
+#: challenges/templates/challenges/challenge-list.html:106
+msgid "Apply"
+msgstr "Aplicar"
+
+#: challenges/templates/challenges/challenge-dateless-list.html:151
+#: challenges/templates/challenges/challenge-list.html:166
+msgid "Calendar"
+msgstr "Calendario"
+
+#: challenges/templates/challenges/challenge-details-acknowledge.html:10
+msgid "Members, waiting for Acknowledgment"
+msgstr "A la espera de Confirmación"
+
+#: challenges/templates/challenges/challenge-details-base.html:51
+msgid "To confirm"
+msgstr "Para confirmar"
+
+#: challenges/templates/challenges/challenge-details-base.html:59
+msgid "To acknowledge"
+msgstr "Para reconocer"
+
+#: challenges/templates/challenges/challenge-details-confirm.html:10
+msgid "Members, waiting for Confirmation"
+msgstr "Miembros, a la espera de Confirmación"
+
+#: challenges/templates/challenges/challenge-edit.html:9
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:78
+msgid "Edit Challenge"
+msgstr "Edición De Desafío"
+
+#: challenges/templates/challenges/challenge-edit.html:50
+msgid ""
+"You can edit your Challenge here. After you save Changes, all applied "
+"Members will receive appropriate Notifications."
+msgstr ""
+
+#: challenges/templates/challenges/challenge-edit.html:195
+msgid ""
+"\n"
+"                                            If you are looking for the "
+"differently skilled Volunteers / Participants, you can add specific Roles "
+"and Quantity here (e.g. 1 Driver, 10 Street-cleaners, etc.).<br/>\n"
+"                                            If Roles are specified, Members "
+"will be offered to choose, which Role they want to take, on signing up to "
+"the Challenge / Event.\n"
+"                                        "
+msgstr ""
+
+#: challenges/templates/challenges/challenge-edit.html:386
+msgid ""
+"\n"
+"                                            Select one of the available "
+"Options: <i>dateless, once, <s>weekly</s>, <s>monthly</s>, <s>annually</s>, "
+"<s>custom</s></i>.\n"
+"                                        "
+msgstr ""
+
+#: challenges/templates/challenges/challenge-edit.html:559
+#: challenges/templates/challenges/challenge-reporting-materials.html:75
+#: challenges/templates/challenges/fragments/challenge-attachments-complete.html:10
+#: challenges/templates/challenges/fragments/challenge-attachments-upcoming.html:10
+#: organizations/templates/organizations/organization-edit.html:416
+#: organizations/templates/organizations/tabs/info-tab.html:105
+msgid "Attachments"
+msgstr "Los archivos adjuntos"
+
+#: challenges/templates/challenges/challenge-edit.html:592
+#: challenges/templates/challenges/challenge-reporting-materials.html:109
+#: organizations/templates/organizations/organization-edit.html:449
+msgid "Images"
+msgstr "Imágenes"
+
+#: challenges/templates/challenges/challenge-edit.html:604
+#: challenges/templates/challenges/challenge-reporting-materials.html:121
+#: organizations/templates/organizations/organization-edit.html:460
+msgid "Documents"
+msgstr "Documentos"
+
+#: challenges/templates/challenges/challenge-edit.html:617
+#: challenges/templates/challenges/challenge-reporting-materials.html:134
+#: organizations/templates/organizations/organization-edit.html:472
+msgid "Links"
+msgstr "Enlaces"
+
+#: challenges/templates/challenges/challenge-edit.html:630
+#: challenges/templates/challenges/challenge-reporting-materials.html:147
+#: organizations/templates/organizations/organization-edit.html:484
+msgid "Video Links"
+msgstr "Enlaces De Vídeo"
+
+#: challenges/templates/challenges/challenge-reporting-materials.html:8
+msgid "Challenge reporting Materials"
+msgstr ""
+
+#: challenges/templates/challenges/challenge-reporting-materials.html:36
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:44
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:48
+msgid "Reporting Materials"
+msgstr ""
+
+#: challenges/templates/challenges/challenge-reporting-materials.html:49
+msgid ""
+"\n"
+"                    Here you can add the Challenge reporting Materials, "
+"manage current Attachments, and describe Achievements.<br/>\n"
+"                    After you save Changes, all confirmed Participants will "
+"receive appropriate Notifications.\n"
+"                "
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:17
+msgid "This Challenge is complete"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:19
+msgid "This Challenge is closed"
+msgstr "Pasado Desafíos"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:21
+msgid "This Challenge already happened"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:25
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:25
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:84
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:65
+msgid "Confirmation required"
+msgstr "La confirmación requiere"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:27
+msgid ""
+"You need to write an Application to participate in this Challenge. The "
+"Challenge Organizer will use your Application Text and your History on "
+"SaneSide to decide whether you are a good fit for this Challenge."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:37
+msgid ""
+"\n"
+"                Notification was sent to all Participants.<br/>\n"
+"                Please, allow 3 - 7 Days to submit their Experience Reports, "
+"and come back to accept or reject them.\n"
+"            "
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:45
+msgid ""
+"You can add reporting Materials, manage current Attachments, and describe "
+"Achievements."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:50
+msgid "There is nothing to do here."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:55
+msgid "Please, mark this Challenge as completed, if it:"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:57
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:94
+msgid "has taken Place as planned;"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:58
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:95
+msgid ""
+"has NOT taken Place, but you would like to all of the Participants to keep "
+"the Hours 'worked'."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:62
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:99
+msgid ""
+"Remember to remove from the Challenge all the Participants, who did not show "
+"up, so the Challenge will not appear on their Profiles."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:69
+msgid ""
+"\n"
+"                        You can also clone the Challenge, if it hasn't taken "
+"Place, but you would like to re-schedule it.<br/>\n"
+"                        All the Participants will be automatically assigned "
+"to the cloned Challenge.\n"
+"                    "
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:76
+#: challenges/templates/challenges/modals/challenge-clone-modal.html:8
+msgid "Clone Challenge"
+msgstr "Guardar Reto"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:83
+msgid "Post this Challenge when you are ready, so other Members can see it."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:86
+msgid "Post Challenge"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:89
+msgid "Dateless."
+msgstr "Dateless"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:90
+msgid ""
+"Unless the Challenge is intentionally dateless, please, don't forget to "
+"provide its starting Date & Time."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:92
+msgid "You can mark this Challenge as completed, if it:"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:106
+#: challenges/templates/challenges/modals/challenge-close-modal.html:8
+msgid "Close Challenge"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:113
+msgid ""
+"You have submitted an Application to this Challenge. You must now wait for "
+"the Organizer to decide whether they want to accept your Offer to help."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:118
+msgid ""
+"You are signed up for this Challenge. The Organizer is expecting you to be "
+"there and do your best."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:137
+msgid "Challenge with Roles"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:138
+msgid ""
+"\n"
+"                            Challenge Author is looking for the differently "
+"skilled Volunteers / Participants.<br/>\n"
+"                            You will be offered to choose, which Role you "
+"want to take, on signing up to the Challenge / Event.\n"
+"                        "
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:145
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:45
+msgid "Participate"
+msgstr "Participar"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:151
+msgid "Application Warning"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:152
+msgid ""
+"Please, be advised, that it's not allowed to apply again to the Challenge "
+"after withdrawing Application."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:156
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:8
+msgid "Withdraw Application"
+msgstr "Retirar De La Aplicación"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:162
+msgid "Your Experience Report was returned to you with the following Note:"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:164
+msgid "Please revise your Experience Report and submit it again."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:167
+msgid "Submit my Experience"
+msgstr "Enviar mi Experiencia"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:173
+msgid "I did not participate"
+msgstr "Yo no participar"
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:179
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:8
+msgid "Rate the Challenge"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:189
+msgid ""
+"\n"
+"                            You see this Message, because you participated "
+"in this Challenge.<br/>\n"
+"                            Let us know, if there's something to complain "
+"about it.\n"
+"                        "
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-media-status-breakdown.html:204
+msgid "You must have a User Account to participate in this Challenge."
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-participant-thumbnail.html:64
+#: challenges/templates/challenges/modals/challenge-participation-remove-modal.html:25
+#: foro/templates/forum/modals/foro-forum-remove-modal.html:25
+#: foro/templates/forum/modals/foro-topic-remove-modal.html:25
+#: organizations/templates/organizations/fragments/organization-group-member-thumbnail.html:54
+#: organizations/templates/organizations/modals/organization-group-member-remove-modal.html:26
+#: organizations/templates/organizations/modals/organization-group-remove-modal.html:25
+#: organizations/templates/organizations/modals/organization-staff-member-remove-modal.html:26
+msgid "Remove"
+msgstr "Quitar"
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:56
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:64
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:39
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:47
+msgid "by"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:93
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:74
+#: challenges/templates/challenges/tabs/info-tab.html:40
+#: organizations/templates/organizations/fragments/organization-thumbnail-hor.html:103
+#: organizations/templates/organizations/tabs/info-tab.html:41
+msgid "Location is not provided"
+msgstr "La ubicación no es siempre"
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:165
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:145
+#: challenges/templates/challenges/tabs/info-tab.html:210
+msgid "Confirmed"
+msgstr "Confirmado"
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:169
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:149
+msgid "Waiting for Selfreflection"
+msgstr "La espera para la Reflexión"
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:171
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:151
+msgid "Waiting for Acknowledgement"
+msgstr "A la espera de Confirmación"
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:179
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:159
+msgid "Confirmed Application(s)"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:183
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:163
+msgid "Pending Application(s)"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:187
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:167
+msgid "Pending Experience Reports"
+msgstr ""
+
+#: challenges/templates/challenges/fragments/challenge-thumbnail-hor.html:191
+#: challenges/templates/challenges/fragments/challenge-thumbnail-vert.html:171
+msgid "Mark as completed"
+msgstr "Marcar como completada"
+
+#: challenges/templates/challenges/modals/challenge-clone-modal.html:16
+msgid "Please, enter a Reason for cloning"
+msgstr "Por favor, escriba una Razón"
+
+#: challenges/templates/challenges/modals/challenge-clone-modal.html:23
+msgid "Clone"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-close-modal.html:16
+#: challenges/templates/challenges/modals/challenge-participation-reject-modal.html:19
+#: challenges/templates/challenges/modals/challenge-participation-remove-modal.html:18
+#: challenges/templates/challenges/modals/challenge-selfreflection-reject-modal.html:19
+#: foro/templates/forum/modals/foro-forum-remove-modal.html:18
+#: foro/templates/forum/modals/foro-topic-remove-modal.html:18
+#: invites/templates/invites/modals/invite-reject-popup-modal.html:18
+#: invites/templates/invites/modals/invite-to-challenge-popup-modal.html:19
+#: invites/templates/invites/modals/invite-to-organization-group-popup-modal.html:20
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:55
+#: invites/templates/invites/modals/invite-to-organization-staff-popup-modal.html:19
+#: organizations/templates/organizations/modals/organization-group-member-remove-modal.html:19
+#: organizations/templates/organizations/modals/organization-group-remove-modal.html:18
+msgid "Please, enter a Reason"
+msgstr "Por favor, escriba una Razón"
+
+#: challenges/templates/challenges/modals/challenge-complete-modal.html:8
+msgid "Complete Challenge"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-complete-modal.html:16
+msgid ""
+"The Challenge Description will appear on the Resume of the Participants. "
+"Please update the Description if it not longer properly reflects what "
+"happened at the Challenge."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-create-modal.html:16
+msgid "You can update the Description."
+msgstr "Usted puede actualizar la Descripción."
+
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:8
+msgid "Not participated"
+msgstr "No participó"
+
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:18
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:16
+msgid "Explain yourself"
+msgstr "Explicar a ti mismo"
+
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:19
+msgid ""
+"Not participating in the Challenge could be very inconvenient for the "
+"Organizer. Please, write a Note, explaining why you couldn't make it this "
+"Time."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:23
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:21
+msgid "Warning"
+msgstr "Advertencia"
+
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:24
+msgid ""
+"If you apply to the Challenge in the future, the Organizer will be able to "
+"see all Challenges you withdrew from, and the Reason you entered. Seeing "
+"fewer Withdrawals will make you look more trustworthy."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-not-participated-modal.html:35
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:42
+#: challenges/templates/challenges/modals/challenge-selfreflection-submit-modal.html:32
+#: home/templates/home/contact-us.html:126
+#: organizations/templates/organizations/modals/organization-staff-member-edit-modal.html:31
+msgid "Submit"
+msgstr "Enviar"
+
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:8
+msgid "Participate in Challenge"
+msgstr "Participar en el Reto"
+
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:17
+msgid ""
+"When you sign up for a Challenge, the Organizer of the Challenge can see "
+"your personal Information, including Phone Number, Email, and Birth Date."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:20
+msgid "This is important"
+msgstr "Esto es importante"
+
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:21
+msgid ""
+"By clicking 'Participate', you agree to take part in this Challenge and to "
+"do your best."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-participation-post-modal.html:33
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:85
+msgid "Desired Role"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-participation-reject-modal.html:8
+msgid "Reject Application"
+msgstr "Rechazar La Solicitud"
+
+#: challenges/templates/challenges/modals/challenge-participation-remove-modal.html:8
+msgid "Remove Application"
+msgstr "Eliminación De La Aplicación"
+
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:17
+msgid ""
+"Withdrawing from the Challenge can be very inconvenient for the Organizer. "
+"Please write a Note, explaining why you can't make it this Time."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:22
+msgid ""
+"If you apply to the Challenge in the future, the Organizer will be able to "
+"see all Challenges you withdrew from, and the Reason you entered. Seeing "
+"fewer withdrawals will make you look more trustworthy."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-participation-withdraw-modal.html:33
+msgid "Withdraw"
+msgstr "Retirar"
+
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:19
+msgid ""
+"Thank you for participating! Please take a minute to rate the Challenge, "
+"Organization and Organizer."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:22
+msgid "How would you rate the Challenge?"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:28
+msgid "How would you rate the Organization?"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-rate-modal.html:34
+msgid "How would you rate the Organizer?"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-accept-modal.html:8
+msgid "Accept Experience Report"
+msgstr "Aceptar El Informe De La Experiencia"
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-accept-modal.html:19
+msgid "How would you rate the Participant?"
+msgstr "¿Cómo calificaría el Participante?"
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-accept-modal.html:24
+#, fuzzy
+#| msgid "Please, enter a Reason"
+msgid "Please, enter a Feedback"
+msgstr "Por favor, escriba una Razón"
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-reject-modal.html:8
+msgid "Reject Experience Report"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-submit-modal.html:8
+msgid "Submit Experience Report"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-submit-modal.html:17
+msgid ""
+"Thank you for participating! Please take a minute to write about your "
+"Experience."
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-submit-modal.html:20
+msgid "What did you do during this Challenge?"
+msgstr ""
+
+#: challenges/templates/challenges/modals/challenge-selfreflection-submit-modal.html:25
+msgid "What did you learn? What Skills could you practice?"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:43
+#: organizations/templates/organizations/tabs/info-tab.html:44
+msgid "View on Map"
+msgstr "Ver en el Mapa"
+
+#: challenges/templates/challenges/tabs/info-tab.html:56
+#: challenges/templates/challenges/tabs/info-tab.html:80
+msgid "Venue Local Time"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:63
+#: challenges/templates/challenges/tabs/info-tab.html:81
+msgid "Your Local Time"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:70
+#: challenges/templates/challenges/tabs/info-tab.html:82
+msgid "UTC Time"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:150
+msgid "Organized by"
+msgstr "Organizado por"
+
+#: challenges/templates/challenges/tabs/info-tab.html:186
+msgid "Roles Breakdown"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:198
+msgid "Required"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:202
+msgid "Applied"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:214
+msgid "Left"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:319
+#: organizations/templates/organizations/tabs/info-tab.html:262
+msgid "Information hidden"
+msgstr "La información oculta"
+
+#: challenges/templates/challenges/tabs/info-tab.html:320
+#: organizations/templates/organizations/tabs/info-tab.html:263
+msgid "Log in to see the Phone # and Email Address of the Contact Person."
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:517
+msgid "Share the Challenge on social App"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:522
+msgid ""
+"\n"
+"            You are just one Click away from sharing<br/>\n"
+"            your Challenge with all Friends.\n"
+"        "
+msgstr ""
+
+#: challenges/templates/challenges/tabs/info-tab.html:545
+msgid ""
+"\n"
+"            You can also do it later from the<br/>\n"
+"            Challenge Details Page.\n"
+"        "
+msgstr ""
+
+#: challenges/templates/challenges/tabs/participants-tab.html:11
+msgid "Members, signed up to Challenge"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/participants-tab.html:19
+msgid "There are no Participants, at the moment."
+msgstr ""
+
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:85
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:83
+msgid "Member"
+msgstr "Miembro"
+
+#: challenges/templates/challenges/tabs/to-acknowledge-tab.html:156
+msgid "There are no Members, waiting for Acknowledgment, at the moment."
+msgstr ""
+
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:50
+msgid "applied for the role of"
+msgstr ""
+
+#: challenges/templates/challenges/tabs/to-confirm-tab.html:152
+msgid "There are no Members, waiting for Confirmation, at the moment"
+msgstr ""
+
+#: challenges/views.py:185
+msgid "All Challenges"
+msgstr "Todos Los Desafíos"
+
+#: challenges/views.py:304
+msgid "Challenges near you"
+msgstr "Desafíos cerca de usted"
+
+#: challenges/views.py:378
+msgid "New Challenges"
+msgstr "Nuevos Desafíos"
+
+#: challenges/views.py:443
+msgid "Dateless Challenges"
+msgstr "Dateless Desafíos"
+
+#: challenges/views.py:510
+msgid "Featured Challenges"
+msgstr "Destacados Desafíos"
+
+#: core/choices.py:21
+msgid "--------"
+msgstr "--------"
+
+#: core/choices.py:22
+msgid "Facebook"
+msgstr "Facebook"
+
+#: core/choices.py:23
+msgid "Twitter"
+msgstr "Twitter"
+
+#: core/choices.py:24
+msgid "Linked In"
+msgstr "Linked In"
+
+#: core/choices.py:25
+msgid "Google +"
+msgstr "Google +"
+
+#: core/choices.py:26
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: core/choices.py:27
+msgid "Instagram"
+msgstr "Instagram"
+
+#: core/choices.py:28
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: core/choices.py:29
+msgid "YouTube"
+msgstr "YouTube"
+
+#: core/forms.py:60
+msgid "Address Line #1"
+msgstr "La Dirección De La Línea #1"
+
+#: core/forms.py:66
+msgid "Address Line #2"
+msgstr "La Dirección De La Línea #2"
+
+#: core/forms.py:72 core/models.py:461 core/models.py:462
+msgid "City"
+msgstr "Ciudad"
+
+#: core/forms.py:78 core/models.py:466 core/models.py:467
+msgid "Zip/Postal Code"
+msgstr "Zip/Código Postal"
+
+#: core/forms.py:83 core/models.py:471 core/models.py:472
+msgid "State/Province"
+msgstr "Estado/Provincia"
+
+#: core/forms.py:94
+msgid "Enter your Notes here..."
+msgstr "Escriba sus Notas aquí..."
+
+#: core/forms.py:146 core/forms.py:157 core/models.py:592 core/models.py:593
+#: core/models.py:602 core/models.py:603
+msgid "Ext."
+msgstr "Ext."
+
+#: core/forms.py:152
+msgid "Mobile Phone Number"
+msgstr "Número De Teléfono Móvil"
+
+#: core/forms.py:202 core/models.py:1354
+msgid "Newsletter Title"
+msgstr ""
+
+#: core/forms.py:259
+msgid "URL"
+msgstr "URL"
+
+#: core/models.py:78
+msgid "temporary file"
+msgstr "archivo temporal"
+
+#: core/models.py:79
+msgid "temporary files"
+msgstr "los archivos temporales"
+
+#: core/models.py:139 core/models.py:203
+msgid "File Name"
+msgstr "Nombre De Archivo"
+
+#: core/models.py:169
+msgid "attached image"
+msgstr "adjunto imagen"
+
+#: core/models.py:170
+msgid "attached images"
+msgstr "las imágenes adjuntas"
+
+#: core/models.py:237
+msgid "attached document"
+msgstr ""
+
+#: core/models.py:238
+msgid "attached documents"
+msgstr ""
+
+#: core/models.py:272
+msgid "URL Title"
+msgstr "URL Título"
+
+#: core/models.py:300
+msgid "attached url"
+msgstr ""
+
+#: core/models.py:301
+msgid "attached urls"
+msgstr ""
+
+#: core/models.py:359
+msgid "attached video url"
+msgstr ""
+
+#: core/models.py:360
+msgid "attached video urls"
+msgstr ""
+
+#: core/models.py:451 core/models.py:452
+msgid "Address Line 1"
+msgstr "Línea De Dirección 1"
+
+#: core/models.py:456 core/models.py:457
+msgid "Address Line 2"
+msgstr "La Dirección De La Línea #2"
+
+#: core/models.py:475 core/models.py:476
+msgid "Country"
+msgstr "País"
+
+#: core/models.py:482
+msgid "Notes"
+msgstr "Notas"
+
+#: core/models.py:483
+msgid ""
+"Here you can provide additional Notes, Directions, and any other Advice, "
+"regarding the Location."
+msgstr ""
+
+#: core/models.py:486
+msgid "address"
+msgstr "dirección"
+
+#: core/models.py:487
+msgid "addresses"
+msgstr "direcciones"
+
+#: core/models.py:606
+msgid "phone number"
+msgstr "número de teléfono"
+
+#: core/models.py:607
+msgid "phone numbers"
+msgstr "los números de teléfono"
+
+#: core/models.py:687
+msgid "view"
+msgstr "vista"
+
+#: core/models.py:688
+msgid "views"
+msgstr "vistas"
+
+#: core/models.py:789
+msgid "Comment Text"
+msgstr ""
+
+#: core/models.py:809
+msgid "comment"
+msgstr "comentario"
+
+#: core/models.py:810
+msgid "comments"
+msgstr "comentarios"
+
+#: core/models.py:909
+msgid "Complaint Text"
+msgstr "El Texto de la Aplicación"
+
+#: core/models.py:931
+msgid "complaint"
+msgstr "queja"
+
+#: core/models.py:932
+msgid "complaints"
+msgstr "quejas"
+
+#: core/models.py:981
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" has reported Complaint "
+"to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\" with the following:</"
+"p><p>%(text)s</p><p>Please, don't forget to take some Action.</p>"
+msgstr ""
+
+#: core/models.py:1114 core/models.py:1115
+msgid "Review Text"
+msgstr ""
+
+#: core/models.py:1130
+msgid "rating"
+msgstr "clasificación"
+
+#: core/models.py:1131
+msgid "ratings"
+msgstr "calificaciones"
+
+#: core/models.py:1348
+msgid "Newsletter Author"
+msgstr ""
+
+#: core/models.py:1359
+msgid "Newsletter Content"
+msgstr "Contenido Del Boletín"
+
+#: core/models.py:1384
+msgid "newsletter"
+msgstr "boletín de noticias"
+
+#: core/models.py:1385
+msgid "newsletters"
+msgstr "los boletines de noticias"
+
+#: core/models.py:1443 core/models.py:1444
+msgid "Social App"
+msgstr "Aplicación Social"
+
+#: core/models.py:1448
+msgid "url"
+msgstr "url"
+
+#: core/models.py:1449
+msgid "Social Link"
+msgstr "Enlace Social"
+
+#: core/models.py:1474
+msgid "social link"
+msgstr "enlace social"
+
+#: core/models.py:1475
+msgid "social links"
+msgstr "los enlaces sociales"
+
+#: core/templates/common/error.html:5 core/templates/common/error.html:12
+msgid "Error"
+msgstr "Error"
+
+#: core/templates/common/error.html:15 core/templates/common/info.html:15
+#: home/templates/home/about-us.html:13 home/templates/home/contact-us.html:14
+#: home/templates/home/faq-create.html:14 home/templates/home/faq-edit.html:14
+#: home/templates/home/faq-list.html:13
+#: home/templates/home/our-partners.html:13
+#: home/templates/home/our-team.html:13
+#: home/templates/home/privacy-policy.html:13
+#: home/templates/home/user-agreement.html:13
+#: templates/error-pages/404.html:35
+msgid "Home"
+msgstr "Casa"
+
+#: core/templates/common/fragments/rating-card-hor.html:19
+#: core/templates/common/fragments/rating-card-vert.html:19
+msgid "total"
+msgstr "total"
+
+#: core/templates/common/modals/attach-doc-modal.html:8
+msgid "Upload Documents"
+msgstr ""
+
+#: core/templates/common/modals/attach-doc-modal.html:18
+#: core/templates/common/modals/attach-image-modal.html:18
+msgid "Select Files..."
+msgstr "Seleccione Los Archivos..."
+
+#: core/templates/common/modals/attach-doc-modal.html:19
+#: core/templates/common/modals/attach-image-modal.html:19
+msgid "or drag Files here to upload them"
+msgstr ""
+
+#: core/templates/common/modals/attach-doc-modal.html:22
+msgid "Only Documents (pdf, doc, plain text) are supported."
+msgstr ""
+
+#: core/templates/common/modals/attach-doc-modal.html:33
+#: core/templates/common/modals/attach-image-modal.html:33
+#: core/templates/common/modals/attach-url-modal.html:23
+msgid "Done"
+msgstr ""
+
+#: core/templates/common/modals/attach-image-modal.html:8
+msgid "Upload Images"
+msgstr ""
+
+#: core/templates/common/modals/attach-image-modal.html:22
+msgid "Only Images (jpg, png) are supported."
+msgstr "Sólo Imágenes (jpg, png) son compatibles."
+
+#: core/templates/common/modals/attach-url-modal.html:8
+msgid "Add Links"
+msgstr "Añadir Enlaces"
+
+#: core/templates/common/modals/comment-add-modal.html:8
+msgid "Add Comment"
+msgstr "Añadir Comentario"
+
+#: core/templates/common/modals/comment-add-modal.html:20
+msgid "Please, enter a Comment"
+msgstr "Por favor, escriba un Comentario"
+
+#: core/templates/common/modals/comment-add-modal.html:27
+msgid "Comment"
+msgstr "Comentario"
+
+#: core/templates/common/modals/complaint-add-modal.html:8
+msgid "Add Complaint"
+msgstr "Añadir Comentario"
+
+#: core/templates/common/modals/complaint-add-modal.html:21
+msgid "So, you are going to leave a Complaint."
+msgstr ""
+
+#: core/templates/common/modals/complaint-add-modal.html:29
+msgid "Please, enter a Complaint"
+msgstr "Por favor, escriba un Comentario"
+
+#: core/templates/search/search.html:15 core/templates/search/search.html:63
+#: core/templates/search/search_text.html:15
+#: core/templates/search/search_text.html:63
+#: templates/fragments/navbar-forum.html:158
+#: templates/fragments/navbar.html:183
+msgid "Search"
+msgstr "Búsqueda"
+
+#: core/templates/search/search.html:26
+#: core/templates/search/search_text.html:26
+msgid "Search Request"
+msgstr ""
+
+#: core/templates/search/search.html:72
+msgid "Search Results"
+msgstr ""
+
+#: core/templates/search/search.html:80
+#: core/templates/search/search_text.html:80
+msgid "There are no Results at the moment."
+msgstr "No existen Resultados en el momento."
+
+#: core/templates/search/search.html:86
+#: core/templates/search/search_text.html:86
+msgid "Previous"
+msgstr "Anterior"
+
+#: core/templates/search/search_text.html:72
+msgid "Results"
+msgstr "Resultados"
+
+#: core/views.py:102
+msgid "No Files attached."
+msgstr "No hay Archivos adjuntos."
+
+#: foro/forms.py:41 foro/models.py:140
+msgid "Forum Title"
+msgstr "Título De Un Foro"
+
+#: foro/forms.py:47 foro/models.py:144
+msgid "Forum Description"
+msgstr ""
+
+#: foro/forms.py:54
+msgid ""
+"Style CSS, e.g. <i class='fa fa-fw fa-4x fa-exclamation-triangle' "
+"style='color:yellow;'></i>"
+msgstr ""
+
+#: foro/forms.py:103 foro/models.py:307
+msgid "Topic Title"
+msgstr ""
+
+#: foro/forms.py:109 foro/models.py:311
+msgid "Topic Description"
+msgstr ""
+
+#: foro/models.py:49 home/models.py:149
+msgid "Section Author"
+msgstr ""
+
+#: foro/models.py:55 home/models.py:155
+msgid "Section Title"
+msgstr ""
+
+#: foro/models.py:58 home/models.py:158
+msgid "Order"
+msgstr ""
+
+#: foro/models.py:59 home/models.py:159
+msgid "Section Order (auto-incremented)"
+msgstr ""
+
+#: foro/models.py:64 home/models.py:164
+msgid "section"
+msgstr "sección"
+
+#: foro/models.py:65 home/models.py:165
+msgid "sections"
+msgstr "secciones"
+
+#: foro/models.py:128
+msgid "Forum Author"
+msgstr ""
+
+#: foro/models.py:133 home/models.py:229
+msgid "Section"
+msgstr "Sección"
+
+#: foro/models.py:134
+msgid "Forum Section"
+msgstr ""
+
+#: foro/models.py:147
+msgid "Style CSS"
+msgstr "Estilo de CSS"
+
+#: foro/models.py:149
+msgid "Forum Style CSS, e.g. <i class='fa fa-fw fa-4x fa-user'></i>"
+msgstr ""
+
+#: foro/models.py:157
+msgid "forum"
+msgstr "foro"
+
+#: foro/models.py:158
+msgid "forums"
+msgstr "foros"
+
+#: foro/models.py:295
+msgid "Topic Author"
+msgstr ""
+
+#: foro/models.py:300 foro/models.py:301
+#: foro/templates/forum/forum-list.html:5
+#: foro/templates/forum/forum-list.html:26
+#: foro/templates/forum/fragments/forum-section.html:15
+#: foro/templates/forum/topic-list.html:5 templates/fragments/footer.html:32
+#: templates/fragments/navbar-forum.html:103
+#: templates/fragments/navbar-forum.html:168
+#: templates/fragments/navbar.html:193
+msgid "Forum"
+msgstr "Foro"
+
+#: foro/models.py:319
+msgid "forum topic"
+msgstr ""
+
+#: foro/models.py:320
+msgid "forum topics"
+msgstr ""
+
+#: foro/models.py:450 foro/templates/forum/topic-list.html:28
+#: foro/templates/forum/topic-post-list.html:6
+msgid "Topic"
+msgstr "Tema"
+
+#: foro/models.py:451
+msgid "Post Topic"
+msgstr ""
+
+#: foro/models.py:476
+msgid "forum topic post"
+msgstr ""
+
+#: foro/models.py:477
+msgid "forum topic posts"
+msgstr ""
+
+#: foro/templates/forum/forum-create.html:7
+msgid "Create a Forum"
+msgstr "Crear un Foro"
+
+#: foro/templates/forum/forum-create.html:30
+#: foro/templates/forum/forum-edit.html:30
+#: foro/templates/forum/forum-list.html:13
+#: foro/templates/forum/topic-create.html:30
+#: foro/templates/forum/topic-edit.html:30
+#: foro/templates/forum/topic-list.html:13
+#: foro/templates/forum/topic-post-create.html:30
+#: foro/templates/forum/topic-post-list.html:14
+msgid "Forums"
+msgstr "Foros"
+
+#: foro/templates/forum/forum-edit.html:7
+msgid "Edit the Forum"
+msgstr "Editar el Foro"
+
+#: foro/templates/forum/forum-list.html:35
+msgid ""
+"\n"
+"                    This is the right Place to discuss any Ideas, Critics, "
+"Feature Requests and all the Ideas, regarding our Platform.<br/>\n"
+"                    Please, follow the Forum Rules, and always check FAQ "
+"before posting, to prevent duplicate Posts.\n"
+"                "
+msgstr ""
+
+#: foro/templates/forum/fragments/forum-section.html:19
+#: foro/templates/forum/topic-create.html:32
+#: foro/templates/forum/topic-edit.html:32
+#: foro/templates/forum/topic-list.html:15
+#: foro/templates/forum/topic-list.html:43
+#: foro/templates/forum/topic-post-create.html:32
+#: foro/templates/forum/topic-post-list.html:16
+msgid "Topics"
+msgstr "Temas"
+
+#: foro/templates/forum/fragments/forum-section.html:20
+#: foro/templates/forum/topic-list.html:47
+#: foro/templates/forum/topic-post-create.html:34
+msgid "Posts"
+msgstr "Puestos"
+
+#: foro/templates/forum/fragments/forum-section.html:21
+#: foro/templates/forum/topic-list.html:48
+msgid "Last Post"
+msgstr ""
+
+#: foro/templates/forum/fragments/forum-section.html:59
+msgid "There are no Forums at the moment"
+msgstr "No hay Foros en el momento"
+
+#: foro/templates/forum/fragments/forum-thumbnail-search.html:17
+#: foro/templates/forum/fragments/forum-topic-thumbnail-search.html:17
+#: organizations/templates/organizations/fragments/organization-thumbnail-search.html:37
+msgid "created by"
+msgstr "creado por"
+
+#: foro/templates/forum/modals/foro-forum-remove-modal.html:8
+msgid "Remove Forum"
+msgstr "Quitar Foro"
+
+#: foro/templates/forum/modals/foro-topic-remove-modal.html:8
+msgid "Remove Topic"
+msgstr "Retire Tema"
+
+#: foro/templates/forum/topic-create.html:7
+msgid "Create a Topic"
+msgstr "Crear un Tema"
+
+#: foro/templates/forum/topic-edit.html:7
+msgid "Edit the Topic"
+msgstr "Editar el Tema"
+
+#: foro/templates/forum/topic-list.html:80
+msgid "There are no Topics at the moment"
+msgstr ""
+
+#: foro/templates/forum/topic-post-create.html:7
+msgid "Create a Post"
+msgstr "Crear un Post"
+
+#: foro/templates/forum/topic-post-list.html:72
+msgid "There are no Posts at the moment"
+msgstr "No hay Puestos por el momento"
+
+#: foro/templatetags/foro_mptt_tags.py:69
+#, python-format
+msgid "%s Tag requires a QuerySet"
+msgstr ""
+
+#: home/forms.py:37
+msgid "Subject"
+msgstr "Tema"
+
+#: home/forms.py:44
+msgid "Enter a Message here..."
+msgstr "Escribe un Mensaje aquí..."
+
+#: home/forms.py:80 home/models.py:234 home/models.py:235
+msgid "Question"
+msgstr "Pregunta"
+
+#: home/models.py:61 home/models.py:62 organizations/forms.py:89
+#: organizations/models.py:125
+#: organizations/templates/organizations/tabs/info-tab.html:61
+msgid "Website"
+msgstr "Sitio web"
+
+#: home/models.py:67
+msgid "partner"
+msgstr ""
+
+#: home/models.py:68
+msgid "partners"
+msgstr ""
+
+#: home/models.py:230
+msgid "FAQ Section"
+msgstr "Sección"
+
+#: home/models.py:239 home/models.py:240
+msgid "Answer"
+msgstr "Respuesta"
+
+#: home/models.py:248
+msgid "frequently asked question"
+msgstr "preguntas frecuentes"
+
+#: home/models.py:249
+msgid "frequently asked questions"
+msgstr "preguntas frecuentes"
+
+#: home/templates/home/about-us.html:5 home/templates/home/about-us.html:15
+#: templates/fragments/footer.html:30
+#: templates/fragments/navbar-forum.html:166
+#: templates/fragments/navbar.html:191
+msgid "About us"
+msgstr "Acerca de nosotros"
+
+#: home/templates/home/about-us.html:27
+msgid "In brief"
+msgstr "En breve"
+
+#: home/templates/home/about-us.html:29
+msgid ""
+"Initially, work on the Project began back in the Year 2012, and the Project "
+"was known as"
+msgstr ""
+
+#: home/templates/home/about-us.html:29
+msgid ""
+"However, due to the lack of Funding, the Work on the Project was suspended "
+"in mid-2013."
+msgstr ""
+
+#: home/templates/home/about-us.html:30
+msgid ""
+"Work on the Project was resumed in the second Half of 2014 by a Team of the "
+"independent Developers and Enthusiasts, and now the Project is experiencing "
+"its second Birth."
+msgstr ""
+
+#: home/templates/home/about-us.html:34
+msgid "Who we are"
+msgstr "Quienes somos"
+
+#: home/templates/home/about-us.html:36
+msgid "We are the Team of independent Developers and Enthusiasts."
+msgstr ""
+
+#: home/templates/home/about-us.html:37
+msgid "Our Motto: Want to be a Human - help others."
+msgstr ""
+
+#: home/templates/home/about-us.html:38
+msgid ""
+"Our Goal: to provide the Promotion and Support of the civil, positively "
+"directed Volunteer Initiatives around the World."
+msgstr ""
+
+#: home/templates/home/about-us.html:39
+msgid "Our Mission"
+msgstr "Nuestra Misión"
+
+#: home/templates/home/about-us.html:41
+msgid ""
+"With the Help of the Volunteers to achieve concrete Results in solving "
+"various social Problems."
+msgstr ""
+
+#: home/templates/home/about-us.html:42
+msgid "To help young People to disclose Leadership and Volunteer Potential."
+msgstr ""
+
+#: home/templates/home/about-us.html:43
+msgid "To bring to Life best socially significant volunteering Initiatives."
+msgstr ""
+
+#: home/templates/home/about-us.html:44
+msgid ""
+"To create the Conditions for a long-term Partnership of the public "
+"Organizations (Participants of the Project) in carrying out other social "
+"community service Programs involving Volunteers."
+msgstr ""
+
+#: home/templates/home/about-us.html:45
+msgid ""
+"Actively use the Internet to promote the Goals and Objectives of the "
+"volunteering Movement."
+msgstr ""
+
+#: home/templates/home/about-us.html:46
+msgid ""
+"To join Forces of the public Organizations in the Area of solving common "
+"social Problems involving Volunteers."
+msgstr ""
+
+#: home/templates/home/about-us.html:48
+msgid "Check out the"
+msgstr ""
+
+#: home/templates/home/about-us.html:48
+msgid "Team</a> behind SaneSide."
+msgstr ""
+
+#: home/templates/home/about-us.html:52
+msgid "Help us to improve the Website"
+msgstr ""
+
+#: home/templates/home/about-us.html:54
+msgid ""
+"We work hard on our Project, and therefore your Opinion is very important "
+"for us."
+msgstr ""
+
+#: home/templates/home/about-us.html:55
+msgid ""
+"All your Suggestions for improving the Website you can send to the Technical "
+"Support Team from the"
+msgstr ""
+
+#: home/templates/home/about-us.html:55
+msgid "Contact us</a> Page."
+msgstr ""
+
+#: home/templates/home/contact-us.html:30
+msgid "We would love to hear from you"
+msgstr "Nos encantaría saber de usted"
+
+#: home/templates/home/contact-us.html:31
+msgid ""
+"Our Los Angeles based Team are on hand to respond to your Emails everyday"
+msgstr ""
+
+#: home/templates/home/contact-us.html:40
+#: organizations/templates/organizations/tabs/info-tab.html:225
+msgid "Twitter Feed"
+msgstr "Feed De Twitter"
+
+#: home/templates/home/contact-us.html:60
+msgid "Contact Info"
+msgstr "Información De Contacto"
+
+#: home/templates/home/contact-us.html:76
+msgid "Phone"
+msgstr "Teléfono"
+
+#: home/templates/home/contact-us.html:82
+msgid "Online Support"
+msgstr "Soporte En Línea"
+
+#: home/templates/home/contact-us.html:88
+msgid "Send us a Message"
+msgstr "Envíenos un Mensaje"
+
+#: home/templates/home/faq-create.html:6
+msgid "Add FAQ"
+msgstr ""
+
+#: home/templates/home/faq-create.html:16 home/templates/home/faq-edit.html:16
+#: home/templates/home/faq-list.html:5 home/templates/home/faq-list.html:15
+#: templates/fragments/footer.html:16
+#: templates/fragments/navbar-forum.html:188
+#: templates/fragments/navbar.html:213
+msgid "FAQ"
+msgstr "Preguntas frecuentes"
+
+#: home/templates/home/faq-create.html:70
+msgid "Add this FAQ"
+msgstr ""
+
+#: home/templates/home/faq-edit.html:6
+msgid "Edit FAQ"
+msgstr "Editar"
+
+#: home/templates/home/index.html:47
+msgid ""
+"\n"
+"                    Have Fun<br/>\n"
+"                    Meet new People<br/>\n"
+"                    Make the World a better Place\n"
+"                "
+msgstr ""
+
+#: home/templates/home/index.html:61
+msgid "Online Platform for volunteering work"
+msgstr "Plataforma en línea para el trabajo de voluntariado"
+
+#: home/templates/home/index.html:64 home/templates/home/index.html:68
+#: templates/emails/base.html:785 templates/emails/base.html:789
+msgid "Find out more"
+msgstr "Averigüe más"
+
+#: home/templates/home/index.html:86
+msgid "SaneSide is an online Platform for volunteering Work"
+msgstr "SaneSide es una Plataforma en línea para el Trabajo de voluntariado"
+
+#: home/templates/home/index.html:88
+msgid ""
+"On SaneSide you can find and post Opportunities to volunteer your Time for a "
+"good Cause."
+msgstr ""
+
+#: home/templates/home/index.html:89
+msgid ""
+"Do you want to meet new People, have fun, and make the World a better Place?"
+msgstr ""
+
+#: home/templates/home/index.html:90
+msgid "Find your first Challenge on SaneSide."
+msgstr "Encontrar su primer Desafío en SaneSide"
+
+#: home/templates/home/index.html:93
+msgid "Right Now"
+msgstr "Ahora Mismo"
+
+#: home/templates/home/index.html:103
+msgid "How it works"
+msgstr "Cómo funciona"
+
+#: home/templates/home/index.html:108
+msgid "Tell us, where you need the Help or what Activity you offer"
+msgstr ""
+
+#: home/templates/home/index.html:109
+msgid ""
+"After signing up to our Platform, you can start creating your Challenges. "
+"You will be asked to describe your Challenge (Description, Time &amp; Place, "
+"Category, etc.), which will help other Members to find your Challenge with "
+"ease."
+msgstr ""
+
+#: home/templates/home/index.html:114
+msgid "All interested Members will apply for the Challenge"
+msgstr ""
+
+#: home/templates/home/index.html:115
+msgid ""
+"Registered Members will apply for your Challenge. You can review their "
+"Profiles, Examples of current and/or past Experience, and other Members' "
+"Reviews. Your contact Details are hidden from the unregistered Users."
+msgstr ""
+
+#: home/templates/home/index.html:120
+msgid "Make a Decision"
+msgstr "Tomar una Decisión"
+
+#: home/templates/home/index.html:121
+msgid ""
+"Our Platform allows you to engage with applied Members before accepting "
+"their Participation in your Challenge. Ask Questions, provide them with "
+"additional Information, and ensure, that they are as excited about your "
+"Challenge as you are."
+msgstr ""
+
+#: home/templates/home/index.html:126
+msgid "Accomplish your Challenge"
+msgstr "Lograr su Reto"
+
+#: home/templates/home/index.html:127
+msgid ""
+"Once you have found the right Participants for the Challenge, confirm their "
+"Participation in the Challenge, and get it done. After the Challenge has "
+"taken its Place, review Experience Reports, and leave Feedback for each "
+"Person, participated in."
+msgstr ""
+
+#: home/templates/home/index.html:140
+msgid "Latest from Twitter"
+msgstr "Más reciente de Twitter"
+
+#: home/templates/home/index.html:169
+msgid "Follow"
+msgstr "Siga"
+
+#: home/templates/home/modals/privacy-policy-popup-modal.html:8
+#: home/templates/home/privacy-policy.html:5
+#: home/templates/home/privacy-policy.html:15
+#: templates/fragments/footer.html:14
+#: templates/fragments/navbar-forum.html:186
+#: templates/fragments/navbar.html:211
+msgid "Privacy Policy"
+msgstr "Política De Privacidad"
+
+#: home/templates/home/modals/user-agreement-popup-modal.html:8
+#: home/templates/home/user-agreement.html:5
+#: home/templates/home/user-agreement.html:15
+#: templates/fragments/footer.html:15
+#: templates/fragments/navbar-forum.html:187
+#: templates/fragments/navbar.html:212
+msgid "User Agreement"
+msgstr "Acuerdo De Usuario"
+
+#: home/templates/home/our-partners.html:5
+#: home/templates/home/our-partners.html:15 templates/fragments/footer.html:24
+#: templates/fragments/navbar-forum.html:178
+#: templates/fragments/navbar.html:203
+msgid "Our Partners"
+msgstr "Nuestros Socios"
+
+#: home/templates/home/our-team.html:5 home/templates/home/our-team.html:15
+#: templates/fragments/footer.html:23
+#: templates/fragments/navbar-forum.html:177
+#: templates/fragments/navbar.html:202
+msgid "Our Team"
+msgstr "Nuestro Equipo"
+
+#: home/templates/home/our-team.html:27
+msgid "Check out the Team behind the SaneSide"
+msgstr "Retirar el Equipo detrás de la SaneSide"
+
+#: home/templates/home/our-team.html:40
+msgid "There are no Team Members at the moment"
+msgstr "No hay Miembros del Equipo en el momento"
+
+#: invites/models.py:82 invites/models.py:83
+msgid "Inviter"
+msgstr "Autor de invitación"
+
+#: invites/models.py:88 invites/models.py:89
+msgid "Invitee"
+msgstr "Invitado"
+
+#: invites/models.py:96
+msgid "Invite Status"
+msgstr "Invitar Estado"
+
+#: invites/models.py:116
+msgid "Rejection Text"
+msgstr ""
+
+#: invites/models.py:117
+msgid "Rejection"
+msgstr "Rechazo"
+
+#: invites/models.py:129 invites/models.py:130
+msgid "Date rejected"
+msgstr ""
+
+#: invites/models.py:134 invites/models.py:135
+msgid "Date revoked"
+msgstr ""
+
+#: invites/models.py:141 invites/models.py:142
+msgid "Archived for Inviter"
+msgstr ""
+
+#: invites/models.py:145 invites/models.py:146
+msgid "Archived for Invitee"
+msgstr ""
+
+#: invites/models.py:166
+msgid "invite"
+msgstr ""
+
+#: invites/models.py:167
+msgid "invites"
+msgstr ""
+
+#: invites/models.py:206
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" has invited you to "
+"%(subject)s \"<a href=\"%(url)s\">%(name)s</a>\" with the following:</p><p>"
+"%(text)s</p><p>Please, don't forget to accept, or reject Invitation.</p>"
+msgstr ""
+
+#: invites/models.py:262
+#, python-format
+msgid ""
+"<p>You have invited Member \"<a href=\"%(profile)s\">%(member)s</a>\" to "
+"%(subject)s \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: invites/models.py:314
+#, python-format
+msgid ""
+"<p>You have accepted \"<a href=\"%(profile)s\">%(member)s's</a>\" Invitation "
+"to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: invites/models.py:363
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" accepted your "
+"Invitation to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: invites/models.py:412
+#, python-format
+msgid ""
+"<p>You have rejected \"<a href=\"%(profile)s\">%(member)s's</a>\" Invitation "
+"to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: invites/models.py:461
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s</a>\" rejected your "
+"Invitation to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\" with the "
+"following:</p><p>%(text)s</p>"
+msgstr ""
+
+#: invites/models.py:512
+#, python-format
+msgid ""
+"<p>Member \"<a href=\"%(profile)s\">%(member)s's</a>\" revoked their "
+"Invitation to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: invites/models.py:561
+#, python-format
+msgid ""
+"<p>You revoked your Invitation of Member \"<a href=\"%(profile)s\">"
+"%(member)s</a>\" to %(subject)s \"<a href=\"%(url)s\">%(name)s</a>\"!</p>"
+msgstr ""
+
+#: invites/templates/invites/modals/invite-reject-popup-modal.html:8
+msgid "Reject Invitation"
+msgstr ""
+
+#: invites/templates/invites/modals/invite-to-challenge-popup-modal.html:26
+#: invites/templates/invites/modals/invite-to-organization-group-popup-modal.html:27
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:62
+#: invites/templates/invites/modals/invite-to-organization-staff-popup-modal.html:26
+#: organizations/templates/organizations/fragments/organization-groups-adm.html:37
+#: organizations/templates/organizations/tabs/staff-adm-tab.html:32
+msgid "Invite"
+msgstr "Invitar"
+
+#: invites/templates/invites/modals/invite-to-organization-group-popup-modal.html:8
+msgid "Invite to Organization Group"
+msgstr ""
+
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:21
+msgid "Warning!!!"
+msgstr "Advertencia!!!"
+
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:22
+msgid ""
+"\n"
+"                                We noticed, that your Organization doesn't "
+"have Groups.<br/>\n"
+"                                The Invitee will be added to the "
+"Organization as a Staff Member by default.\n"
+"                            "
+msgstr ""
+
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:31
+msgid "Notice"
+msgstr "Aviso"
+
+#: invites/templates/invites/modals/invite-to-organization-popup-modal.html:32
+msgid ""
+"\n"
+"                                Please, choose, where you'd like to add the "
+"Invitee.\n"
+"                            "
+msgstr ""
+
+#: invites/templates/invites/modals/invite-to-organization-staff-popup-modal.html:8
+msgid "Invite to Organization Staff"
+msgstr ""
+
+#: organizations/forms.py:39
+msgid ""
+"You can make your Organization hidden from the Public, so only Subscribers "
+"and Members, invited by you, will be able to see the Organization's Activity "
+"and sign up for its Challenges (Events)."
+msgstr ""
+
+#: organizations/forms.py:70 organizations/models.py:80
+msgid "Organization Name"
+msgstr "Nombre De La Organización"
+
+#: organizations/forms.py:76 organizations/models.py:84
+msgid "Organization Description"
+msgstr ""
+
+#: organizations/forms.py:94
+msgid "Embedded Video (Link)"
+msgstr "El Vídeo Incrustado (Link)"
+
+#: organizations/forms.py:99 organizations/models.py:136
+msgid "Organization Email"
+msgstr ""
+
+#: organizations/forms.py:129
+msgid "Reserved Word cannot be used as an Organization Name."
+msgstr ""
+
+#: organizations/models.py:73
+msgid "Organization Author"
+msgstr ""
+
+#: organizations/models.py:111
+msgid "Organization Address"
+msgstr ""
+
+#: organizations/models.py:118
+msgid "Organization Phone Numbers"
+msgstr ""
+
+#: organizations/models.py:126
+msgid "Organization Website"
+msgstr ""
+
+#: organizations/models.py:130
+#: organizations/templates/organizations/tabs/info-tab.html:63
+msgid "Video"
+msgstr "Video"
+
+#: organizations/models.py:131
+msgid "Organization Informational Video"
+msgstr ""
+
+#: organizations/models.py:148
+#: organizations/templates/organizations/tabs/info-tab.html:271
+msgid "Subscribers"
+msgstr "Los suscriptores"
+
+#: organizations/models.py:149
+msgid "Organization Subscribers"
+msgstr ""
+
+#: organizations/models.py:158
+msgid "Organization contact Person full Name"
+msgstr ""
+
+#: organizations/models.py:162
+msgid "Organization contact Person Email"
+msgstr ""
+
+#: organizations/models.py:180
+msgid "organization"
+msgstr "organización"
+
+#: organizations/models.py:181
+msgid "organizations"
+msgstr "las organizaciones"
+
+#: organizations/models.py:281
+#, python-format
+msgid ""
+"<p>The Organization \"<a href=\"%(url)s\">%(name)s</a>\" was successfully "
+"created.</p>"
+msgstr ""
+
+#: organizations/models.py:330
+#, python-format
+msgid ""
+"<p>The Organization \"<a href=\"%(url)s\">%(name)s</a>\" was successfully "
+"created, and you were added as a Contact Person to it.</p>"
+msgstr ""
+
+#: organizations/models.py:376
+#, python-format
+msgid ""
+"<p>Your Organization \"<a href=\"%(url)s\">%(name)s</a>\" was modified.</p>"
+msgstr ""
+
+#: organizations/models.py:425
+#, python-format
+msgid ""
+"<p>The Organization \"<a href=\"%(url)s\">%(name)s</a>\", were you added as "
+"a Contact Person, was modified!.</p>"
+msgstr ""
+
+#: organizations/models.py:475
+#, python-format
+msgid ""
+"<p>The Organization's \"<a href=\"%(url)s\">%(name)s</a>\" Newsletter with "
+"the Title \"%(title)s\", was successfully created and populated.</p>"
+msgstr ""
+
+#: organizations/models.py:523
+#, python-format
+msgid "The \"<a href=\"%(url)s\">%(name)s</a>\" Newsletter:<br/>\"%(title)s\""
+msgstr ""
+
+#: organizations/models.py:529
+#, python-format
+msgid ""
+"<p>%(content)s<br/>You have received this Email, because you're subscribed "
+"to the Organization's Newsletters and Activity Notifications.</p>"
+msgstr ""
+
+#: organizations/models.py:674
+msgid "Organization Staff Member Author"
+msgstr ""
+
+#: organizations/models.py:686
+msgid "Staff Member"
+msgstr "Miembro Del Personal"
+
+#: organizations/models.py:687
+msgid "Organization Staff Member"
+msgstr ""
+
+#: organizations/models.py:696
+msgid "Short Bio"
+msgstr "Breve Biografía"
+
+#: organizations/models.py:707
+msgid "organization staff member"
+msgstr ""
+
+#: organizations/models.py:708
+msgid "organization staff members"
+msgstr ""
+
+#: organizations/models.py:808
+msgid "Organization Group Author"
+msgstr ""
+
+#: organizations/models.py:813
+msgid "Organiztion Group Name"
+msgstr ""
+
+#: organizations/models.py:817
+msgid "Organization Group Description"
+msgstr ""
+
+#: organizations/models.py:829
+msgid "Group Member"
+msgstr "Miembro Del Grupo"
+
+#: organizations/models.py:830
+msgid "Organization Group Member"
+msgstr ""
+
+#: organizations/models.py:838
+msgid "organization group"
+msgstr "grupo de organización"
+
+#: organizations/models.py:839
+msgid "organization groups"
+msgstr "grupos de organización"
+
+#: organizations/templates/organizations/fragments/organization-groups-adm.html:35
+#: organizations/templates/organizations/tabs/staff-adm-tab.html:30
+msgid "Find and invite"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-groups-adm.html:78
+#: organizations/templates/organizations/fragments/organization-groups.html:27
+#, fuzzy
+#| msgid "There are no Members at the moment"
+msgid "This Group has no Members at the moment."
+msgstr "No hay Miembros en el momento"
+
+#: organizations/templates/organizations/fragments/organization-groups-adm.html:90
+#: organizations/templates/organizations/fragments/organization-groups.html:43
+msgid "This Organization has no Groups at the moment."
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-iframe-complete.html:42
+msgid "Completed Challenges on SaneSide"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-iframe-complete.html:75
+msgid "This Organization has no closed Challenges at the moment"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-iframe-complete.html:81
+msgid "Total Number of Hours received for the Organization"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-iframe-upcoming.html:42
+msgid "Upcoming Challenges on SaneSide"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-iframe-upcoming.html:65
+msgid "This Organization has no open Challenges at the moment"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:9
+#: organizations/templates/organizations/organization-edit.html:9
+msgid "Edit Organization"
+msgstr "Editar Organización"
+
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:10
+msgid "Populate Newsletter"
+msgstr "Rellenar Boletín De Noticias"
+
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:14
+msgid "Subscribe"
+msgstr "Suscribirse"
+
+#: organizations/templates/organizations/fragments/organization-media-status-breakdown.html:22
+msgid ""
+"\n"
+"                You see this Message, because in the you participated in the "
+"Challenge(s), organized by this Organization.<br/>\n"
+"                Let us know, if there's something to complain about it.\n"
+"            "
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-staff-members-adm.html:76
+#: organizations/templates/organizations/fragments/organization-staff-members.html:59
+msgid "Avatar"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-staff-members-adm.html:77
+#: organizations/templates/organizations/fragments/organization-staff-members.html:60
+msgid "Info"
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-staff-members-adm.html:123
+#: organizations/templates/organizations/fragments/organization-staff-members.html:94
+msgid "This Organization has no Staff Members at the moment."
+msgstr ""
+
+#: organizations/templates/organizations/fragments/organization-thumbnail-hor.html:28
+msgid "Created by"
+msgstr "Creado por"
+
+#: organizations/templates/organizations/fragments/organization-thumbnail-hor.html:85
+msgid "Current Challenges"
+msgstr "Retos Actuales"
+
+#: organizations/templates/organizations/modals/organization-group-create-modal.html:8
+msgid "Create Organization Group"
+msgstr "Crear Grupo de la Organización"
+
+#: organizations/templates/organizations/modals/organization-group-create-modal.html:18
+msgid "Group Name"
+msgstr "Nombre Del Grupo"
+
+#: organizations/templates/organizations/modals/organization-group-create-modal.html:23
+msgid "Group Description"
+msgstr "Descripción De Grupo"
+
+#: organizations/templates/organizations/modals/organization-group-member-remove-modal.html:8
+msgid "Remove Group Member"
+msgstr ""
+
+#: organizations/templates/organizations/modals/organization-group-remove-modal.html:8
+msgid "Remove Group"
+msgstr "Eliminar Grupo"
+
+#: organizations/templates/organizations/modals/organization-staff-member-edit-modal.html:8
+msgid "Edit Staff Member"
+msgstr "Miembro Del Personal"
+
+#: organizations/templates/organizations/modals/organization-staff-member-remove-modal.html:8
+msgid "Remove Staff Member"
+msgstr "Miembro Del Personal"
+
+#: organizations/templates/organizations/organization-create.html:32
+#: organizations/templates/organizations/organization-details-base.html:27
+#: organizations/templates/organizations/organization-directory.html:14
+#: organizations/templates/organizations/organization-edit.html:35
+#: organizations/templates/organizations/organization-list.html:15
+#: organizations/templates/organizations/organization-populate-newsletter.html:31
+#: templates/fragments/navbar.html:128
+msgid "Organizations"
+msgstr "Las organizaciones"
+
+#: organizations/templates/organizations/organization-create.html:47
+#: organizations/templates/organizations/organization-create.html:458
+msgid ""
+"\n"
+"                    You can create your Organization here. If you have any "
+"questions, don't hesitate to <a href=\"mailto:support@saneside.com\">contact "
+"Support</a>.\n"
+"                "
+msgstr ""
+
+#: organizations/templates/organizations/organization-create.html:54
+#: organizations/templates/organizations/organization-create.html:464
+msgid ""
+"After creating the Organization, you will be redirected to the Details Page, "
+"where you can attach related Images, Documents and Links."
+msgstr ""
+
+#: organizations/templates/organizations/organization-create.html:68
+#: organizations/templates/organizations/organization-edit.html:57
+msgid "Upload Logo"
+msgstr "Subir Logo"
+
+#: organizations/templates/organizations/organization-create.html:436
+msgid "Create this Organization"
+msgstr "Crear esta Organización"
+
+#: organizations/templates/organizations/organization-details-base.html:50
+msgid "Staff"
+msgstr "El personal"
+
+#: organizations/templates/organizations/organization-details-base.html:59
+msgid "Groups"
+msgstr "Grupos"
+
+#: organizations/templates/organizations/organization-directory.html:6
+msgid "Organizations Directory"
+msgstr "Directorio De La Organizaciones"
+
+#: organizations/templates/organizations/organization-directory.html:16
+#: organizations/templates/organizations/organization-list.html:30
+msgid "Directory"
+msgstr "Directorio"
+
+#: organizations/templates/organizations/organization-list.html:7
+msgid "Organizations List"
+msgstr "La Lista de Organizaciones"
+
+#: organizations/templates/organizations/organization-populate-newsletter.html:8
+msgid "Create and populate Newsletter"
+msgstr "Crear y rellenar Boletín de noticias"
+
+#: organizations/templates/organizations/organization-populate-newsletter.html:35
+msgid "Newsletter"
+msgstr "Boletín de noticias"
+
+#: organizations/templates/organizations/organization-populate-newsletter.html:77
+msgid "Populate this Newsletter"
+msgstr "Rellenar este Boletín"
+
+#: organizations/templates/organizations/tabs/challenges-completed-tab.html:9
+msgid "Organization's past Challenges"
+msgstr ""
+
+#: organizations/templates/organizations/tabs/challenges-completed-tab.html:19
+msgid "This Organization has no past Challenges at the moment."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/challenges-upcoming-tab.html:9
+msgid "Organization's upcoming Challenges"
+msgstr ""
+
+#: organizations/templates/organizations/tabs/challenges-upcoming-tab.html:19
+msgid "This Organization has no upcoming Challenges at the moment."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/groups-adm-tab.html:10
+#: organizations/templates/organizations/tabs/groups-tab.html:9
+msgid "Organization Groups"
+msgstr "Grupos de Organización"
+
+#: organizations/templates/organizations/tabs/groups-adm-tab.html:12
+#: organizations/templates/organizations/tabs/groups-adm-tab.html:16
+msgid "Group"
+msgstr "Grupo"
+
+#: organizations/templates/organizations/tabs/groups-adm-tab.html:21
+msgid ""
+"Here you can create the Organization Groups and invite SaneSide Members to "
+"them."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/groups-adm-tab.html:26
+msgid ""
+"\n"
+"            <strong>!!! IMPORTANT !!!</strong><br/>\n"
+"            If the Organization <strong>is hidden</strong> from the Public, "
+"only the Staff and Groups' Members will be able to see the Organization "
+"Activity, so this helps to keep the Privacy under Control.\n"
+"        "
+msgstr ""
+
+#: organizations/templates/organizations/tabs/info-tab.html:99
+msgid "Hours received"
+msgstr ""
+
+#: organizations/templates/organizations/tabs/info-tab.html:291
+msgid "Widgets"
+msgstr "Los Widgets"
+
+#: organizations/templates/organizations/tabs/info-tab.html:294
+msgid ""
+"Copy and paste this Block of Code to your Website to show a List of all "
+"upcoming Challenges of your Organization."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/info-tab.html:299
+msgid ""
+"Copy and paste this Block of Code to your Website to show a List of all past "
+"Challenges of your Organization and their Participants."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/info-tab.html:464
+msgid "Share the Organization on social App"
+msgstr ""
+
+#: organizations/templates/organizations/tabs/info-tab.html:469
+msgid ""
+"\n"
+"            You are just one Click away from sharing<br/>\n"
+"            your Organization with all Friends.\n"
+"        "
+msgstr ""
+
+#: organizations/templates/organizations/tabs/info-tab.html:492
+msgid ""
+"\n"
+"            You can also do it later from the<br/>\n"
+"            Organization Details Page.\n"
+"        "
+msgstr ""
+
+#: organizations/templates/organizations/tabs/staff-adm-tab.html:9
+#: organizations/templates/organizations/tabs/staff-tab.html:9
+msgid "Organization's Staff Members"
+msgstr ""
+
+#: organizations/templates/organizations/tabs/staff-adm-tab.html:13
+msgid "Staff Members can create Challenges on behalf of this Organization."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/staff-adm-tab.html:18
+msgid ""
+"You can use the Search Form below to find and invite SaneSide Members to "
+"become the Staff Members of the Organization."
+msgstr ""
+
+#: organizations/templates/organizations/tabs/staff-tab.html:13
+msgid "These Members can create Challenges on behalf of this Organization."
+msgstr ""
+
+#: settings/base.py:120
+msgid "English"
+msgstr "Inglés"
+
+#: settings/base.py:121
+msgid "Deutsch"
+msgstr "Deutsch"
+
+#: settings/base.py:122
+msgid "Spanish"
+msgstr "Español"
+
+#: templates/base-error.html:8
+msgid "We've got some Trouble"
+msgstr ""
+
+#: templates/base-error.html:24
+msgid "Technical Contact:"
+msgstr ""
+
+#: templates/emails/base.html:18
+msgid "Online Platform for volunteering Work"
+msgstr "Plataforma en línea para el Trabajo de voluntariado"
+
+#: templates/emails/base.html:769 templates/emails/base.html:890
+msgid "SaneSide"
+msgstr "SaneSide"
+
+#: templates/emails/base.html:773
+msgid "ONLINE PLATFORM FOR VOLUNTEERING WORK"
+msgstr "PLATAFORMA EN LÍNEA PARA EL TRABAJO DE VOLUNTARIADO"
+
+#: templates/emails/base.html:819
+msgid "Want to be a Human - help others"
+msgstr "Quiero ser un Humano de ayudar a los demás"
+
+#: templates/emails/base.html:844
+msgid "Thank you, SaneSide Team."
+msgstr "Gracias, SaneSide Equipo."
+
+#: templates/emails/base.html:897
+msgid ""
+"\n"
+"                                    This email was sent to you, because you "
+"signed up on <a href=\"https://www.saneside.com/\">SaneSide</a>.<br/>\n"
+"                                    Please add us to your contacts to ensure "
+"the newsletters land in your inbox.\n"
+"                                "
+msgstr ""
+
+#: templates/emails/base.html:930
+msgid "Unsubscribe"
+msgstr ""
+
+#: templates/error-pages/400.html:5
+msgid "400 - Bad Request"
+msgstr ""
+
+#: templates/error-pages/400.html:9
+msgid "Bad Request"
+msgstr ""
+
+#: templates/error-pages/400.html:10
+#, fuzzy
+#| msgid "Error"
+msgid "Error 400"
+msgstr "Error"
+
+#: templates/error-pages/400.html:12
+msgid ""
+"The Server cannot process the Request due to something, that is perceived to "
+"be a Client Error."
+msgstr ""
+
+#: templates/error-pages/403.html:5
+msgid "403 - Access Denied"
+msgstr ""
+
+#: templates/error-pages/403.html:9
+msgid "Access Denied"
+msgstr ""
+
+#: templates/error-pages/403.html:10
+#, fuzzy
+#| msgid "Error"
+msgid "Error 403"
+msgstr "Error"
+
+#: templates/error-pages/403.html:12
+msgid "The requested Resource requires an Authentication."
+msgstr ""
+
+#: templates/error-pages/404.html:5
+#, fuzzy
+#| msgid "User not found."
+msgid "404 - Resource not found"
+msgstr "El usuario no encontrado."
+
+#: templates/error-pages/404.html:9
+#, fuzzy
+#| msgid "User not found."
+msgid "Resource not found"
+msgstr "El usuario no encontrado."
+
+#: templates/error-pages/404.html:10
+#, fuzzy
+#| msgid "Error"
+msgid "Error 404"
+msgstr "Error"
+
+#: templates/error-pages/404.html:12
+msgid ""
+"The requested Resource could not be found, but may be available again in the "
+"Future."
+msgstr ""
+
+#: templates/error-pages/404.html:36
+#, fuzzy
+#| msgid "About us"
+msgid "About"
+msgstr "Acerca de nosotros"
+
+#: templates/error-pages/404.html:38
+#, fuzzy
+#| msgid "Contact us"
+msgid "Contact"
+msgstr "Contáctenos"
+
+#: templates/error-pages/500.html:5
+msgid "500 - Web-service currently unavailable"
+msgstr ""
+
+#: templates/error-pages/500.html:9
+msgid "Web-service currently unavailable"
+msgstr ""
+
+#: templates/error-pages/500.html:10
+#, fuzzy
+#| msgid "Error"
+msgid "Error 500"
+msgstr "Error"
+
+#: templates/error-pages/500.html:12
+msgid "An unexpected Condition was encountered."
+msgstr ""
+
+#: templates/error-pages/500.html:13
+msgid "Our service team has been dispatched to bring it back online."
+msgstr ""
+
+#: templates/fragments/footer.html:12
+msgid "Terms &amp; Conditions"
+msgstr "Términos &amp; Condiciones"
+
+#: templates/fragments/footer.html:20
+msgid "Media"
+msgstr "Media"
+
+#: templates/fragments/footer.html:28
+msgid "Feedback"
+msgstr "Comentarios"
+
+#: templates/fragments/navbar-forum.html:60 templates/fragments/navbar.html:60
+msgid "Log out"
+msgstr ""
+
+#: templates/fragments/navbar.html:105 templates/fragments/navbar.html:117
+msgid "Near you"
+msgstr "Cerca de usted"
+
+#: templates/fragments/navbar.html:107
+msgid "Might know"
+msgstr "Podría saber"
+
+#: templates/fragments/navbar.html:110
+msgid "Online"
+msgstr "Online"
+
+#: templates/fragments/navbar.html:120
+msgid "Featured"
+msgstr "Presentado"
+
+#~ msgid "Completed"
+#~ msgstr "Completado"
+
+#~ msgid "There are no affiliated Challenges at the moment"
+#~ msgstr "No hay afiliados Desafíos al momento"
+
+#~ msgid "Participants"
+#~ msgstr "Los participantes"
+
+#~ msgid "Past Challenges"
+#~ msgstr "Pasado Desafíos"
+
+#~ msgid "You can edit your Organization here."
+#~ msgstr "Usted puede editar su Organización aquí."
+
+#~ msgid "Archived"
+#~ msgstr "Archivado"
+
+#~ msgid "Page not found"
+#~ msgstr "No se encontró la página"
+
+#~ msgid "There are no canceled Participations at the moment"
+#~ msgstr "No hay cancelado Participaciones en el momento"
+
+#~ msgid "There are no completed Challenges at the moment"
+#~ msgstr "No hay ninguna completado Desafíos al momento"

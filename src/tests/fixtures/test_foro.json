@@ -1,0 +1,62 @@
+[
+    {
+        "model":    "foro.section",
+        "pk":       1,
+        "fields": {
+            "author":       1,
+            "title":        "General Issues",
+            "order":        0,
+
+            "created":      "2016-01-01 00:00:00-0700",
+            "modified":     "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "foro.section",
+        "pk":       2,
+        "fields": {
+            "author":       1,
+            "title":        "Feedback",
+            "order":        1,
+
+            "created":      "2016-01-01 00:00:00-0700",
+            "modified":     "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "foro.section",
+        "pk":       3,
+        "fields": {
+            "author":       1,
+            "title":        "New Ideas",
+            "order":        2,
+
+            "created":      "2016-01-01 00:00:00-0700",
+            "modified":     "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "foro.section",
+        "pk":       4,
+        "fields": {
+            "author":       1,
+            "title":        "Challenges",
+            "order":        3,
+
+            "created":      "2016-01-01 00:00:00-0700",
+            "modified":     "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "model":    "foro.section",
+        "pk":       5,
+        "fields": {
+            "author":       1,
+            "title":        "Organizations",
+            "order":        4,
+
+            "created":      "2016-01-01 00:00:00-0700",
+            "modified":     "2016-01-01 00:00:00-0700"
+        }
+    }
+]

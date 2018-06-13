@@ -1,0 +1,68 @@
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% comment %}
+    Input Parameters:
+        :<account>
+        :[challenge]
+        :[participation]
+        :[is_admin]
+{% endcomment %}
+
+{% need_to_know_profile_details_tag request account as need_to_know_profile_details %}
+{% need_to_know_contact_details_tag request account as need_to_know_contact_details %}
+
+{% sum_of_hours_spent_tag account as sum_of_hours_spent %}
+
+<div class="col-xs-8 col-sm-6 col-md-4" align="center">
+    <div class="challenge-participant-thumb">
+        <div class="thumbnail">
+        {% with account.profile as profile %}
+            <a href="{% url 'profile-view' account.id %}">
+            {% if profile.avatar and need_to_know_profile_details %}
+                {% generateimage "common:thumbnail_bigger" source=profile.avatar -- alt=profile.auth_name %}
+            {% else %}
+                <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="100" width="100" alt="" />
+            {% endif %}
+            </a>
+        </div>
+
+        <div class="participant-info">
+            <a href="{% url 'profile-view' account.id %}">
+                <p>
+                {% if need_to_know_profile_details %}
+                    {{ profile.user.get_full_name }}
+                {% else %}
+                    {% if profile.nickname %}
+                        {{ profile.nickname }}
+                    {% elif profile.short_name %}
+                        {{ profile.short_name }}
+                    {% else %}
+                        <i class="fa fa-user-secret fa-fw"></i>
+                    {% endif %}
+                {% endif %}
+
+                {% if sum_of_hours_spent and need_to_know_profile_details %}
+                    <span class="badge">{{ sum_of_hours_spent }}</span>
+                {% endif %}
+
+                {% if profile.get_rating_avg > 0 %}
+                    <div class="pull-right" style="color:orange; position:absolute; top:0; left:15px;">
+                        <input id="id_profile_rating" name="profile_rating" type="hidden" class="rating" data-filled="fa fa-star fa-fw" data-empty="fa fa-star-o fa-fw" data-start="0" data-stop="5" data-step="1" disabled="disabled" value="{{ profile.get_rating_avg }}" />
+                    </div>
+                {% endif %}
+                </p>
+            </a>
+        {% endwith %}
+
+        {% if participation.role %}
+            <p><strong>{{ participation.role.name }}</strong></p>
+        {% endif %}
+
+        {% if is_admin and not participation.is_acknowledged %}
+            <a class="btn btn-danger btn-centered remove-app" participation="{{ participation.id }}" href="#">{% trans "Remove" %}</a>
+        {% endif %}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Client: {{ from_name }}
+
+Subject: {{ from_subject }}
+
+Message: {{ from_message }}
+
+Reply to: {{ from_email }}
+
+SaneSide Automated System.

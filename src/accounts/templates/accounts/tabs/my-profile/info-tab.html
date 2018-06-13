@@ -1,0 +1,164 @@
+<!--
+TAB
+My Profile - Info
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% sum_of_hours_spent_tag request.user as sum_of_hours_spent %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-6 col-md-6 profile-picture" align="left">
+        <div class="thumbnail avatar">
+        {% if request.user.profile.avatar %}
+            {% generateimage "common:medium_fill" source=request.user.profile.avatar -- alt=request.user.profile.auth_name %}
+        {% else %}
+            <img src="{{ STATIC_URL }}img/no-avatar-{{ request.user.profile.stat_gender_name|default:'male' }}.png" height="400" width="400" alt="" />
+        {% endif %}
+        </div>
+
+        <div class="profile-info-section">
+            <div class="progress">
+                <div class="progress-bar progress-bar-{% if request.user.profile.completeness_total > 75 %}success{% elif request.user.profile.completeness_total > 50 %}info{% elif request.user.profile.completeness_total > 25 %}warning{% else %}danger{% endif %} progress-bar-striped active" role="progressbar" aria-valuenow="{{ request.user.profile.completeness_total }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ request.user.profile.completeness_total }}%">
+                    <span class="sr-only">{{ request.user.profile.completeness_total }}% {% trans "Complete" %}</span>
+                    {{ request.user.profile.completeness_total }}%
+                </div>
+            </div>
+
+            <div class="hidden-sm hidden-md hidden-lg right-sidebar">
+                {% include "accounts/fragments/my-profile-media-status-breakdown.html" %}
+            </div>
+
+            <div>
+                <p>
+                    <strong>{% trans "Hours spent" %}</strong>
+                    <span class="badge pull-right">{{ sum_of_hours_spent }}</span>
+                </p>
+            </div>
+        </div>
+
+        <div class="profile-info-section">
+            <p>
+                <span class="label label-success">{% trans "My Organizations" %}</span><br/>
+            {% for organization in created_organizations %}
+                <a href="{% url 'organization-details' organization.slug %}">{{ organization.name }}</a>{% if not forloop.last %}, {% endif %}
+            {% empty %}
+                {% trans "There are no Organizations yet." %}<br/>
+
+                {% if request.user.profile.is_completed %}
+                    <a href="{% url 'organization-create' %}"><i class="fa fa-plus fa-fw"></i> {% blocktrans %}Create</a> new Organization.{% endblocktrans %}
+                {% endif %}
+            {% endfor %}
+            </p>
+
+            <p>
+                <span class="label label-info">{% trans "Related Organizations" %}</span><br/>
+            {% for organization in related_organizations %}
+                <a href="{% url 'organization-details' organization.slug %}">{{ organization.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% empty %}
+                {% trans "There are no related Organizations yet." %}
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+
+    <div class="col-xs-24 col-sm-10 col-md-12">
+        <div class="profile-info-section">
+            <div class="profile-contacts">
+                <h4>{% trans "Contact Details" %}</h4>
+
+                <p class="note">
+                    <span class="label label-info">{% trans "Privacy Information" %}</span><br/>
+                    <p>{% trans "This Information can only be seen by the Organizers of the Challenges (Events) you participate in." %}</p>
+                </p>
+
+                <hr>
+
+                <address>
+                    <p><i class="fa fa-map-marker fa-fw"></i>{{ request.user.profile.address.full_address|default:"N/A" }}</p>
+                {% if request.user.profile.address.notes %}
+                    <blockquote>
+                        <p>{{ request.user.profile.address.notes }}</p>
+                    </blockquote>
+                {% endif %}
+
+                    <p>
+                        <i class="fa fa-phone fa-fw"></i>{{ request.user.profile.phone_number.phone_number|default:"N/A" }}{% if request.user.profile.phone_number.phone_number_ext %} ({% trans "ext." %} {{ request.user.profile.phone_number.phone_number_ext }}){% endif %}
+                        <span class="vert-delimiter">|</span>
+                        <i class="fa fa-mobile-phone fa-fw"></i>{{ request.user.profile.phone_number.mobile_phone_number|default:"N/A" }}{% if request.user.profile.phone_number.mobile_phone_number_ext %} ({% trans "ext." %} {{ request.user.profile.phone_number.mobile_phone_number_ext }}){% endif %}
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope fa-fw"></i>{{ request.user.profile.user.email }}
+                    </p>
+                    <p>
+                        <i class="fa fa-calendar fa-fw"></i>{{ request.user.profile.birth_day }}
+                    </p>
+                </address>
+            </div>
+        </div>
+
+        <div class="profile-info-section">
+            <div class="profile-bio">
+                <h4>{% trans "Bio" %}</h4>
+
+                <blockquote>
+                    <p>{{ request.user.profile.bio|default:"N/A" }}</p>
+                </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+        <div class="hidden-xs">
+            {% include "accounts/fragments/my-profile-media-status-breakdown.html" %}
+        </div>
+
+        <!-- Social Links -->
+    {% if social_links %}
+        <h4>{% trans "Social Links" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="social-buttons">
+                {% for social_link in social_links %}
+                    <button onclick="javascript:document.location.href='{{ social_link.url }}';" class="{{ social_link.stat_social_app_button }}">
+                        <i class="{{ social_link.stat_social_app_icon }}"></i>
+                    </button>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+        <div id="spotlight">
+            <h4>{% trans "Spotlight" %}</h4>
+        </div>
+
+    {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+        <div id="sponsored-links">
+            <h4>{% trans "Sponsored Links" %}</h4>
+
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+            <!-- Unit1 -->
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9496875666537518"
+                 data-ad-slot="6843889782"
+                 data-ad-format="auto"></ins>
+            <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+{% if request.user.profile.get_rating_avg > 0 %}
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        {% include "common/fragments/rating-card-hor.html" with instance=request.user.profile %}
+    </div>
+</div>
+{% endif %}

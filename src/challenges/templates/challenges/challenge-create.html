@@ -1,0 +1,820 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+{% load formset_tags %}
+
+{% block title %}{% trans "Create Challenge" %} - {{ block.super }}{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'challenge-list' %}">{% trans "Challenges" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'challenge-create' %}">{% trans "Create" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="challenge-create" class="container">
+    <div class="row">
+        <div id="tips" class="col-xs-24 hidden-sm hidden-md hidden-lg right-sidebar">
+            <div class="alert alert-info alert-dismissible hidden-xs" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {% blocktrans %}
+                You can create your Challenge here. If you have any Questions, don't hesitate to <a href="mailto:support@saneside.com">contact Support</a>.
+            {% endblocktrans %}
+            </div>
+
+            <div class="alert alert-success alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {% trans "After creating the Challenge, you will be redirected to the Details Page, where you can attach additional Materials (e.g. Images, Documents, Links, etc.)" %}
+            </div>
+        </div>
+
+        <div class="col-xs-24 col-sm-16 col-md-18">
+            <form id="post-challenge-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <div class="row">
+                    <div id="chl-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                        <div class="thumbnail avatar" style="display:none;">
+                            <img id="avatar" src="#" alt="Upload Cover." />
+                        </div>
+
+                        <a class="btn btn-primary btn-centered file" id="file"><i class="fa fa-upload fa-fw"></i> {% trans "Upload Cover" %}</a>
+                        <input id="id_avatar" name="avatar" type="file">
+
+                        <div class="form-group {% if form.avatar.errors %}has-error{% endif %}">
+                            <span class="help-block">{% if form.avatar.errors %}{% for error in form.avatar.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                        </div>
+                    </div>
+
+                    <div id="chl-description" class="col-xs-24 col-sm-24 col-md-16">
+                        <div class="wizard">
+                            <div class="wizard-inner">
+                                <div class="connecting-line"></div>
+
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#challenge-description" data-toggle="tab" aria-controls="challenge-description" role="tab" title="Description">
+                                            <span class="round-tab">
+                                                <i class="fa fa-book fa-fw"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" class="disabled">
+                                        <a href="#challenge-time-and-place" data-toggle="tab" aria-controls="challenge-time-and-place" role="tab" title="Time and Place">
+                                            <span class="round-tab">
+                                                <i class="fa fa-map-marker fa-fw"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" class="disabled">
+                                        <a href="#challenge-social-links" data-toggle="tab" aria-controls="challenge-social-links" role="tab" title="Social Links">
+                                            <span class="round-tab">
+                                                <i class="fa fa-handshake-o fa-fw"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" class="disabled">
+                                        <a href="#challenge-application" data-toggle="tab" aria-controls="challenge-application" role="tab" title="Application">
+                                            <span class="round-tab">
+                                                <i class="fa fa-exclamation-triangle fa-fw"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+
+                                    <li role="presentation" class="disabled">
+                                        <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                                            <span class="round-tab">
+                                                <i class="fa fa-check fa-fw"></i>
+                                            </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="tab-content">
+                                <div class="tab-pane fade in active" role="tabpanel" id="challenge-description">
+                                    <ul class="list-inline pull-right">
+                                        <li><span><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</span></li>
+                                        <li><a href="#" class="next-step" style="border-radius:15px;">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+
+                                    <h3>{% trans "Description" %}</h3>
+
+                                    <div class="form-group {% if form.name.errors %}has-error{% endif %}">
+                                        <div class="input-group">
+                                            {{ form.name }}
+                                            <div class="input-group-addon"><i class="fa fa-edit fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.name.errors %}{% for error in form.name.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                    <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                                        {{ form.description }}
+
+                                        <span class="help-block">{% if form.description.errors %}{% for error in form.description.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                    <div class="form-group {% if form.category.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.category.label }}{% if form.category.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div class="input-group">
+                                            {{ form.category }}
+                                            <div class="input-group-addon"><i class="fa fa-plus-square-o fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.category.errors %}{% for error in form.category.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                    <div class="form-group {% if form.tags.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.tags.label }}{% if form.tags.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div class="input-group">
+                                            {{ form.tags }}
+                                            <div class="input-group-addon"><i class="fa fa-tags fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.tags.errors %}{% for error in form.tags.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                    <div class="form-group {% if form.hashtag.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.hashtag.label }}{% if form.hashtag.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div class="input-group">
+                                            {{ form.hashtag }}
+                                            <div class="input-group-addon"><i class="fa fa-hashtag fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.hashtag.errors %}{% for error in form.hashtag.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                    <div class="form-group {% if form.duration.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.duration.label }}{% if form.duration.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div>
+                                            {{ form.duration }}
+                                            <span id="currentSliderValue"></span> hours
+                                        </div>
+
+                                        <span class="help-block">{% if form.duration.errors %}{% for error in form.duration.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+
+                                {% if not form.organization.is_hidden %}
+                                    <div class="form-group {% if form.organization.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.organization.label }}{% if form.organization.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div class="input-group">
+                                            {{ form.organization }}
+                                            <div class="input-group-addon"><i class="fa fa-university fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.organization.errors %}{% for error in form.organization.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                {% endif %}
+
+                                    <hr>
+
+                                    <h3>{% trans "Roles" %}</h3>
+
+                                    <div class="alert alert-info">
+                                    {% blocktrans %}
+                                        If you are looking for the differently skilled Volunteers / Participants, you can add specific Roles and Quantity here (e.g. 1 Driver, 10 Street-cleaners, etc.).<br/>
+                                        If Roles are specified, Members will be offered to choose, which Role they want to take, on signing up to the Challenge / Event.
+                                    {% endblocktrans %}
+                                    </div>
+
+                                    <div id="formset-roles" data-formset-prefix="{{ formset_roles.prefix }}" style="display:inline-block; width:100%">
+                                        {{ formset_roles.management_form }}
+
+                                        <div data-formset-body>
+                                            <!-- New forms will be inserted in here -->
+                                        {% for fs in formset_roles %}
+                                            <div class="row" data-formset-form>
+                                                {{ fs.id }}
+                                                <div class="col-xs-12 col-sm-16 col-md-16">
+                                                    {{ fs.name }}
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                                    {{ fs.quantity }}
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                                    <div class="hidden">{{ fs.DELETE }}</div>
+                                                    <a type="button" class="btn btn-rounded pull-right" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+
+                                        <!-- The empty form template. By wrapping this in a <script> tag, the __prefix__ placeholder can easily be replaced in both attributes and any scripts -->
+                                        <script type="form-template" data-formset-empty-form>
+                                        {% escapescript %}
+                                            <div class="row" data-formset-form>
+                                                {{ formset_roles.empty_form.id }}
+                                                <div class="col-xs-12 col-sm-16 col-md-16">
+                                                    {{ formset_roles.empty_form.name }}
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                                    {{ formset_roles.empty_form.quantity }}
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                                    <div class="hidden">{{ formset_roles.empty_form.DELETE }}</div>
+                                                    <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                </div>
+                                            </div>
+                                        {% endescapescript %}
+                                        </script>
+
+                                        <!-- This Button will add a new Form, when clicked -->
+                                        <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-add><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+
+                                        <script>
+                                            jQuery(function ($) {
+                                                $("#formset-roles").formset({
+                                                    animateForms:   true
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+
+                                    <ul class="list-inline pull-right">
+                                        <li><span><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</span></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" role="tabpanel" id="challenge-time-and-place">
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+
+                                    <!-- Challenge Location -->
+
+                                    <h3>{% trans "Location" %}</h3>
+
+                                    <div class="checkbox checkbox-primary">
+                                        {{ form.addressless }}
+                                        {{ form.addressless.label_tag }}
+                                    </div>
+
+                                    <address>
+                                        <div class="form-group {% if aform.address_1.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ aform.address_1 }}
+                                                <div class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.address_1.errors %}{% for error in aform.address_1.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.address_2.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ aform.address_2 }}
+                                                <div class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.address_2.errors %}{% for error in aform.address_2.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.zip_code.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ aform.zip_code }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.zip_code.errors %}{% for error in aform.zip_code.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.city.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ aform.city }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.city.errors %}{% for error in aform.city.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.province.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ aform.province }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.province.errors %}{% for error in aform.province.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if aform.country.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ aform.country.label }}{% if aform.country.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ aform.country }}
+                                                <div class="input-group-addon"><i class="fa fa-globe fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if aform.country.errors %}{% for error in aform.country.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                    </address>
+
+                                    <!-- REMINDER: Keep the Address Notes Field outside the <address> Tag, so, for Example, in Case of the addressless Challenge (Address is collapsed) the Admin will be able to provide some Notes, e.g., why the Challenge Location is not specified, some Directions, etc. -->
+                                    <div class="form-group {% if aform.notes.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ aform.notes.label }}{% if aform.notes.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        {{ aform.notes }}
+                                        <p class="help">{{ aform.notes.help_text|safe }}</p>
+
+                                        <span class="help-block">{% if aform.notes.errors %}{% for error in aform.notes.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+
+                                    <hr>
+
+                                    <!-- Challenge Contact Person -->
+
+                                    <h3>{% trans "Contact Person" %}</h3>
+
+                                    <div class="form-group">
+                                    {% for choice in form.contact %}
+                                        <div class="radio radio-primary">
+                                            {{ choice.tag }}
+                                            <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+                                    <div id="alt_person_creds">
+                                        <div class="form-group {% if form.alt_person_fullname.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.alt_person_fullname }}
+                                                <div class="input-group-addon"><i class="fa fa-user fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.alt_person_fullname.errors %}{% for error in form.alt_person_fullname.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.alt_person_email.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.alt_person_email }}
+                                                <div class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.alt_person_email.errors %}{% for error in form.alt_person_email.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div class="form-group {% if form.alt_person_phone.errors %}has-error{% endif %}">
+                                            <div class="input-group">
+                                                {{ form.alt_person_phone }}
+                                                <div class="input-group-addon"><i class="fa fa-phone fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{{ form.alt_person_phone.help_text }} {% if form.alt_person_phone.errors %}{% for error in form.alt_person_phone.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <!-- Challenge Recurrence -->
+
+                                    <h3>Time</h3>
+
+                                    <h4><strong>How often:</strong></h4>
+
+                                    <div class="alert alert-info">
+                                    {% blocktrans %}
+                                        Select one of the available Options: <i>dateless, once, <s>weekly</s>, <s>monthly</s>, <s>annually</s>, <s>custom</s></i>.
+                                    {% endblocktrans %}
+                                    </div>
+
+                                    <!-- Recurrence -->
+                                    <div id="chl-recurrence" class="form-group {% if form.recurrence.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.recurrence.label }}{% if form.recurrence.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div class="input-group">
+                                            {{ form.recurrence }}
+                                            <div class="input-group-addon"><i class="fa fa-refresh fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.recurrence.errors %}{% for error in form.recurrence.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+
+                                    <hr>
+
+                                    <!-- Challenge starts at -->
+                                    <h4><strong>Starts at:</strong></h4>
+
+                                    <!-- Date, Time, and Time Zone -->
+                                    <div id="chl-tz" class="form-group {% if form.start_tz.errors %}has-error{% endif %}">
+                                        <label class="control-label">{{ form.start_tz.label }}{% if form.start_tz.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        <div class="input-group">
+                                            {{ form.start_tz }}
+                                            <div class="input-group-addon"><i class="fa fa-globe fa-fw"></i></div>
+                                        </div>
+
+                                        <span class="help-block">{% if form.start_tz.errors %}{% for error in form.start_tz.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+                                    <div style="display:inline-block; width:100%">
+                                        <div id="chl-sd" class="form-group half {% if form.start_date.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ form.start_date.label }}{% if form.start_date.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ form.start_date }}
+                                                <div class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.start_date.errors %}{% for error in form.start_date.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                        <div id="chl-st" class="form-group half pull-right {% if form.start_time.errors %}has-error{% endif %}">
+                                            <label class="control-label">{{ form.start_time.label }}{% if form.start_time.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                            <div class="input-group">
+                                                {{ form.start_time }}
+                                                <div class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></div>
+                                            </div>
+
+                                            <span class="help-block">{% if form.start_time.errors %}{% for error in form.start_time.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                        </div>
+                                    </div>
+
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" role="tabpanel" id="challenge-social-links">
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+
+                                    <h3>{% trans "Social Links" %}</h3>
+
+                                    <div id="formset-social" data-formset-prefix="{{ formset_social.prefix }}" style="display:inline-block; width:100%">
+                                        {{ formset_social.management_form }}
+
+                                        <div data-formset-body>
+                                            <!-- New forms will be inserted in here -->
+                                        {% for fs in formset_social %}
+                                            <div class="row" data-formset-form>
+                                                {{ fs.id }}
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    {{ fs.social_app }}
+                                                </div>
+                                                <div class="col-xs-12 col-sm-14 col-md-14">
+                                                    {{ fs.url }}
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                                    <div class="hidden">{{ fs.DELETE }}</div>
+                                                    <a type="button" class="btn btn-rounded pull-right" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+
+                                        <!-- The empty form template. By wrapping this in a <script> tag, the __prefix__ placeholder can easily be replaced in both attributes and any scripts -->
+                                        <script type="form-template" data-formset-empty-form>
+                                        {% escapescript %}
+                                            <div class="row" data-formset-form>
+                                                {{ formset_social.empty_form.id }}
+                                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                                    {{ formset_social.empty_form.social_app }}
+                                                </div>
+                                                <div class="col-xs-12 col-sm-14 col-md-14">
+                                                    {{ formset_social.empty_form.url }}
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-4">
+                                                    <div class="hidden">{{ formset_social.empty_form.DELETE }}</div>
+                                                    <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-delete-button><i class="fa fa-minus fa-fw"></i> {% trans "Del" %}</a>
+                                                </div>
+                                            </div>
+                                        {% endescapescript %}
+                                        </script>
+
+                                        <!-- This Button will add a new Form, when clicked -->
+                                        <a type="button" class="btn btn-rounded pull-right" style="width:auto;" data-formset-add><i class="fa fa-plus fa-fw"></i> {% trans "Add" %}</a>
+
+                                        <script>
+                                            jQuery(function ($) {
+                                                $("#formset-social").formset({
+                                                    animateForms:   true
+                                                });
+                                            });
+                                        </script>
+                                    </div>
+
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" role="tabpanel" id="challenge-application">
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+
+                                    <h3>{% trans "Application" %}</h3>
+
+                                    <div class="form-group">
+                                    {% for choice in form.application %}
+                                        <div class="radio radio-primary">
+                                            {{ choice.tag }}
+                                            <label for="{{ choice.id_for_label }}">{{ choice.choice_label }}</label>
+                                        </div>
+                                    {% endfor %}
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="checkbox checkbox-primary">
+                                        {{ form.allow_reenter }}
+                                        {{ form.allow_reenter.label_tag }}
+                                    </div>
+
+                                    <hr>
+
+                                    <div class="checkbox checkbox-primary">
+                                        {{ form.accept_automatically }}
+                                        {{ form.accept_automatically.label_tag }}
+                                    </div>
+                                    <div id="id_acceptance_text_div" class="form-group {% if form.acceptance_text.errors %}has-error{% endif %}">
+                                        {{ form.acceptance_text }}
+
+                                        <span class="help-block">{% if form.acceptance_text.errors %}{% for error in form.acceptance_text.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                                    </div>
+
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><a href="#" class="next-step">{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></a></li>
+                                    </ul>
+                                </div>
+
+                                <div class="tab-pane fade" role="tabpanel" id="complete">
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><span>{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></span></li>
+                                    </ul>
+
+                                    <h3>{% trans "Complete" %}</h3>
+
+                                    <p>{% trans "You have successfully completed all Steps." %}</p>
+
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-6 feature">
+                                            <a href="#" name="chl-create" class="chl-create"">
+                                                <span><i class="flaticon-rounded25"></i></span>
+                                                <p>{% trans "Create this Challenge" %}</p>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-xs-12 col-sm-12 col-md-6 feature">
+                                            <a href="#" name="chl-draft" class="chl-draft">
+                                                <span><i class="flaticon-document58"></i></span>
+                                                <p>{% trans "Save as a Draft" %}</p>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <ul class="list-inline pull-right">
+                                        <li><a href="#" class="prev-step"><i class="fa fa-chevron-left fa-fw"></i> {% trans "Prev" %}</a></li>
+                                        <li><span>{% trans "Next" %} <i class="fa fa-chevron-right fa-fw"></i></span></li>
+                                    </ul>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="tips" class="hidden-xs col-sm-8 col-md-6 right-sidebar">
+            <h4>{% trans "Tips" %}</h4>
+
+            <div class="alert alert-info">
+            {% blocktrans %}
+                You can create your Challenge here. If you have any Questions, don't hesitate to <a href="mailto:support@saneside.com">contact Support</a>.
+            {% endblocktrans %}
+            </div>
+
+            <div class="alert alert-success">
+                {% trans "After creating the Challenge, you will be redirected to the Details Page, where you can attach additional Materials (e.g. Images, Documents, Links, etc.)" %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='chl-create']").click(function () {
+        // --------------------------------------------------------------------
+        // --- Check, if Avatar Input is NOT empty
+        if ($("#id_avatar").get(0).files.length === 0) {
+            alert("Please, select the Avatar Image.");
+
+            return false;
+        }
+
+        /*** DATE FORMAT *****************************************************/
+        var $input = $("input[name='start_date']");
+        var val = $input.val();
+
+        if (val) {
+            var valMoment = moment(val);
+            var isMoment = moment.isMoment(valMoment);
+
+            if (isMoment) {
+                $input.attr("type", "text");
+                $input.val(valMoment.format("MM/DD/YYYY"));
+            }
+        }
+        /*********************************************************************/
+
+        var form = $("form#post-challenge-form");
+
+        $("#spinner").fadeIn("slow");
+
+        form.append("<input type='hidden' name='chl-create' value='Create this Challenge' />");
+        form.submit();
+
+        return true;
+    })
+
+    $("a[name='chl-draft']").click(function () {
+        // --------------------------------------------------------------------
+        // --- Check, if Avatar Input is NOT empty
+        if ($("#id_avatar").get(0).files.length === 0) {
+            alert("Please, select the Avatar Image.");
+
+            return false;
+        }
+
+        /*** DATE FORMAT *****************************************************/
+        var $input = $("input[name='start_date']");
+        var val = $input.val();
+
+        if (val) {
+            var valMoment = moment(val);
+            var isMoment = moment.isMoment(valMoment);
+
+            if (isMoment) {
+                $input.attr("type", "text");
+                $input.val(valMoment.format("MM/DD/YYYY"));
+            }
+        }
+        /*********************************************************************/
+
+        var form = $("form#post-challenge-form");
+
+        $("#spinner").fadeIn("slow");
+
+        form.append("<input type='hidden' name='chl-draft' value='Save as a Draft' />");
+        form.submit();
+
+        return true;
+    })
+
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% for field in form %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in aform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for field in nform %}
+            {% if field.errors %}
+                {% for error in field.errors %}
+                    new Noty({
+                        text: "{{ field.label }}: {{ error }}"
+                    }).show();
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+
+        {% for form in formset_roles.forms %}
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        new Noty({
+                            text: "Role : {{ field.label }}: {{ error }}"
+                        }).show();
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        {% for form in formset_social.forms %}
+            {% for field in form %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        new Noty({
+                            text: "Social Link : {{ field.label }}: {{ error }}"
+                        }).show();
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+
+        /*********************************************************************/
+        /*** Slider                                                        ***/
+        /*********************************************************************/
+        var mySlider = $("input.slider");
+
+        mySlider.on("slide", function (event) {
+            $("#currentSliderValue").text(event.value);
+        });
+
+        $("#currentSliderValue").text(
+            mySlider.bootstrapSlider("getValue")
+        );
+
+        /*********************************************************************/
+        /*** Challenge has Address?                                        ***/
+        /*********************************************************************/
+        $("address").show();
+
+        if ($("#id_addressless").prop("checked")) {
+            $("address").hide();
+        }
+
+        $("#id_addressless").click(function () {
+            $("address").toggle("slow");
+        });
+
+        /*********************************************************************/
+        /*** Recurrence UX                                                 ***/
+        /*********************************************************************/
+        recurrence($("#id_recurrence").val());
+
+        $("#id_recurrence").change(function() {
+            recurrence(this.value);
+        });
+
+        function recurrence(value) {
+            if (value == {{ RECURRENCE.DATELESS }}) {
+                $("#chl-tz").hide();
+                $("#chl-sd").hide();
+                $("#chl-st").hide();
+            } else if (value == {{ RECURRENCE.ONCE }}) {
+                $("#chl-tz").show();
+                $("#chl-sd").show();
+                $("#chl-st").show();
+            }
+        }
+
+        /*********************************************************************/
+        /*** Contact Person UX                                             ***/
+        /*********************************************************************/
+        $("#alt_person_creds").hide();
+
+        var selected = $("input[type='radio']:checked");
+
+        if (selected.val() == "he") {
+            $("#alt_person_creds").show("slow");
+        }
+
+        $("#id_contact_0").click(function () {
+            $("#alt_person_creds").hide("slow");
+        });
+
+        $("#id_contact_1").click(function () {
+            $("#alt_person_creds").show("slow");
+        })
+
+        /*********************************************************************/
+        /*** Automatically accept Experience Reports UX                    ***/
+        /*********************************************************************/
+        $("#id_acceptance_text_div").hide();
+
+        if ($("#id_accept_automatically").prop("checked")) {
+            $("#id_acceptance_text_div").show("slow");
+        }
+
+        $("#id_accept_automatically").click(function () {
+            $("#id_acceptance_text_div").toggle("slow");
+        });
+    });
+</script>
+{% endblock %}

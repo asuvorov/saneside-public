@@ -1,0 +1,133 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load highlight %}
+{% load more_like_this %}
+
+{% block title %}Search - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'haystack_search' %}">{% trans "Search" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="search-results-list">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <h4 class="hidden-xs">{% trans "Search Request" %}</h4>
+
+                <div id="search-request" class="row">
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                        <form id="search-form" method="GET" action=".">
+                            <div class="form-group {% if form.q.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    <label class="control-label">{{ form.q.label }}{% if form.q.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                    {{ form.q }}
+                                    <div class="input-group-addon"><i class="fa fa-search fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.q.errors %}{% for error in form.q.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+
+                            <div class="form-group-choices">
+                                <div class="row">
+                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                        <div class="input-group-label">
+                                            <label class="control-label">{{ form.models.label }}{% if form.models.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
+                                        <div class="input-group-choices">
+                                        {% for model in form.models %}
+                                            <div class="checkbox checkbox-primary">
+                                                {{ model.tag }}
+                                                <label for="{{ model.id_for_label }}">{{ model.choice_label }}</label>
+                                            </div>
+                                        {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div align="right">
+                                <a class="btn btn-rounded" name="submit"><i class="fa fa-search fa-fw"></i> {% trans "Search" %}</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="search-results" class="row">
+                    <div class="col-xs-24 col-sm-24 col-md-24">
+                    {% if query %}
+                        <h4>{% trans "Results" %}</h4>
+
+                        {% for result in page.object_list %}
+                            <p>
+                                <a href="{{ result.object.get_absolute_url }}">{{ result.text }}</a>
+                            </p>
+                        {% empty %}
+                            <p>
+                                <span class="label label-info">{% trans "There are no Results at the moment." %}</span>
+                            </p>
+                        {% endfor %}
+
+                        {% if page.has_previous or page.has_next %}
+                            <div>
+                                {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; {% trans "Previous" %}{% if page.has_previous %}</a>{% endif %}
+                                |
+                                {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}{% trans "Next" %} &raquo;{% if page.has_next %}</a>{% endif %}
+                            </div>
+                        {% endif %}
+                    {% else %}
+                        {# Show some example queries to run, maybe query syntax, something else? #}
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+            {% if ENVIRONMENT == "staging" or ENVIRONMENT == "production" %}
+                <div id="sponsored-links">
+                    <h4>{% trans "Sponsored Links" %}</h4>
+
+                    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                    <!-- Search List -->
+                    <ins class="adsbygoogle"
+                         style="display:block"
+                         data-ad-client="ca-pub-9496875666537518"
+                         data-ad-slot="7575606492"
+                         data-ad-format="auto"></ins>
+                    <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                    </script>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    $("a[name='submit']").click(function () {
+        $("form#search-form").submit();
+
+        return true;
+    })
+
+    $(document).ready(function() {
+        $("input[type='checkbox']").prop("checked", "checked");
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,83 @@
+// ----------------------------------------------------------------------------
+// ---
+// ----------------------------------------------------------------------------
+span.label {
+    font-size:              inherit;
+    white-space:            normal;
+}
+hr {
+    color:                  @gray-light;
+    font-size:              1px;
+    line-height:            0;
+    display:                block;
+
+    position:               relative;
+    height:                 0;
+
+    width:                  100%;
+    padding:                0;
+    margin:                 8px auto;
+    max-height:             0;
+}
+
+// ----------------------------------------------------------------------------
+// --- Overrides for pop-up Modals
+// ----------------------------------------------------------------------------
+body.modal-open {
+    position:               fixed !important;
+}
+
+.modal-dialog {
+    a.btn,
+    button {
+        font-weight:        bold;
+        text-transform:     uppercase;
+    }
+}
+.modal-header {
+    .modal-title {
+        font-weight:        600;
+        text-transform:     uppercase;
+        border:             none !important;
+        margin:             0px  !important;
+        padding:            0px  !important;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Overrides for bxSlider Theme (remove "box-shadow")
+// ----------------------------------------------------------------------------
+.bx-wrapper {
+    -webkit-box-shadow:     none !important;
+       -moz-box-shadow:     none !important;
+            box-shadow:     none !important;
+
+    border:                 5px solid @white;
+    left:                   -5px;
+    background:             @white;
+
+    -webkit-transform:      translatez(0);
+       -moz-transform:      translatez(0);
+        -ms-transform:      translatez(0);
+         -o-transform:      translatez(0);
+            transform:      translatez(0);
+
+    > .bx-viewport {
+        ul.bxslider {
+            padding-left:   0;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Overrides for Slider
+// ----------------------------------------------------------------------------
+span#currentSliderValue {
+    color:                  @brand-primary;
+    font-weight:            bold;
+    margin-left:            10px;
+}
+
+.slider.slider-horizontal {
+    width:                  50% !important;
+}

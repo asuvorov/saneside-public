@@ -1,0 +1,194 @@
+[
+    {
+        "pk":       212,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               1,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #1-2",
+            "description":          "Description for the Challenge #1-2. Upcoming.",
+            "slug":                 "challenge-1-2",
+
+            "tags":                 [20, 21],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "1",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              21,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2026-01-01",
+            "start_time":           "00:00:00",
+            "start_tz":             "America/Los_Angeles",
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         31,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       222,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               2,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #2-2",
+            "description":          "Description for the Challenge #2-2. Upcoming.",
+            "slug":                 "challenge-2-2",
+
+            "tags":                 [20, 22],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "1",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              22,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2026-01-01",
+            "start_time":           "00:00:00",
+            "start_tz":             "America/Los_Angeles",
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         32,
+
+            "is_newly_created":     true,
+            "allow_reenter":        false,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       232,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               3,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #3-2",
+            "description":          "Description for the Challenge #3-2. Upcoming.",
+            "slug":                 "challenge-3-2",
+
+            "tags":                 [20, 23],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "1",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              23,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2026-01-01",
+            "start_time":           "00:00:00",
+            "start_tz":             "America/Los_Angeles",
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         33,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    },
+    {
+        "pk":       242,
+        "model":    "challenges.challenge",
+        "fields":   {
+            "author":               4,
+            "avatar":               "images/challenges/avatars/17_wiGHZIz.jpg",
+            "name":                 "Challenge #4-2",
+            "description":          "Description for the Challenge #4-2. Upcoming. Without organization.",
+            "slug":                 "challenge-4-2",
+
+            "tags":                 [20, 24],
+            "hashtag":              "challenge",
+            "category":             null,
+
+            "status":               "1",
+            "application":          "",
+
+            "addressless":          false,
+            "address":              24,
+
+            "duration":             8,
+
+            "recurrence":           "1",
+            "month":                null,
+            "day_of_week":          null,
+            "day_of_month":         null,
+
+            "start_date":           "2026-01-01",
+            "start_time":           "00:00:00",
+            "start_tz":             "America/Los_Angeles",
+            "start_date_time_tz":   null,
+
+            "is_alt_person":        false,
+            "alt_person_fullname":  "",
+            "alt_person_email":     "",
+            "alt_person_phone":     "",
+
+            "organization":         null,
+
+            "is_newly_created":     true,
+            "allow_reenter":        true,
+            "accept_automatically": false,
+            "acceptance_text":      null,
+
+            "created":              "2016-01-01 00:00:00-0700",
+            "modified":             "2016-01-01 00:00:00-0700"
+        }
+    }
+]

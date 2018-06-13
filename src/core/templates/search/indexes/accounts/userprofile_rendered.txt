@@ -1,0 +1,1 @@
+{% include "accounts/fragments/account-thumbnail-search.html" with account=object %}

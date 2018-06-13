@@ -1,0 +1,72 @@
+{% extends "base-forum.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Forum" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'forum-list' %}">{% trans "Forums" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="forum-list">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="controllers">
+                {% if request.user.is_authenticated and request.user.is_staff %}
+                    <a class="btn btn-rounded pull-right" href="{% url 'forum-create' %}"><i class="fa fa-plus fa-fw"></i> {% trans "Forum" %}</a>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="alert alert-info hidden-xs" role="alert">
+                {% blocktrans %}
+                    This is the right Place to discuss any Ideas, Critics, Feature Requests and all the Ideas, regarding our Platform.<br/>
+                    Please, follow the Forum Rules, and always check FAQ before posting, to prevent duplicate Posts.
+                {% endblocktrans %}
+                </div>
+
+            {% for section in sections %}
+                {% include "forum/fragments/forum-section.html" with section=section %}
+            {% empty %}
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+{% include "forum/modals/foro-forum-remove-modal.html" %}
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var forum_id;
+    var element;
+
+    /*************************************************************************/
+    /*** Remove Forum                                                      ***/
+    /*************************************************************************/
+    $(".remove").click(function () {
+        var element = $(this);
+
+        var forum_id = $(this).attr("forum");
+
+        $("#foro-forum-remove-modal-form").find("input[name='forum_id']").val(forum_id);
+        $("#foroForumRemovePopupModal").modal("show");
+    })
+</script>
+{% endblock %}

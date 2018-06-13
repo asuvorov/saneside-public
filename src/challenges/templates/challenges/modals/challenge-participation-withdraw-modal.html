@@ -1,0 +1,78 @@
+{% load i18n %}
+
+<div class="modal fade" id="challengeParticipationWithdrawPopupModal" tabindex="-1" role="dialog" aria-labelledby="challengeParticipationWithdrawPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onClick="" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="challengeParticipationWithdrawPopupModalLabel">{% trans "Withdraw Application" %}</h4>
+            </div>
+
+            <div class="modal-body">
+                <form id="challenge-participation-withdraw-modal-form" action="" method="POST">
+                    {% csrf_token %}
+
+                    <p class="note">
+                        <span class="label label-warning">{% trans "Explain yourself" %}</span><br/>
+                        <strong>{% trans "Withdrawing from the Challenge can be very inconvenient for the Organizer. Please write a Note, explaining why you can't make it this Time." %}</strong>
+                    </p>
+
+                    <p class="note">
+                        <span class="label label-warning">{% trans "Warning" %}</span><br/>
+                        {% trans "If you apply to the Challenge in the future, the Organizer will be able to see all Challenges you withdrew from, and the Reason you entered. Seeing fewer withdrawals will make you look more trustworthy." %}
+                    </p>
+
+                    <div class="form-group">
+                        <label for="id_cancellation_text">{% trans "Cancellation Text" %}</label>
+                        <textarea id="id_cancellation_text" class="form-control" name="cancellation_text" maxlength="1000" placeholder="Enter text here..."></textarea>
+                    </div>
+                </form>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="participation_withdraw();">{% trans "Withdraw" %}</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">{% trans "Cancel" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    /*************************************************************************/
+    /*** Withdraw Participation                                            ***/
+    /*************************************************************************/
+    function participation_withdraw() {
+        var cancellation_text = $("#challenge-participation-withdraw-modal-form").find("textarea[name='cancellation_text']").val();
+
+        $.post("{% url 'api-participation-withdraw' challenge.id %}", {
+            "cancellation_text":    cancellation_text,
+            "csrfmiddlewaretoken":  $("#challenge-participation-withdraw-modal-form").find("input[name='csrfmiddlewaretoken']").val()
+        }).done(function (data) {
+            console.log("Success");
+            console.log("Data :", data);
+
+            $("#challengeParticipationWithdrawPopupModal").modal("hide");
+
+            new Noty({
+                type:   "info",
+                text:   data.message
+            }).show();
+
+            location.reload(true);
+        }).fail(function (data) {
+            try {
+                new Noty({
+                    type:   "error",
+                    text:   data.responseJSON.message
+                }).show();
+            } catch (err) {
+                new Noty({
+                    type:   "error",
+                    text:   "Failed to withdraw the Participation."
+                }).show();
+            };
+        });
+
+        return true;
+    }
+</script>

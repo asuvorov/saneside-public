@@ -1,0 +1,74 @@
+<!--
+TAB
+My Profile - Rejected Challenges
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% if request.user.profile.get_rejected_participations.count > 0 %}
+    <!--
+        Mobile View
+    -->
+    <div class="hidden-sm hidden-md hidden-lg">
+    {% for participation in request.user.profile.get_rejected_participations %}
+        <table class="table table-condensed">
+            <thead>
+                <tr class="active">
+                    <th colspan="2">
+                        <a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a> canceled on {{ participation.date_cancelled }}
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><strong>{% trans "Reason" %}</strong></td>
+                    <td>
+                        <span class="desc">{{ participation.cancellation_text }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+    </div>
+
+    <!--
+        Tablet/Desktop View
+    -->
+    <table class="table table-condensed hidden-xs">
+        <thead>
+            <tr>
+                <th></th>
+                <th>{% trans "Challenge Name" %}</th>
+                <th>{% trans "Signed up" %}</th>
+                <th>{% trans "Canceled" %}</th>
+                <th>{% trans "Reason" %}</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% for participation in request.user.profile.get_rejected_participations %}
+            <tr>
+                <td>
+                    <a href="{% url 'challenge-details' participation.challenge.slug %}">
+                    {% if participation.challenge.avatar %}
+                        {% generateimage "common:thumbnail" source=participation.challenge.avatar -- alt=participation.challenge.name %}
+                    {% endif %}
+                    </a>
+                </td>
+                <td><a href="{% url 'challenge-details' participation.challenge.slug %}">{{ participation.challenge.name }}</a></td>
+                <td>{{ participation.date_created }}</td>
+                <td>{{ participation.date_cancelled }}</td>
+                <td>
+                    <span class="desc">{{ participation.cancellation_text }}</span>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>
+        <span class="label label-info">{% trans "There are no rejected Participations at the moment" %}</span>
+    </p>
+{% endif %}

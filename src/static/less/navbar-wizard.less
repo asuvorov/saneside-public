@@ -1,0 +1,159 @@
+// ----------------------------------------------------------------------------
+// --- NavBar Wizard
+// ----------------------------------------------------------------------------
+span.round-tab {
+    width:                  50px;
+    height:                 50px;
+    line-height:            50px;
+    display:                inline-block;
+    border-radius:          50px;
+    background:             #fff;
+    border:                 2px solid #e0e0e0;
+    z-index:                2;
+    position:               absolute;
+    left:                   0;
+    text-align:             center;
+    font-size:              20px;
+
+    > i {
+        color:              #555555;
+    }
+
+    &:hover {
+        color:              #333;
+        border:             2px solid #333;
+    }
+}
+
+.connecting-line {
+    height:                 2px;
+    background:             #e0e0e0;
+    position:               absolute;
+    width:                  80%;
+    margin:                 0 auto;
+    left:                   0;
+    right:                  0;
+    top:                    25px;
+    z-index:                1;
+}
+
+.wizard {
+    margin:                 0 auto;
+    background:             #fff;
+
+    h3 {
+        margin-top:         0;
+    }
+    li:after {
+        content:                " ";
+        position:               absolute;
+        left:                   40%;
+        opacity:                0;
+        margin:                 0 auto;
+        bottom:                 0px;
+        border:                 5px solid transparent;
+        border-bottom-color:    @brand-primary;
+        transition:             0.1s ease-in-out;
+    }
+    li.active:after {
+        content:                " ";
+        position:               absolute;
+        left:                   40%;
+        opacity:                1;
+        margin:                 0 auto;
+        bottom:                 0px;
+        border:                 10px solid transparent;
+        border-bottom-color:    @brand-primary;
+    }
+    li.active span.round-tab {
+        background:             #fff;
+        border:                 2px solid @brand-primary;
+
+        > i {
+            color:          @brand-primary;
+        }
+    }
+    div.wizard-inner {
+        background-color:   @white;
+        position:           relative;
+    }
+
+    .nav-tabs {
+        position:               relative;
+        margin:                 0 auto;
+        margin-bottom:          0;
+        border-bottom-color:    #e0e0e0;
+
+        > li {
+            width:              20%;
+            padding-bottom:     20px;
+        }
+        > li a {
+            width:              50px;
+            height:             50px;
+            margin:             0 auto;
+            border-radius:      100%;
+            padding:            0;
+
+            &:hover {
+                background:     transparent;
+            }
+        }
+        > li.active > a,
+        > li.active > a:hover,
+        > li.active > a:focus {
+            color:                  #555555;
+            cursor:                 default;
+            border:                 0;
+            border-bottom-color:    transparent;
+        }
+    }
+    .tab-pane {
+        position:           relative;
+        padding-top:        10px;
+
+        li > span {
+            color:          @gray-light;
+        }
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Make Design more responsive
+// ----------------------------------------------------------------------------
+@media (max-width: @screen-xs-max) {
+    /* <= 480px <= 767px */
+    span.round-tab {
+        font-size:          16px;
+        width:              50px;
+        height:             50px;
+        line-height:        50px;
+    }
+
+    .wizard {
+        width:              90%;
+        height: auto        !important;
+    }
+    .wizard .nav-tabs > li a {
+        width:              50px;
+        height:             50px;
+        line-height:        50px;
+    }
+    .wizard li.active:after {
+        content:            " ";
+        position:           absolute;
+        left:               35%;
+    }
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    /* <= 768px <= 991px */
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    /* <= 992px <= 1199px */
+}
+@media (min-width: @screen-lg-min) and (max-width: 1599px) {
+    /* <= 1200px <= 1599px */
+}
+@media (min-width: 1600px) {
+    /* >= 1600px */
+}

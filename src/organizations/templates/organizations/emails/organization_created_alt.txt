@@ -1,0 +1,13 @@
+*******************************************************************************
+    THIS IS AN AUTOMATED EMAIL - PLEASE DO NOT REPLY.
+*******************************************************************************
+
+Dear, {{ user }}!
+
+The Organization "{{ organization.name }}", was successfully created, and you were added as a Contact Person to it.
+
+Link to the Organization Details Page: {{ organization_link }}
+
+Also, you can find Link to this Organization on your Profile Page.
+
+Thank you, SaneSide Team.

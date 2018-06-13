@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load static %}
+{% load compress %}
+{% load imagekit %}
+
+{% block title %}{% trans "Edit Post" %} - {{ block.super }}{% endblock %}
+
+{% block extra_style %}
+{% endblock %}
+
+{% block extra_script %}
+    <!-- NavBar Wizard -->
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/navbar-wizard.js' %}"></script>
+    {% endcompress %}
+
+    <!-- Wire up Events -->
+    {% comment %}
+    {% compress js %}
+        <script type="text/javascript" charset="utf-8" src="{% static 'js/wire-up-events.js' %}"></script>
+    {% endcompress %}
+    {% endcomment %}
+{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <div class="breadcrumbs pull-right">
+                    <a href="{% url 'post-list' %}">{% trans "Blog" %}</a>
+                    <i class="fa fa-chevron-circle-right"></i>
+                    <a href="{% url 'post-edit' post.slug %}">{% trans "Edit" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div id="post-edit">
+        <div class="row">
+            <div class="col-xs-24 col-sm-16 col-md-18">
+                <form id="edit-post-form" role="form" action="" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {{ form.media }}
+
+                    <div class="row">
+                        <div id="post-avatar" class="col-xs-24 col-sm-24 col-md-8">
+                            <div class="thumbnail avatar" style="display:none;">
+                                <img id="avatar" src="#" alt="Upload Photo." />
+                            </div>
+
+                            <a class="btn btn-primary btn-centered file" id="file"><i class="fa fa-upload fa-fw"></i> {% trans "Upload Photo" %}</a>
+                            <input id="id_avatar" name="avatar" type="file">
+                            <div class="form-group {% if form.avatar.errors %}has-error{% endif %}">
+                                <span class="help-block">{% if form.avatar.errors %}{% for error in form.avatar.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+
+                        <div id="pst-details" class="col-xs-24 col-sm-24 col-md-16">
+                            <div class="form-group {% if form.title.errors %}has-error{% endif %}">
+                                <div class="input-group">
+                                    {{ form.title }}
+                                    <div class="input-group-addon"><i class="fa fa-i-cursor fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.title.errors %}{% for error in form.title.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if form.description.errors %}has-error{% endif %}">
+                                <h3>{{ form.description.label }}</h3>
+
+                                {{ form.description }}
+
+                                <span class="help-block">{% if form.description.errors %}{% for error in form.description.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if form.content.errors %}has-error{% endif %}">
+                                <h3>{{ form.content.label }}</h3>
+
+                                {{ form.content }}
+
+                                <span class="help-block">{% if form.content.errors %}{% for error in form.content.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if form.tags.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ form.tags.label }}{% if form.tags.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                <div class="input-group">
+                                    {{ form.tags }}
+                                    <div class="input-group-addon"><i class="fa fa-tags fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.tags.errors %}{% for error in form.tags.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                            <div class="form-group {% if form.hashtag.errors %}has-error{% endif %}">
+                                <label class="control-label">{{ form.hashtag.label }}{% if form.hashtag.field.required %}<span class="asteriskField">*</span>{% endif %}</label>
+                                <div class="input-group">
+                                    {{ form.hashtag }}
+                                    <div class="input-group-addon"><i class="fa fa-hashtag fa-fw"></i></div>
+                                </div>
+
+                                <span class="help-block">{% if form.hashtag.errors %}{% for error in form.hashtag.errors %}&nbsp;{{ error }}{% endfor %}{% endif %}</span>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+                <div class="actions">
+                    <a class="btn btn-primary btn-centered" name="submit"><i class="fa fa-check-square-o fa-fw"></i> {% trans "Save Changes" %}</a>
+                    <a class="btn btn-danger  btn-centered" name="close" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#postClosePopupModal" tabindex="-1"><i class="fa fa-times fa-fw"></i> {% trans "Close Post" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals -->
+{% if request.user.is_staff %}
+    {% include "blog/modals/post-close-modal.html" %}
+{% endif %}
+
+<script>
+    /*************************************************************************/
+    /*** Form Submitting                                                   ***/
+    /*************************************************************************/
+    $("a[name='submit']").click(function () {
+        $("#spinner").fadeIn("slow");
+
+        $("form#edit-post-form").submit();
+
+        return true;
+    })
+</script>
+{% endblock %}

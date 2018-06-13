@@ -1,0 +1,223 @@
+<!--
+TAB
+Foreign Profile - Info
+-->
+{% load i18n %}
+{% load imagekit %}
+{% load accounttags %}
+
+{% need_to_know_profile_details_tag request account as need_to_know_profile_details %}
+{% need_to_know_contact_details_tag request account as need_to_know_contact_details %}
+
+{% sum_of_hours_spent_tag account.profile.user as sum_of_hours_spent %}
+
+<div class="row">
+    <div class="col-xs-24 col-sm-6 col-md-6 profile-picture" align="left">
+        <div class="thumbnail avatar">
+        {% if account.profile.avatar and need_to_know_profile_details %}
+            {% generateimage "common:medium_fill" source=account.profile.avatar -- alt=account.profile.auth_name %}
+        {% else %}
+            <img src="{{ STATIC_URL }}img/no-avatar-{{ account.profile.stat_gender_name|default:'male' }}.png" height="400" width="400" alt="" />
+        {% endif %}
+        </div>
+
+        <div class="profile-info-section">
+            <h4 class="hidden-sm hidden-md hidden-lg">
+            {% if need_to_know_profile_details %}
+                {{ account.profile.user.get_full_name }}
+            {% else %}
+                {% if account.profile.nickname %}
+                    {{ account.profile.nickname }}
+                {% elif account.profile.short_name %}
+                    {{ account.profile.short_name }}
+                {% else %}
+                    <i class="fa fa-user-secret fa-fw"></i>
+                {% endif %}
+            {% endif %}
+            </h4>
+
+            <div class="hidden-sm hidden-md hidden-lg right-sidebar">
+                {% include "accounts/fragments/foreign-profile-media-status-breakdown.html" %}
+            </div>
+
+        {% if need_to_know_profile_details %}
+            <div>
+                <p><strong>{% trans "Hours spent" %}</strong> <span class="badge pull-right">{{ sum_of_hours_spent }}</span></p>
+            </div>
+        {% endif %}
+        </div>
+
+        <div class="profile-info-section">
+            <p>
+                <span class="label label-success">{% trans "Member's Organizations" %}</span><br/>
+            {% for organization in created_organizations %}
+                <a href="{% url 'organization-details' organization.slug %}">{{ organization.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% empty %}
+                {% trans "There are no Organizations yet." %}<br/>
+            {% endfor %}
+            </p>
+
+            <p>
+                <span class="label label-info">{% trans "Related Organizations" %}</span><br/>
+            {% for organization in related_organizations %}
+                <a href="{% url 'organization-details' organization.slug %}">{{ organization.name }}</a>
+                {% if not forloop.last %}, {% endif %}
+            {% empty %}
+                {% trans "There are no related Organizations yet." %}
+            {% endfor %}
+            </p>
+        </div>
+    </div>
+
+    <div class="col-xs-24 col-sm-10 col-md-12">
+        <div class="profile-info-section">
+            <h1 class="hidden-xs">
+            {% if need_to_know_profile_details %}
+                {{ account.profile.user.get_full_name }}
+            {% else %}
+                {% if account.profile.nickname %}
+                    {{ account.profile.nickname }}
+                {% elif account.profile.short_name %}
+                    {{ account.profile.short_name }}
+                {% else %}
+                    <i class="fa fa-user-secret fa-fw"></i>
+                {% endif %}
+            {% endif %}
+            </h1>
+
+            <div class="profile-contacts">
+                <h4>{% trans "Contact Details" %}</h4>
+
+            {% if need_to_know_contact_details %}
+                <address>
+                    <p><i class="fa fa-map-marker fa-fw"></i>{{ account.profile.address.short_address|default:"N/A" }}</p>
+                {% if account.profile.address.notes %}
+                    <blockquote>
+                        <p>{{ account.profile.address.notes }}</p>
+                    </blockquote>
+                {% endif %}
+
+                    <p>
+                        <i class="fa fa-phone fa-fw"></i>{{ account.profile.phone_number.phone_number|default:"N/A" }}{% if account.profile.phone_number.phone_number_ext %} ({% trans "ext." %} {{ account.profile.phone_number.phone_number_ext }}){% endif %}
+                        <span class="vert-delimiter">|</span>
+                        <i class="fa fa-mobile-phone fa-fw"></i>{{ account.profile.phone_number.mobile_phone_number|default:"N/A" }}{% if account.profile.phone_number.mobile_phone_number_ext %} ({% trans "ext." %} {{ account.profile.phone_number.mobile_phone_number_ext }}){% endif %}
+                    </p>
+                    <p>
+                        <i class="fa fa-envelope fa-fw"></i>{{ account.profile.user.email }}
+                    </p>
+                </address>
+            {% else %}
+                <p class="note">
+                    <span class="label label-info">{% trans "Information is hidden from Public" %}</span>
+                </p>
+            {% endif %}
+
+            {% if need_to_know_profile_details %}
+                <address>
+                    <p><i class="fa fa-calendar fa-fw"></i>{{ account.profile.birth_day }}</p>
+                </address>
+            {% endif %}
+            </div>
+        </div>
+
+        <div class="profile-info-section">
+            <div class="profile-bio">
+                <h4>{% trans "Bio" %}</h4>
+
+            {% if need_to_know_profile_details %}
+                <blockquote>
+                    <p>{{ account.profile.bio|default:"N/A" }}</p>
+                </blockquote>
+            {% else %}
+                <p class="note">
+                    <span class="label label-info">{% trans "Information is hidden from Public" %}</span>
+                </p>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-24 col-sm-8 col-md-6 right-sidebar">
+        <div class="hidden-xs">
+            {% include "accounts/fragments/foreign-profile-media-status-breakdown.html" %}
+        </div>
+
+        <!-- Social Links -->
+    {% if social_links and need_to_know_contact_details %}
+        <h4>{% trans "Social Links" %}</h4>
+
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <div class="social-buttons">
+                {% for social_link in social_links %}
+                    <button onclick="javascript:document.location.href='{{ social_link.url }}';" class="{{ social_link.stat_social_app_button }}">
+                        <i class="{{ social_link.stat_social_app_icon }}"></i>
+                    </button>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </div>
+</div>
+
+{% if account.profile.get_rating_avg > 0 %}
+<div class="row">
+    <div class="col-xs-24 col-sm-24 col-md-24">
+        {% include "common/fragments/rating-card-hor.html" with instance=account.profile %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Scripts -->
+
+<script>
+    /*************************************************************************/
+    /*** Add Complaint                                                     ***/
+    /*************************************************************************/
+    $(".add-complaint").click(function (event) {
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var account_id = "{{ account.profile.id }}";
+
+        $("#complaint-add-modal-form").find("input[name='account_id']").val(account_id);
+        $("#complaintAddPopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Invite to Challenge                                               ***/
+    /*************************************************************************/
+    $(".invite-to-chl").click(function (event) {
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var challenge_id = $(this).attr("challenge");
+        var invitee_id = {{ account.profile.user_id }};
+
+        $("#invite-to-challenge-modal-form").find("input[name='challenge_id']").val(challenge_id);
+        $("#invite-to-challenge-modal-form").find("input[name='invitee_id']").val(invitee_id);
+
+        $("#inviteToChallengePopupModal").modal("show");
+    })
+
+    /*************************************************************************/
+    /*** Invite to Organization                                            ***/
+    /*************************************************************************/
+    $(".invite-to-org").click(function (event) {
+        var event = window.event || event;
+
+        event.preventDefault();
+
+        var organization_id = $(this).attr("organization");
+        var invitee_id = {{ account.profile.user_id }};
+
+        $("#invite-to-organization-modal-form").find("input[name='organization_id']").val(organization_id);
+        $("#invite-to-organization-modal-form").find("input[name='invitee_id']").val(invitee_id);
+
+        $("#inviteToOrganizationPopupModal").modal("show");
+    })
+</script>

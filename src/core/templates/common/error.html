@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Error" %} - {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="nav-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-24 col-sm-24 col-md-24">
+                <h2 class="pull-left">{% trans "Error" %}</h2>
+
+                <div class="breadcrumbs pull-right">
+                    <a href="/">{% trans "Home" %}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="error" class="container">
+    <div class="row">
+        <div class="col-xs-24 col-sm-24 col-md-24">
+            <div class="jumbotron">
+                <div class="alert alert-danger">
+                    {{ information }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

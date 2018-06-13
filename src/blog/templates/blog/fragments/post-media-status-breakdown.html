@@ -1,0 +1,18 @@
+{% load i18n %}
+
+{% comment %}
+    Input Parameters:
+        :<request>
+{% endcomment %}
+
+{% if request.user.is_authenticated and request.user.is_staff %}
+    <a class="btn btn-primary btn-centered" href="{% url 'post-edit' post.slug %}"><i class="fa fa-edit fa-fw"></i> {% trans "Edit Post" %}</a>
+    {% if post.is_draft %}
+        <p class="note">
+            <span class="label label-warning">{% trans "This is a Draft." %}</span><br/>
+            <strong>{% trans "Publish this Post when you are ready, so other Members can see it." %}</strong>
+        </p>
+
+        <a class="btn btn-success btn-centered" name="post" title="" data-original-title="" data-content="" data-placement="bottom" data-container="body" data-trigger="hover" data-toggle="modal" href="#postPublishPopupModal" tabindex="-1"><i class="fa fa-check fa-fw"></i> {% trans "Publish Post" %}</a>
+    {% endif %}
+{% endif %}

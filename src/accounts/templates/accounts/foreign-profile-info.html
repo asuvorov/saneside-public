@@ -1,0 +1,23 @@
+{% extends "accounts/foreign-profile-base.html" %}
+
+{% load i18n %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="foreign-profile-info">
+        {% include "accounts/tabs/foreign-profile/info-tab.html" %}
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% include "common/modals/complaint-add-modal.html" %}
+
+    {% include "invites/modals/invite-to-challenge-popup-modal.html" %}
+    {% include "invites/modals/invite-to-organization-popup-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+{% endblock %}

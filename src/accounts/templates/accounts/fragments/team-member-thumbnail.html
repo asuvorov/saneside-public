@@ -1,0 +1,49 @@
+{% load i18n %}
+{% load imagekit %}
+
+{% comment %}
+    Input Parameters:
+        :<account>
+{% endcomment %}
+
+<div class="col-xs-12 col-sm-6 col-md-4 card-thumb">
+    <div class="thumbnail">
+    {% with account.user.profile as profile %}
+        <a href="{% url 'profile-view' profile.id %}">
+            <div class="member-card hovercard">
+                <div class="card-background">
+            {% if profile.avatar %}
+                {% generateimage "common:thumbnail_bigger" source=profile.avatar -- alt=profile.auth_name %}
+            {% else %}
+                <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="400" width="400" alt="Team Member - SaneSide Platform." />
+            {% endif %}
+                </div>
+
+                <div class="user-avatar">
+                {% if profile.avatar %}
+                    {% generateimage "common:thumbnail_bigger" source=profile.avatar -- alt=profile.auth_name %}
+                {% else %}
+                    <img src="{{ STATIC_URL }}img/no-avatar-{{ profile.stat_gender_name|default:'male' }}.png" height="400" width="400" alt="Team Member - SaneSide Platform." />
+                {% endif %}
+                </div>
+
+                <div class="card-info">
+                    <div class="card-title">
+                    {% if profile.short_name %}
+                        {{ profile.short_name }}
+                    {% elif profile.nickname %}
+                        {{ profile.nickname }}
+                    {% else %}
+                        <i class="fa fa-user-secret fa-fw"></i>
+                    {% endif %}
+                    </div>
+
+                    <div class="card-position">
+                        <p>{{ account.position }}</p>
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endwith %}
+    </div>
+</div>

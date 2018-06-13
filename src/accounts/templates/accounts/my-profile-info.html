@@ -1,0 +1,158 @@
+{% extends "accounts/my-profile-base.html" %}
+
+{% load i18n %}
+
+{% block extra_content %}
+<div class="container">
+    <div id="my-profile-info">
+        {% include "accounts/tabs/my-profile/info-tab.html" %}
+    </div>
+</div>
+
+<!-- Modals -->
+
+{% if request.user.is_authenticated %}
+    {% include "accounts/modals/no-email-provided-popup-modal.html" %}
+{% endif %}
+
+<!-- Scripts -->
+
+<script>
+    $(document).ready( function() {
+        /*********************************************************************/
+        /*** Iterate Form Fields Errors                                    ***/
+        /*********************************************************************/
+        {% if request.user.invitee.get_new.all.count > 0 %}
+            new Noty({
+                type:   "warning",
+                text:   "You have {{ request.user.invitee.get_new.all.count }} Invite(s)"
+            }).show();
+        {% endif %}
+
+        {% if request.user.profile.get_upcoming_participations.all.count > 0 %}
+            new Noty({
+                type:   "warning",
+                text:   "You have {{ request.user.profile.get_upcoming_participations.all.count }} upcoming Challenge(s), were you participate"
+            }).show();
+        {% endif %}
+
+        {% if request.user.profile.get_admin_challenges_action_required.all.count > 0 %}
+            new Noty({
+                type:   "error",
+                text:   "You have {{ request.user.profile.get_admin_challenges_action_required.all.count }} Challenge(s), that require your Action"
+            }).show();
+        {% endif %}
+
+        {% if request.user.profile.get_admin_challenges_upcoming.all.count > 0 %}
+            new Noty({
+                type:   "warning",
+                text:   "You have {{ request.user.profile.get_admin_challenges_upcoming.all.count }} upcoming Challenge(s), organized by you"
+            }).show();
+        {% endif %}
+
+        {% if request.user.profile.get_admin_challenges_draft.all.count > 0 %}
+            new Noty({
+                type:   "info",
+                text:   "You have {{ request.user.profile.get_admin_challenges_draft.all.count }} draft Challenge(s)"
+            }).show();
+        {% endif %}
+
+        /*********************************************************************/
+        /*** Show `no_email_provided` pop-up Modal, if User's Email        ***/
+        /*** is not set                                                    ***/
+        /*********************************************************************/
+        {% if show_no_email_popup_modal %}
+            console.log(">>> NO EMAIL PROVIDED");
+
+            $("#noEmailProvidedPopupModal").modal("show");
+        {% endif %}
+    })
+</script>
+
+<script type="text/javascript">
+    /*************************************************************************/
+    /*** Global Variables                                                  ***/
+    /*************************************************************************/
+    var element;
+</script>
+
+<!-- Pop-up Overlays -->
+
+{% if request.user.profile.completeness_total < 80 %}
+<div id="profile-completeness-popup-overlay" class="well" style="display:none;">
+    <div class="popup-overlay-heading">
+        <h4>{% trans "Welcome" %}, {{ request.user.profile.auth_name }}</h4>
+    </div>
+
+    <div class="popup-overlay-info">
+        <div class="alert alert-info">
+        {% blocktrans %}
+            <p>
+                Make sure to get your Profile to 80% complete.
+            </p>
+
+            <p>
+                This is a Requirement:<br/>
+                (1) to show up in Search Results;<br/>
+                (2) to create Challenges (Events) and Organizations;<br/>
+                (3) to participate in Challenges (Events);<br/>
+                (4) to invite and to be invited to Challenges (Events)<br/>
+                and Organizations.
+            </p>
+        {% endblocktrans %}
+        </div>
+
+    {% if request.user.profile.grace_period_days_left > 0 %}
+        <div class="alert alert-warning">
+        {% blocktrans with days_left=request.user.profile.grace_period_days_left %}
+            <p>
+                You have {{ days_left }} Days of the <strong>GRACE PERIOD</strong> left.
+            </p>
+        {% endblocktrans %}
+        </div>
+    {% endif %}
+    </div>
+
+    <!-- Add an optional Button to close the Pop-up -->
+    <div class="popup-overlay-footer">
+        <button class="btn btn-default profile-completeness-popup-overlay_close">{% trans "Let's go" %}</button>
+    </div>
+</div>
+
+<!-- Scripts -->
+
+<script>
+    $(document).ready(function () {
+        /*********************************************************************/
+        /*** jQuery Pop-up Overlay                                         ***/
+        /*********************************************************************/
+        var options = {
+            type:                       "overlay",      //      "tooltip"
+            autoopen:                   true,           // def. false
+            scrolllock:                 true,           // def. false
+            background:                 true,
+            backgroundactive:           false,
+            color:                      "#000",
+            opacity:                    0.5,
+            horizontal:                 "center",
+            vertical:                   "center",
+            offsettop:                  0,
+            offsetleft:                 0,
+            escape:                     true,
+            blur:                       true,
+            setzindex:                  true,
+            autozindex:                 false,
+            keepfocus:                  true,
+            focusdelay:                 50,
+            outline:                    false,
+            detach:                     false,
+            //openelement:                ".{popup_id}_open",
+            //closeelement:               ".{popup_id}_close",
+            transition:                 "all 0.3s"
+        };
+
+        $("#profile-completeness-popup-overlay").popup(options);
+    });
+</script>
+{% endif %}
+{% endblock %}

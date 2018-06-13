@@ -1,0 +1,295 @@
+body {
+    margin:                 0;
+    padding:                0;
+    height:                 100%;
+
+    background-color:       @gray-lightest;
+
+    //overflow-y:                 scroll; /* has to be scroll, not auto */
+
+    //-webkit-overflow-scrolling: touch;
+
+    // ------------------------------------------------------------------------
+    // --- AJAX Spinner
+    // ------------------------------------------------------------------------
+    #spinner {
+        display:            none;
+        width:              100%;
+        height:             100%;
+        top:                0;
+        left:               0;
+        position:           fixed;
+        opacity:            0.5;
+        background-color:   @black;
+        z-index:            9999;
+        text-align:         center;
+
+        > img {
+            width:          100px;
+            height:         100px;
+            position:       fixed;
+            top:            50%;
+            left:           50%;
+            text-align:     center;
+            margin-left:    -50px;
+            margin-top:     -100px;
+            overflow:       auto;
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Content Wrappers
+    // ------------------------------------------------------------------------
+    #wrapper {
+        position:           relative;
+        min-height:         100%;
+    }
+    #navbar {
+    }
+    #content {
+        // padding-top:        40px;
+        min-height:         900px;
+    }
+    #footer {
+        position:           relative;
+        width:              100%;
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Navigation Header with Breadcrumbs
+    // ------------------------------------------------------------------------
+    .nav-header {
+        color:              @gray-dark;
+        text-transform:     uppercase;
+        background-color:   @white;
+        padding:            10px;
+
+        h2 {
+            font-weight:    bold;
+            margin:         0px;
+        }
+        div.breadcrumbs {
+            font-size:      @font-size-small;
+            //padding-top:    10px;
+
+            a {
+                color:      @gray-dark;
+            }
+            i {
+                padding:    0 5px;
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Navigation Sub-Header
+    // ------------------------------------------------------------------------
+    .nav-sub-header {
+        color:              @gray-dark;
+        text-align:         center;
+        text-transform:     uppercase;
+        background-color:   @white;
+        padding-bottom:     10px;
+
+        .sub-btn {
+            padding-right:      8px;
+            padding-left:       8px;
+
+            &:last-child {
+                padding-right:  15px;
+                padding-left:   1px;
+            }
+            &:first-child {
+                padding-right:  1px;
+                padding-left:   15px;
+            }
+        }
+        a {
+            color:          @gray-dark;
+            width:          100%;
+            border:         1px solid @gray-dark;
+
+            i {
+                margin-right:   5px;
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Control Buttons Section
+    // ------------------------------------------------------------------------
+    .controllers {
+        width:              100%;
+        display:            inline-block;
+        border-bottom:      1px solid @gray-lightest;
+        padding-bottom:     5px;
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Inline vertical Delimiter
+    // ------------------------------------------------------------------------
+    .vert-delimiter {
+        margin:             0 10px;
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Share Social Buttons
+    // ------------------------------------------------------------------------
+    .social-buttons {
+        button {
+            display:        inline-block;
+            padding:        4px 6px;
+            margin-right:   5px;
+            margin-bottom:  5px;
+
+            .fa-2x {
+                margin:     6px 3px;
+            }
+            .fa-3x {
+                margin:     10px 5px;
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Attachments (Gallery, Documents, Links)
+    // ------------------------------------------------------------------------
+    .gallery {
+        margin:             10px 0;
+    }
+    .gallery-container,
+    .documents-container,
+    .links-container,
+    .video-links-container {
+        display:            inline-block;
+        position:           relative;
+
+        i {
+            color:          @red-signal;
+            font-size:      @font-size-large;
+            cursor:         pointer;
+            margin:         0 5px;
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Feature
+    // ------------------------------------------------------------------------
+    .feature {
+        text-align:         center;
+        padding-top:        50px;
+
+        i {
+            &[class^="flaticon-"]:before,
+            &[class*=" flaticon-"]:before,
+            &[class^="flaticon-"]:after,
+            &[class*=" flaticon-"]:after {
+                font-size:      2em;
+                margin-left:    0px;
+                text-align:     center;
+            }
+        }
+        span {
+            color:          @white;
+            display:        inline-block;
+            text-align:     center;
+
+            .circle(
+                @radius:            55px,
+                @background-color:  @brand-primary,
+                @border-color:      @white,
+                @border:            0.10
+            );
+        }
+        p {
+            color:          @brand-primary;
+            font-weight:    bold;
+            text-transform: uppercase;
+            padding-top:    20px;
+        }
+
+        &:hover {
+            span {
+                color:      @brand-primary;
+
+                .circle(
+                    @radius:            55px,
+                    @background-color:  @white,
+                    @border-color:      @brand-primary,
+                    @border:            0.10
+                );
+            }
+            img {
+                border-radius:  50%;
+                border:         5px solid @brand-primary;
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Bootpag
+    // ------------------------------------------------------------------------
+    #page-selection {
+        text-align:         center;
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Calendar
+    // ------------------------------------------------------------------------
+    .calendar {
+        font-size:          @font-size-small;
+        line-height:        @font-size-small;
+        background-color:   @white;
+        white-space:        pre-wrap;
+    }
+
+    // ------------------------------------------------------------------------
+    // --- Error Pages
+    // ------------------------------------------------------------------------
+    .page-404,
+    .page-500 {
+        display:            block;
+        margin:             0 auto;
+        clear:              right;
+        padding-top:        50px;
+    }
+}
+
+// ----------------------------------------------------------------------------
+// --- Make Design more responsive
+// ----------------------------------------------------------------------------
+@media (max-width: 479px) {
+    /* <= 479px */
+    body {
+        .nav-sub-header {
+            a {
+                i {
+                    margin-right:   0;
+                }
+            }
+
+            .btn {
+                padding:    6px;
+            }
+        }
+    }
+
+    .container {
+        //padding:            0px;
+    }
+}
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+    /* <= 480px <= 767px */
+}
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+    /* <= 768px <= 991px */
+}
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+    /* <= 992px <= 1199px */
+}
+@media (min-width: @screen-lg-min) and (max-width: 1599px) {
+    /* <= 1200px <= 1599px */
+}
+@media (min-width: 1600px) {
+    /* >= 1600px */
+}

@@ -1,0 +1,46 @@
+{% load i18n %}
+
+{% comment %}
+    Input Parameters:
+        :<section>
+{% endcomment %}
+
+<div class="faq-section-thumb">
+    <h4>{{ section.title }}</h4>
+
+    <div class="panel-group" id="accordion" aria-multiselectable="true">
+    {% for faq in section.related_faqs.all %}
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab">
+                <p class="panel-title">
+                    <strong>
+                        <a class="accordion-toggle" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{ faq.id }}" aria-expanded="false" aria-controls="#collapse-{{ faq.id }}">
+                        {% autoescape off %}
+                            {{ faq.question }}
+                        {% endautoescape %}
+                        </a>
+                    </strong>
+                </p>
+            </div>
+
+            <div id="collapse-{{ faq.id }}" role="tabpanel" class="panel-collapse collapse in">
+                <div class="panel-body">
+                {% autoescape off %}
+                    {{ faq.answer }}
+                {% endautoescape %}
+                </div>
+            </div>
+
+        {% if request.user.is_staff %}
+            <div class="panel-footer">
+                <p>
+                    <a class="faq-remove" href="" faq-id="{{ faq.id }}"><i class="fa fa-fw fa-times txt-danger pull-right"></i></a>
+                    <a href="{% url 'faq-edit' faq.id %}"><i class="fa fa-fw fa-edit txt-warning pull-right"></i></a>
+                </p>
+            </div>
+        {% endif %}
+        </div>
+    {% empty %}
+    {% endfor %}
+    </div>
+</div>
